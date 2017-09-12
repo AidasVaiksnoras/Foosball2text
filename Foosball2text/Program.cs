@@ -14,6 +14,10 @@ namespace Foosball2text
         [STAThread]
         static void Main()
         {
+            //Karolis test
+            string Kstring = "this is my test string";
+            //Karolis test end--
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
