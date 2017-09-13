@@ -1,0 +1,9 @@
+C:\Users\Aidas\Desktop\foosball2text\Foosball2text\Foosball2text\bin\Debug\Foosball2text.exe.config
+C:\Users\Aidas\Desktop\foosball2text\Foosball2text\Foosball2text\bin\Debug\Foosball2text.exe
+C:\Users\Aidas\Desktop\foosball2text\Foosball2text\Foosball2text\bin\Debug\Foosball2text.pdb
+C:\Users\Aidas\Desktop\foosball2text\Foosball2text\Foosball2text\obj\Debug\Foosball2text.csprojResolveAssemblyReference.cache
+C:\Users\Aidas\Desktop\foosball2text\Foosball2text\Foosball2text\obj\Debug\Foosball2text.Properties.Resources.resources
+C:\Users\Aidas\Desktop\foosball2text\Foosball2text\Foosball2text\obj\Debug\Foosball2text.csproj.GenerateResource.Cache
+C:\Users\Aidas\Desktop\foosball2text\Foosball2text\Foosball2text\obj\Debug\Foosball2text.csproj.CoreCompileInputs.cache
+C:\Users\Aidas\Desktop\foosball2text\Foosball2text\Foosball2text\obj\Debug\Foosball2text.exe
+C:\Users\Aidas\Desktop\foosball2text\Foosball2text\Foosball2text\obj\Debug\Foosball2text.pdb
