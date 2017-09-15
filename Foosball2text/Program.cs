@@ -14,6 +14,14 @@ namespace Foosball2text
         [STAThread]
         static void Main()
         {
+            //--Karolis test
+            //First test
+            string Kstring = "this is my test string";
+
+            //Second test
+            string checkpls = "a string that I will commit but I WON'T push";
+            //--Karolis test end
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
