@@ -21,9 +21,12 @@ bld/
 [Oo]bj/
 [Ll]og/
 [Oo]bj/Debug
+.vs/
 
 # User-specific files
 *.suo
 *.user
 *.userosscache
 *.sln.docstates
+
+*.ide
