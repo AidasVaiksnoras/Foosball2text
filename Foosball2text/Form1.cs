@@ -36,13 +36,12 @@ namespace Foosball2text
 
             Image<Hsv, byte> hsv = resizedImage.Convert<Hsv, byte>();
 
-            Hsv lowerLimit = new Hsv(10, 10, 100);
+	    Hsv lowerLimit = new Hsv(0, 70, 70);
             Hsv upperLimit = new Hsv(30, 255, 255);
-
             Image<Gray, byte> imageHSVDest = hsv.InRange(lowerLimit, upperLimit);
 
             imageBox1.Image = imageHSVDest;
-         
+     
         }
 
         private void pictureBox1_Click_1(object sender, EventArgs e)
