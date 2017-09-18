@@ -36,8 +36,8 @@ namespace Foosball2text
 
             Image<Hsv, byte> hsv = resizedImage.Convert<Hsv, byte>();
 
-            Hsv lowerLimit = new Hsv(10, 10, 100);
-            Hsv upperLimit = new Hsv(30, 255, 255);
+            Hsv lowerLimit = new Hsv(0, 0, 200);
+            Hsv upperLimit = new Hsv(5, 100, 255);
 
             Image<Gray, byte> imageHSVDest = hsv.InRange(lowerLimit, upperLimit);
 
