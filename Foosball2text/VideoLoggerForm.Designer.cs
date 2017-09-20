@@ -42,6 +42,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.Coordinates = new System.Windows.Forms.Label();
             this.Speed = new System.Windows.Forms.Label();
+            this.button5 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -176,11 +177,22 @@
             this.Speed.TabIndex = 16;
             this.Speed.Text = "Null";
             // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(471, 153);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(145, 23);
+            this.button5.TabIndex = 17;
+            this.button5.Text = "End of Game Test";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
             // VideoLoggerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(631, 324);
+            this.Controls.Add(this.button5);
             this.Controls.Add(this.Speed);
             this.Controls.Add(this.Coordinates);
             this.Controls.Add(this.label3);
@@ -219,5 +231,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label Coordinates;
         private System.Windows.Forms.Label Speed;
+        private System.Windows.Forms.Button button5;
     }
 }
