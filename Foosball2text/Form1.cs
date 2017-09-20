@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
+using System.Drawing;
 
 namespace Foosball2text
 {
@@ -28,24 +29,71 @@ namespace Foosball2text
 
         private void TimerTick(object sender, EventArgs e)
         {
-            Mat m = _capture.QueryFrame();
-            if (m == null) return;
+            // Capture frame
+            Mat frame = _capture.QueryFrame();
+            if (frame == null)
+                return;
+
+            // Resize Image to size of pictureBox
             Image<Bgr, byte> resizedImage =
-                m.ToImage<Bgr, byte>().Resize(pictureBox1.Width, pictureBox1.Height, Inter.Linear);
+                frame.ToImage<Bgr, byte>().Resize(pictureBox1.Width, pictureBox1.Height, Inter.Linear);
             pictureBox1.Image = resizedImage.Bitmap;
 
-            Image<Hsv, byte> hsv = resizedImage.Convert<Hsv, byte>();
+            // Filter image by given parameters
+            Image<Gray, byte> filteredImage = GetFilteredImage(resizedImage.Convert<Hsv, byte>(), 
+                                                              0, 100, 70, 35, 255, 255);
+            
+            // Erode and Dilate snow from grayscale image
+            ErodeFrame(filteredImage, 5);
+            DilateFrame(filteredImage, 6);
 
-	    Hsv lowerLimit = new Hsv(0, 70, 70);
-            Hsv upperLimit = new Hsv(30, 255, 255);
-            Image<Gray, byte> imageHSVDest = hsv.InRange(lowerLimit, upperLimit);
-
-            imageBox1.Image = imageHSVDest;
-     
+            // Detect and Draw circle
+            Image<Bgr, Byte> circleImage = resizedImage.CopyBlank();
+            foreach (CircleF circle in GetCirclesFromFrame(filteredImage))
+            {
+                circleImage.Draw(circle, new Bgr(Color.Green), 7);
+                UpdateCordinates(circle);
+            }
+            imageBox1.Image = circleImage;
         }
 
-        private void pictureBox1_Click_1(object sender, EventArgs e)
+        private CircleF[] GetCirclesFromFrame (Image<Gray, byte> frame)
         {
+            Gray cannyThreshold = new Gray(12);
+            Gray circleAccumulatorThreshold = new Gray(26);
+            double resolution = 1.90;
+            double minDistance = 1.0;
+            int minRadius = 0;
+            int maxRadius = 10;
+
+            return frame.HoughCircles(cannyThreshold, circleAccumulatorThreshold, resolution,
+                                      minDistance, minRadius, maxRadius)[0];
+        }
+
+        private void UpdateCordinates(CircleF circle)
+        {
+            _xlabel.Text = circle.Center.X.ToString();
+            _ylabel.Text = circle.Center.Y.ToString();
+        }
+
+        private void ErodeFrame(Image<Gray, byte> frame, int pointSize)
+        {
+            var erodeElement = CvInvoke.GetStructuringElement(ElementShape.Ellipse, new Size(pointSize, pointSize), new Point(-1, -1));
+            CvInvoke.Erode(frame, frame, erodeElement, new Point(-1, -1), 1, BorderType.Reflect, default(MCvScalar));
+        }
+
+        private void DilateFrame(Image<Gray, byte> frame, int pointSize)
+        {
+            var dilateElement = CvInvoke.GetStructuringElement(ElementShape.Ellipse, new Size(pointSize, pointSize), new Point(-1, -1));
+            CvInvoke.Dilate(frame, frame, dilateElement, new Point(-1, -1), 1, BorderType.Reflect, default(MCvScalar));
+        }
+
+        private Image<Gray, byte> GetFilteredImage(Image<Hsv, byte> image, int lowerHue, int lowerSaturation, 
+                                        int lowerValue, int higherHue, int higherSaturation, int higherValue)
+        {
+
+            return image.InRange(new Hsv(lowerHue, lowerSaturation, lowerValue), 
+                                 new Hsv(higherHue, higherSaturation, higherValue));
         }
     }
 }
