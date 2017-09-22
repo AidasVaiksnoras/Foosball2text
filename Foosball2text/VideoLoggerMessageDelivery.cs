@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Foosball2text
 {
-    class VideoLoggerMessageDelivery
+    static class VideoLoggerMessageDelivery
     {
         public const string gameStart = "*** Start of the game ***";
         public const string gameEnd = "*** End of the game ***";

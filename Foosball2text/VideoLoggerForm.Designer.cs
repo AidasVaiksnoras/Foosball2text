@@ -28,13 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.LeftGoalButton = new System.Windows.Forms.Button();
+            this.RightGoalButton = new System.Windows.Forms.Button();
+            this.BallDisappearedButton = new System.Windows.Forms.Button();
+            this.BallPassedButton = new System.Windows.Forms.Button();
+            this.HasDisappearedButton = new System.Windows.Forms.Button();
+            this.PassedToText = new System.Windows.Forms.TextBox();
+            this.DisappearedText = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.LatestLog = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
@@ -42,74 +42,81 @@
             this.label3 = new System.Windows.Forms.Label();
             this.Coordinates = new System.Windows.Forms.Label();
             this.Speed = new System.Windows.Forms.Label();
-            this.button5 = new System.Windows.Forms.Button();
+            this.EndGameButton = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.TeamA = new System.Windows.Forms.Label();
+            this.TeamB = new System.Windows.Forms.Label();
+            this.CoordinatesTestButton = new System.Windows.Forms.Button();
+            this.CoordinatesTestBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // button1
+            // LeftGoalButton
             // 
-            this.button1.Location = new System.Drawing.Point(315, 124);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(150, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Left Goal Test";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.LeftGoalButton.Location = new System.Drawing.Point(315, 124);
+            this.LeftGoalButton.Name = "LeftGoalButton";
+            this.LeftGoalButton.Size = new System.Drawing.Size(150, 23);
+            this.LeftGoalButton.TabIndex = 0;
+            this.LeftGoalButton.Text = "Left Goal Test";
+            this.LeftGoalButton.UseVisualStyleBackColor = true;
+            this.LeftGoalButton.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button2
+            // RightGoalButton
             // 
-            this.button2.Location = new System.Drawing.Point(471, 124);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(145, 23);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Right Goal Test";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.RightGoalButton.Location = new System.Drawing.Point(471, 124);
+            this.RightGoalButton.Name = "RightGoalButton";
+            this.RightGoalButton.Size = new System.Drawing.Size(145, 23);
+            this.RightGoalButton.TabIndex = 1;
+            this.RightGoalButton.Text = "Right Goal Test";
+            this.RightGoalButton.UseVisualStyleBackColor = true;
+            this.RightGoalButton.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button3
+            // BallDisappearedButton
             // 
-            this.button3.Location = new System.Drawing.Point(315, 153);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(150, 23);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Ball Disappeared Test";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.BallDisappearedButton.Location = new System.Drawing.Point(315, 153);
+            this.BallDisappearedButton.Name = "BallDisappearedButton";
+            this.BallDisappearedButton.Size = new System.Drawing.Size(150, 23);
+            this.BallDisappearedButton.TabIndex = 2;
+            this.BallDisappearedButton.Text = "Ball Disappeared Test";
+            this.BallDisappearedButton.UseVisualStyleBackColor = true;
+            this.BallDisappearedButton.Click += new System.EventHandler(this.button3_Click);
             // 
-            // button4
+            // BallPassedButton
             // 
-            this.button4.Location = new System.Drawing.Point(315, 182);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(150, 23);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "Ball Passed to";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.BallPassedButton.Location = new System.Drawing.Point(315, 182);
+            this.BallPassedButton.Name = "BallPassedButton";
+            this.BallPassedButton.Size = new System.Drawing.Size(150, 23);
+            this.BallPassedButton.TabIndex = 3;
+            this.BallPassedButton.Text = "Ball Passed to";
+            this.BallPassedButton.UseVisualStyleBackColor = true;
+            this.BallPassedButton.Click += new System.EventHandler(this.button4_Click);
             // 
-            // button7
+            // HasDisappearedButton
             // 
-            this.button7.Location = new System.Drawing.Point(471, 211);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(145, 23);
-            this.button7.TabIndex = 6;
-            this.button7.Text = "has Disappeared";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
+            this.HasDisappearedButton.Location = new System.Drawing.Point(471, 211);
+            this.HasDisappearedButton.Name = "HasDisappearedButton";
+            this.HasDisappearedButton.Size = new System.Drawing.Size(145, 23);
+            this.HasDisappearedButton.TabIndex = 6;
+            this.HasDisappearedButton.Text = "has Disappeared";
+            this.HasDisappearedButton.UseVisualStyleBackColor = true;
+            this.HasDisappearedButton.Click += new System.EventHandler(this.button7_Click);
             // 
-            // textBox1
+            // PassedToText
             // 
-            this.textBox1.Location = new System.Drawing.Point(471, 184);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(145, 20);
-            this.textBox1.TabIndex = 7;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.PassedToText.Location = new System.Drawing.Point(471, 184);
+            this.PassedToText.Name = "PassedToText";
+            this.PassedToText.Size = new System.Drawing.Size(145, 20);
+            this.PassedToText.TabIndex = 7;
+            this.PassedToText.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
-            // textBox2
+            // DisappearedText
             // 
-            this.textBox2.Location = new System.Drawing.Point(315, 213);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(150, 20);
-            this.textBox2.TabIndex = 8;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.DisappearedText.Location = new System.Drawing.Point(315, 213);
+            this.DisappearedText.Name = "DisappearedText";
+            this.DisappearedText.Size = new System.Drawing.Size(150, 20);
+            this.DisappearedText.TabIndex = 8;
+            this.DisappearedText.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // label1
             // 
@@ -152,7 +159,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 35);
+            this.label3.Location = new System.Drawing.Point(12, 22);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(59, 13);
             this.label3.TabIndex = 14;
@@ -171,28 +178,100 @@
             // Speed
             // 
             this.Speed.AutoSize = true;
-            this.Speed.Location = new System.Drawing.Point(100, 35);
+            this.Speed.Location = new System.Drawing.Point(100, 22);
             this.Speed.Name = "Speed";
             this.Speed.Size = new System.Drawing.Size(25, 13);
             this.Speed.TabIndex = 16;
             this.Speed.Text = "Null";
             // 
-            // button5
+            // EndGameButton
             // 
-            this.button5.Location = new System.Drawing.Point(471, 153);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(145, 23);
-            this.button5.TabIndex = 17;
-            this.button5.Text = "End of Game Test";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.EndGameButton.Location = new System.Drawing.Point(471, 153);
+            this.EndGameButton.Name = "EndGameButton";
+            this.EndGameButton.Size = new System.Drawing.Size(145, 23);
+            this.EndGameButton.TabIndex = 17;
+            this.EndGameButton.Text = "End of Game\r\n";
+            this.EndGameButton.UseVisualStyleBackColor = true;
+            this.EndGameButton.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 69);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(44, 13);
+            this.label4.TabIndex = 18;
+            this.label4.Text = "Team A";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            this.label5.Location = new System.Drawing.Point(12, 47);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(48, 15);
+            this.label5.TabIndex = 19;
+            this.label5.Text = "Score:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(126, 69);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(44, 13);
+            this.label6.TabIndex = 20;
+            this.label6.Text = "Team B";
+            // 
+            // TeamA
+            // 
+            this.TeamA.AutoSize = true;
+            this.TeamA.Location = new System.Drawing.Point(62, 69);
+            this.TeamA.Name = "TeamA";
+            this.TeamA.Size = new System.Drawing.Size(13, 13);
+            this.TeamA.TabIndex = 21;
+            this.TeamA.Tag = "score";
+            this.TeamA.Text = "0";
+            // 
+            // TeamB
+            // 
+            this.TeamB.AutoSize = true;
+            this.TeamB.Location = new System.Drawing.Point(176, 69);
+            this.TeamB.Name = "TeamB";
+            this.TeamB.Size = new System.Drawing.Size(13, 13);
+            this.TeamB.TabIndex = 22;
+            this.TeamB.Tag = "score";
+            this.TeamB.Text = "0";
+            // 
+            // CoordinatesTestButton
+            // 
+            this.CoordinatesTestButton.Location = new System.Drawing.Point(315, 239);
+            this.CoordinatesTestButton.Name = "CoordinatesTestButton";
+            this.CoordinatesTestButton.Size = new System.Drawing.Size(150, 23);
+            this.CoordinatesTestButton.TabIndex = 23;
+            this.CoordinatesTestButton.Text = "Ball Coordinates";
+            this.CoordinatesTestButton.UseVisualStyleBackColor = true;
+            this.CoordinatesTestButton.Click += new System.EventHandler(this.CoordinatesTestButton_Click);
+            // 
+            // CoordinatesTestBox
+            // 
+            this.CoordinatesTestBox.Location = new System.Drawing.Point(471, 239);
+            this.CoordinatesTestBox.Name = "CoordinatesTestBox";
+            this.CoordinatesTestBox.Size = new System.Drawing.Size(145, 20);
+            this.CoordinatesTestBox.TabIndex = 24;
             // 
             // VideoLoggerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(631, 324);
-            this.Controls.Add(this.button5);
+            this.Controls.Add(this.CoordinatesTestBox);
+            this.Controls.Add(this.CoordinatesTestButton);
+            this.Controls.Add(this.TeamB);
+            this.Controls.Add(this.TeamA);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.EndGameButton);
             this.Controls.Add(this.Speed);
             this.Controls.Add(this.Coordinates);
             this.Controls.Add(this.label3);
@@ -200,13 +279,13 @@
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.LatestLog);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button7);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.DisappearedText);
+            this.Controls.Add(this.PassedToText);
+            this.Controls.Add(this.HasDisappearedButton);
+            this.Controls.Add(this.BallPassedButton);
+            this.Controls.Add(this.BallDisappearedButton);
+            this.Controls.Add(this.RightGoalButton);
+            this.Controls.Add(this.LeftGoalButton);
             this.Name = "VideoLoggerForm";
             this.Text = "VideoLogger";
             this.Load += new System.EventHandler(this.VideoLoggerForm_Load);
@@ -217,13 +296,13 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Button LeftGoalButton;
+        private System.Windows.Forms.Button RightGoalButton;
+        private System.Windows.Forms.Button BallDisappearedButton;
+        private System.Windows.Forms.Button BallPassedButton;
+        private System.Windows.Forms.Button HasDisappearedButton;
+        private System.Windows.Forms.TextBox PassedToText;
+        private System.Windows.Forms.TextBox DisappearedText;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label LatestLog;
         private System.Windows.Forms.ListBox listBox1;
@@ -231,6 +310,13 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label Coordinates;
         private System.Windows.Forms.Label Speed;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button EndGameButton;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label TeamA;
+        private System.Windows.Forms.Label TeamB;
+        private System.Windows.Forms.Button CoordinatesTestButton;
+        private System.Windows.Forms.TextBox CoordinatesTestBox;
     }
 }

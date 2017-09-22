@@ -22,7 +22,7 @@ namespace Foosball2text
             logData.ListChanged += new ListChangedEventHandler(list_ListChanged);
         }
 
-        void list_ListChanged(object sender, ListChangedEventArgs e)
+        private void list_ListChanged(object sender, ListChangedEventArgs e)
         {
             LatestLogUpdate();
         }
@@ -43,6 +43,7 @@ namespace Foosball2text
         private void button1_Click(object sender, EventArgs e)
         {
             logData.Add(VideoLoggerMessageDelivery.goalLeft);
+            AddGoalA();
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -53,6 +54,7 @@ namespace Foosball2text
         private void button2_Click(object sender, EventArgs e)
         {
             logData.Add(VideoLoggerMessageDelivery.goalRight);
+            AddGoalB();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -62,12 +64,12 @@ namespace Foosball2text
 
         private void button4_Click(object sender, EventArgs e)
         {
-            logData.Add(VideoLoggerMessageDelivery.getPassMessage(textBox1.Text));
+            logData.Add(VideoLoggerMessageDelivery.getPassMessage(PassedToText.Text));
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            logData.Add(VideoLoggerMessageDelivery.getDisappearMessage(textBox2.Text));
+            logData.Add(VideoLoggerMessageDelivery.getDisappearMessage(DisappearedText.Text));
         }
 
         private void VideoLoggerForm_Load(object sender, EventArgs e)
@@ -98,6 +100,45 @@ namespace Foosball2text
         private void button5_Click(object sender, EventArgs e)
         {
             logData.Add(VideoLoggerMessageDelivery.gameEnd);
+            ResetScore();
         }
+
+        public void AddGoalA()
+        {
+            int score = int.Parse(TeamA.Text);
+            score++;
+            TeamA.Text = score.ToString();
+        }
+
+        public void AddGoalB()
+        {
+            int score = int.Parse(TeamB.Text);
+            score++;
+            TeamB.Text = score.ToString();
+        }
+
+        public void ResetScore()
+        {
+            TeamA.Text = "0";
+            TeamB.Text = "0";
+        }
+
+        public void UpdateBallCoordinates(string newCoordinates)
+        {
+            Coordinates.Text = newCoordinates;
+        }
+
+        public void UpdateBallCoordinates(float xCoord, float yCoord)
+        {
+            string newCoordinates = "x: " + xCoord.ToString() + "; ";
+            newCoordinates += "y: " + yCoord.ToString();
+            Coordinates.Text = newCoordinates;
+        }
+
+        private void CoordinatesTestButton_Click(object sender, EventArgs e)
+        {
+            UpdateBallCoordinates(CoordinatesTestBox.Text);
+        }
+
     }
 }
