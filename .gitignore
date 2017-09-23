@@ -65,3 +65,7 @@
 /Foosball2text/cudart64_80.dll
 /Foosball2text/cublas64_80.dll
 /Foosball2text/concrt140.dll
+
+# Karolis
+# Mano VS siuksles (experimental)
+/Foosball2text/.vs/
