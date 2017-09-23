@@ -1,8 +1,12 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Foosball2text"
+    "\\Foosball2text",
+    "\\Foosball2text\\.vs",
+    "\\Foosball2text\\.vs\\Foosball2text",
+    "\\Foosball2text\\.vs\\Foosball2text\\v15",
+    "\\Foosball2text\\.vs\\Foosball2text\\v15\\sqlite3"
   ],
-  "SelectedNode": "\\Foosball2text\\Foosball2text.sln",
+  "SelectedNode": "\\Foosball2text\\VideoLoggerForm.cs",
   "PreviewInSolutionExplorer": false
 }
