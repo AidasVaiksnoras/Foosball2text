@@ -108,7 +108,6 @@
             this.PassedToText.Name = "PassedToText";
             this.PassedToText.Size = new System.Drawing.Size(145, 20);
             this.PassedToText.TabIndex = 7;
-            this.PassedToText.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // DisappearedText
             // 
@@ -116,7 +115,6 @@
             this.DisappearedText.Name = "DisappearedText";
             this.DisappearedText.Size = new System.Drawing.Size(150, 20);
             this.DisappearedText.TabIndex = 8;
-            this.DisappearedText.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // label1
             // 
@@ -135,7 +133,6 @@
             this.LatestLog.Size = new System.Drawing.Size(33, 13);
             this.LatestLog.TabIndex = 11;
             this.LatestLog.Text = "None";
-            this.LatestLog.Click += new System.EventHandler(this.LatestLog_Click);
             // 
             // listBox1
             // 
@@ -144,7 +141,6 @@
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(297, 186);
             this.listBox1.TabIndex = 12;
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -154,7 +150,6 @@
             this.label2.Size = new System.Drawing.Size(85, 13);
             this.label2.TabIndex = 13;
             this.label2.Text = "Ball coordinates:";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
@@ -164,7 +159,6 @@
             this.label3.Size = new System.Drawing.Size(59, 13);
             this.label3.TabIndex = 14;
             this.label3.Text = "Ball speed:";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // Coordinates
             // 
@@ -288,7 +282,6 @@
             this.Controls.Add(this.LeftGoalButton);
             this.Name = "VideoLoggerForm";
             this.Text = "VideoLogger";
-            this.Load += new System.EventHandler(this.VideoLoggerForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

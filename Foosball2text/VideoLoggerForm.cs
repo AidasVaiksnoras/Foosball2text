@@ -13,11 +13,12 @@ namespace Foosball2text
     public partial class VideoLoggerForm : Form
     {
         BindingList<String> logData = new BindingList<string>();
+        VideoLoggerMessageDelivery messageGetter = new VideoLoggerMessageDelivery();
 
         public VideoLoggerForm()
         {
             InitializeComponent();
-            logData.Add(VideoLoggerMessageDelivery.gameStart);
+            logData.Add(messageGetter.gameStart);
             listBox1.DataSource = logData;
             logData.ListChanged += new ListChangedEventHandler(list_ListChanged);
         }
@@ -35,71 +36,36 @@ namespace Foosball2text
             listBox1.TopIndex = Math.Max(listBox1.Items.Count - visibleItems + 1, 0);
         }
 
-        private void LatestLog_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
-            logData.Add(VideoLoggerMessageDelivery.goalLeft);
+            logData.Add(messageGetter.goalLeft);
             AddGoalA();
-        }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            logData.Add(VideoLoggerMessageDelivery.goalRight);
+            logData.Add(messageGetter.goalRight);
             AddGoalB();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            logData.Add(VideoLoggerMessageDelivery.dissapearedBall);
+            logData.Add(messageGetter.dissapearedBall);
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            logData.Add(VideoLoggerMessageDelivery.getPassMessage(PassedToText.Text));
+            logData.Add(messageGetter.getPassMessage(PassedToText.Text));
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            logData.Add(VideoLoggerMessageDelivery.getDisappearMessage(DisappearedText.Text));
-        }
-
-        private void VideoLoggerForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
+            logData.Add(messageGetter.getDisappearMessage(DisappearedText.Text));
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            logData.Add(VideoLoggerMessageDelivery.gameEnd);
+            logData.Add(messageGetter.gameEnd);
             ResetScore();
         }
 

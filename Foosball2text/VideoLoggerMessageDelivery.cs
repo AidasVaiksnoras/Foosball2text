@@ -6,22 +6,22 @@ using System.Threading.Tasks;
 
 namespace Foosball2text
 {
-    static class VideoLoggerMessageDelivery
+    class VideoLoggerMessageDelivery
     {
-        public const string gameStart = "*** Start of the game ***";
-        public const string gameEnd = "*** End of the game ***";
-        public const string goalLeft = "Left team has scored!";
-        public const string goalRight = "Right team has scored!";
-        public const string dissapearedBall = "Ball has dissapeared";
-        private const string pass = "Ball has been passed to ";
-        private const string dissapearedString = " has dissapeared";
+        public readonly string gameStart = "*** Start of the game ***";
+        public readonly string gameEnd = "*** End of the game ***";
+        public readonly string goalLeft = "Left team has scored!";
+        public readonly string goalRight = "Right team has scored!";
+        public readonly string dissapearedBall = "Ball has dissapeared";
+        private readonly string pass = "Ball has been passed to ";
+        private readonly string dissapearedString = " has dissapeared";
 
-        static public string getPassMessage(String passedTo)
+        public string getPassMessage(String passedTo)
         {
             return pass + passedTo;
         }
 
-        static public string getDisappearMessage(String disappearedObjName)
+        public string getDisappearMessage(String disappearedObjName)
         {
             return disappearedObjName + dissapearedString;
         }
