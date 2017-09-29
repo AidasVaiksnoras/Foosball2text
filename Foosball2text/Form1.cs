@@ -14,11 +14,13 @@ namespace Foosball2text
         private const int Fps = 30;
         VideoCapture _capture;
         private Ball _ball;
+        private Filter _filter;
 
         public Form1()
         {
             InitializeComponent();
             _ball = new Ball();
+            _filter = new Filter();
             _timer = new Timer();
             //Frame Rate
             _timer.Interval = 1000 / Fps;
@@ -40,13 +42,9 @@ namespace Foosball2text
                 frame.ToImage<Bgr, byte>().Resize(pictureBox1.Width, pictureBox1.Height, Inter.Linear);
             pictureBox1.Image = resizedImage.Bitmap;
 
-            // Filter image by given parameters
-            Image<Gray, byte> filteredImage = GetFilteredImage(resizedImage.Convert<Hsv, byte>(),
-                                                              0, 100, 70, 35, 255, 255);
 
-            // Erode and Dilate snow from grayscale image
-            ErodeFrame(filteredImage, 5);
-            DilateFrame(filteredImage, 6);
+            Image<Gray, byte> filteredImage = _filter.FilterImage(resizedImage);
+
 
             
             Image<Bgr, Byte> circleImage = resizedImage.CopyBlank();
@@ -56,7 +54,9 @@ namespace Foosball2text
             //Diplay ball's coordinates
             UpdateCordinates();
 
-            imageBox1.Image = filteredImage;
+            //draw and display the circle
+            circleImage.Draw(_ball.Circle, new Bgr(Color.Green), 7);
+            imageBox1.Image = circleImage;
         }
 
         private void UpdateCordinates()
@@ -65,25 +65,6 @@ namespace Foosball2text
             _ylabel.Text = _ball.Y.ToString();
         }
 
-        private void ErodeFrame(Image<Gray, byte> frame, int pointSize)
-        {
-            var erodeElement = CvInvoke.GetStructuringElement(ElementShape.Ellipse, new Size(pointSize, pointSize), new Point(-1, -1));
-            CvInvoke.Erode(frame, frame, erodeElement, new Point(-1, -1), 1, BorderType.Reflect, default(MCvScalar));
-        }
-
-        private void DilateFrame(Image<Gray, byte> frame, int pointSize)
-        {
-            var dilateElement = CvInvoke.GetStructuringElement(ElementShape.Ellipse, new Size(pointSize, pointSize), new Point(-1, -1));
-            CvInvoke.Dilate(frame, frame, dilateElement, new Point(-1, -1), 1, BorderType.Reflect, default(MCvScalar));
-        }
-
-        private Image<Gray, byte> GetFilteredImage(Image<Hsv, byte> image, int lowerHue, int lowerSaturation, 
-                                        int lowerValue, int higherHue, int higherSaturation, int higherValue)
-        {
-
-            return image.InRange(new Hsv(lowerHue, lowerSaturation, lowerValue), 
-                                 new Hsv(higherHue, higherSaturation, higherValue));
-        }
 
         private void label2_Click(object sender, EventArgs e)
         {
