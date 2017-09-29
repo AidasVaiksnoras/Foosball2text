@@ -19,8 +19,11 @@ namespace Foosball2text
         {
             Image<Gray, byte> filteredImage = GetFilteredImage(frame.Convert<Hsv, byte>(),
                                                              0, 100, 70, 35, 255, 255);
-            ErodeFrame(filteredImage, 5);
-            DilateFrame(filteredImage, 6);
+            for (int i=0; i<5; i++)
+            {
+                ErodeFrame(filteredImage, 5);
+                DilateFrame(filteredImage, 6);
+            }
 
             return filteredImage;
         }
