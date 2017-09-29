@@ -13,11 +13,12 @@ namespace Foosball2text
         Timer _timer;
         private const int Fps = 30;
         VideoCapture _capture;
+        private Ball _ball;
 
         public Form1()
         {
             InitializeComponent();
-
+            _ball = new Ball();
             _timer = new Timer();
             //Frame Rate
             _timer.Interval = 1000 / Fps;
@@ -40,40 +41,28 @@ namespace Foosball2text
             pictureBox1.Image = resizedImage.Bitmap;
 
             // Filter image by given parameters
-            Image<Gray, byte> filteredImage = GetFilteredImage(resizedImage.Convert<Hsv, byte>(), 
+            Image<Gray, byte> filteredImage = GetFilteredImage(resizedImage.Convert<Hsv, byte>(),
                                                               0, 100, 70, 35, 255, 255);
-            
+
             // Erode and Dilate snow from grayscale image
             ErodeFrame(filteredImage, 5);
             DilateFrame(filteredImage, 6);
 
-            // Detect and Draw circle
+            
             Image<Bgr, Byte> circleImage = resizedImage.CopyBlank();
-            foreach (CircleF circle in GetCirclesFromFrame(filteredImage))
-            {
-                circleImage.Draw(circle, new Bgr(Color.Green), 7);
-                UpdateCordinates(circle);
-            }
-            imageBox1.Image = circleImage;
+            //Find the coordinates of the ball in the filtered image
+            _ball.FindCordinates(filteredImage);
+
+            //Diplay ball's coordinates
+            UpdateCordinates();
+
+            imageBox1.Image = filteredImage;
         }
 
-        private CircleF[] GetCirclesFromFrame (Image<Gray, byte> frame)
+        private void UpdateCordinates()
         {
-            Gray cannyThreshold = new Gray(12);
-            Gray circleAccumulatorThreshold = new Gray(26);
-            double resolution = 1.90;
-            double minDistance = 1.0;
-            int minRadius = 0;
-            int maxRadius = 10;
-
-            return frame.HoughCircles(cannyThreshold, circleAccumulatorThreshold, resolution,
-                                      minDistance, minRadius, maxRadius)[0];
-        }
-
-        private void UpdateCordinates(CircleF circle)
-        {
-            _xlabel.Text = circle.Center.X.ToString();
-            _ylabel.Text = circle.Center.Y.ToString();
+            _xlabel.Text = _ball.X.ToString();
+            _ylabel.Text = _ball.Y.ToString();
         }
 
         private void ErodeFrame(Image<Gray, byte> frame, int pointSize)
@@ -94,6 +83,11 @@ namespace Foosball2text
 
             return image.InRange(new Hsv(lowerHue, lowerSaturation, lowerValue), 
                                  new Hsv(higherHue, higherSaturation, higherValue));
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
