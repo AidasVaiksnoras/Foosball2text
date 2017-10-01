@@ -35,8 +35,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this._ylabel = new System.Windows.Forms.Label();
             this._xlabel = new System.Windows.Forms.Label();
+          
+            this.pauseButton = new System.Windows.Forms.Button();
+
             this.browseButton = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageBox1)).BeginInit();
             this.SuspendLayout();
@@ -48,6 +52,7 @@
             this.pictureBox1.Size = new System.Drawing.Size(363, 216);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // imageBox1
             // 
@@ -93,7 +98,17 @@
             this._xlabel.Size = new System.Drawing.Size(13, 13);
             this._xlabel.TabIndex = 6;
             this._xlabel.Text = "0";
+            //
+            // pauseButton
             // 
+            this.pauseButton.Location = new System.Drawing.Point(174, 460);
+            this.pauseButton.Name = "pauseButton";
+            this.pauseButton.Size = new System.Drawing.Size(75, 23);
+            this.pauseButton.TabIndex = 7;
+            this.pauseButton.Text = "Pause";
+            this.pauseButton.UseVisualStyleBackColor = true;
+            this.pauseButton.Click += new System.EventHandler(this.button1_Click);
+            //
             // browseButton
             // 
             this.browseButton.Location = new System.Drawing.Point(290, 469);
@@ -112,6 +127,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+
+            this.ClientSize = new System.Drawing.Size(389, 484);
+            this.Controls.Add(this.pauseButton);
             this.ClientSize = new System.Drawing.Size(389, 502);
             this.Controls.Add(this.browseButton);
             this.Controls.Add(this._xlabel);

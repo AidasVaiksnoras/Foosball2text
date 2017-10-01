@@ -72,6 +72,29 @@ namespace Foosball2text
 
         }
 
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            Point pt = pictureBox1.PointToClient(MousePosition);
+            int x = pt.X;
+            int y = pt.Y;
+
+            Bitmap bm = new Bitmap(pictureBox1.Image);
+            Color colorAtPoint = bm.GetPixel(x, y);
+
+            int hue = Convert.ToInt32(colorAtPoint.GetHue());
+
+            _filter.UpdateValuesHSV(hue);
+
+            _timer.Stop();
+            _capture = new VideoCapture("../../sample.avi");
+            _timer.Start();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            _timer.Stop();
+        }
+        
         private void browseButton_Click(object sender, EventArgs e)
         {
             int size = -1;
