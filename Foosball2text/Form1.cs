@@ -17,6 +17,7 @@ namespace Foosball2text
         private Ball _ball;
         private Filter _filter;
         private VideoLoggerForm _logger;
+        string filePath;
 
         public Form1()
         {
@@ -76,10 +77,10 @@ namespace Foosball2text
             DialogResult result = openFileDialog1.ShowDialog(); // Show the browse window
             if (result == DialogResult.OK) //If opened a file
             {
-                string fileName = openFileDialog1.FileName;
+                filePath = openFileDialog1.FileName;
                 try //to assign new _capture
                 {
-                    _capture = new VideoCapture(fileName);
+                    _capture = new VideoCapture(filePath);
                     _logger.newGame();
                 }
                 catch (IOException ex)
