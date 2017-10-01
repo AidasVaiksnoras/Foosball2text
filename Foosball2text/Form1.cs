@@ -80,15 +80,20 @@ namespace Foosball2text
             Bitmap bm = new Bitmap(pictureBox1.Image);
             Color colorAtPoint = bm.GetPixel(x, y);
 
-            int r = colorAtPoint.R;
-            int g = colorAtPoint.G;
-            int b = colorAtPoint.B;
-
             int hue = Convert.ToInt32(colorAtPoint.GetHue());
             int saturation = Convert.ToInt32(colorAtPoint.GetSaturation());
             int brightness = Convert.ToInt32(colorAtPoint.GetBrightness());
 
             _filter.UpdateValuesHSV(hue, saturation, brightness);
+
+            _timer.Stop();
+            _capture = new VideoCapture("../../sample.avi");
+            _timer.Start();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            _timer.Stop();
         }
     }
 }

@@ -54,12 +54,12 @@ namespace Foosball2text
                                  new Hsv(higherHue, higherSaturation, higherValue));
         }
 
-        public void UpdateValuesHSV(int a, int b, int c)
+        public void UpdateValuesHSV(int hue, int saturation, int brightness)
         {
-        _hueMin = a-10;
+        _hueMin = hue-10;
         _saturationMin = 100;
         _brightnessMin = 70;
-        _hueMax = a+10;
+        _hueMax = hue+10;
         _saturationMax = 255;
         _brightnessMax = 255;
     }
