@@ -81,10 +81,8 @@ namespace Foosball2text
             Color colorAtPoint = bm.GetPixel(x, y);
 
             int hue = Convert.ToInt32(colorAtPoint.GetHue());
-            int saturation = Convert.ToInt32(colorAtPoint.GetSaturation());
-            int brightness = Convert.ToInt32(colorAtPoint.GetBrightness());
 
-            _filter.UpdateValuesHSV(hue, saturation, brightness);
+            _filter.UpdateValuesHSV(hue);
 
             _timer.Stop();
             _capture = new VideoCapture("../../sample.avi");
