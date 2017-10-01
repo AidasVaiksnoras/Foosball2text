@@ -35,6 +35,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this._ylabel = new System.Windows.Forms.Label();
             this._xlabel = new System.Windows.Forms.Label();
+            this.browseButton = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageBox1)).BeginInit();
             this.SuspendLayout();
@@ -92,11 +94,26 @@
             this._xlabel.TabIndex = 6;
             this._xlabel.Text = "0";
             // 
+            // browseButton
+            // 
+            this.browseButton.Location = new System.Drawing.Point(290, 469);
+            this.browseButton.Name = "browseButton";
+            this.browseButton.Size = new System.Drawing.Size(84, 23);
+            this.browseButton.TabIndex = 7;
+            this.browseButton.Text = "Browse...";
+            this.browseButton.UseVisualStyleBackColor = true;
+            this.browseButton.Click += new System.EventHandler(this.browseButton_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(389, 484);
+            this.ClientSize = new System.Drawing.Size(389, 502);
+            this.Controls.Add(this.browseButton);
             this.Controls.Add(this._xlabel);
             this.Controls.Add(this._ylabel);
             this.Controls.Add(this.label2);
@@ -120,6 +137,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label _ylabel;
         private System.Windows.Forms.Label _xlabel;
+        private System.Windows.Forms.Button browseButton;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 

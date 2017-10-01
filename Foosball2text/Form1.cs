@@ -5,6 +5,7 @@ using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 using System.Drawing;
+using System.IO;
 
 namespace Foosball2text
 {
@@ -70,6 +71,24 @@ namespace Foosball2text
         {
 
         }
+
+        private void browseButton_Click(object sender, EventArgs e)
+        {
+            int size = -1;
+            DialogResult result = openFileDialog1.ShowDialog(); // Show the browse window
+            if (result == DialogResult.OK) //If opened a file
+            {
+                string fileName = openFileDialog1.FileName;
+                try //to assign new _capture
+                {
+                    _capture = new VideoCapture(fileName);
+                }
+                catch (IOException)
+                {
+                }
+            }
+        }
+
     }
 }
 
