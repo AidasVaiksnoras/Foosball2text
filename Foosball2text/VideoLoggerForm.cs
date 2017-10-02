@@ -96,8 +96,8 @@ namespace Foosball2text
 
         public void UpdateBallCoordinates(float xCoord, float yCoord)
         {
-            string newCoordinates = "x: " + xCoord.ToString() + "; ";
-            newCoordinates += "y: " + yCoord.ToString();
+            string newCoordinates = "X: " + xCoord.ToString() + "; ";
+            newCoordinates += "   Y: " + yCoord.ToString();
             Coordinates.Text = newCoordinates;
         }
 
@@ -106,5 +106,10 @@ namespace Foosball2text
             UpdateBallCoordinates(CoordinatesTestBox.Text);
         }
 
+        public void newGame()
+        {
+            ResetScore();
+            logData.Add(messageGetter.gameStart);
+        }
     }
 }

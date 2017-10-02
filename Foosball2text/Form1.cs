@@ -16,10 +16,14 @@ namespace Foosball2text
         VideoCapture _capture;
         private Ball _ball;
         private Filter _filter;
+        private VideoLoggerForm _logger;
+        string filePath;
 
         public Form1()
         {
             InitializeComponent();
+            _logger = new VideoLoggerForm();
+            _logger.Show();
             _ball = new Ball();
             _filter = new Filter();
             _timer = new Timer();
@@ -43,11 +47,7 @@ namespace Foosball2text
                 frame.ToImage<Bgr, byte>().Resize(pictureBox1.Width, pictureBox1.Height, Inter.Linear);
             pictureBox1.Image = resizedImage.Bitmap;
 
-
             Image<Gray, byte> filteredImage = _filter.FilterImage(resizedImage);
-
-
-            
             Image<Bgr, Byte> circleImage = resizedImage.CopyBlank();
             //Find the coordinates of the ball in the filtered image
             _ball.FindCordinates(filteredImage);
@@ -64,12 +64,7 @@ namespace Foosball2text
         {
             _xlabel.Text = _ball.X.ToString();
             _ylabel.Text = _ball.Y.ToString();
-        }
-
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
+            _logger.UpdateBallCoordinates(_ball.X, _ball.Y);
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -101,16 +96,19 @@ namespace Foosball2text
             DialogResult result = openFileDialog1.ShowDialog(); // Show the browse window
             if (result == DialogResult.OK) //If opened a file
             {
-                string fileName = openFileDialog1.FileName;
+                filePath = openFileDialog1.FileName;
                 try //to assign new _capture
                 {
-                    _capture = new VideoCapture(fileName);
+                    _capture = new VideoCapture(filePath);
+                    _logger.newGame();
                 }
-                catch (IOException)
+                catch (IOException ex)
                 {
+                    MessageBox.Show(ex.ToString());
                 }
             }
         }
+
 
     }
 }
