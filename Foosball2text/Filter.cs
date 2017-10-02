@@ -10,6 +10,13 @@ namespace Foosball2text
 {
     class Filter
     {
+        private int _hueMin = 0;
+        private int _saturationMin = 100;
+        private int _brightnessMin = 70;
+        private int _hueMax = 0;
+        private int _saturationMax = 255;
+        private int _brightnessMax = 255;
+
 
         public Filter()
         {
@@ -18,7 +25,7 @@ namespace Foosball2text
         public Image<Gray, byte> FilterImage(Image<Bgr, byte> frame)
         {
             Image<Gray, byte> filteredImage = GetFilteredImage(frame.Convert<Hsv, byte>(),
-                                                             0, 100, 70, 35, 255, 255);
+                                                             _hueMin, _saturationMin, _brightnessMin, _hueMax, _saturationMax, _brightnessMax);
             for (int i=0; i<5; i++)
             {
                 ErodeFrame(filteredImage, 5);
@@ -46,5 +53,15 @@ namespace Foosball2text
             return image.InRange(new Hsv(lowerHue, lowerSaturation, lowerValue),
                                  new Hsv(higherHue, higherSaturation, higherValue));
         }
+
+        public void UpdateValuesHSV(int hue)
+        {
+        _hueMin = hue-10;
+        _saturationMin = 100;
+        _brightnessMin = 70;
+        _hueMax = hue+10;
+        _saturationMax = 255;
+        _brightnessMax = 255;
+    }
     }
 }

@@ -47,11 +47,7 @@ namespace Foosball2text
                 frame.ToImage<Bgr, byte>().Resize(pictureBox1.Width, pictureBox1.Height, Inter.Linear);
             pictureBox1.Image = resizedImage.Bitmap;
 
-
             Image<Gray, byte> filteredImage = _filter.FilterImage(resizedImage);
-
-
-            
             Image<Bgr, Byte> circleImage = resizedImage.CopyBlank();
             //Find the coordinates of the ball in the filtered image
             _ball.FindCordinates(filteredImage);
@@ -71,6 +67,29 @@ namespace Foosball2text
             _logger.UpdateBallCoordinates(_ball.X, _ball.Y);
         }
 
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            Point pt = pictureBox1.PointToClient(MousePosition);
+            int x = pt.X;
+            int y = pt.Y;
+
+            Bitmap bm = new Bitmap(pictureBox1.Image);
+            Color colorAtPoint = bm.GetPixel(x, y);
+
+            int hue = Convert.ToInt32(colorAtPoint.GetHue());
+
+            _filter.UpdateValuesHSV(hue);
+
+            _timer.Stop();
+            _capture = new VideoCapture("../../sample.avi");
+            _timer.Start();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            _timer.Stop();
+        }
+        
         private void browseButton_Click(object sender, EventArgs e)
         {
             int size = -1;
@@ -89,6 +108,7 @@ namespace Foosball2text
                 }
             }
         }
+
 
     }
 }
