@@ -13,7 +13,7 @@ namespace Foosball2text
         private int _hueMin = 0;
         private int _saturationMin = 100;
         private int _brightnessMin = 70;
-        private int _hueMax = 35;
+        private int _hueMax = 0;
         private int _saturationMax = 255;
         private int _brightnessMax = 255;
 

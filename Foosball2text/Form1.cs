@@ -43,11 +43,7 @@ namespace Foosball2text
                 frame.ToImage<Bgr, byte>().Resize(pictureBox1.Width, pictureBox1.Height, Inter.Linear);
             pictureBox1.Image = resizedImage.Bitmap;
 
-
             Image<Gray, byte> filteredImage = _filter.FilterImage(resizedImage);
-
-
-            
             Image<Bgr, Byte> circleImage = resizedImage.CopyBlank();
             //Find the coordinates of the ball in the filtered image
             _ball.FindCordinates(filteredImage);
@@ -64,12 +60,6 @@ namespace Foosball2text
         {
             _xlabel.Text = _ball.X.ToString();
             _ylabel.Text = _ball.Y.ToString();
-        }
-
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -111,6 +101,7 @@ namespace Foosball2text
                 }
             }
         }
+
 
     }
 }
