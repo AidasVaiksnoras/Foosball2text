@@ -48,7 +48,7 @@ namespace Foosball2text
         {
             _xlabel.Text = _frameHandler.X;
             _ylabel.Text = _frameHandler.Y;
-            _logger.UpdateBallCoordinates(_ball.X, _ball.Y);
+            _logger.UpdateBallCoordinates(_frameHandler.Ball.X, _frameHandler.Ball.Y);
 
         }
 
