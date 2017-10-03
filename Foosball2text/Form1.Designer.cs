@@ -37,7 +37,6 @@
             this._xlabel = new System.Windows.Forms.Label();
             this.browseButton = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.pauseButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageBox1)).BeginInit();
             this.SuspendLayout();
@@ -49,7 +48,6 @@
             this.pictureBox1.Size = new System.Drawing.Size(363, 216);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // imageBox1
             // 
@@ -109,22 +107,11 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // pauseButton
-            // 
-            this.pauseButton.Location = new System.Drawing.Point(208, 469);
-            this.pauseButton.Name = "pauseButton";
-            this.pauseButton.Size = new System.Drawing.Size(67, 23);
-            this.pauseButton.TabIndex = 8;
-            this.pauseButton.Text = "pause";
-            this.pauseButton.UseVisualStyleBackColor = true;
-            this.pauseButton.Click += new System.EventHandler(this.button1_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(389, 502);
-            this.Controls.Add(this.pauseButton);
             this.Controls.Add(this.browseButton);
             this.Controls.Add(this._xlabel);
             this.Controls.Add(this._ylabel);
@@ -151,7 +138,6 @@
         private System.Windows.Forms.Label _xlabel;
         private System.Windows.Forms.Button browseButton;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.Button pauseButton;
     }
 }
 
