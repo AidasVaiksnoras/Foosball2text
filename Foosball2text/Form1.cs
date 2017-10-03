@@ -17,6 +17,7 @@ namespace Foosball2text
         private Ball _ball;
         private Filter _filter;
         private VideoLoggerForm _logger;
+        private BallWatcher ballWatcher;
         string filePath;
 
         public Form1()
@@ -25,6 +26,7 @@ namespace Foosball2text
             _logger = new VideoLoggerForm();
             _logger.Show();
             _ball = new Ball();
+            ballWatcher = new BallWatcher(ref _ball, pictureBox1.Height, pictureBox1.Width);
             _filter = new Filter();
             _timer = new Timer();
             //Frame Rate
@@ -37,6 +39,7 @@ namespace Foosball2text
 
         private void TimerTick(object sender, EventArgs e)
         {
+
             // Capture frame
             Mat frame = _capture.QueryFrame();
             if (frame == null)
@@ -47,7 +50,11 @@ namespace Foosball2text
                 frame.ToImage<Bgr, byte>().Resize(pictureBox1.Width, pictureBox1.Height, Inter.Linear);
             pictureBox1.Image = resizedImage.Bitmap;
 
+
             Image<Gray, byte> filteredImage = _filter.FilterImage(resizedImage);
+
+
+            
             Image<Bgr, Byte> circleImage = resizedImage.CopyBlank();
             //Find the coordinates of the ball in the filtered image
             _ball.FindCordinates(filteredImage);
@@ -55,41 +62,47 @@ namespace Foosball2text
             //Diplay ball's coordinates
             UpdateCordinates();
 
+            //BallWatcher Update
+            ballWatcher.UpdateBallWatcher();
+            Teams teamScored = ballWatcher.checkWhichTeamScored();
+            _logger.UpdateBallWatcherData(ballWatcher.GetBallOnSideString(), ballWatcher.GetSpeedString(), teamScored);
+
             //draw and display the circle
-            circleImage.Draw(_ball.Circle, new Bgr(Color.Green), 7);
+            circleImage.Draw(_ball._circle, new Bgr(Color.Green), 7);
             imageBox1.Image = circleImage;
         }
 
         private void UpdateCordinates()
         {
-            _xlabel.Text = _ball.X.ToString();
-            _ylabel.Text = _ball.Y.ToString();
-            _logger.UpdateBallCoordinates(_ball.X, _ball.Y);
+            _xlabel.Text = _ball.x.ToString();
+            _ylabel.Text = _ball.y.ToString();
+            _logger.UpdateBallCoordinates(_ball.x, _ball.y);
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
-        {
-            Point pt = pictureBox1.PointToClient(MousePosition);
-            int x = pt.X;
-            int y = pt.Y;
+         {
+             Point pt = pictureBox1.PointToClient(MousePosition);
+             int x = pt.X;
+             int y = pt.Y;
+ 
+             Bitmap bm = new Bitmap(pictureBox1.Image);
+             Color colorAtPoint = bm.GetPixel(x, y);
 
-            Bitmap bm = new Bitmap(pictureBox1.Image);
-            Color colorAtPoint = bm.GetPixel(x, y);
+             int hue = Convert.ToInt32(colorAtPoint.GetHue());
+ 
+             _filter.UpdateValuesHSV(hue);
+ 
+             _timer.Stop();
+             _capture = new VideoCapture("../../sample.avi");
+             _timer.Start();
+         }
+ 
+         private void button1_Click(object sender, EventArgs e)
+         {
+             _timer.Stop();
+         }
 
-            int hue = Convert.ToInt32(colorAtPoint.GetHue());
 
-            _filter.UpdateValuesHSV(hue);
-
-            _timer.Stop();
-            _capture = new VideoCapture("../../sample.avi");
-            _timer.Start();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            _timer.Stop();
-        }
-        
         private void browseButton_Click(object sender, EventArgs e)
         {
             int size = -1;
@@ -108,7 +121,6 @@ namespace Foosball2text
                 }
             }
         }
-
 
     }
 }
