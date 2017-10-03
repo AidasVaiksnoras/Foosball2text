@@ -11,11 +11,10 @@ namespace Foosball2text
 {
     public partial class Form1 : Form
     {
-        Timer _timer;
-        private const int Fps = 30;
-        VideoCapture _capture;
-        private Ball _ball;
-        private Filter _filter;
+        private Timer _timer;
+        private const int _fps = 30;
+        private VideoCapture _capture;
+        private FrameHandler _frameHandler;
         private VideoLoggerForm _logger;
         private BallWatcher ballWatcher;
         string filePath;
@@ -27,10 +26,10 @@ namespace Foosball2text
             _logger.Show();
             _ball = new Ball();
             ballWatcher = new BallWatcher(ref _ball, pictureBox1.Height, pictureBox1.Width);
-            _filter = new Filter();
+            _frameHandler = new FrameHandler();
             _timer = new Timer();
             //Frame Rate
-            _timer.Interval = 1000 / Fps;
+            _timer.Interval = 1000 / _fps;
             _timer.Tick += new EventHandler(TimerTick);
             _timer.Start();
 
@@ -39,21 +38,13 @@ namespace Foosball2text
 
         private void TimerTick(object sender, EventArgs e)
         {
-
-            // Capture frame
             Mat frame = _capture.QueryFrame();
             if (frame == null)
                 return;
 
             // Resize Image to size of pictureBox
-            Image<Bgr, byte> resizedImage =
-                frame.ToImage<Bgr, byte>().Resize(pictureBox1.Width, pictureBox1.Height, Inter.Linear);
-            pictureBox1.Image = resizedImage.Bitmap;
-
-
-            Image<Gray, byte> filteredImage = _filter.FilterImage(resizedImage);
-
-
+            pictureBox1.Image = _frameHandler.GetResizedImage(frame, pictureBox1.Width, pictureBox1.Height);
+            imageBox1.Image = _frameHandler.GetFilteredImage(frame, pictureBox1.Width, pictureBox1.Height);
             
             Image<Bgr, Byte> circleImage = resizedImage.CopyBlank();
             //Find the coordinates of the ball in the filtered image
@@ -77,6 +68,7 @@ namespace Foosball2text
             _xlabel.Text = _ball.x.ToString();
             _ylabel.Text = _ball.y.ToString();
             _logger.UpdateBallCoordinates(_ball.x, _ball.y);
+            //^^^^^^^^^^^ Removed the call for frame handler on merge conflict. Will fix if needed
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -90,7 +82,7 @@ namespace Foosball2text
 
              int hue = Convert.ToInt32(colorAtPoint.GetHue());
  
-             _filter.UpdateValuesHSV(hue);
+             _frameHandler.UpdateHue(hue);
  
              _timer.Stop();
              _capture = new VideoCapture("../../sample.avi");
@@ -102,10 +94,8 @@ namespace Foosball2text
              _timer.Stop();
          }
 
-
         private void browseButton_Click(object sender, EventArgs e)
         {
-            int size = -1;
             DialogResult result = openFileDialog1.ShowDialog(); // Show the browse window
             if (result == DialogResult.OK) //If opened a file
             {
@@ -120,8 +110,7 @@ namespace Foosball2text
                     MessageBox.Show(ex.ToString());
                 }
             }
-        }
-
+         }
     }
 }
 

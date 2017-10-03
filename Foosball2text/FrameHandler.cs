@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace Foosball2text
 {
-    class Filter
+    class FrameHandler
     {
         private int _hueMin = 0;
         private int _saturationMin = 100;
@@ -16,11 +16,31 @@ namespace Foosball2text
         private int _hueMax = 0;
         private int _saturationMax = 255;
         private int _brightnessMax = 255;
-
-
-        public Filter()
+        private Image<Bgr, byte> _grayscaleImage;
+        private Ball _ball;
+        public FrameHandler()
         {
+            _ball = new Ball();
         }
+
+        public string X {get => _ball.X.ToString();}
+        public string Y {get => _ball.Y.ToString();}
+        public Ball Ball {get => _ball;}
+        public Image GetResizedImage(Mat frame, int width, int height)
+        {
+            return frame.ToImage<Bgr, byte>().Resize(width, height, Inter.Linear).ToBitmap();
+        }
+
+        public Image<Bgr, byte> GetFilteredImage(Mat frame, int width, int height)
+        {
+            Image<Bgr, byte> resizedImage = frame.ToImage<Bgr, byte>().Resize(width, height, Inter.Linear);
+            Image<Gray, byte> filteredImage = FilterImage(resizedImage);
+            _grayscaleImage = resizedImage.CopyBlank();
+            if (null != _ball)
+                _grayscaleImage.Draw(_ball.GetCircle(filteredImage), new Bgr(Color.Green), 7);
+            return _grayscaleImage;
+        }
+
 
         public Image<Gray, byte> FilterImage(Image<Bgr, byte> frame)
         {
@@ -31,9 +51,9 @@ namespace Foosball2text
                 ErodeFrame(filteredImage, 5);
                 DilateFrame(filteredImage, 6);
             }
-
             return filteredImage;
         }
+
         private void ErodeFrame(Image<Gray, byte> frame, int pointSize)
         {
             var erodeElement = CvInvoke.GetStructuringElement(ElementShape.Ellipse, new Size(pointSize, pointSize), new Point(-1, -1));
@@ -49,19 +69,14 @@ namespace Foosball2text
         private Image<Gray, byte> GetFilteredImage(Image<Hsv, byte> image, int lowerHue, int lowerSaturation,
                                         int lowerValue, int higherHue, int higherSaturation, int higherValue)
         {
-
             return image.InRange(new Hsv(lowerHue, lowerSaturation, lowerValue),
                                  new Hsv(higherHue, higherSaturation, higherValue));
         }
 
-        public void UpdateValuesHSV(int hue)
+        public void UpdateHue(int hue)
         {
         _hueMin = hue-10;
-        _saturationMin = 100;
-        _brightnessMin = 70;
         _hueMax = hue+10;
-        _saturationMax = 255;
-        _brightnessMax = 255;
-    }
+        }
     }
 }

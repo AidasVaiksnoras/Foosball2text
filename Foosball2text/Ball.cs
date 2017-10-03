@@ -15,7 +15,7 @@ namespace Foosball2text
         public float x { get; set; }
         public float y { get; set; }
         public CircleF _circle { get; set; }
-
+        
         public Ball()
         {
         }
@@ -27,8 +27,7 @@ namespace Foosball2text
             _circle = circle;
         }
 
-
-        private CircleF[] GetCirclesFromFrame(Image<Gray, byte> frame)
+        public CircleF[] GetCirclesFromFrame(Image<Gray, byte> frame)
         {
             Gray cannyThreshold = new Gray(12);
             Gray circleAccumulatorThreshold = new Gray(26);
@@ -41,7 +40,7 @@ namespace Foosball2text
                                       minDistance, minRadius, maxRadius)[0];
         }
 
-        public void FindCordinates(Image<Gray, byte> frame)
+        public CircleF GetCircle(Image<Gray, byte> frame)
         {
             CircleF[] circleArray = GetCirclesFromFrame(frame);
             if (circleArray.Length != 0)
@@ -50,6 +49,7 @@ namespace Foosball2text
                 x = _circle.Center.X;
                 y = _circle.Center.Y;
             }
+            return Circle;
         }
 
         public object Clone()
