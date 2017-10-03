@@ -17,15 +17,19 @@ namespace Foosball2text
         private int _saturationMax = 255;
         private int _brightnessMax = 255;
         private Image<Bgr, byte> _grayscaleImage;
-        private Ball _ball;
+        public Ball _ball;
+        //K.S. I will make this back to private in the future when I decide where to implement my BallWatcher (goal check) class
+        //ATM this is public because I pass a reference, and the Form1 rework deleted the _ball field
+        //public Ball Ball {get => _ball;}
+
         public FrameHandler()
         {
             _ball = new Ball();
         }
 
-        public string X {get => _ball.X.ToString();}
-        public string Y {get => _ball.Y.ToString();}
-        public Ball Ball {get => _ball;}
+        public string X {get => _ball.x.ToString();}
+        public string Y {get => _ball.y.ToString();}
+        
         public Image GetResizedImage(Mat frame, int width, int height)
         {
             return frame.ToImage<Bgr, byte>().Resize(width, height, Inter.Linear).ToBitmap();

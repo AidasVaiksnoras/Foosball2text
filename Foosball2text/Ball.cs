@@ -49,7 +49,7 @@ namespace Foosball2text
                 x = _circle.Center.X;
                 y = _circle.Center.Y;
             }
-            return Circle;
+            return _circle;
         }
 
         public object Clone()

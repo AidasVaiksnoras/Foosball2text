@@ -17,16 +17,15 @@ namespace Foosball2text
         private FrameHandler _frameHandler;
         private VideoLoggerForm _logger;
         private BallWatcher ballWatcher;
-        string filePath;
+        string filePath;    //TODO cleanup format
 
         public Form1()
         {
             InitializeComponent();
             _logger = new VideoLoggerForm();
             _logger.Show();
-            _ball = new Ball();
-            ballWatcher = new BallWatcher(ref _ball, pictureBox1.Height, pictureBox1.Width);
             _frameHandler = new FrameHandler();
+            ballWatcher = new BallWatcher(ref _frameHandler._ball, pictureBox1.Height, pictureBox1.Width);
             _timer = new Timer();
             //Frame Rate
             _timer.Interval = 1000 / _fps;
@@ -42,33 +41,21 @@ namespace Foosball2text
             if (frame == null)
                 return;
 
-            // Resize Image to size of pictureBox
             pictureBox1.Image = _frameHandler.GetResizedImage(frame, pictureBox1.Width, pictureBox1.Height);
             imageBox1.Image = _frameHandler.GetFilteredImage(frame, pictureBox1.Width, pictureBox1.Height);
-            
-            Image<Bgr, Byte> circleImage = resizedImage.CopyBlank();
-            //Find the coordinates of the ball in the filtered image
-            _ball.FindCordinates(filteredImage);
-
-            //Diplay ball's coordinates
             UpdateCordinates();
 
             //BallWatcher Update
             ballWatcher.UpdateBallWatcher();
             Teams teamScored = ballWatcher.checkWhichTeamScored();
             _logger.UpdateBallWatcherData(ballWatcher.GetBallOnSideString(), ballWatcher.GetSpeedString(), teamScored);
-
-            //draw and display the circle
-            circleImage.Draw(_ball._circle, new Bgr(Color.Green), 7);
-            imageBox1.Image = circleImage;
         }
 
         private void UpdateCordinates()
         {
-            _xlabel.Text = _ball.x.ToString();
-            _ylabel.Text = _ball.y.ToString();
-            _logger.UpdateBallCoordinates(_ball.x, _ball.y);
-            //^^^^^^^^^^^ Removed the call for frame handler on merge conflict. Will fix if needed
+            _xlabel.Text = _frameHandler.X;
+            _ylabel.Text = _frameHandler.Y;
+            _logger.UpdateBallCoordinates(_frameHandler._ball.x, _frameHandler._ball.y);
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -85,7 +72,7 @@ namespace Foosball2text
              _frameHandler.UpdateHue(hue);
  
              _timer.Stop();
-             _capture = new VideoCapture("../../sample.avi");
+             _capture = new VideoCapture("../../sample.avi"); //TODO change to filePath
              _timer.Start();
          }
  
