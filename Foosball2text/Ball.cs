@@ -10,18 +10,22 @@ namespace Foosball2text
 {
     
 
-    public class Ball
+    public class Ball : ICloneable
     {
-        private float _x;
-        private float _y;
-        private CircleF _circle;
+        public float X { get; set; }
+        public float Y { get; set; }
+        public CircleF _circle { get; set; }
+        
         public Ball()
         {
         }
 
-        public float X { get => _x; set => _x = value; }
-        public float Y { get => _y; set => _y = value; }
-        public CircleF Circle { get => _circle; set => _circle = value; }
+        public Ball(float x, float y, CircleF circle)
+        {
+            X = x;
+            Y = y;
+            _circle = circle;
+        }
 
         public CircleF[] GetCirclesFromFrame(Image<Gray, byte> frame)
         {
@@ -41,11 +45,16 @@ namespace Foosball2text
             CircleF[] circleArray = GetCirclesFromFrame(frame);
             if (circleArray.Length != 0)
             {
-                Circle = circleArray[circleArray.Length - 1];
-                X = Circle.Center.X;
-                Y = Circle.Center.Y;
+                _circle = circleArray[circleArray.Length-1];
+                X = _circle.Center.X;
+                Y = _circle.Center.Y;
             }
-            return Circle;
+            return _circle;
+        }
+
+        public object Clone()
+        {
+            return MemberwiseClone();
         }
     }
 

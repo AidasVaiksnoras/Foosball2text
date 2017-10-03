@@ -16,7 +16,8 @@ namespace Foosball2text
         private VideoCapture _capture;
         private FrameHandler _frameHandler;
         private VideoLoggerForm _logger;
-        string filePath;
+        private BallWatcher _ballWatcher;
+        string _filePath;    
 
         public Form1()
         {
@@ -24,13 +25,15 @@ namespace Foosball2text
             _logger = new VideoLoggerForm();
             _logger.Show();
             _frameHandler = new FrameHandler();
+            _ballWatcher = new BallWatcher(ref _frameHandler._ball, pictureBox1.Height, pictureBox1.Width);
             _timer = new Timer();
             //Frame Rate
             _timer.Interval = 1000 / _fps;
             _timer.Tick += new EventHandler(TimerTick);
             _timer.Start();
 
-            _capture = new VideoCapture("../../sample.avi");
+            _filePath = "../../sample.avi";
+            _capture = new VideoCapture(_filePath);
         }
 
         private void TimerTick(object sender, EventArgs e)
@@ -42,48 +45,52 @@ namespace Foosball2text
             pictureBox1.Image = _frameHandler.GetResizedImage(frame, pictureBox1.Width, pictureBox1.Height);
             imageBox1.Image = _frameHandler.GetFilteredImage(frame, pictureBox1.Width, pictureBox1.Height);
             UpdateCordinates();
+
+            //BallWatcher Update
+            _ballWatcher.UpdateBallWatcher();
+            Teams teamScored = _ballWatcher.checkWhichTeamScored();
+            _logger.UpdateBallWatcherData(_ballWatcher.GetBallOnSideString(), _ballWatcher.GetSpeedString(), teamScored);
         }
 
         private void UpdateCordinates()
         {
             _xlabel.Text = _frameHandler.X;
             _ylabel.Text = _frameHandler.Y;
-            _logger.UpdateBallCoordinates(_frameHandler.Ball.X, _frameHandler.Ball.Y);
-
+            _logger.UpdateBallCoordinates(_frameHandler._ball.X, _frameHandler._ball.Y);
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
-        {
-            Point pt = pictureBox1.PointToClient(MousePosition);
-            int x = pt.X;
-            int y = pt.Y;
+         {
+             Point pt = pictureBox1.PointToClient(MousePosition);
+             int x = pt.X;
+             int y = pt.Y;
+ 
+             Bitmap bm = new Bitmap(pictureBox1.Image);
+             Color colorAtPoint = bm.GetPixel(x, y);
 
-            Bitmap bm = new Bitmap(pictureBox1.Image);
-            Color colorAtPoint = bm.GetPixel(x, y);
+             int hue = Convert.ToInt32(colorAtPoint.GetHue());
+ 
+             _frameHandler.UpdateHue(hue);
+ 
+             _timer.Stop();
+             _capture = new VideoCapture(_filePath); //TODO change to filePath
+             _timer.Start();
+         }
+ 
+         private void button1_Click(object sender, EventArgs e)
+         {
+             _timer.Stop();
+         }
 
-            int hue = Convert.ToInt32(colorAtPoint.GetHue());
-
-            _frameHandler.UpdateHue(hue);
-
-            _timer.Stop();
-            _capture = new VideoCapture("../../sample.avi");
-            _timer.Start();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            _timer.Stop();
-        }
-        
         private void browseButton_Click(object sender, EventArgs e)
         {
             DialogResult result = openFileDialog1.ShowDialog(); // Show the browse window
             if (result == DialogResult.OK) //If opened a file
             {
-                filePath = openFileDialog1.FileName;
+                _filePath = openFileDialog1.FileName;
                 try //to assign new _capture
                 {
-                    _capture = new VideoCapture(filePath);
+                    _capture = new VideoCapture(_filePath);
                     _logger.newGame();
                 }
                 catch (IOException ex)
@@ -91,7 +98,6 @@ namespace Foosball2text
                     MessageBox.Show(ex.ToString());
                 }
             }
-
          }
     }
 }

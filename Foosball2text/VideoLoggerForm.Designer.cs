@@ -41,15 +41,15 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.Coordinates = new System.Windows.Forms.Label();
-            this.Speed = new System.Windows.Forms.Label();
+            this.SpeedValue = new System.Windows.Forms.Label();
             this.EndGameButton = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.TeamA = new System.Windows.Forms.Label();
             this.TeamB = new System.Windows.Forms.Label();
-            this.CoordinatesTestButton = new System.Windows.Forms.Button();
-            this.CoordinatesTestBox = new System.Windows.Forms.TextBox();
+            this.sideOfFieldLabel = new System.Windows.Forms.Label();
+            this.ballOnSideOfFieldValue = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // LeftGoalButton
@@ -169,14 +169,14 @@
             this.Coordinates.TabIndex = 15;
             this.Coordinates.Text = "Null";
             // 
-            // Speed
+            // SpeedValue
             // 
-            this.Speed.AutoSize = true;
-            this.Speed.Location = new System.Drawing.Point(100, 22);
-            this.Speed.Name = "Speed";
-            this.Speed.Size = new System.Drawing.Size(25, 13);
-            this.Speed.TabIndex = 16;
-            this.Speed.Text = "Null";
+            this.SpeedValue.AutoSize = true;
+            this.SpeedValue.Location = new System.Drawing.Point(100, 22);
+            this.SpeedValue.Name = "SpeedValue";
+            this.SpeedValue.Size = new System.Drawing.Size(25, 13);
+            this.SpeedValue.TabIndex = 16;
+            this.SpeedValue.Text = "Null";
             // 
             // EndGameButton
             // 
@@ -191,7 +191,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 69);
+            this.label4.Location = new System.Drawing.Point(12, 72);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(44, 13);
             this.label4.TabIndex = 18;
@@ -201,7 +201,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.label5.Location = new System.Drawing.Point(12, 47);
+            this.label5.Location = new System.Drawing.Point(12, 57);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(48, 15);
             this.label5.TabIndex = 19;
@@ -210,7 +210,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(126, 69);
+            this.label6.Location = new System.Drawing.Point(126, 72);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(44, 13);
             this.label6.TabIndex = 20;
@@ -219,7 +219,7 @@
             // TeamA
             // 
             this.TeamA.AutoSize = true;
-            this.TeamA.Location = new System.Drawing.Point(62, 69);
+            this.TeamA.Location = new System.Drawing.Point(62, 72);
             this.TeamA.Name = "TeamA";
             this.TeamA.Size = new System.Drawing.Size(13, 13);
             this.TeamA.TabIndex = 21;
@@ -229,44 +229,45 @@
             // TeamB
             // 
             this.TeamB.AutoSize = true;
-            this.TeamB.Location = new System.Drawing.Point(176, 69);
+            this.TeamB.Location = new System.Drawing.Point(176, 72);
             this.TeamB.Name = "TeamB";
             this.TeamB.Size = new System.Drawing.Size(13, 13);
             this.TeamB.TabIndex = 22;
             this.TeamB.Tag = "score";
             this.TeamB.Text = "0";
             // 
-            // CoordinatesTestButton
+            // sideOfFieldLabel
             // 
-            this.CoordinatesTestButton.Location = new System.Drawing.Point(315, 239);
-            this.CoordinatesTestButton.Name = "CoordinatesTestButton";
-            this.CoordinatesTestButton.Size = new System.Drawing.Size(150, 23);
-            this.CoordinatesTestButton.TabIndex = 23;
-            this.CoordinatesTestButton.Text = "Ball Coordinates";
-            this.CoordinatesTestButton.UseVisualStyleBackColor = true;
-            this.CoordinatesTestButton.Click += new System.EventHandler(this.CoordinatesTestButton_Click);
+            this.sideOfFieldLabel.AutoSize = true;
+            this.sideOfFieldLabel.Location = new System.Drawing.Point(12, 35);
+            this.sideOfFieldLabel.Name = "sideOfFieldLabel";
+            this.sideOfFieldLabel.Size = new System.Drawing.Size(98, 13);
+            this.sideOfFieldLabel.TabIndex = 23;
+            this.sideOfFieldLabel.Text = "Ball on side of field:";
             // 
-            // CoordinatesTestBox
+            // ballOnSideOfFieldValue
             // 
-            this.CoordinatesTestBox.Location = new System.Drawing.Point(471, 239);
-            this.CoordinatesTestBox.Name = "CoordinatesTestBox";
-            this.CoordinatesTestBox.Size = new System.Drawing.Size(145, 20);
-            this.CoordinatesTestBox.TabIndex = 24;
+            this.ballOnSideOfFieldValue.AutoSize = true;
+            this.ballOnSideOfFieldValue.Location = new System.Drawing.Point(116, 35);
+            this.ballOnSideOfFieldValue.Name = "ballOnSideOfFieldValue";
+            this.ballOnSideOfFieldValue.Size = new System.Drawing.Size(25, 13);
+            this.ballOnSideOfFieldValue.TabIndex = 24;
+            this.ballOnSideOfFieldValue.Text = "Null";
             // 
             // VideoLoggerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(631, 324);
-            this.Controls.Add(this.CoordinatesTestBox);
-            this.Controls.Add(this.CoordinatesTestButton);
+            this.Controls.Add(this.ballOnSideOfFieldValue);
+            this.Controls.Add(this.sideOfFieldLabel);
             this.Controls.Add(this.TeamB);
             this.Controls.Add(this.TeamA);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.EndGameButton);
-            this.Controls.Add(this.Speed);
+            this.Controls.Add(this.SpeedValue);
             this.Controls.Add(this.Coordinates);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -302,14 +303,14 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label Coordinates;
-        private System.Windows.Forms.Label Speed;
+        private System.Windows.Forms.Label SpeedValue;
         private System.Windows.Forms.Button EndGameButton;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label TeamA;
         private System.Windows.Forms.Label TeamB;
-        private System.Windows.Forms.Button CoordinatesTestButton;
-        private System.Windows.Forms.TextBox CoordinatesTestBox;
+        private System.Windows.Forms.Label sideOfFieldLabel;
+        private System.Windows.Forms.Label ballOnSideOfFieldValue;
     }
 }
