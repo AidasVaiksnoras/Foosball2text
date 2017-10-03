@@ -38,11 +38,13 @@ namespace Foosball2text
 
         private void button1_Click(object sender, EventArgs e)
         {
+            logData.Add(messageGetter.goalLeft);
             AddGoalA();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            logData.Add(messageGetter.goalRight);
             AddGoalB();
         }
 
@@ -67,23 +69,11 @@ namespace Foosball2text
             ResetScore();
         }
 
-        public void UpdateBallWatcherData(string ballOnSideText, string speedText, Teams teamScored)
-        {
-            ballOnSideOfFieldValue.Text = ballOnSideText;
-            SpeedValue.Text = speedText;
-
-            if (teamScored == Teams.TeamA)
-                AddGoalA();
-            if (teamScored == Teams.TeamB)
-                AddGoalB();
-        }
-
         public void AddGoalA()
         {
             int score = int.Parse(TeamA.Text);
             score++;
             TeamA.Text = score.ToString();
-            logData.Add(messageGetter.goalLeft);
         }
 
         public void AddGoalB()
@@ -91,7 +81,6 @@ namespace Foosball2text
             int score = int.Parse(TeamB.Text);
             score++;
             TeamB.Text = score.ToString();
-            logData.Add(messageGetter.goalRight);
         }
 
         public void ResetScore()
@@ -110,6 +99,11 @@ namespace Foosball2text
             string newCoordinates = "X: " + xCoord.ToString() + "; ";
             newCoordinates += "   Y: " + yCoord.ToString();
             Coordinates.Text = newCoordinates;
+        }
+
+        private void CoordinatesTestButton_Click(object sender, EventArgs e)
+        {
+            UpdateBallCoordinates(CoordinatesTestBox.Text);
         }
 
         public void newGame()
