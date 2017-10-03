@@ -48,7 +48,7 @@ namespace Foosball2text
         int positionHasntChangedFrameCount;
         PlayField _playField;
 
-        public BallWatcher(ref Ball ball, float fieldHeight, float fieldWidth) // <--- Ball is passed by reference
+        public BallWatcher(ref Ball ball, float fieldWidth, float fieldHeight) // <--- Ball is passed by reference
         {
             _ball = ball;
             _lastFrameBall = _ball.Clone() as Ball;

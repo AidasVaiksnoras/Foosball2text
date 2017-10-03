@@ -16,7 +16,6 @@ namespace Foosball2text
         private VideoCapture _capture;
         private FrameHandler _frameHandler;
         private VideoLoggerForm _logger;
-        private BallWatcher _ballWatcher;
         string _filePath;    
 
         public Form1()
@@ -24,15 +23,14 @@ namespace Foosball2text
             InitializeComponent();
             _logger = new VideoLoggerForm();
             _logger.Show();
-            _frameHandler = new FrameHandler();
-            _ballWatcher = new BallWatcher(ref _frameHandler._ball, pictureBox1.Height, pictureBox1.Width);
+            _frameHandler = new FrameHandler(pictureBox1.Width, pictureBox1.Height);
             _timer = new Timer();
             //Frame Rate
             _timer.Interval = 1000 / _fps;
             _timer.Tick += new EventHandler(TimerTick);
             _timer.Start();
 
-            _filePath = "../../sample.avi";
+            _filePath = "../../sample.avi"; //<---- On launch video file path
             _capture = new VideoCapture(_filePath);
         }
 
@@ -47,9 +45,11 @@ namespace Foosball2text
             UpdateCordinates();
 
             //BallWatcher Update
-            _ballWatcher.UpdateBallWatcher();
-            Teams teamScored = _ballWatcher.checkWhichTeamScored();
-            _logger.UpdateBallWatcherData(_ballWatcher.GetBallOnSideString(), _ballWatcher.GetSpeedString(), teamScored);
+            _frameHandler.ballWatcher.UpdateBallWatcher();
+            Teams teamScored = _frameHandler.ballWatcher.checkWhichTeamScored();
+            _logger.UpdateBallWatcherData(_frameHandler.ballWatcher.GetBallOnSideString(),
+                                          _frameHandler.ballWatcher.GetSpeedString(),
+                                          teamScored);
         }
 
         private void UpdateCordinates()
@@ -73,7 +73,7 @@ namespace Foosball2text
              _frameHandler.UpdateHue(hue);
  
              _timer.Stop();
-             _capture = new VideoCapture(_filePath); //TODO change to filePath
+             _capture = new VideoCapture(_filePath);
              _timer.Start();
          }
  
