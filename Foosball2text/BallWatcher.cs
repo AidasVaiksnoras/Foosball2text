@@ -11,8 +11,8 @@ namespace Foosball2text
 
     class Speed
     {
-        public float x { get; set; }    //public read-only
-        public float y { get; set; }    //public read-only
+        public float x;
+        public float y;
 
         public Speed()
         {
@@ -43,7 +43,7 @@ namespace Foosball2text
     {
         Ball _ball;                         //Used for coordinates
         Ball _lastFrameBall = new Ball();   //Used for calculating speed and other changes between frames
-        Speed speed = new Speed();
+        Speed _speed = new Speed();
         public FieldSide ballOnSide = FieldSide.Middle;
         int positionHasntChangedFrameCount;
         PlayField _playField;
@@ -57,7 +57,7 @@ namespace Foosball2text
 
         public void UpdateBallWatcher()
         {
-            if (_lastFrameBall.x != _ball.x || _lastFrameBall.y != _ball.y)
+            if (_lastFrameBall.X != _ball.X || _lastFrameBall.Y != _ball.Y)
             {
                 UpdateballOnSide();
                 UpdateSpeed();
@@ -70,9 +70,9 @@ namespace Foosball2text
 
         private void UpdateballOnSide()
         {
-            if (_ball.x < _playField.leftSideLine)
+            if (_ball.X < _playField.leftSideLine)
                 ballOnSide = FieldSide.Left;
-            else if (_ball.x < _playField.rightSideLine)
+            else if (_ball.X < _playField.rightSideLine)
                 ballOnSide = FieldSide.Middle;
             else ballOnSide = FieldSide.Right;
         }
@@ -84,22 +84,22 @@ namespace Foosball2text
 
         private void UpdateSpeed()
         {
-            speed.x = _ball.x - _lastFrameBall.x;
-            speed.y = _ball.y - _lastFrameBall.y;
+            _speed.x = _ball.X - _lastFrameBall.X;
+            _speed.y = _ball.Y - _lastFrameBall.Y;
         }
 
         public string GetSpeedString()
         {
-            return "X: " + speed.x.ToString() + ";    Y: " + speed.y.ToString();
+            return "X: " + _speed.x.ToString() + ";    Y: " + _speed.y.ToString();
         }
 
         public Teams checkWhichTeamScored()
         {
             if (positionHasntChangedFrameCount == 30) //== 1 sec
             {
-                if (ballOnSide == FieldSide.Left && speed.x < 0)
+                if (ballOnSide == FieldSide.Left && _speed.x < 0)
                     return Teams.TeamA;
-                else if (ballOnSide == FieldSide.Right && speed.x > 0)
+                else if (ballOnSide == FieldSide.Right && _speed.x > 0)
                     return Teams.TeamB;
             }
 

@@ -12,8 +12,8 @@ namespace Foosball2text
 
     public class Ball : ICloneable
     {
-        public float x { get; set; }
-        public float y { get; set; }
+        public float X { get; set; }
+        public float Y { get; set; }
         public CircleF _circle { get; set; }
         
         public Ball()
@@ -22,8 +22,8 @@ namespace Foosball2text
 
         public Ball(float x, float y, CircleF circle)
         {
-            this.x = x;
-            this.y = y;
+            X = x;
+            Y = y;
             _circle = circle;
         }
 
@@ -46,15 +46,15 @@ namespace Foosball2text
             if (circleArray.Length != 0)
             {
                 _circle = circleArray[circleArray.Length-1];
-                x = _circle.Center.X;
-                y = _circle.Center.Y;
+                X = _circle.Center.X;
+                Y = _circle.Center.Y;
             }
             return _circle;
         }
 
         public object Clone()
         {
-            return this.MemberwiseClone();
+            return MemberwiseClone();
         }
     }
 

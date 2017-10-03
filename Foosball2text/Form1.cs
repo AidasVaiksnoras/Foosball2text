@@ -56,7 +56,7 @@ namespace Foosball2text
         {
             _xlabel.Text = _frameHandler.X;
             _ylabel.Text = _frameHandler.Y;
-            _logger.UpdateBallCoordinates(_frameHandler._ball.x, _frameHandler._ball.y);
+            _logger.UpdateBallCoordinates(_frameHandler._ball.X, _frameHandler._ball.Y);
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)

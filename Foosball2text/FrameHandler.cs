@@ -27,8 +27,8 @@ namespace Foosball2text
             _ball = new Ball();
         }
 
-        public string X {get => _ball.x.ToString();}
-        public string Y {get => _ball.y.ToString();}
+        public string X {get => _ball.X.ToString();}
+        public string Y {get => _ball.Y.ToString();}
         
         public Image GetResizedImage(Mat frame, int width, int height)
         {
