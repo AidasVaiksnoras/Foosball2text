@@ -15,6 +15,7 @@ namespace Foosball2text
         public readonly string dissapearedBall = "Ball has dissapeared";
         private readonly string pass = "Ball has been passed to ";
         private readonly string dissapearedString = " has dissapeared";
+        private readonly string score = "Score is: ";
 
         public string getPassMessage(String passedTo)
         {
@@ -25,5 +26,12 @@ namespace Foosball2text
         {
             return disappearedObjName + dissapearedString;
         }
+
+        public string getScoreMessage(int scoreA, int scoreB)
+        {
+            return score + "Team A: " + scoreA.ToString() + "; Team B: " + scoreB.ToString();
+        }
+
+
     }
 }

@@ -49,7 +49,6 @@ namespace Foosball2text
             imageBox1.Image = _frameHandler.GetFilteredImage(frame, pictureBox1.Width, pictureBox1.Height);
             UpdateCordinates();
 
-            //TODO rework BallWatcher
             _frameHandler.ballWatcher.UpdateBallWatcher();
             Teams teamScored = _frameHandler.ballWatcher.checkWhichTeamScored();
             UpdateBallWatcherData(_frameHandler.ballWatcher.GetBallOnSideString(),
