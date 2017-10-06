@@ -9,16 +9,10 @@ namespace Foosball2text
     enum FieldSide { Left, Middle, Right };
     public enum Teams { None, TeamA, TeamB }
 
-    class Speed
+    struct Speed
     {
         public float x;
         public float y;
-
-        public Speed()
-        {
-            x = 0;
-            y = 0;
-        }
     }
 
     class PlayField
@@ -33,9 +27,9 @@ namespace Foosball2text
             this.xSize = xSize;
             this.ySize = ySize;
 
-            float oneThird = xSize / 3;
-            leftSideLine = oneThird;
-            rightSideLine = oneThird * 2;
+            float quater = xSize / 4;
+            leftSideLine = quater;
+            rightSideLine = quater * 3;
         }
     }
 
@@ -43,12 +37,12 @@ namespace Foosball2text
     {
         Ball _ball;                         //Used for coordinates
         Ball _lastFrameBall = new Ball();   //Used for calculating speed and other changes between frames
-        Speed _speed = new Speed();
+        Speed _speed;
         public FieldSide ballOnSide = FieldSide.Middle;
         int positionHasntChangedFrameCount;
         PlayField _playField;
 
-        public BallWatcher(ref Ball ball, float fieldHeight, float fieldWidth) // <--- Ball is passed by reference
+        public BallWatcher(ref Ball ball, float fieldWidth, float fieldHeight) // <--- Ball is passed by reference
         {
             _ball = ball;
             _lastFrameBall = _ball.Clone() as Ball;
