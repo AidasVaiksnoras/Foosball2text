@@ -13,6 +13,8 @@ namespace Foosball2text
     {
         public float x;
         public float y;
+
+        public double OneDirectionalSpeed => Math.Sqrt(x * x + y * y);
     }
 
     class PlayField
@@ -85,7 +87,7 @@ namespace Foosball2text
             _speed.y = _ball.Y - _lastFrameBall.Y;
         }
 
-        public string GetSpeedString()
+        public string GetXYSpeedString()
         {
             return "X: " + _speed.x.ToString() + ";    Y: " + _speed.y.ToString();
         }
