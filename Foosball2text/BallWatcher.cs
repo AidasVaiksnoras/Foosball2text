@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Foosball2text
 {
-    enum FieldSide { Left, Middle, Right };
+    public enum FieldSide { Left, Middle, Right };
     public enum Teams { None, TeamA, TeamB }
 
     struct Speed
@@ -33,14 +33,17 @@ namespace Foosball2text
         }
     }
 
-    class BallWatcher
+    public class BallWatcher
     {
         Ball _ball;                         //Used for coordinates
         Ball _lastFrameBall = new Ball();   //Used for calculating speed and other changes between frames
         Speed _speed;
-        public FieldSide ballOnSide = FieldSide.Middle;
-        int positionHasntChangedFrameCount;
         PlayField _playField;
+        FieldSide ballOnSide = FieldSide.Middle;
+
+        internal Speed Speed { get => _speed; }
+        public FieldSide BallOnSide { get => ballOnSide; }
+        public int PositionHasntChangedCount { get; private set; }
 
         public BallWatcher(ref Ball ball, float fieldWidth, float fieldHeight) // <--- Ball is passed by reference
         {
@@ -56,10 +59,10 @@ namespace Foosball2text
                 UpdateballOnSide();
                 UpdateSpeed();
                 _lastFrameBall = _ball.Clone() as Ball;
-                positionHasntChangedFrameCount = 0;
+                PositionHasntChangedCount = 0;
             }
             else
-                positionHasntChangedFrameCount++;
+                PositionHasntChangedCount++;
         }
 
         private void UpdateballOnSide()
@@ -89,7 +92,7 @@ namespace Foosball2text
 
         public Teams checkWhichTeamScored()
         {
-            if (positionHasntChangedFrameCount == 30) //== 1 sec
+            if (PositionHasntChangedCount == 30) //== 1 sec
             {
                 if (ballOnSide == FieldSide.Left && _speed.x < 0)
                     return Teams.TeamA;
