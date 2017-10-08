@@ -8,13 +8,11 @@ using System.Drawing;
 
 namespace Foosball2text
 {
-    
-
     public class Ball : ICloneable
     {
         public float X { get; set; }
         public float Y { get; set; }
-        public CircleF _circle { get; set; }
+        public CircleF Circle { get; set; }
         
         public Ball()
         {
@@ -24,10 +22,10 @@ namespace Foosball2text
         {
             X = x;
             Y = y;
-            _circle = circle;
+            Circle = circle;
         }
 
-        public CircleF[] GetCirclesFromFrame(Image<Gray, byte> frame)
+        public CircleF[] GetCirclesFromFrame(Image<Gray, byte> frame)           //NOTE: still only gets one circle (look: line 40)
         {
             Gray cannyThreshold = new Gray(12);
             Gray circleAccumulatorThreshold = new Gray(26);
@@ -37,7 +35,7 @@ namespace Foosball2text
             int maxRadius = 10;
 
             return frame.HoughCircles(cannyThreshold, circleAccumulatorThreshold, resolution,
-                                      minDistance, minRadius, maxRadius)[0];
+                                      minDistance, minRadius, maxRadius)[0];    //<-------- one circle
         }
 
         public CircleF GetCircle(Image<Gray, byte> frame)
@@ -45,16 +43,24 @@ namespace Foosball2text
             CircleF[] circleArray = GetCirclesFromFrame(frame);
             if (circleArray.Length != 0)
             {
-                _circle = circleArray[circleArray.Length-1];
-                X = _circle.Center.X;
-                Y = _circle.Center.Y;
+                Circle = circleArray[circleArray.Length-1];
+                X = Circle.Center.X;
+                Y = Circle.Center.Y;
             }
-            return _circle;
+            return Circle;
         }
 
         public object Clone()
         {
             return MemberwiseClone();
+        }
+
+        public void ForcedMove(float toX, float toY) //For testing and possible movement on frames where ball was undetected
+        {
+            CircleF newCircle = new CircleF(new PointF(toX, toY), Circle.Radius);
+            Circle = newCircle;
+            X = toX;
+            Y = toY;
         }
     }
 
