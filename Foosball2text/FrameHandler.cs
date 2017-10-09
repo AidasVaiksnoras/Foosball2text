@@ -38,7 +38,15 @@ namespace Foosball2text
         
         public Image GetResizedImage(Mat frame, int width, int height)
         {
-            return frame.ToImage<Bgr, byte>().Resize(width, height, Inter.Linear).ToBitmap();
+            Image<Bgr, byte> resizedImage = frame.ToImage<Bgr, byte>().Resize(width, height, Inter.Linear);
+            Image<Gray, byte> filteredImage = FilterImage(resizedImage);
+            _grayscaleImage = resizedImage.CopyBlank(); 
+            if (null != _ball)
+                //resizedImage.Draw(_ball.GetCircle(filteredImage), new Bgr(Color.Green), 7);
+                resizedImage.Draw(new Rectangle(new Point(Convert.ToInt32(_ball.X), Convert.ToInt32(_ball.Y)), new Size(5,5)), new Bgr(Color.Green), 7);
+            //return _grayscaleImage;
+            return resizedImage.ToBitmap();
+
         }
 
         public Image<Bgr, byte> GetFilteredImage(Mat frame, int width, int height)
