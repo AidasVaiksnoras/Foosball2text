@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows.Forms;
 
 using Emgu.CV;
 using Emgu.CV.CvEnum;
@@ -8,7 +7,7 @@ using System.Drawing;
 
 namespace Foosball2text
 {
-    class FrameHandler
+    public class FrameHandler
     {
         private int _hueMin = 0;
         private int _saturationMin = 100;

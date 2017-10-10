@@ -1,6 +1,6 @@
 ﻿namespace Foosball2text
 {
-    partial class Form1
+    partial class VideoProcessForm
     {
         /// <summary>
         /// Required designer variable.
@@ -35,9 +35,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this._ylabel = new System.Windows.Forms.Label();
             this._xlabel = new System.Windows.Forms.Label();
-            this.browseButton = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.pauseButton = new System.Windows.Forms.Button();
             this.ballOnSideOfFieldValue = new System.Windows.Forms.Label();
             this.sideOfFieldLabel = new System.Windows.Forms.Label();
             this.SpeedValue = new System.Windows.Forms.Label();
@@ -52,6 +50,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.EndGameButton = new System.Windows.Forms.Button();
+            this.restartButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageBox1)).BeginInit();
             this.SuspendLayout();
@@ -63,7 +62,6 @@
             this.pictureBox1.Size = new System.Drawing.Size(363, 216);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // imageBox1
             // 
@@ -109,29 +107,9 @@
             this._xlabel.TabIndex = 6;
             this._xlabel.Text = "0";
             // 
-            // browseButton
-            // 
-            this.browseButton.Location = new System.Drawing.Point(290, 469);
-            this.browseButton.Name = "browseButton";
-            this.browseButton.Size = new System.Drawing.Size(84, 23);
-            this.browseButton.TabIndex = 7;
-            this.browseButton.Text = "Browse...";
-            this.browseButton.UseVisualStyleBackColor = true;
-            this.browseButton.Click += new System.EventHandler(this.browseButton_Click);
-            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // pauseButton
-            // 
-            this.pauseButton.Location = new System.Drawing.Point(208, 469);
-            this.pauseButton.Name = "pauseButton";
-            this.pauseButton.Size = new System.Drawing.Size(67, 23);
-            this.pauseButton.TabIndex = 8;
-            this.pauseButton.Text = "pause";
-            this.pauseButton.UseVisualStyleBackColor = true;
-            this.pauseButton.Click += new System.EventHandler(this.button1_Click);
             // 
             // ballOnSideOfFieldValue
             // 
@@ -264,11 +242,22 @@
             this.EndGameButton.UseVisualStyleBackColor = true;
             this.EndGameButton.Click += new System.EventHandler(this.EndGameButton_Click);
             // 
-            // Form1
+            // restartButton
+            // 
+            this.restartButton.Location = new System.Drawing.Point(386, 310);
+            this.restartButton.Name = "restartButton";
+            this.restartButton.Size = new System.Drawing.Size(130, 27);
+            this.restartButton.TabIndex = 40;
+            this.restartButton.Text = "Restart";
+            this.restartButton.UseVisualStyleBackColor = true;
+            this.restartButton.Click += new System.EventHandler(this.restartButton_Click);
+            // 
+            // VideoProcessForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(769, 502);
+            this.Controls.Add(this.restartButton);
             this.Controls.Add(this.EndGameButton);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.LatestLog);
@@ -283,16 +272,15 @@
             this.Controls.Add(this.SpeedValue);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.pauseButton);
-            this.Controls.Add(this.browseButton);
             this.Controls.Add(this._xlabel);
             this.Controls.Add(this._ylabel);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.imageBox1);
             this.Controls.Add(this.pictureBox1);
-            this.Name = "Form1";
+            this.Name = "VideoProcessForm";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnClose);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageBox1)).EndInit();
             this.ResumeLayout(false);
@@ -308,9 +296,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label _ylabel;
         private System.Windows.Forms.Label _xlabel;
-        private System.Windows.Forms.Button browseButton;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.Button pauseButton;
         private System.Windows.Forms.Label ballOnSideOfFieldValue;
         private System.Windows.Forms.Label sideOfFieldLabel;
         private System.Windows.Forms.Label SpeedValue;
@@ -325,6 +311,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button EndGameButton;
+        private System.Windows.Forms.Button restartButton;
     }
 }
 

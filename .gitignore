@@ -203,3 +203,8 @@ $RECYCLE.BIN/
 /Foosball2text/msvcp140.dll
 /Foosball2text/cvextern.dll
 /Foosball2text/concrt140.dll
+/Foosball2text/Logic/libs/vcruntime140.dll
+/Foosball2text/Logic/libs/opencv_ffmpeg320_64.dll
+/Foosball2text/Logic/libs/msvcp140.dll
+/Foosball2text/Logic/libs/cvextern.dll
+/Foosball2text/Logic/libs/concrt140.dll
