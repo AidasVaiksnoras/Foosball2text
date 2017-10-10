@@ -138,6 +138,11 @@ namespace Foosball2text
             _timer.Tick -= TimerTick;
             Init();
         }
+
+        private void OnClose(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
 

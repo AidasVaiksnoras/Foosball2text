@@ -96,6 +96,7 @@
             this.Controls.Add(this.label1);
             this.Name = "BallColorDetectionForm";
             this.Text = "BallColorDetectionForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnClose);
             ((System.ComponentModel.ISupportInitialize)(this._pictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
