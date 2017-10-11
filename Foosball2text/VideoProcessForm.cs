@@ -2,19 +2,16 @@
 using System.Windows.Forms;
 
 using Emgu.CV;
-using Emgu.CV.CvEnum;
-using Emgu.CV.Structure;
-using System.Drawing;
-using System.IO;
 using System.ComponentModel;
 using System.Linq;
+using Logic;
 
-namespace Logic
+namespace Foosball2text
 {
     public partial class VideoProcessForm : Form
     {
         private Timer _timer;
-        private const int _fps = 15;
+        private const int _fps = 30;
         private VideoCapture _capture;
         private FrameHandler _frameHandler;
         private string _filePath;
@@ -29,18 +26,20 @@ namespace Logic
 
             logData.Add(messageGetter.gameStart);
             listBox1.DataSource = logData;
-            logData.ListChanged += new ListChangedEventHandler(OnListChange);
+            logData.ListChanged += new ListChangedEventHandler(list_ListChanged);
         }
-
         private void Init()
         {
             _timer = new Timer();
+
+            //Frame Rate
             _timer.Interval = 1000 / _fps;
             _timer.Tick += new EventHandler(TimerTick);
             _timer.Start();
+
+
             _capture = new VideoCapture(_filePath);
         }
-
         private void TimerTick(object sender, EventArgs e)
         {
             Mat frame = _capture.QueryFrame();
@@ -48,14 +47,32 @@ namespace Logic
                 return;
             
             pictureBox1.Image = _frameHandler.GetResizedImage(frame, pictureBox1.Width, pictureBox1.Height);
-            UpdateBallInformation();
+            UpdateInformation();
         }
+        private void UpdateInformation()
+        {
+            _xlabel.Text = _frameHandler.GetBallInformation().X;
+            _ylabel.Text = _frameHandler.GetBallInformation().X;
+
+            ballOnSideOfFieldValue.Text = Enum.GetName(typeof(FieldSide), _frameHandler.GetBallInformation().BallSide);
+            SpeedValue.Text = _frameHandler.GetBallInformation().Speed;
+
+            if (_frameHandler.GetBallInformation().TeamScored == Teams.TeamOnLeft)
+                AddGoalA();
+            if (_frameHandler.GetBallInformation().TeamScored == Teams.TeamOnRight)
+                AddGoalB();
+        }
+ 
+         private void button1_Click(object sender, EventArgs e)
+         {
+             _timer.Stop();
+         }
 
         // ************ Logger methods ************
         BindingList<String> logData = new BindingList<string>();
         LoggerMessageDelivery messageGetter = new LoggerMessageDelivery();
 
-        private void OnListChange(object sender, ListChangedEventArgs e)
+        private void list_ListChanged(object sender, ListChangedEventArgs e)
         {
             LatestLogUpdate();
         }
@@ -72,27 +89,6 @@ namespace Logic
         {
             logData.Add(messageGetter.gameEnd);
             ResetScore();
-        }
-
-        public void UpdateBallInformation()
-        {
-            BallInformation info = _frameHandler.GetBallInformation();
-            ballOnSideOfFieldValue.Text = Enum.GetName(typeof(FieldSide), info.BallSide);
-            SpeedValue.Text = info.Speed;
-            _xlabel.Text = info.X;
-            _ylabel.Text = info.Y;
-
-            if (info.TeamScored == Teams.TeamOnLeft)
-            {
-                AddGoalA();
-                info.TeamScored = Teams.None;
-            }
-            if (info.TeamScored == Teams.TeamOnRight)
-            {
-                AddGoalB();
-                info.TeamScored = Teams.None;
-            }
-
         }
 
         public void AddGoalA()
@@ -117,7 +113,7 @@ namespace Logic
             TeamB.Text = "0";
         }
 
-        public void NewGame()
+        public void newGame()
         {
             ResetScore();
             logData.Add(messageGetter.gameStart);
