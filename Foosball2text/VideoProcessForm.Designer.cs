@@ -1,4 +1,4 @@
-﻿namespace Logic
+﻿namespace Foosball2text
 {
     partial class VideoProcessForm
     {

@@ -2,12 +2,9 @@
 using System.Windows.Forms;
 
 using Emgu.CV;
-using Emgu.CV.CvEnum;
-using Emgu.CV.Structure;
-using System.Drawing;
-using System.IO;
 using System.ComponentModel;
 using System.Linq;
+using Logic;
 
 namespace Foosball2text
 {
@@ -50,15 +47,26 @@ namespace Foosball2text
                 return;
             
             pictureBox1.Image = _frameHandler.GetResizedImage(frame, pictureBox1.Width, pictureBox1.Height);
-            imageBox1.Image = _frameHandler.GetFilteredImage(frame, pictureBox1.Width, pictureBox1.Height);
-            UpdateCordinates();
-
-            _frameHandler.ballWatcher.UpdateBallWatcher();
-            Teams teamScored = _frameHandler.ballWatcher.checkWhichTeamScored();
-            UpdateBallWatcherData(_frameHandler.ballWatcher.GetBallOnSideString(),
-                                          _frameHandler.ballWatcher.GetXYSpeedString(),
-                                          teamScored);
+            UpdateInformation();
         }
+        private void UpdateInformation()
+        {
+            _xlabel.Text = _frameHandler.GetBallInformation().X;
+            _ylabel.Text = _frameHandler.GetBallInformation().X;
+
+            ballOnSideOfFieldValue.Text = Enum.GetName(typeof(FieldSide), _frameHandler.GetBallInformation().BallSide);
+            SpeedValue.Text = _frameHandler.GetBallInformation().Speed;
+
+            if (_frameHandler.GetBallInformation().TeamScored == Teams.TeamOnLeft)
+                AddGoalA();
+            if (_frameHandler.GetBallInformation().TeamScored == Teams.TeamOnRight)
+                AddGoalB();
+        }
+ 
+         private void button1_Click(object sender, EventArgs e)
+         {
+             _timer.Stop();
+         }
 
         private void UpdateCordinates()
         {
@@ -92,17 +100,6 @@ namespace Foosball2text
         {
             logData.Add(messageGetter.gameEnd);
             ResetScore();
-        }
-
-        public void UpdateBallWatcherData(string ballOnSideText, string speedText, Teams teamScored)
-        {
-            ballOnSideOfFieldValue.Text = ballOnSideText;
-            SpeedValue.Text = speedText;
-
-            if (teamScored == Teams.TeamA)
-                AddGoalA();
-            if (teamScored == Teams.TeamB)
-                AddGoalB();
         }
 
         public void AddGoalA()
