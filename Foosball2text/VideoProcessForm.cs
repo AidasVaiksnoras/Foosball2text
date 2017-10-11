@@ -68,6 +68,17 @@ namespace Foosball2text
              _timer.Stop();
          }
 
+        private void UpdateCordinates()
+        {
+            _xlabel.Text = _frameHandler.X;
+            _ylabel.Text = _frameHandler.Y;
+        }
+ 
+         private void button1_Click(object sender, EventArgs e)
+         {
+             _timer.Stop();
+         }
+
         // ************ Logger methods ************
         BindingList<String> logData = new BindingList<string>();
         LoggerMessageDelivery messageGetter = new LoggerMessageDelivery();
@@ -119,7 +130,7 @@ namespace Foosball2text
             logData.Add(messageGetter.gameStart);
         }
 
-        private void RestartButton_Click(object sender, EventArgs e)
+        private void restartButton_Click(object sender, EventArgs e)
         {
             _timer.Tick -= TimerTick;
             Init();
