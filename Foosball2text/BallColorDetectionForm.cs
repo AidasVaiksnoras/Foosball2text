@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using Emgu.CV;
+using Logic;
 
 namespace Foosball2text
 {

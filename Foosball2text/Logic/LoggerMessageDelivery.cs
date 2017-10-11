@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Foosball2text
+namespace Logic
 {
     public class LoggerMessageDelivery
     {

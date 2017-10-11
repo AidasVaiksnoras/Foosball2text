@@ -28,21 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this._proccessVideoButton = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
-            // button1
+            // _proccessVideoButton
             // 
-            this.button1.Location = new System.Drawing.Point(47, 34);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(150, 50);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Process video";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this._proccessVideoButton.Location = new System.Drawing.Point(47, 34);
+            this._proccessVideoButton.Name = "_proccessVideoButton";
+            this._proccessVideoButton.Size = new System.Drawing.Size(150, 50);
+            this._proccessVideoButton.TabIndex = 0;
+            this._proccessVideoButton.Text = "Process video";
+            this._proccessVideoButton.UseVisualStyleBackColor = true;
+            this._proccessVideoButton.Click += new System.EventHandler(this.ProcessButtonClick);
             // 
             // button2
             // 
@@ -65,7 +65,7 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "sample.avi";
-            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
+            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.OnOpenFileDialog1_FileOk);
             // 
             // NavigationForm
             // 
@@ -74,7 +74,7 @@
             this.ClientSize = new System.Drawing.Size(234, 253);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this._proccessVideoButton);
             this.Name = "NavigationForm";
             this.Text = "Navigation";
             this.ResumeLayout(false);
@@ -83,7 +83,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button _proccessVideoButton;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;

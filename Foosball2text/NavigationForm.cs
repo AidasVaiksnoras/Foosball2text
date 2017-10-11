@@ -18,12 +18,12 @@ namespace Foosball2text
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void ProcessButtonClick(object sender, EventArgs e)
         {
             DialogResult result = openFileDialog1.ShowDialog();
         }
 
-        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
+        private void OnOpenFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
             this.Hide();
             new BallColorDetectionForm(openFileDialog1.FileName).Show();

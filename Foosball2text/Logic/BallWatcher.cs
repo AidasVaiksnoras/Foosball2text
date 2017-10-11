@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Emgu.CV;
+using Emgu.CV.Structure;
 
-namespace Foosball2text
+namespace Logic
 {
     public enum FieldSide { Left, Middle, Right };
-    public enum Teams { None, TeamA, TeamB }
+    public enum Teams { None, TeamOnLeft, TeamOnRight }
 
     struct Speed
     {
@@ -21,85 +19,85 @@ namespace Foosball2text
     {
         public float xSize;
         public float ySize;
-        public float leftSideLine;
-        public float rightSideLine;
+        public float middleLine;
 
         public PlayField(float xSize, float ySize)
         {
             this.xSize = xSize;
             this.ySize = ySize;
 
-            float quater = xSize / 4;
-            leftSideLine = quater;
-            rightSideLine = quater * 3;
+            middleLine = xSize / 2;
         }
     }
 
     public class BallWatcher
     {
-        Ball _ball;                         //Used for coordinates
-        Ball _lastFrameBall = new Ball();   //Used for calculating speed and other changes between frames
+        Ball _ball;                                 //Used for coordinates
+        private Ball _lastFrameBall = new Ball();   //Used for calculating speed and other changes between frames
+        private BallInformation _ballInformation = new BallInformation();
+        public BallInformation BallInformation { get => _ballInformation; set => _ballInformation = value; }
         Speed _speed;
         PlayField _playField;
         FieldSide ballOnSide = FieldSide.Middle;
-
+        public Ball Ball { get =>_ball; }
         internal Speed Speed { get => _speed; }
         public FieldSide BallOnSide { get => ballOnSide; }
         public int PositionHasntChangedCount { get; private set; }
 
-        public BallWatcher(ref Ball ball, float fieldWidth, float fieldHeight) // <--- Ball is passed by reference
+        public BallWatcher(float fieldWidth, float fieldHeight)
         {
-            _ball = ball;
-            _lastFrameBall = _ball.Clone() as Ball;
             _playField = new PlayField(fieldWidth, fieldHeight);
         }
 
-        public void UpdateBallWatcher()
+        public void UpdateBallWatcher(Image<Gray, byte> image)
         {
-            if (_lastFrameBall.X != _ball.X || _lastFrameBall.Y != _ball.Y)
-            {
-                UpdateballOnSide();
-                UpdateSpeed();
+            if (null != _ball)
                 _lastFrameBall = _ball.Clone() as Ball;
+
+            _ball = new Ball(image);
+
+            if (null != _ball && 0 != _ball.X && (_lastFrameBall.X != _ball.X || _lastFrameBall.Y != _ball.Y))
+            {
+                UpdateBallInformation();
                 PositionHasntChangedCount = 0;
             }
             else
+            {
                 PositionHasntChangedCount++;
+                _ballInformation.TeamScored = Teams.None;
+            }
         }
 
-        private void UpdateballOnSide()
+        private void UpdateBallInformation()
         {
-            if (_ball.X < _playField.leftSideLine)
-                ballOnSide = FieldSide.Left;
-            else if (_ball.X < _playField.rightSideLine)
-                ballOnSide = FieldSide.Middle;
-            else ballOnSide = FieldSide.Right;
-        }
-
-        public string GetBallOnSideString()
-        {
-            return Enum.GetName(typeof(FieldSide), ballOnSide);
+            if (_ball.X < _playField.middleLine)
+                _ballInformation.BallSide =  FieldSide.Left;
+            else
+                _ballInformation.BallSide = FieldSide.Right;
+            _ballInformation.X = _ball.X.ToString();
+            _ballInformation.Y = _ball.Y.ToString();
+            UpdateSpeed();
+            _ballInformation.Speed = "X: " + _speed.x.ToString() + ";    Y: " + _speed.y.ToString();
+            _ballInformation.TeamScored = CheckWhichTeamScored();
         }
 
         private void UpdateSpeed()
         {
-            _speed.x = _ball.X - _lastFrameBall.X;
-            _speed.y = _ball.Y - _lastFrameBall.Y;
+            if (_lastFrameBall.X != 0)
+                _speed.x = _ball.X - _lastFrameBall.X;
+            if (_lastFrameBall.X != 0)
+                _speed.y = _ball.Y - _lastFrameBall.Y;
         }
 
-        public string GetXYSpeedString()
+        public Teams CheckWhichTeamScored()
         {
-            return "X: " + _speed.x.ToString() + ";    Y: " + _speed.y.ToString();
-        }
-
-        public Teams checkWhichTeamScored()
-        {
-            if (PositionHasntChangedCount == 30) //== 1 sec
+            if (PositionHasntChangedCount > 40) //== 1,5 sec
             {
-                if (ballOnSide == FieldSide.Left && _speed.x < 0)
-                    return Teams.TeamA;
-                else if (ballOnSide == FieldSide.Right && _speed.x > 0)
-                    return Teams.TeamB;
+                PositionHasntChangedCount = 0;
+                if (_ballInformation.BallSide == FieldSide.Left )
+                    return Teams.TeamOnRight;
+                else if (_ballInformation.BallSide == FieldSide.Right)
+                    return Teams.TeamOnLeft;
             }
 
             return Teams.None;
