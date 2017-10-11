@@ -1,11 +1,9 @@
-﻿using System;
-
-using Emgu.CV;
+﻿using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 using System.Drawing;
 
-namespace Foosball2text
+namespace Logic
 {
     public class FrameHandler
     {
@@ -15,50 +13,31 @@ namespace Foosball2text
         private int _hueMax = 0;
         private int _saturationMax = 255;
         private int _brightnessMax = 255;
-        private Image<Bgr, byte> _grayscaleImage;
-        private Ball _ball;
-
-        public BallWatcher ballWatcher;
+        private BallWatcher _ballWatcher;
 
         public FrameHandler()
         {
-            _ball = new Ball();
         }
 
         public FrameHandler(int pictureBoxWidth, int pictureBoxHeight)
         {
-            _ball = new Ball();
-            ballWatcher = new BallWatcher(ref _ball, pictureBoxWidth, pictureBoxHeight);
+            _ballWatcher = new BallWatcher(pictureBoxWidth, pictureBoxHeight);
         }
-
-        public Ball Ball { get => _ball; }
-        public string X {get => _ball.X.ToString();}
-        public string Y {get => _ball.Y.ToString();}
         
         public Image GetResizedImage(Mat frame, int width, int height)
         {
             Image<Bgr, byte> resizedImage = frame.ToImage<Bgr, byte>().Resize(width, height, Inter.Linear);
             Image<Gray, byte> filteredImage = FilterImage(resizedImage);
-            _grayscaleImage = resizedImage.CopyBlank(); 
-            if (null != _ball)
-                //resizedImage.Draw(_ball.GetCircle(filteredImage), new Bgr(Color.Green), 7);
-                resizedImage.Draw(new Rectangle(new Point(Convert.ToInt32(_ball.X), Convert.ToInt32(_ball.Y)), new Size(5,5)), new Bgr(Color.Green), 7);
-            //return _grayscaleImage;
+            _ballWatcher.UpdateBallWatcher(filteredImage);
+            if (null != _ballWatcher.Ball)
+                resizedImage.Draw(_ballWatcher.Ball.Circle, new Bgr(Color.Red), 2);
             return resizedImage.ToBitmap();
-
         }
 
-        public Image<Bgr, byte> GetFilteredImage(Mat frame, int width, int height)
+        public BallInformation GetBallInformation()
         {
-            Image<Bgr, byte> resizedImage = frame.ToImage<Bgr, byte>().Resize(width, height, Inter.Linear);
-            Image<Gray, byte> filteredImage = FilterImage(resizedImage);
-            _grayscaleImage = resizedImage.CopyBlank();
-            if (null != _ball)
-                _grayscaleImage.Draw(_ball.GetCircle(filteredImage), new Bgr(Color.Green), 7);
-            return _grayscaleImage;
+            return _ballWatcher.BallInformation;
         }
-
-
         public Image<Gray, byte> FilterImage(Image<Bgr, byte> frame)
         {
             Image<Gray, byte> filteredImage = GetFilteredImage(frame.Convert<Hsv, byte>(),
@@ -95,6 +74,5 @@ namespace Foosball2text
             _hueMin = hue-10;
             _hueMax = hue+10;
         }
-
     }
 }

@@ -5,26 +5,25 @@ using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 using System.Drawing;
 
-namespace Foosball2text
+namespace Logic
 {
     public class Ball : ICloneable
     {
-        public float X { get; set; }
-        public float Y { get; set; }
+        private float _x;
+        private float _y;
         public CircleF Circle { get; set; }
-        
+        public float X { get => _x ; set => _x = value; }
+        public float Y { get => _y; set => _y = value; }
         public Ball()
         {
         }
 
-        public Ball(float x, float y, CircleF circle)
+        public Ball(Image<Gray, byte> frame)
         {
-            X = x;
-            Y = y;
-            Circle = circle;
+            ProcessImage(frame);
         }
 
-        public CircleF[] GetCirclesFromFrame(Image<Gray, byte> frame)           //NOTE: still only gets one circle (look: line 40)
+        private CircleF[] GetCirclesFromFrame(Image<Gray, byte> frame)           //NOTE: still only gets one circle (look: line 40)
         {
             Gray cannyThreshold = new Gray(12);
             Gray circleAccumulatorThreshold = new Gray(26);
@@ -37,7 +36,7 @@ namespace Foosball2text
                                       minDistance, minRadius, maxRadius)[0];    //<-------- one circle
         }
 
-        public CircleF GetCircle(Image<Gray, byte> frame)
+        private void ProcessImage(Image<Gray, byte> frame)
         {
             CircleF[] circleArray = GetCirclesFromFrame(frame);
             if (circleArray.Length != 0)
@@ -46,7 +45,7 @@ namespace Foosball2text
                 X = Circle.Center.X;
                 Y = Circle.Center.Y;
             }
-            return Circle;
+
         }
 
         public object Clone()
@@ -54,13 +53,13 @@ namespace Foosball2text
             return MemberwiseClone();
         }
 
-        public void ForcedMove(float toX, float toY) //For testing and possible movement on frames where ball was undetected
-        {
-            CircleF newCircle = new CircleF(new PointF(toX, toY), Circle.Radius);
-            Circle = newCircle;
-            X = toX;
-            Y = toY;
-        }
+        //public void ForcedMove(float toX, float toY) //For testing and possible movement on frames where ball was undetected
+        //{
+        //    CircleF newCircle = new CircleF(new PointF(toX, toY), Circle.Radius);
+        //    Circle = newCircle;
+        //    X = toX;
+        //    Y = toY;
+        //}
     }
 
 }

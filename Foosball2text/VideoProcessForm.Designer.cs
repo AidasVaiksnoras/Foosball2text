@@ -1,4 +1,4 @@
-﻿namespace Foosball2text
+﻿namespace Logic
 {
     partial class VideoProcessForm
     {
@@ -28,9 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.imageBox1 = new Emgu.CV.UI.ImageBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this._ylabel = new System.Windows.Forms.Label();
@@ -52,7 +50,6 @@
             this.EndGameButton = new System.Windows.Forms.Button();
             this.restartButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imageBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -62,14 +59,6 @@
             this.pictureBox1.Size = new System.Drawing.Size(363, 216);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            // 
-            // imageBox1
-            // 
-            this.imageBox1.Location = new System.Drawing.Point(12, 234);
-            this.imageBox1.Name = "imageBox1";
-            this.imageBox1.Size = new System.Drawing.Size(363, 228);
-            this.imageBox1.TabIndex = 2;
-            this.imageBox1.TabStop = false;
             // 
             // label1
             // 
@@ -244,19 +233,19 @@
             // 
             // restartButton
             // 
-            this.restartButton.Location = new System.Drawing.Point(386, 310);
+            this.restartButton.Location = new System.Drawing.Point(12, 240);
             this.restartButton.Name = "restartButton";
-            this.restartButton.Size = new System.Drawing.Size(130, 27);
+            this.restartButton.Size = new System.Drawing.Size(363, 27);
             this.restartButton.TabIndex = 40;
             this.restartButton.Text = "Restart";
             this.restartButton.UseVisualStyleBackColor = true;
-            this.restartButton.Click += new System.EventHandler(this.restartButton_Click);
+            this.restartButton.Click += new System.EventHandler(this.RestartButton_Click);
             // 
             // VideoProcessForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(769, 502);
+            this.ClientSize = new System.Drawing.Size(769, 320);
             this.Controls.Add(this.restartButton);
             this.Controls.Add(this.EndGameButton);
             this.Controls.Add(this.listBox1);
@@ -276,13 +265,11 @@
             this.Controls.Add(this._ylabel);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.imageBox1);
             this.Controls.Add(this.pictureBox1);
             this.Name = "VideoProcessForm";
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnClose);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imageBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -291,7 +278,6 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBox1;
-        private Emgu.CV.UI.ImageBox imageBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label _ylabel;
