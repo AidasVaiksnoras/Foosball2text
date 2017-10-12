@@ -25,6 +25,7 @@ namespace Foosball2text
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             var main = new NavigationForm();
+
             main.FormClosed += new FormClosedEventHandler(FormClosed);
             main.Show();
             Application.Run();
