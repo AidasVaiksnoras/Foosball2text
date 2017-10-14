@@ -48,6 +48,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Emgu.CV.DebuggerVisualizers.VS2012">
+      <HintPath>..\..\..\..\..\..\Emgu\emgucv-windesktop_x64-cuda 3.2.0.2682\bin\Emgu.CV.DebuggerVisualizers.VS2012.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.DebuggerVisualizers.VS2013">
+      <HintPath>..\..\..\..\..\..\Emgu\emgucv-windesktop_x64-cuda 3.2.0.2682\bin\Emgu.CV.DebuggerVisualizers.VS2013.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.DebuggerVisualizers.VS2015">
+      <HintPath>..\..\..\..\..\..\Emgu\emgucv-windesktop_x64-cuda 3.2.0.2682\bin\Emgu.CV.DebuggerVisualizers.VS2015.dll</HintPath>
+    </Reference>
     <Reference Include="Emgu.CV.DebuggerVisualizers.VS2017, Version=3.2.0.2682, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\Emgu\emgucv-windesktop 3.2.0.2682\bin\Emgu.CV.DebuggerVisualizers.VS2017.dll</HintPath>
@@ -94,6 +103,13 @@
     <Compile Include="LeaderboardForm.Designer.cs">
       <DependentUpon>LeaderboardForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Login.cs" />
+    <Compile Include="LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="VideoProcessForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,6 +129,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LeaderboardForm.resx">
       <DependentUpon>LeaderboardForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VideoProcessForm.resx">
       <DependentUpon>VideoProcessForm.cs</DependentUpon>
