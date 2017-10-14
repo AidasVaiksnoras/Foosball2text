@@ -10,17 +10,9 @@ namespace Logic
     {
         public string X { get; set; }
         public string Y { get; set; }
-        public FieldSide BallSide { get; set; }
         public string Speed { get; set; }
+        public string OmniSpeed { get; set; } //Overall speed
+        public FieldSide BallSide { get; set; }
         public Teams TeamScored { get; set; }
-
-        public BallInformation(string x, string y, FieldSide ballSide, string speed, Teams teamScored)
-        {
-            X = x;
-            Y = y;
-            BallSide = ballSide;
-            Speed = speed;
-            TeamScored = teamScored;
-        }
     }
 }
