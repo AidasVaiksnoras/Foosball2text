@@ -58,6 +58,8 @@
     <Compile Include="BallWatcher.cs" />
     <Compile Include="BallInformation.cs" />
     <Compile Include="FrameHandler.cs" />
+    <Compile Include="GameWatcher.cs" />
+    <Compile Include="IBallWatcher.cs" />
     <Compile Include="LoggerMessageDelivery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

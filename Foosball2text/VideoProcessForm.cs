@@ -52,10 +52,12 @@ namespace Foosball2text
         private void UpdateInformation()
         {
             _xlabel.Text = _frameHandler.GetBallInformation().X;
-            _ylabel.Text = _frameHandler.GetBallInformation().X;
+            _ylabel.Text = _frameHandler.GetBallInformation().Y;
 
             ballOnSideOfFieldValue.Text = Enum.GetName(typeof(FieldSide), _frameHandler.GetBallInformation().BallSide);
-            SpeedValue.Text = _frameHandler.GetBallInformation().Speed;
+            SpeedValue.Text = _frameHandler.GetBallInformation().Speed; //XY Speed
+            OmniSpeedPerMs_value.Text = _frameHandler.GetBallInformation().OmniSpeed; //OmniDirectional speed per Ms
+            ValueUpdates.Text = _frameHandler.GetBallInformation().TimeBetweenBallCapture; //TODO remove this
 
             if (_frameHandler.GetBallInformation().TeamScored == Teams.TeamOnLeft)
                 AddGoalA();

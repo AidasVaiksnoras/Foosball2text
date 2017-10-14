@@ -13,7 +13,7 @@ namespace Logic
         private int _hueMax = 0;
         private int _saturationMax = 255;
         private int _brightnessMax = 255;
-        private BallWatcher _ballWatcher;
+        private GameWatcher _gameWatcher;
 
         public FrameHandler()
         {
@@ -21,22 +21,22 @@ namespace Logic
 
         public FrameHandler(int pictureBoxWidth, int pictureBoxHeight)
         {
-            _ballWatcher = new BallWatcher(pictureBoxWidth, pictureBoxHeight);
+            _gameWatcher = new GameWatcher(pictureBoxWidth, pictureBoxHeight);
         }
         
         public Image GetResizedImage(Mat frame, int width, int height)
         {
             Image<Bgr, byte> resizedImage = frame.ToImage<Bgr, byte>().Resize(width, height, Inter.Linear);
             Image<Gray, byte> filteredImage = FilterImage(resizedImage);
-            _ballWatcher.UpdateBallWatcher(filteredImage);
-            if (null != _ballWatcher.Ball)
-                resizedImage.Draw(_ballWatcher.Ball.Circle, new Bgr(Color.Red), 2);
+            _gameWatcher.UpdateBallWatcher(filteredImage);
+            if (null != _gameWatcher.Ball)
+                resizedImage.Draw(_gameWatcher.Ball.Circle, new Bgr(Color.Red), 2);
             return resizedImage.ToBitmap();
         }
 
         public BallInformation GetBallInformation()
         {
-            return _ballWatcher.BallInformation;
+            return _gameWatcher.BallInformation;
         }
         public Image<Gray, byte> FilterImage(Image<Bgr, byte> frame)
         {

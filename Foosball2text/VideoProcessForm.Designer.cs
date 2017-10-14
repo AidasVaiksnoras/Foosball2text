@@ -49,6 +49,10 @@
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.EndGameButton = new System.Windows.Forms.Button();
             this.restartButton = new System.Windows.Forms.Button();
+            this.OmniSpeedPerMs_label = new System.Windows.Forms.Label();
+            this.OmniSpeedPerMs_value = new System.Windows.Forms.Label();
+            this.LabelUpdates = new System.Windows.Forms.Label();
+            this.ValueUpdates = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -241,11 +245,51 @@
             this.restartButton.UseVisualStyleBackColor = true;
             this.restartButton.Click += new System.EventHandler(this.RestartButton_Click);
             // 
+            // OmniSpeedPerMs_label
+            // 
+            this.OmniSpeedPerMs_label.AutoSize = true;
+            this.OmniSpeedPerMs_label.Location = new System.Drawing.Point(381, 273);
+            this.OmniSpeedPerMs_label.Name = "OmniSpeedPerMs_label";
+            this.OmniSpeedPerMs_label.Size = new System.Drawing.Size(89, 13);
+            this.OmniSpeedPerMs_label.TabIndex = 41;
+            this.OmniSpeedPerMs_label.Text = "OmniSpeed/Sec:";
+            // 
+            // OmniSpeedPerMs_value
+            // 
+            this.OmniSpeedPerMs_value.AutoSize = true;
+            this.OmniSpeedPerMs_value.Location = new System.Drawing.Point(476, 271);
+            this.OmniSpeedPerMs_value.Name = "OmniSpeedPerMs_value";
+            this.OmniSpeedPerMs_value.Size = new System.Drawing.Size(25, 13);
+            this.OmniSpeedPerMs_value.TabIndex = 42;
+            this.OmniSpeedPerMs_value.Text = "Null";
+            // 
+            // LabelUpdates
+            // 
+            this.LabelUpdates.AutoSize = true;
+            this.LabelUpdates.Location = new System.Drawing.Point(381, 298);
+            this.LabelUpdates.Name = "LabelUpdates";
+            this.LabelUpdates.Size = new System.Drawing.Size(112, 13);
+            this.LabelUpdates.TabIndex = 43;
+            this.LabelUpdates.Text = "TimeBetweenUpdates";
+            // 
+            // ValueUpdates
+            // 
+            this.ValueUpdates.AutoSize = true;
+            this.ValueUpdates.Location = new System.Drawing.Point(499, 298);
+            this.ValueUpdates.Name = "ValueUpdates";
+            this.ValueUpdates.Size = new System.Drawing.Size(25, 13);
+            this.ValueUpdates.TabIndex = 44;
+            this.ValueUpdates.Text = "Null";
+            // 
             // VideoProcessForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(769, 320);
+            this.Controls.Add(this.ValueUpdates);
+            this.Controls.Add(this.LabelUpdates);
+            this.Controls.Add(this.OmniSpeedPerMs_value);
+            this.Controls.Add(this.OmniSpeedPerMs_label);
             this.Controls.Add(this.restartButton);
             this.Controls.Add(this.EndGameButton);
             this.Controls.Add(this.listBox1);
@@ -298,6 +342,10 @@
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button EndGameButton;
         private System.Windows.Forms.Button restartButton;
+        private System.Windows.Forms.Label OmniSpeedPerMs_label;
+        private System.Windows.Forms.Label OmniSpeedPerMs_value;
+        private System.Windows.Forms.Label LabelUpdates;
+        private System.Windows.Forms.Label ValueUpdates;
     }
 }
 

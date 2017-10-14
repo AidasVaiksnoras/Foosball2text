@@ -8,15 +8,28 @@ namespace Logic
     public enum FieldSide { Left, Middle, Right };
     public enum Teams { None, TeamOnLeft, TeamOnRight }
 
-    struct Speed
+    public class Speed
     {
-        public float x;
-        public float y;
+        public float xMoved;
+        public float yMoved;
+        public Stopwatch timeBetweenCalculations;
 
-        public double OmniSpeed => Math.Sqrt(x * x + y * y);
+        public double SecondsBetweenCalculations => ((double)timeBetweenCalculations.ElapsedMilliseconds) / 1000;
+
+        public Speed()
+        {
+            xMoved = 0;
+            yMoved = 0;
+            timeBetweenCalculations = new Stopwatch();
+            timeBetweenCalculations.Start();
+        }
+
+        public float XPerMs => xMoved / timeBetweenCalculations.ElapsedMilliseconds;
+        public float YPerMs => yMoved / timeBetweenCalculations.ElapsedMilliseconds;
+        public double OmniSpeedPerSec => Math.Sqrt(xMoved * xMoved + yMoved * yMoved) / SecondsBetweenCalculations; //UNDONE //byTimePassed
     }
 
-    class PlayField
+    struct PlayField
     {
         public float xSize;
         public float ySize;
@@ -31,16 +44,14 @@ namespace Logic
         }
     }
 
-    public class BallWatcher
+    public class BallWatcher : IBallWatcher
     {
         //Fields
         Ball _ball;                                 //Used for coordinates
         Ball _lastFrameBall = new Ball();           //Used for calculating speed and other changes between frames
         BallInformation _ballInformation = new BallInformation(); //X, Y, Speed, BallSide, TeamScored
-        Speed _speed;
-        double _maxSpeed = 0;
+        protected Speed _speed = new Speed();
         PlayField _playField;
-
         //Scoring related
         Stopwatch _positionHasntChangedTime = new Stopwatch();
         bool _scoredOnLostPositionTime;
@@ -61,8 +72,7 @@ namespace Logic
 
             _ball = new Ball(image);
 
-            //TODO try to remove "0 != _ball.X"
-            if (null != _ball && (_lastFrameBall.X != _ball.X || _lastFrameBall.Y != _ball.Y))  //If moved
+            if (null != _ball && 0 != _ball.X && (_lastFrameBall.X != _ball.X || _lastFrameBall.Y != _ball.Y))  //If moved
             {
                 _scoredOnLostPositionTime = false; //bool reset
                 _positionHasntChangedTime.Reset();
@@ -81,7 +91,7 @@ namespace Logic
             }
         }
 
-        private void UpdateBallInformation()
+        protected void UpdateBallInformation()
         {
             if (_ball.X < _playField.middleLine)
                 _ballInformation.BallSide = FieldSide.Left;
@@ -91,25 +101,21 @@ namespace Logic
             _ballInformation.X = _ball.X.ToString();
             _ballInformation.Y = _ball.Y.ToString();
 
-            UpdateSpeed();
-            _ballInformation.Speed = "X: " + _speed.x.ToString() + ";   Y: " + _speed.y.ToString();
-            _ballInformation.OmniSpeed = _speed.OmniSpeed.ToString();
+            CalculateSpeed();
+            _ballInformation.Speed = "X: " + _speed.xMoved.ToString() + ";   Y: " + _speed.yMoved.ToString();
+            _ballInformation.OmniSpeed = _speed.OmniSpeedPerSec.ToString();
         }
 
-        private void UpdateSpeed()
+        protected virtual void CalculateSpeed() //TODO test if it gets a speed that's too high on first frames
         {
             if (_lastFrameBall.X != 0)
-                _speed.x = _ball.X - _lastFrameBall.X;
-            if (_lastFrameBall.X != 0)
-                _speed.y = _ball.Y - _lastFrameBall.Y;
+                _speed.xMoved = _ball.X - _lastFrameBall.X;
+            if (_lastFrameBall.Y != 0)
+                _speed.yMoved = _ball.Y - _lastFrameBall.Y;
 
-            UpdateMaxSpeed();
-        }
-
-        private void UpdateMaxSpeed()
-        {
-            if (_speed.OmniSpeed > _maxSpeed)
-                _maxSpeed = _speed.OmniSpeed;
+            _ballInformation.TimeBetweenBallCapture = _speed.SecondsBetweenCalculations.ToString();
+            _speed.timeBetweenCalculations.Reset();
+            _speed.timeBetweenCalculations.Start();
         }
 
         public Teams CheckWhichTeamScored()
