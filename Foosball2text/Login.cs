@@ -21,18 +21,23 @@ namespace Foosball2text
             _tableAdapter = tableAdapter;
         }
 
-        public int Loginas(String name)//Grazina 1 jeigu vartotojas yra naujas, 0 jeigu jau senas
+        public bool IsNameFree(String name)//Grazina true jeigu vartotojas yra naujas, false jeigu jau senas
         {
             _tableAdapter.Fill(_dataset.User);
+            int n = name.Length;
+            for (int i = 0; i < 10 - n; i++)
+            {
+                name += " ";
+            }
             for (int i = 0; i < _dataset.User.Count; i++)
             {
-                if(_dataset.User[i].Name.Contains(name))
+                if(_dataset.User[i].Name.Equals(name))
                 {
-                    return 0;
+                    return false;
                 }
             }
             Register(name);
-            return 1;
+            return true;
         }
 
         public void Register(String name)
