@@ -56,7 +56,7 @@
   <ItemGroup>
     <Compile Include="Ball.cs" />
     <Compile Include="BallWatcher.cs" />
-    <Compile Include="BallInformation.cs" />
+    <Compile Include="WatcherInformation.cs" />
     <Compile Include="FrameHandler.cs" />
     <Compile Include="GameWatcher.cs" />
     <Compile Include="IBallWatcher.cs" />

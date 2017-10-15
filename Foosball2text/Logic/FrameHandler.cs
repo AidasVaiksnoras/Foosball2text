@@ -34,10 +34,16 @@ namespace Logic
             return resizedImage.ToBitmap();
         }
 
-        public BallInformation GetBallInformation()
+        public WatcherInformation GetWatcherInformation()
         {
-            return _gameWatcher.BallInformation;
+            return _gameWatcher.WatcherInformation;
         }
+
+        public void ResetGameWatcher() //so far it just resets maxSpeed
+        {
+            _gameWatcher.ResetMaxSpeed();
+        }
+
         public Image<Gray, byte> FilterImage(Image<Bgr, byte> frame)
         {
             Image<Gray, byte> filteredImage = GetFilteredImage(frame.Convert<Hsv, byte>(),

@@ -51,17 +51,18 @@ namespace Foosball2text
         }
         private void UpdateInformation()
         {
-            _xlabel.Text = _frameHandler.GetBallInformation().X;
-            _ylabel.Text = _frameHandler.GetBallInformation().Y;
+            _xlabel.Text = _frameHandler.GetWatcherInformation().X;
+            _ylabel.Text = _frameHandler.GetWatcherInformation().Y;
 
-            ballOnSideOfFieldValue.Text = Enum.GetName(typeof(FieldSide), _frameHandler.GetBallInformation().BallSide);
-            SpeedValue.Text = _frameHandler.GetBallInformation().Speed; //XY Speed
-            OmniSpeedPerMs_value.Text = _frameHandler.GetBallInformation().OmniSpeed; //OmniDirectional speed
-            ValueUpdates.Text = _frameHandler.GetBallInformation().SecondsBetweenBallCapture;
+            ballOnSideOfFieldValue.Text = Enum.GetName(typeof(FieldSide), _frameHandler.GetWatcherInformation().BallSide);
+            SpeedValue.Text = _frameHandler.GetWatcherInformation().Speed; //XY Speed
+            OmniSpeedPerMs_value.Text = _frameHandler.GetWatcherInformation().OmniSpeed; //OmniDirectional speed
+            ValueUpdates.Text = _frameHandler.GetWatcherInformation().SecondsBetweenBallCapture;
+            label_MaxSpeedValue.Text = _frameHandler.GetWatcherInformation().MaxSpeed;
 
-            if (_frameHandler.GetBallInformation().TeamScored == Teams.TeamOnLeft)
+            if (_frameHandler.GetWatcherInformation().TeamScored == Teams.TeamOnLeft)
                 AddGoalA();
-            if (_frameHandler.GetBallInformation().TeamScored == Teams.TeamOnRight)
+            if (_frameHandler.GetWatcherInformation().TeamScored == Teams.TeamOnRight)
                 AddGoalB();
         }
 
@@ -82,6 +83,7 @@ namespace Foosball2text
 
         private void EndGameButton_Click(object sender, EventArgs e)
         {
+            _frameHandler.ResetGameWatcher();
             logData.Add(messageGetter.gameEnd);
             ResetScore();
         }

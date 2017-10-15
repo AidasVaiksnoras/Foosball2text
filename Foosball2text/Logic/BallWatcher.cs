@@ -49,7 +49,7 @@ namespace Logic
         //Fields
         Ball _ball;                                 //Used for coordinates
         Ball _lastFrameBall = new Ball();           //Used for calculating speed and other changes between frames
-        BallInformation _ballInformation = new BallInformation(); //X, Y, Speed, BallSide, TeamScored etc.
+        protected WatcherInformation _watcherInformation = new WatcherInformation(); //X, Y, Speed, BallSide, TeamScored etc.
         protected Speed _speed = new Speed();
         PlayField _playField;
         //Scoring related
@@ -58,7 +58,7 @@ namespace Logic
 
         //Getters
         public Ball Ball { get => _ball; }
-        public BallInformation BallInformation { get => _ballInformation; }
+        public WatcherInformation WatcherInformation { get => _watcherInformation; }
 
         public BallWatcher(float fieldWidth, float fieldHeight)
         {
@@ -72,8 +72,7 @@ namespace Logic
 
             _ball = new Ball(image);
 
-            //I removed this and it changed nothing
-            //TODO check this
+            //I removed this and it changed nothing so until further notice it's commented
             if (/*null != _ball &&*/ 0 != _ball.X && (_lastFrameBall.X != _ball.X || _lastFrameBall.Y != _ball.Y))  //If detected moving
             {
                 _scoredOnLostPositionTime = false; //bool reset allows to score again
@@ -86,26 +85,26 @@ namespace Logic
 
                 if (_positionHasntChangedTime.ElapsedMilliseconds > 1500 && !_scoredOnLostPositionTime) //1.5 sec
                 {
-                    _ballInformation.TeamScored = CheckWhichTeamScored();
+                    _watcherInformation.TeamScored = CheckWhichTeamScored();
                     _scoredOnLostPositionTime = true;
                 }
-                else _ballInformation.TeamScored = Teams.None;
+                else _watcherInformation.TeamScored = Teams.None;
             }
         }
 
         protected void UpdateBallInformation()
         {
             if (_ball.X < _playField.middleLine)
-                _ballInformation.BallSide = FieldSide.Left;
+                _watcherInformation.BallSide = FieldSide.Left;
             else
-                _ballInformation.BallSide = FieldSide.Right;
+                _watcherInformation.BallSide = FieldSide.Right;
 
-            _ballInformation.X = _ball.X.ToString();
-            _ballInformation.Y = _ball.Y.ToString();
+            _watcherInformation.X = _ball.X.ToString();
+            _watcherInformation.Y = _ball.Y.ToString();
 
             CalculateSpeed();
-            _ballInformation.Speed = "per ms: X:" + _speed.XPerMs.ToString("F5") + "   Y:" + _speed.YPerMs.ToString("F5");
-            _ballInformation.OmniSpeed = _speed.OmniSpeed_ms.ToString("F5");
+            _watcherInformation.Speed = "per ms: X:" + _speed.XPerMs.ToString("F5") + "   Y:" + _speed.YPerMs.ToString("F5");
+            _watcherInformation.OmniSpeed = _speed.OmniSpeed_ms.ToString("F5");
         }
 
         protected virtual void CalculateSpeed()
@@ -119,7 +118,7 @@ namespace Logic
             //if (_lastFrameBall.Y != 0)
                 _speed.yMoved = _ball.Y - _lastFrameBall.Y;
 
-            _ballInformation.SecondsBetweenBallCapture = _speed.SecondsBetweenCalculations.ToString();
+            _watcherInformation.SecondsBetweenBallCapture = _speed.SecondsBetweenCalculations.ToString();
 
             _speed.timeBetweenCalculations.Reset();
             _speed.timeBetweenCalculations.Start();
@@ -127,9 +126,9 @@ namespace Logic
 
         public Teams CheckWhichTeamScored()
         {
-            if (_ballInformation.BallSide == FieldSide.Left )
+            if (_watcherInformation.BallSide == FieldSide.Left )
                 return Teams.TeamOnLeft;
-            else if (_ballInformation.BallSide == FieldSide.Right)
+            else if (_watcherInformation.BallSide == FieldSide.Right)
                 return Teams.TeamOnRight;
 
             return Teams.None;

@@ -51,6 +51,8 @@
             this.OmniSpeedPerMs_value = new System.Windows.Forms.Label();
             this.LabelUpdates = new System.Windows.Forms.Label();
             this.ValueUpdates = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label_MaxSpeedValue = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -261,11 +263,31 @@
             this.ValueUpdates.TabIndex = 44;
             this.ValueUpdates.Text = "Null";
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(381, 299);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(64, 13);
+            this.label8.TabIndex = 45;
+            this.label8.Text = "Max Speed:";
+            // 
+            // label_MaxSpeedValue
+            // 
+            this.label_MaxSpeedValue.AutoSize = true;
+            this.label_MaxSpeedValue.Location = new System.Drawing.Point(452, 299);
+            this.label_MaxSpeedValue.Name = "label_MaxSpeedValue";
+            this.label_MaxSpeedValue.Size = new System.Drawing.Size(25, 13);
+            this.label_MaxSpeedValue.TabIndex = 46;
+            this.label_MaxSpeedValue.Text = "Null";
+            // 
             // VideoProcessForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(769, 320);
+            this.Controls.Add(this.label_MaxSpeedValue);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.ValueUpdates);
             this.Controls.Add(this.LabelUpdates);
             this.Controls.Add(this.OmniSpeedPerMs_value);
@@ -322,6 +344,8 @@
         private System.Windows.Forms.Label OmniSpeedPerMs_value;
         private System.Windows.Forms.Label LabelUpdates;
         private System.Windows.Forms.Label ValueUpdates;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label_MaxSpeedValue;
     }
 }
 

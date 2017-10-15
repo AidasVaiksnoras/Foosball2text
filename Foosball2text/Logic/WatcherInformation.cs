@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Logic
 {
-    public struct BallInformation
+    public struct WatcherInformation
     {
+        //In BallWatcher
         public string X { get; set; }
         public string Y { get; set; }
         public string Speed { get; set; }
@@ -15,5 +16,8 @@ namespace Logic
         public FieldSide BallSide { get; set; }
         public Teams TeamScored { get; set; }
         public string SecondsBetweenBallCapture { get; set; }
+
+        //In GameWatcher
+        public string MaxSpeed { get; set; }
     }
 }

@@ -9,11 +9,16 @@ namespace Logic
     class GameWatcher : BallWatcher
     {
         //TODO add team scores, game time, other game related info
-        double _maxSpeedPerSec = 0;
+        double _maxSpeedPerMs = 0;
         public double MaxSpeedPerMs { get; }
 
         public GameWatcher(float fieldWidth, float fieldHeight) : base(fieldWidth, fieldHeight)
         {
+        }
+
+        public void ResetMaxSpeed()
+        {
+            _maxSpeedPerMs = 0;
         }
 
         protected override void CalculateSpeed()
@@ -24,8 +29,11 @@ namespace Logic
 
         private void UpdateMaxSpeed()
         {
-            if (_speed.OmniSpeed_ms > _maxSpeedPerSec)
-                _maxSpeedPerSec = _speed.OmniSpeed_ms;
+            if (_speed.OmniSpeed_ms > _maxSpeedPerMs)
+            {
+                _maxSpeedPerMs = _speed.OmniSpeed_ms;
+                _watcherInformation.MaxSpeed = _maxSpeedPerMs.ToString("F5");
+            }
         }
     }
 }
