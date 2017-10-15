@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
+using System.Text.RegularExpressions;
 
 namespace Foosball2text
 {
@@ -24,14 +25,16 @@ namespace Foosball2text
         public bool IsNameFree(String name)//Grazina true jeigu vartotojas yra naujas, false jeigu jau senas
         {
             _tableAdapter.Fill(_dataset.User);
+            int nn = _dataset.User[0].Name.Length;
             int n = name.Length;
-            for (int i = 0; i < 10 - n; i++)
+            for (int i = 0; i < nn - n; i++)
             {
                 name += " ";
             }
             for (int i = 0; i < _dataset.User.Count; i++)
             {
-                if(_dataset.User[i].Name.Equals(name))
+                Match match = Regex.Match(name, _dataset.User[i].Name);
+                if(match.Success)
                 {
                     return false;
                 }

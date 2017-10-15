@@ -43,21 +43,23 @@
             // 
             this.name1.Location = new System.Drawing.Point(63, 59);
             this.name1.Name = "name1";
-            this.name1.Size = new System.Drawing.Size(143, 20);
+            this.name1.Size = new System.Drawing.Size(166, 20);
             this.name1.TabIndex = 0;
+            this.name1.Text = "1 - os komandos pavadinimas";
             // 
             // name2
             // 
             this.name2.Location = new System.Drawing.Point(292, 59);
             this.name2.Name = "name2";
-            this.name2.Size = new System.Drawing.Size(143, 20);
+            this.name2.Size = new System.Drawing.Size(166, 20);
             this.name2.TabIndex = 1;
+            this.name2.Text = "2 - os komandos pavadinimas";
             // 
             // login1
             // 
             this.login1.Location = new System.Drawing.Point(63, 125);
             this.login1.Name = "login1";
-            this.login1.Size = new System.Drawing.Size(143, 46);
+            this.login1.Size = new System.Drawing.Size(166, 46);
             this.login1.TabIndex = 2;
             this.login1.Text = "Rinktis varda";
             this.login1.UseVisualStyleBackColor = true;
@@ -67,7 +69,7 @@
             // 
             this.login2.Location = new System.Drawing.Point(292, 125);
             this.login2.Name = "login2";
-            this.login2.Size = new System.Drawing.Size(143, 46);
+            this.login2.Size = new System.Drawing.Size(166, 46);
             this.login2.TabIndex = 3;
             this.login2.Text = "Rinktis varda";
             this.login2.UseVisualStyleBackColor = true;
