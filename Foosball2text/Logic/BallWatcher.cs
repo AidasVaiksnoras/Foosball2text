@@ -10,11 +10,10 @@ namespace Logic
 
     public class Speed
     {
-        public float xMoved;
-        public float yMoved;
+        public double xMoved;
+        public double yMoved;
         public Stopwatch timeBetweenCalculations;
-
-        public double SecondsBetweenCalculations => ((double)timeBetweenCalculations.ElapsedMilliseconds) / 1000;
+        public double msBetweenCalculations; //Save value on every StopWatch.Stop() to use for speed calculations
 
         public Speed()
         {
@@ -24,9 +23,10 @@ namespace Logic
             timeBetweenCalculations.Start();
         }
 
-        public float XPerMs => xMoved / timeBetweenCalculations.ElapsedMilliseconds;
-        public float YPerMs => yMoved / timeBetweenCalculations.ElapsedMilliseconds;
-        public double OmniSpeedPerSec => Math.Sqrt(xMoved * xMoved + yMoved * yMoved) / SecondsBetweenCalculations; //UNDONE //byTimePassed
+        public double SecondsBetweenCalculations => msBetweenCalculations / 1000.0;
+        public double XPerMs => xMoved / msBetweenCalculations;
+        public double YPerMs => yMoved / msBetweenCalculations;
+        public double OmniSpeed_ms => Math.Sqrt(xMoved * xMoved + yMoved * yMoved) / msBetweenCalculations;
     }
 
     struct PlayField
@@ -49,7 +49,7 @@ namespace Logic
         //Fields
         Ball _ball;                                 //Used for coordinates
         Ball _lastFrameBall = new Ball();           //Used for calculating speed and other changes between frames
-        BallInformation _ballInformation = new BallInformation(); //X, Y, Speed, BallSide, TeamScored
+        BallInformation _ballInformation = new BallInformation(); //X, Y, Speed, BallSide, TeamScored etc.
         protected Speed _speed = new Speed();
         PlayField _playField;
         //Scoring related
@@ -72,13 +72,15 @@ namespace Logic
 
             _ball = new Ball(image);
 
-            if (null != _ball && 0 != _ball.X && (_lastFrameBall.X != _ball.X || _lastFrameBall.Y != _ball.Y))  //If moved
+            //I removed this and it changed nothing
+            //TODO check this
+            if (/*null != _ball &&*/ 0 != _ball.X && (_lastFrameBall.X != _ball.X || _lastFrameBall.Y != _ball.Y))  //If detected moving
             {
-                _scoredOnLostPositionTime = false; //bool reset
+                _scoredOnLostPositionTime = false; //bool reset allows to score again
                 _positionHasntChangedTime.Reset();
                 UpdateBallInformation();
             }
-            else                                                                                                //If it didn't move
+            else                                                                                                    //If it didn't move
             {
                 _positionHasntChangedTime.Start(); //If already started - does nothing
 
@@ -102,18 +104,23 @@ namespace Logic
             _ballInformation.Y = _ball.Y.ToString();
 
             CalculateSpeed();
-            _ballInformation.Speed = "X: " + _speed.xMoved.ToString() + ";   Y: " + _speed.yMoved.ToString();
-            _ballInformation.OmniSpeed = _speed.OmniSpeedPerSec.ToString();
+            _ballInformation.Speed = "per ms: X:" + _speed.XPerMs.ToString("F5") + "   Y:" + _speed.YPerMs.ToString("F5");
+            _ballInformation.OmniSpeed = _speed.OmniSpeed_ms.ToString("F5");
         }
 
-        protected virtual void CalculateSpeed() //TODO test if it gets a speed that's too high on first frames
+        protected virtual void CalculateSpeed()
         {
-            if (_lastFrameBall.X != 0)
+            _speed.timeBetweenCalculations.Stop();
+            _speed.msBetweenCalculations = _speed.timeBetweenCalculations.ElapsedMilliseconds;
+
+            //ifs removed as I did not find that they do anything
+            //if (_lastFrameBall.X != 0)
                 _speed.xMoved = _ball.X - _lastFrameBall.X;
-            if (_lastFrameBall.Y != 0)
+            //if (_lastFrameBall.Y != 0)
                 _speed.yMoved = _ball.Y - _lastFrameBall.Y;
 
-            _ballInformation.TimeBetweenBallCapture = _speed.SecondsBetweenCalculations.ToString();
+            _ballInformation.SecondsBetweenBallCapture = _speed.SecondsBetweenCalculations.ToString();
+
             _speed.timeBetweenCalculations.Reset();
             _speed.timeBetweenCalculations.Start();
         }

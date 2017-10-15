@@ -24,8 +24,8 @@ namespace Logic
 
         private void UpdateMaxSpeed()
         {
-            if (_speed.OmniSpeedPerSec > _maxSpeedPerSec)
-                _maxSpeedPerSec = _speed.OmniSpeedPerSec;
+            if (_speed.OmniSpeed_ms > _maxSpeedPerSec)
+                _maxSpeedPerSec = _speed.OmniSpeed_ms;
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Foosball2text
     public partial class VideoProcessForm : Form
     {
         private Timer _timer;
-        private const int _fps = 30;
+        private const int _fps = 30; //Would this be a problem on a 60fps video?
         private VideoCapture _capture;
         private FrameHandler _frameHandler;
         private string _filePath;
@@ -56,8 +56,8 @@ namespace Foosball2text
 
             ballOnSideOfFieldValue.Text = Enum.GetName(typeof(FieldSide), _frameHandler.GetBallInformation().BallSide);
             SpeedValue.Text = _frameHandler.GetBallInformation().Speed; //XY Speed
-            OmniSpeedPerMs_value.Text = _frameHandler.GetBallInformation().OmniSpeed; //OmniDirectional speed per Ms
-            ValueUpdates.Text = _frameHandler.GetBallInformation().TimeBetweenBallCapture; //TODO remove this
+            OmniSpeedPerMs_value.Text = _frameHandler.GetBallInformation().OmniSpeed; //OmniDirectional speed
+            ValueUpdates.Text = _frameHandler.GetBallInformation().SecondsBetweenBallCapture;
 
             if (_frameHandler.GetBallInformation().TeamScored == Teams.TeamOnLeft)
                 AddGoalA();
@@ -71,13 +71,11 @@ namespace Foosball2text
 
         private void OnListChange(object sender, ListChangedEventArgs e)
         {
-            LatestLogUpdate();
+            LogUpdate();
         }
 
-        private void LatestLogUpdate()
+        private void LogUpdate()
         {
-            LatestLog.Text = logData.Last();
-
             int visibleItems = listBox1.ClientSize.Height / listBox1.ItemHeight;
             listBox1.TopIndex = Math.Max(listBox1.Items.Count - visibleItems + 1, 0);
         }

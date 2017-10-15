@@ -44,8 +44,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.LatestLog = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.EndGameButton = new System.Windows.Forms.Button();
             this.restartButton = new System.Windows.Forms.Button();
@@ -125,7 +123,7 @@
             // SpeedValue
             // 
             this.SpeedValue.AutoSize = true;
-            this.SpeedValue.Location = new System.Drawing.Point(469, 247);
+            this.SpeedValue.Location = new System.Drawing.Point(446, 247);
             this.SpeedValue.Name = "SpeedValue";
             this.SpeedValue.Size = new System.Drawing.Size(25, 13);
             this.SpeedValue.TabIndex = 28;
@@ -197,24 +195,6 @@
             this.label7.TabIndex = 31;
             this.label7.Text = "Team A";
             // 
-            // LatestLog
-            // 
-            this.LatestLog.AutoSize = true;
-            this.LatestLog.Location = new System.Drawing.Point(450, 284);
-            this.LatestLog.Name = "LatestLog";
-            this.LatestLog.Size = new System.Drawing.Size(33, 13);
-            this.LatestLog.TabIndex = 37;
-            this.LatestLog.Text = "None";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(381, 284);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(63, 13);
-            this.label8.TabIndex = 36;
-            this.label8.Text = "Latest Log: ";
-            // 
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
@@ -257,7 +237,7 @@
             // OmniSpeedPerMs_value
             // 
             this.OmniSpeedPerMs_value.AutoSize = true;
-            this.OmniSpeedPerMs_value.Location = new System.Drawing.Point(476, 271);
+            this.OmniSpeedPerMs_value.Location = new System.Drawing.Point(476, 273);
             this.OmniSpeedPerMs_value.Name = "OmniSpeedPerMs_value";
             this.OmniSpeedPerMs_value.Size = new System.Drawing.Size(25, 13);
             this.OmniSpeedPerMs_value.TabIndex = 42;
@@ -266,7 +246,7 @@
             // LabelUpdates
             // 
             this.LabelUpdates.AutoSize = true;
-            this.LabelUpdates.Location = new System.Drawing.Point(381, 298);
+            this.LabelUpdates.Location = new System.Drawing.Point(381, 286);
             this.LabelUpdates.Name = "LabelUpdates";
             this.LabelUpdates.Size = new System.Drawing.Size(112, 13);
             this.LabelUpdates.TabIndex = 43;
@@ -275,7 +255,7 @@
             // ValueUpdates
             // 
             this.ValueUpdates.AutoSize = true;
-            this.ValueUpdates.Location = new System.Drawing.Point(499, 298);
+            this.ValueUpdates.Location = new System.Drawing.Point(499, 286);
             this.ValueUpdates.Name = "ValueUpdates";
             this.ValueUpdates.Size = new System.Drawing.Size(25, 13);
             this.ValueUpdates.TabIndex = 44;
@@ -293,8 +273,6 @@
             this.Controls.Add(this.restartButton);
             this.Controls.Add(this.EndGameButton);
             this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.LatestLog);
-            this.Controls.Add(this.label8);
             this.Controls.Add(this.TeamB);
             this.Controls.Add(this.TeamA);
             this.Controls.Add(this.label6);
@@ -337,8 +315,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label LatestLog;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button EndGameButton;
         private System.Windows.Forms.Button restartButton;
