@@ -31,5 +31,16 @@ namespace Foosball2text
             this.userTableAdapter.Fill(this.database1DataSet.User);
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.userDataGridView.Sort(this.userDataGridView.Columns[1], ListSortDirection.Descending);
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.userDataGridView.Sort(this.userDataGridView.Columns[2], ListSortDirection.Descending);
+        }
     }
 }
