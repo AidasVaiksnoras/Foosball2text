@@ -18,12 +18,18 @@ namespace Logic
         {
         }
 
+        public Ball(float x, float y) //Using this one for testing
+        {
+            _x = x;
+            _y = y;
+        }
+
         public Ball(Image<Gray, byte> frame)
         {
             ProcessImage(frame);
         }
 
-        private CircleF[] GetCirclesFromFrame(Image<Gray, byte> frame)           //NOTE: still only gets one circle (look: line 40)
+        private CircleF[] GetCirclesFromFrame(Image<Gray, byte> frame)           //NOTE: still only gets one circle
         {
             Gray cannyThreshold = new Gray(12);
             Gray circleAccumulatorThreshold = new Gray(26);
@@ -53,13 +59,13 @@ namespace Logic
             return MemberwiseClone();
         }
 
-        //public void ForcedMove(float toX, float toY) //For testing and possible movement on frames where ball was undetected
-        //{
-        //    CircleF newCircle = new CircleF(new PointF(toX, toY), Circle.Radius);
-        //    Circle = newCircle;
-        //    X = toX;
-        //    Y = toY;
-        //}
+        public void ForcedMove(float toX, float toY) //For testing and possible movement on frames where ball was undetected
+        {
+            CircleF newCircle = new CircleF(new PointF(toX, toY), Circle.Radius);
+            Circle = newCircle;
+            X = toX;
+            Y = toY;
+        }
     }
 
 }

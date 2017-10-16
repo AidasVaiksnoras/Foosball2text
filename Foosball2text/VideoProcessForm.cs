@@ -11,7 +11,7 @@ namespace Foosball2text
     public partial class VideoProcessForm : Form
     {
         private Timer _timer;
-        private const int _fps = 30;
+        private const int _fps = 30; //Would this be a problem on a 60fps video?
         private VideoCapture _capture;
         private FrameHandler _frameHandler;
         private string _filePath;
@@ -51,15 +51,18 @@ namespace Foosball2text
         }
         private void UpdateInformation()
         {
-            _xlabel.Text = _frameHandler.GetBallInformation().X;
-            _ylabel.Text = _frameHandler.GetBallInformation().X;
+            _xlabel.Text = _frameHandler.GetWatcherInformation().X;
+            _ylabel.Text = _frameHandler.GetWatcherInformation().Y;
 
-            ballOnSideOfFieldValue.Text = Enum.GetName(typeof(FieldSide), _frameHandler.GetBallInformation().BallSide);
-            SpeedValue.Text = _frameHandler.GetBallInformation().Speed;
+            ballOnSideOfFieldValue.Text = Enum.GetName(typeof(FieldSide), _frameHandler.GetWatcherInformation().BallSide);
+            SpeedValue.Text = _frameHandler.GetWatcherInformation().Speed; //XY Speed
+            OmniSpeedPerMs_value.Text = _frameHandler.GetWatcherInformation().OmniSpeed; //OmniDirectional speed
+            ValueUpdates.Text = _frameHandler.GetWatcherInformation().SecondsBetweenBallCapture;
+            label_MaxSpeedValue.Text = _frameHandler.GetWatcherInformation().MaxSpeed;
 
-            if (_frameHandler.GetBallInformation().TeamScored == Teams.TeamOnLeft)
+            if (_frameHandler.GetWatcherInformation().TeamScored == Teams.TeamOnLeft)
                 AddGoalA();
-            if (_frameHandler.GetBallInformation().TeamScored == Teams.TeamOnRight)
+            if (_frameHandler.GetWatcherInformation().TeamScored == Teams.TeamOnRight)
                 AddGoalB();
         }
 
@@ -69,19 +72,18 @@ namespace Foosball2text
 
         private void OnListChange(object sender, ListChangedEventArgs e)
         {
-            LatestLogUpdate();
+            LogUpdate();
         }
 
-        private void LatestLogUpdate()
+        private void LogUpdate()
         {
-            LatestLog.Text = logData.Last();
-
             int visibleItems = listBox1.ClientSize.Height / listBox1.ItemHeight;
             listBox1.TopIndex = Math.Max(listBox1.Items.Count - visibleItems + 1, 0);
         }
 
         private void EndGameButton_Click(object sender, EventArgs e)
         {
+            _frameHandler.ResetGameWatcher();
             logData.Add(messageGetter.gameEnd);
             ResetScore();
         }
