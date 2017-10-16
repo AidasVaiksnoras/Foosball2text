@@ -24,10 +24,12 @@ namespace Foosball2text
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            var form = new LoginForm();
             var main = new NavigationForm();
 
             main.FormClosed += new FormClosedEventHandler(FormClosed);
             main.Show();
+            form.Show();
             Application.Run();
         }
 

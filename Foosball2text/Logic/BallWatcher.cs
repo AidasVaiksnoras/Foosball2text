@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Emgu.CV;
 using Emgu.CV.Structure;
 
@@ -7,15 +8,28 @@ namespace Logic
     public enum FieldSide { Left, Middle, Right };
     public enum Teams { None, TeamOnLeft, TeamOnRight }
 
-    struct Speed
+    public class Speed
     {
-        public float x;
-        public float y;
+        public double xMoved;
+        public double yMoved;
+        public Stopwatch timeBetweenCalculations;
+        public double msBetweenCalculations; //Save value on every StopWatch.Stop() to use for speed calculations
 
-        public double OneDirectionalSpeed => Math.Sqrt(x * x + y * y);
+        public Speed()
+        {
+            xMoved = 0;
+            yMoved = 0;
+            timeBetweenCalculations = new Stopwatch();
+            timeBetweenCalculations.Start();
+        }
+
+        public double SecondsBetweenCalculations => msBetweenCalculations / 1000.0;
+        public double XPerMs => xMoved / msBetweenCalculations;
+        public double YPerMs => yMoved / msBetweenCalculations;
+        public double OmniSpeed_ms => Math.Sqrt(xMoved * xMoved + yMoved * yMoved) / msBetweenCalculations;
     }
 
-    class PlayField
+    struct PlayField
     {
         public float xSize;
         public float ySize;
@@ -30,21 +44,28 @@ namespace Logic
         }
     }
 
-    public class BallWatcher
+    public class BallWatcher : IBallWatcher
     {
+        //Fields
         Ball _ball;                                 //Used for coordinates
-        private Ball _lastFrameBall = new Ball();   //Used for calculating speed and other changes between frames
-        private BallInformation _ballInformation = new BallInformation();
-        public BallInformation BallInformation { get => _ballInformation; set => _ballInformation = value; }
-        Speed _speed;
+        Ball _lastFrameBall = new Ball();           //Used for calculating speed and other changes between frames
+        protected WatcherInformation _watcherInformation = new WatcherInformation(); //X, Y, Speed, BallSide, TeamScored etc.
+        protected Speed _speed = new Speed();
         PlayField _playField;
-        FieldSide ballOnSide = FieldSide.Middle;
-        public Ball Ball { get =>_ball; }
-        internal Speed Speed { get => _speed; }
-        public FieldSide BallOnSide { get => ballOnSide; }
-        public int PositionHasntChangedCount { get; private set; }
+        //Scoring related
+        Stopwatch _positionHasntChangedTime = new Stopwatch();
+        bool _scoredOnLostPositionTime;
 
-        public BallWatcher(float fieldWidth, float fieldHeight)
+        //Getters
+        public Ball Ball { get => _ball; }
+        public WatcherInformation WatcherInformation { get => _watcherInformation; }
+
+        public BallWatcher()
+        {
+            _watcherInformation.BallSide = FieldSide.Middle; //Prevents goals until ball is found
+        }
+
+        public BallWatcher(float fieldWidth, float fieldHeight) : this()
         {
             _playField = new PlayField(fieldWidth, fieldHeight);
         }
@@ -56,49 +77,64 @@ namespace Logic
 
             _ball = new Ball(image);
 
-            if (null != _ball && 0 != _ball.X && (_lastFrameBall.X != _ball.X || _lastFrameBall.Y != _ball.Y))
+            //I removed this and it changed nothing so until further notice it's commented
+            if (/*null != _ball &&*/ 0 != _ball.X && (_lastFrameBall.X != _ball.X || _lastFrameBall.Y != _ball.Y))  //If detected moving
             {
+                _scoredOnLostPositionTime = false; //bool reset allows to score again
+                _positionHasntChangedTime.Reset();
                 UpdateBallInformation();
-                PositionHasntChangedCount = 0;
             }
-            else
+            else                                                                                                    //If it didn't move
             {
-                PositionHasntChangedCount++;
-                _ballInformation.TeamScored = Teams.None;
+                _positionHasntChangedTime.Start(); //If already started - does nothing
+
+                if (_positionHasntChangedTime.ElapsedMilliseconds > 1500 && !_scoredOnLostPositionTime) //1.5 sec
+                {
+                    _watcherInformation.TeamScored = CheckWhichTeamScored();
+                    _scoredOnLostPositionTime = true;
+                }
+                else _watcherInformation.TeamScored = Teams.None;
             }
         }
 
-        private void UpdateBallInformation()
+        protected void UpdateBallInformation()
         {
             if (_ball.X < _playField.middleLine)
-                _ballInformation.BallSide =  FieldSide.Left;
+                _watcherInformation.BallSide = FieldSide.Left;
             else
-                _ballInformation.BallSide = FieldSide.Right;
-            _ballInformation.X = _ball.X.ToString();
-            _ballInformation.Y = _ball.Y.ToString();
-            UpdateSpeed();
-            _ballInformation.Speed = "X: " + _speed.x.ToString() + ";    Y: " + _speed.y.ToString();
-            _ballInformation.TeamScored = CheckWhichTeamScored();
+                _watcherInformation.BallSide = FieldSide.Right;
+
+            _watcherInformation.X = _ball.X.ToString();
+            _watcherInformation.Y = _ball.Y.ToString();
+
+            CalculateSpeed();
+            _watcherInformation.Speed = "per ms: X:" + _speed.XPerMs.ToString("F5") + "   Y:" + _speed.YPerMs.ToString("F5");
+            _watcherInformation.OmniSpeed = _speed.OmniSpeed_ms.ToString("F5");
         }
 
-        private void UpdateSpeed()
+        protected virtual void CalculateSpeed()
         {
-            if (_lastFrameBall.X != 0)
-                _speed.x = _ball.X - _lastFrameBall.X;
-            if (_lastFrameBall.X != 0)
-                _speed.y = _ball.Y - _lastFrameBall.Y;
+            _speed.timeBetweenCalculations.Stop();
+            _speed.msBetweenCalculations = _speed.timeBetweenCalculations.ElapsedMilliseconds;
+
+            //ifs removed as I did not find that they do anything
+            //if (_lastFrameBall.X != 0)
+                _speed.xMoved = _ball.X - _lastFrameBall.X;
+            //if (_lastFrameBall.Y != 0)
+                _speed.yMoved = _ball.Y - _lastFrameBall.Y;
+
+            _watcherInformation.SecondsBetweenBallCapture = _speed.SecondsBetweenCalculations.ToString();
+
+            _speed.timeBetweenCalculations.Reset();
+            _speed.timeBetweenCalculations.Start();
         }
 
         public Teams CheckWhichTeamScored()
         {
-            if (PositionHasntChangedCount > 40) //== 1,5 sec
-            {
-                PositionHasntChangedCount = 0;
-                if (_ballInformation.BallSide == FieldSide.Left )
-                    return Teams.TeamOnRight;
-                else if (_ballInformation.BallSide == FieldSide.Right)
-                    return Teams.TeamOnLeft;
-            }
+            if (_watcherInformation.BallSide == FieldSide.Left )
+                return Teams.TeamOnLeft;
+            else if (_watcherInformation.BallSide == FieldSide.Right)
+                return Teams.TeamOnRight;
 
             return Teams.None;
         }
