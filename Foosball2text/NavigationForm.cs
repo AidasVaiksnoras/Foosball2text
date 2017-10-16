@@ -12,6 +12,8 @@ namespace Foosball2text
 {
     public partial class NavigationForm : Form
     {
+        public String _teamA { get; set; }
+        public String _teamB { get; set; }
 
         public NavigationForm()
         {
@@ -20,6 +22,9 @@ namespace Foosball2text
 
         private void ProcessButtonClick(object sender, EventArgs e)
         {
+            var form = new LoginForm();
+            form.ShowDialog();
+
             DialogResult result = openFileDialog1.ShowDialog();
         }
 
