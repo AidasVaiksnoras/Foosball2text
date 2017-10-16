@@ -23,26 +23,20 @@ namespace Foosball2text
 
         private void login1_Click(object sender, EventArgs e)
         {
-            if (_login.IsNameFree(name1.Text) == true) label1.Text = "Sukurtas naujas vartotojas " + name1.Text;
-            else label1.Text = "Prisijungta vardu " + name1.Text;
-            _login._teamA = name1.Text;
-            checkIfDoneNaming();
-        }
-
-        private void login2_Click(object sender, EventArgs e)
-        {
-            if (_login.IsNameFree(name2.Text) == true) label2.Text = "Sukurtas naujas vartotojas " + name2.Text;
-            else label2.Text = "Prisijungta vardu " + name2.Text;
-            _login._teamB = name2.Text;
-            checkIfDoneNaming();
-        }
-
-        private void checkIfDoneNaming()
-        {
-            if((label1.Text != "")&&(label2.Text != ""))
+            if(name1.Text != name2.Text)
             {
+                _login.IsNameFree(name1.Text);
+                _login._teamA = name1.Text;
+                _login.IsNameFree(name2.Text);
+                _login._teamB = name2.Text;
                 this.Close();
             }
+            else
+            {
+                label.Text = "Vardai negali buti tokie patys";
+            }
         }
+
+
     }
 }
