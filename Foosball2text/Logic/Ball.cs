@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace Logic
 {
-    public class Ball : ICloneable
+    public class Ball : ICloneable, IEquatable<Ball>
     {
         private float _x;
         private float _y;
@@ -65,6 +65,13 @@ namespace Logic
             Circle = newCircle;
             X = toX;
             Y = toY;
+        }
+
+        public bool Equals(Ball other) //if it's on the same coordinates it's the same ball
+        {
+            if (other.X == _x && other.Y == _y)
+                return true;
+            return false;
         }
     }
 
