@@ -14,11 +14,8 @@ namespace Logic
         public CircleF Circle { get; set; }
         public float X { get => _x ; set => _x = value; }
         public float Y { get => _y; set => _y = value; }
-        public Ball()
-        {
-        }
 
-        public Ball(float x, float y) //Using this one for testing
+        public Ball(float x = 0, float y = 0) //Optional parameters don't force to assign new values
         {
             _x = x;
             _y = y;
