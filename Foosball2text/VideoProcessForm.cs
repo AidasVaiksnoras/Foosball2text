@@ -51,21 +51,26 @@ namespace Foosball2text
         }
         private void UpdateInformation()
         {
-            _xlabel.Text = _frameHandler.GetWatcherInformation().X;
-            _ylabel.Text = _frameHandler.GetWatcherInformation().Y;
+            WatcherInformation newInformation = _frameHandler.GetWatcherInformation();
 
-            ballOnSideOfFieldValue.Text = Enum.GetName(typeof(FieldSide), _frameHandler.GetWatcherInformation().BallSide);
-            SpeedValue.Text = _frameHandler.GetWatcherInformation().XYSpeed;
-            OmniSpeedPerMs_value.Text = _frameHandler.GetWatcherInformation().OmniSpeed;
-            ValueUpdates.Text = _frameHandler.GetWatcherInformation().SecondsBetweenBallCapture;
-            label_MaxSpeedValue.Text = _frameHandler.GetWatcherInformation().MaxSpeed;
-            label_TeamOnLeftMaxValue.Text = _frameHandler.GetWatcherInformation().MaxSpeedTeamOnLeft;
-            label_TeamOnRightMaxValue.Text = _frameHandler.GetWatcherInformation().MaxSpeedTeamOnRight;
+            _xlabel.Text = newInformation.X;
+            _ylabel.Text = newInformation.Y;
 
-            if (_frameHandler.GetWatcherInformation().TeamScored == Teams.TeamOnLeft)
-                AddGoalA();
-            if (_frameHandler.GetWatcherInformation().TeamScored == Teams.TeamOnRight)
-                AddGoalB();
+            ballOnSideOfFieldValue.Text = Enum.GetName(typeof(FieldSide), newInformation.BallSide);
+            SpeedValue.Text = newInformation.XYSpeed;
+            OmniSpeedPerMs_value.Text = newInformation.OmniSpeed;
+            ValueUpdates.Text = newInformation.SecondsBetweenBallCapture;
+            label_MaxSpeedValue.Text = newInformation.MaxSpeed;
+            label_TeamOnLeftMaxValue.Text = newInformation.MaxSpeedTeamOnLeft;
+            label_TeamOnRightMaxValue.Text = newInformation.MaxSpeedTeamOnRight;
+            TeamA.Text = newInformation.TeamOnLeftGoals;
+            TeamB.Text = newInformation.TeamOnRightGoals;
+
+            if (newInformation.NewLogs != null)
+            {
+                foreach (string log in newInformation.NewLogs)
+                    logData.Add(log);
+            }
         }
 
         // ************ Logger methods ************
@@ -74,11 +79,7 @@ namespace Foosball2text
 
         private void OnListChange(object sender, ListChangedEventArgs e)
         {
-            LogUpdate();
-        }
-
-        private void LogUpdate()
-        {
+            //Auto-scrolling
             int visibleItems = listBox1.ClientSize.Height / listBox1.ItemHeight;
             listBox1.TopIndex = Math.Max(listBox1.Items.Count - visibleItems + 1, 0);
         }
@@ -88,22 +89,6 @@ namespace Foosball2text
             _frameHandler.ResetGameWatcher();
             logData.Add(messageGetter.gameEnd);
             ResetScore();
-        }
-
-        public void AddGoalA()
-        {
-            int score = int.Parse(TeamA.Text);
-            score++;
-            TeamA.Text = score.ToString();
-            logData.Add(messageGetter.goalLeft);
-        }
-
-        public void AddGoalB()
-        {
-            int score = int.Parse(TeamB.Text);
-            score++;
-            TeamB.Text = score.ToString();
-            logData.Add(messageGetter.goalRight);
         }
 
         public void ResetScore()

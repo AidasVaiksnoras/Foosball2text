@@ -53,7 +53,8 @@ namespace Logic
         protected Speed _speed = new Speed();
         protected Teams _movingTowardsGoal = Teams.None;
         PlayField _playField;
-        //Scoring related
+        //-Scoring related
+        protected Teams _teamScored = Teams.None;
         Stopwatch _positionHasntChangedTime = new Stopwatch();
         bool _scoredOnLostPositionTime;
 
@@ -91,10 +92,10 @@ namespace Logic
 
                 if (_positionHasntChangedTime.ElapsedMilliseconds > 1500 && !_scoredOnLostPositionTime) //1.5 sec
                 {
-                    _watcherInformation.TeamScored = CheckWhichTeamScored();
+                    _teamScored = CheckWhichTeamScored();
                     _scoredOnLostPositionTime = true;
                 }
-                else _watcherInformation.TeamScored = Teams.None;
+                else _teamScored = Teams.None;
             }
         }
 
@@ -118,7 +119,6 @@ namespace Logic
                 _movingTowardsGoal = Teams.TeamOnLeft;
             else
                 _movingTowardsGoal = Teams.None;
-
         }
 
         protected virtual void CalculateSpeed()
@@ -140,7 +140,7 @@ namespace Logic
 
         public Teams CheckWhichTeamScored()
         {
-            if (_watcherInformation.BallSide == FieldSide.Left )
+            if (_watcherInformation.BallSide == FieldSide.Left)
                 return Teams.TeamOnLeft;
             else if (_watcherInformation.BallSide == FieldSide.Right)
                 return Teams.TeamOnRight;

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Emgu.CV;
+using Emgu.CV.Structure;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +10,7 @@ namespace Logic
 {
     class GameWatcher : BallWatcher
     {
+        int _teamOnLeftGoals = 0, _teamOnRightGoals = 0;
         double _teamOnLeftMaxSpeed = 0, _teamOnRightMaxSpeed = 0;
         double _maxSpeedPerMs = 0;
 
@@ -17,8 +20,34 @@ namespace Logic
         {
         }
 
-        public void ResetMaxSpeed()
+        public void UpdateGameWatcher(Image <Gray, byte> image)
         {
+            base.UpdateBallWatcher(image);
+            List<String> newLogs = new List<string>();
+            LoggerMessageDelivery messageTemplates = new LoggerMessageDelivery();
+            if (_teamScored == Teams.TeamOnLeft)
+            {
+                _teamOnLeftGoals++;
+                newLogs.Add(messageTemplates.goalLeft);
+            }
+            else if (_teamScored == Teams.TeamOnRight)
+            {
+                _teamOnRightGoals++;
+                newLogs.Add(messageTemplates.goalRight);
+            }
+
+            _watcherInformation.TeamOnLeftGoals = _teamOnLeftGoals.ToString();
+            _watcherInformation.TeamOnRightGoals = _teamOnRightGoals.ToString();
+
+            _watcherInformation.NewLogs = newLogs;
+        }
+
+        public void ResetGame()
+        {
+            _teamOnLeftGoals = 0;
+            _teamOnRightGoals = 0;
+            _teamOnLeftMaxSpeed = 0;
+            _teamOnRightMaxSpeed = 0;
             _maxSpeedPerMs = 0;
         }
 
@@ -28,7 +57,7 @@ namespace Logic
             UpdateMaxSpeed();
         }
 
-        private void UpdateMaxSpeed()
+        private void UpdateMaxSpeed() //FIXME it should check maxSpeed with Teams' maxSpeed
         {
             if (_speed.OmniSpeed_ms > _maxSpeedPerMs)
             {
