@@ -51,6 +51,7 @@ namespace Logic
         Ball _lastFrameBall = new Ball();           //Used for calculating speed and other changes between frames
         protected WatcherInformation _watcherInformation = new WatcherInformation(); //X, Y, Speed, BallSide, TeamScored etc.
         protected Speed _speed = new Speed();
+        protected Teams _movingTowardsGoal = Teams.None;
         PlayField _playField;
         //Scoring related
         Stopwatch _positionHasntChangedTime = new Stopwatch();
@@ -110,6 +111,14 @@ namespace Logic
             CalculateSpeed();
             _watcherInformation.Speed = "per ms: X:" + _speed.XPerMs.ToString("F5") + "   Y:" + _speed.YPerMs.ToString("F5");
             _watcherInformation.OmniSpeed = _speed.OmniSpeed_ms.ToString("F5");
+
+            if (_speed.xMoved > 0.0)
+                _movingTowardsGoal = Teams.TeamOnRight;
+            else if (_speed.xMoved < 0.0)
+                _movingTowardsGoal = Teams.TeamOnLeft;
+            else
+                _movingTowardsGoal = Teams.None;
+
         }
 
         protected virtual void CalculateSpeed()

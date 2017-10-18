@@ -8,8 +8,9 @@ namespace Logic
 {
     class GameWatcher : BallWatcher
     {
-        //TODO add team scores, game time, other game related info
+        double _teamOnLeftMaxSpeed = 0, _teamOnRightMaxSpeed = 0;
         double _maxSpeedPerMs = 0;
+
         public double MaxSpeedPerMs { get; }
 
         public GameWatcher(float fieldWidth, float fieldHeight) : base(fieldWidth, fieldHeight)
@@ -33,6 +34,15 @@ namespace Logic
             {
                 _maxSpeedPerMs = _speed.OmniSpeed_ms;
                 _watcherInformation.MaxSpeed = _maxSpeedPerMs.ToString("F5");
+            }
+
+            //Assign to the correct team
+            if (_movingTowardsGoal != Teams.None)
+            {
+                if (_movingTowardsGoal == Teams.TeamOnLeft)
+                    _teamOnRightMaxSpeed = _maxSpeedPerMs;
+                else
+                    _teamOnLeftMaxSpeed = _maxSpeedPerMs;
             }
         }
     }
