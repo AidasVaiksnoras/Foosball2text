@@ -36,8 +36,8 @@ namespace Foosball2text
 
         private void Button2_Click(object sender, EventArgs e)
         {
-            var seconadary = new LeaderboardForm(DataProvider);
-            seconadary.Show();
+            var leaderboard = new LeaderboardForm(DataProvider);
+            leaderboard.Show();
         }
 
         private void NavigationForm_FormClosing(object sender, FormClosingEventArgs e)
