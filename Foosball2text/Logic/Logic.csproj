@@ -56,6 +56,10 @@
   <ItemGroup>
     <Compile Include="Ball.cs" />
     <Compile Include="BallWatcher.cs" />
+    <Compile Include="DataProvider.cs" />
+    <Compile Include="ListExtensions.cs" />
+    <Compile Include="SerializationHandler.cs" />
+    <Compile Include="User.cs" />
     <Compile Include="WatcherInformation.cs" />
     <Compile Include="FrameHandler.cs" />
     <Compile Include="GameWatcher.cs" />

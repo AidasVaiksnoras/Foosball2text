@@ -2,7 +2,7 @@
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 using System.Drawing;
-
+using System.Collections.Generic;
 namespace Logic
 {
     public class FrameHandler
@@ -19,9 +19,9 @@ namespace Logic
         {
         }
 
-        public FrameHandler(int pictureBoxWidth, int pictureBoxHeight)
+        public FrameHandler(int pictureBoxWidth, int pictureBoxHeight, User leftUser = null, User rightUser = null)
         {
-            _gameWatcher = new GameWatcher(fieldWidth: pictureBoxWidth, fieldHeight: pictureBoxHeight);
+            _gameWatcher = new GameWatcher(fieldWidth: pictureBoxWidth, fieldHeight: pictureBoxHeight, leftUser, rightUser);
         }
         
         public Image GetResizedImage(Mat frame, int width, int height)

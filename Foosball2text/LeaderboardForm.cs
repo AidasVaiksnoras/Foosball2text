@@ -1,46 +1,48 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Logic;
 
 namespace Foosball2text
 {
     public partial class LeaderboardForm : Form
     {
-        public LeaderboardForm()
+        private UsersDataProvider _dataProvider;
+        public LeaderboardForm(UsersDataProvider dataProvider)
         {
             InitializeComponent();
+            _dataProvider = dataProvider;
+            gamesWonList.DataSource = _dataProvider.Data.OrderByGamesWon();
+            totalScoreList.DataSource = _dataProvider.Data.OrderByTotalScore();
+            maxSpeedList.DataSource = _dataProvider.Data.OrderByMaxSpeed();
+            gamesPlayedList.DataSource = _dataProvider.Data.OrderByGamesPlayed();
         }
 
-        private void userBindingNavigatorSaveItem_Click(object sender, EventArgs e)
+        private void GamesWonList_Format(object sender, ListControlConvertEventArgs e)
         {
-            this.Validate();
-            this.userBindingSource.EndEdit();
-            this.tableAdapterManager.UpdateAll(this.database1DataSet);
-
+            string username = ((User)e.ListItem).UserName;
+            string gamesWon = ((User)e.ListItem).GamesWon.ToString();
+            e.Value = String.Format("{0, -5} {1, -30}", gamesWon, username);
         }
 
-        private void LeaderboardForm_Load(object sender, EventArgs e)
+        private void TotalScoreList_Format(object sender, ListControlConvertEventArgs e)
         {
-            // TODO: This line of code loads data into the 'database1DataSet.User' table. You can move, or remove it, as needed.
-            this.userTableAdapter.Fill(this.database1DataSet.User);
-
+            string username = ((User)e.ListItem).UserName;
+            string totalScore = ((User)e.ListItem).TotalScore.ToString();
+            e.Value = String.Format("{0, -5} {1, -30}", totalScore, username);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void MaxSpeedList_Format(object sender, ListControlConvertEventArgs e)
         {
-            this.userDataGridView.Sort(this.userDataGridView.Columns[1], ListSortDirection.Descending);
-
+            string username = ((User)e.ListItem).UserName;
+            string maxSpeed = ((User)e.ListItem).MaxSpeed.ToString();
+            e.Value = String.Format("{0, -10} {1, -30}", maxSpeed, username);
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void GamesPlayedList_Format(object sender, ListControlConvertEventArgs e)
         {
-            this.userDataGridView.Sort(this.userDataGridView.Columns[2], ListSortDirection.Descending);
+            string username = ((User)e.ListItem).UserName;
+            string gamesPlayed = ((User)e.ListItem).MaxSpeed.ToString();
+            e.Value = String.Format("{0, -10} {1, -30}", gamesPlayed, username);
         }
     }
 }
