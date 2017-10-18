@@ -51,8 +51,11 @@
             this.OmniSpeedPerMs_value = new System.Windows.Forms.Label();
             this.LabelUpdates = new System.Windows.Forms.Label();
             this.ValueUpdates = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label_TeamOnLeftMaxValue = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label_TeamOnRightMaxValue = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.label_MaxSpeedValue = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -107,7 +110,7 @@
             // ballOnSideOfFieldValue
             // 
             this.ballOnSideOfFieldValue.AutoSize = true;
-            this.ballOnSideOfFieldValue.Location = new System.Drawing.Point(485, 260);
+            this.ballOnSideOfFieldValue.Location = new System.Drawing.Point(485, 247);
             this.ballOnSideOfFieldValue.Name = "ballOnSideOfFieldValue";
             this.ballOnSideOfFieldValue.Size = new System.Drawing.Size(25, 13);
             this.ballOnSideOfFieldValue.TabIndex = 30;
@@ -116,7 +119,7 @@
             // sideOfFieldLabel
             // 
             this.sideOfFieldLabel.AutoSize = true;
-            this.sideOfFieldLabel.Location = new System.Drawing.Point(381, 260);
+            this.sideOfFieldLabel.Location = new System.Drawing.Point(381, 247);
             this.sideOfFieldLabel.Name = "sideOfFieldLabel";
             this.sideOfFieldLabel.Size = new System.Drawing.Size(98, 13);
             this.sideOfFieldLabel.TabIndex = 29;
@@ -125,7 +128,7 @@
             // SpeedValue
             // 
             this.SpeedValue.AutoSize = true;
-            this.SpeedValue.Location = new System.Drawing.Point(446, 247);
+            this.SpeedValue.Location = new System.Drawing.Point(464, 260);
             this.SpeedValue.Name = "SpeedValue";
             this.SpeedValue.Size = new System.Drawing.Size(25, 13);
             this.SpeedValue.TabIndex = 28;
@@ -134,11 +137,11 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(381, 247);
+            this.label3.Location = new System.Drawing.Point(381, 260);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(59, 13);
+            this.label3.Size = new System.Drawing.Size(77, 13);
             this.label3.TabIndex = 26;
-            this.label3.Text = "Ball speed:";
+            this.label3.Text = "Ball speed/ms:";
             // 
             // label4
             // 
@@ -232,14 +235,14 @@
             this.OmniSpeedPerMs_label.AutoSize = true;
             this.OmniSpeedPerMs_label.Location = new System.Drawing.Point(381, 273);
             this.OmniSpeedPerMs_label.Name = "OmniSpeedPerMs_label";
-            this.OmniSpeedPerMs_label.Size = new System.Drawing.Size(89, 13);
+            this.OmniSpeedPerMs_label.Size = new System.Drawing.Size(83, 13);
             this.OmniSpeedPerMs_label.TabIndex = 41;
-            this.OmniSpeedPerMs_label.Text = "OmniSpeed/Sec:";
+            this.OmniSpeedPerMs_label.Text = "OmniSpeed/ms:";
             // 
             // OmniSpeedPerMs_value
             // 
             this.OmniSpeedPerMs_value.AutoSize = true;
-            this.OmniSpeedPerMs_value.Location = new System.Drawing.Point(476, 273);
+            this.OmniSpeedPerMs_value.Location = new System.Drawing.Point(470, 273);
             this.OmniSpeedPerMs_value.Name = "OmniSpeedPerMs_value";
             this.OmniSpeedPerMs_value.Size = new System.Drawing.Size(25, 13);
             this.OmniSpeedPerMs_value.TabIndex = 42;
@@ -250,44 +253,75 @@
             this.LabelUpdates.AutoSize = true;
             this.LabelUpdates.Location = new System.Drawing.Point(381, 286);
             this.LabelUpdates.Name = "LabelUpdates";
-            this.LabelUpdates.Size = new System.Drawing.Size(112, 13);
+            this.LabelUpdates.Size = new System.Drawing.Size(134, 13);
             this.LabelUpdates.TabIndex = 43;
-            this.LabelUpdates.Text = "TimeBetweenUpdates";
+            this.LabelUpdates.Text = "SecondsBetweenUpdates:";
             // 
             // ValueUpdates
             // 
             this.ValueUpdates.AutoSize = true;
-            this.ValueUpdates.Location = new System.Drawing.Point(499, 286);
+            this.ValueUpdates.Location = new System.Drawing.Point(518, 286);
             this.ValueUpdates.Name = "ValueUpdates";
             this.ValueUpdates.Size = new System.Drawing.Size(25, 13);
             this.ValueUpdates.TabIndex = 44;
             this.ValueUpdates.Text = "Null";
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(381, 312);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(69, 13);
+            this.label9.TabIndex = 47;
+            this.label9.Text = "TeamOnLeft:";
+            // 
+            // label_TeamOnLeftMaxValue
+            // 
+            this.label_TeamOnLeftMaxValue.AutoSize = true;
+            this.label_TeamOnLeftMaxValue.Location = new System.Drawing.Point(456, 312);
+            this.label_TeamOnLeftMaxValue.Name = "label_TeamOnLeftMaxValue";
+            this.label_TeamOnLeftMaxValue.Size = new System.Drawing.Size(46, 13);
+            this.label_TeamOnLeftMaxValue.TabIndex = 48;
+            this.label_TeamOnLeftMaxValue.Text = "0.00000";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(508, 312);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(76, 13);
+            this.label10.TabIndex = 49;
+            this.label10.Text = "TeamOnRight:";
+            // 
+            // label_TeamOnRightMaxValue
+            // 
+            this.label_TeamOnRightMaxValue.AutoSize = true;
+            this.label_TeamOnRightMaxValue.Location = new System.Drawing.Point(590, 312);
+            this.label_TeamOnRightMaxValue.Name = "label_TeamOnRightMaxValue";
+            this.label_TeamOnRightMaxValue.Size = new System.Drawing.Size(46, 13);
+            this.label_TeamOnRightMaxValue.TabIndex = 50;
+            this.label_TeamOnRightMaxValue.Text = "0.00000";
+            // 
             // label8
             // 
             this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
             this.label8.Location = new System.Drawing.Point(381, 299);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(64, 13);
-            this.label8.TabIndex = 45;
-            this.label8.Text = "Max Speed:";
-            // 
-            // label_MaxSpeedValue
-            // 
-            this.label_MaxSpeedValue.AutoSize = true;
-            this.label_MaxSpeedValue.Location = new System.Drawing.Point(452, 299);
-            this.label_MaxSpeedValue.Name = "label_MaxSpeedValue";
-            this.label_MaxSpeedValue.Size = new System.Drawing.Size(25, 13);
-            this.label_MaxSpeedValue.TabIndex = 46;
-            this.label_MaxSpeedValue.Text = "Null";
+            this.label8.Size = new System.Drawing.Size(89, 13);
+            this.label8.TabIndex = 51;
+            this.label8.Text = "Max Ball Speeds:";
             // 
             // VideoProcessForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(769, 320);
-            this.Controls.Add(this.label_MaxSpeedValue);
+            this.ClientSize = new System.Drawing.Size(769, 350);
             this.Controls.Add(this.label8);
+            this.Controls.Add(this.label_TeamOnRightMaxValue);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label_TeamOnLeftMaxValue);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.ValueUpdates);
             this.Controls.Add(this.LabelUpdates);
             this.Controls.Add(this.OmniSpeedPerMs_value);
@@ -344,8 +378,11 @@
         private System.Windows.Forms.Label OmniSpeedPerMs_value;
         private System.Windows.Forms.Label LabelUpdates;
         private System.Windows.Forms.Label ValueUpdates;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label_TeamOnLeftMaxValue;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label_TeamOnRightMaxValue;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label_MaxSpeedValue;
     }
 }
 
