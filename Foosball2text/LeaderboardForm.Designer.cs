@@ -28,145 +28,139 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.database1DataSet = new Foosball2text.Database1DataSet();
-            this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.userTableAdapter = new Foosball2text.Database1DataSetTableAdapters.UserTableAdapter();
-            this.tableAdapterManager = new Foosball2text.Database1DataSetTableAdapters.TableAdapterManager();
-            this.userDataGridView = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.database1DataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userDataGridView)).BeginInit();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.gamesWonTab = new System.Windows.Forms.TabPage();
+            this.gamesWonList = new System.Windows.Forms.ListBox();
+            this.totalScoreTab = new System.Windows.Forms.TabPage();
+            this.totalScoreList = new System.Windows.Forms.ListBox();
+            this.maxSpeedTab = new System.Windows.Forms.TabPage();
+            this.maxSpeedList = new System.Windows.Forms.ListBox();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.gamesPlayedList = new System.Windows.Forms.ListBox();
+            this.tabControl1.SuspendLayout();
+            this.gamesWonTab.SuspendLayout();
+            this.totalScoreTab.SuspendLayout();
+            this.maxSpeedTab.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // database1DataSet
+            // tabControl1
             // 
-            this.database1DataSet.DataSetName = "Database1DataSet";
-            this.database1DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.tabControl1.Controls.Add(this.gamesWonTab);
+            this.tabControl1.Controls.Add(this.totalScoreTab);
+            this.tabControl1.Controls.Add(this.maxSpeedTab);
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Location = new System.Drawing.Point(12, 12);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(290, 273);
+            this.tabControl1.TabIndex = 0;
             // 
-            // userBindingSource
+            // gamesWonTab
             // 
-            this.userBindingSource.DataMember = "User";
-            this.userBindingSource.DataSource = this.database1DataSet;
+            this.gamesWonTab.Controls.Add(this.gamesWonList);
+            this.gamesWonTab.Location = new System.Drawing.Point(4, 22);
+            this.gamesWonTab.Name = "gamesWonTab";
+            this.gamesWonTab.Padding = new System.Windows.Forms.Padding(3);
+            this.gamesWonTab.Size = new System.Drawing.Size(282, 247);
+            this.gamesWonTab.TabIndex = 0;
+            this.gamesWonTab.Text = "Laimėti žaidimai";
+            this.gamesWonTab.UseVisualStyleBackColor = true;
             // 
-            // userTableAdapter
+            // gamesWonList
             // 
-            this.userTableAdapter.ClearBeforeFill = true;
+            this.gamesWonList.FormattingEnabled = true;
+            this.gamesWonList.Location = new System.Drawing.Point(6, 16);
+            this.gamesWonList.Name = "gamesWonList";
+            this.gamesWonList.Size = new System.Drawing.Size(270, 225);
+            this.gamesWonList.TabIndex = 0;
+            this.gamesWonList.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.GamesWonList_Format);
             // 
-            // tableAdapterManager
+            // totalScoreTab
             // 
-            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
-            this.tableAdapterManager.UpdateOrder = Foosball2text.Database1DataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
-            this.tableAdapterManager.UserTableAdapter = this.userTableAdapter;
+            this.totalScoreTab.Controls.Add(this.totalScoreList);
+            this.totalScoreTab.Location = new System.Drawing.Point(4, 22);
+            this.totalScoreTab.Name = "totalScoreTab";
+            this.totalScoreTab.Padding = new System.Windows.Forms.Padding(3);
+            this.totalScoreTab.Size = new System.Drawing.Size(282, 247);
+            this.totalScoreTab.TabIndex = 1;
+            this.totalScoreTab.Text = "Taškai";
+            this.totalScoreTab.UseVisualStyleBackColor = true;
             // 
-            // userDataGridView
+            // totalScoreList
             // 
-            this.userDataGridView.AllowUserToAddRows = false;
-            this.userDataGridView.AllowUserToDeleteRows = false;
-            this.userDataGridView.AllowUserToResizeColumns = false;
-            this.userDataGridView.AllowUserToResizeRows = false;
-            this.userDataGridView.AutoGenerateColumns = false;
-            this.userDataGridView.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
-            this.userDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.userDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4});
-            this.userDataGridView.DataSource = this.userBindingSource;
-            this.userDataGridView.Location = new System.Drawing.Point(15, 33);
-            this.userDataGridView.Name = "userDataGridView";
-            this.userDataGridView.ReadOnly = true;
-            this.userDataGridView.Size = new System.Drawing.Size(345, 239);
-            this.userDataGridView.TabIndex = 1;
+            this.totalScoreList.FormattingEnabled = true;
+            this.totalScoreList.Location = new System.Drawing.Point(2, 0);
+            this.totalScoreList.Name = "totalScoreList";
+            this.totalScoreList.Size = new System.Drawing.Size(279, 238);
+            this.totalScoreList.TabIndex = 0;
+            this.totalScoreList.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.TotalScoreList_Format);
             // 
-            // dataGridViewTextBoxColumn2
+            // maxSpeedTab
             // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "Name";
-            this.dataGridViewTextBoxColumn2.HeaderText = "Name";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.maxSpeedTab.Controls.Add(this.maxSpeedList);
+            this.maxSpeedTab.Location = new System.Drawing.Point(4, 22);
+            this.maxSpeedTab.Name = "maxSpeedTab";
+            this.maxSpeedTab.Size = new System.Drawing.Size(282, 247);
+            this.maxSpeedTab.TabIndex = 2;
+            this.maxSpeedTab.Text = "Greitis";
+            this.maxSpeedTab.UseVisualStyleBackColor = true;
             // 
-            // dataGridViewTextBoxColumn3
+            // maxSpeedList
             // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "Score";
-            this.dataGridViewTextBoxColumn3.HeaderText = "Score";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            this.maxSpeedList.FormattingEnabled = true;
+            this.maxSpeedList.Location = new System.Drawing.Point(2, 1);
+            this.maxSpeedList.Name = "maxSpeedList";
+            this.maxSpeedList.Size = new System.Drawing.Size(279, 238);
+            this.maxSpeedList.TabIndex = 0;
+            this.maxSpeedList.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.MaxSpeedList_Format);
             // 
-            // dataGridViewTextBoxColumn4
+            // tabPage1
             // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "NoOfGoals";
-            this.dataGridViewTextBoxColumn4.HeaderText = "Goals made";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.tabPage1.Controls.Add(this.gamesPlayedList);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Size = new System.Drawing.Size(282, 247);
+            this.tabPage1.TabIndex = 3;
+            this.tabPage1.Text = "sužaista žaidimų";
+            this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // gamesPlayedList
             // 
-            this.button1.Location = new System.Drawing.Point(61, 4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Score";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(45, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Best by:";
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(142, 4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Goals";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.gamesPlayedList.FormattingEnabled = true;
+            this.gamesPlayedList.Location = new System.Drawing.Point(1, 2);
+            this.gamesPlayedList.Name = "gamesPlayedList";
+            this.gamesPlayedList.Size = new System.Drawing.Size(280, 238);
+            this.gamesPlayedList.TabIndex = 0;
+            this.gamesPlayedList.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.GamesPlayedList_Format);
             // 
             // LeaderboardForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(377, 283);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.userDataGridView);
+            this.ClientSize = new System.Drawing.Size(314, 297);
+            this.Controls.Add(this.tabControl1);
             this.Name = "LeaderboardForm";
             this.Text = "LeaderboardForm";
-            this.Load += new System.EventHandler(this.LeaderboardForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.database1DataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userDataGridView)).EndInit();
+            this.tabControl1.ResumeLayout(false);
+            this.gamesWonTab.ResumeLayout(false);
+            this.totalScoreTab.ResumeLayout(false);
+            this.maxSpeedTab.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private Database1DataSet database1DataSet;
-        private System.Windows.Forms.BindingSource userBindingSource;
-        private Database1DataSetTableAdapters.UserTableAdapter userTableAdapter;
-        private Database1DataSetTableAdapters.TableAdapterManager tableAdapterManager;
-        private System.Windows.Forms.DataGridView userDataGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage gamesWonTab;
+        private System.Windows.Forms.ListBox gamesWonList;
+        private System.Windows.Forms.TabPage totalScoreTab;
+        private System.Windows.Forms.TabPage maxSpeedTab;
+        private System.Windows.Forms.ListBox totalScoreList;
+        private System.Windows.Forms.ListBox maxSpeedList;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.ListBox gamesPlayedList;
     }
 }

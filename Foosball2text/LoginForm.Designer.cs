@@ -31,10 +31,7 @@
             this.name1 = new System.Windows.Forms.TextBox();
             this.name2 = new System.Windows.Forms.TextBox();
             this.login1 = new System.Windows.Forms.Button();
-            this.database1DataSet1 = new Foosball2text.Database1DataSet();
-            this.userTableAdapter1 = new Foosball2text.Database1DataSetTableAdapters.UserTableAdapter();
             this.label = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.database1DataSet1)).BeginInit();
             this.SuspendLayout();
             // 
             // name1
@@ -61,16 +58,7 @@
             this.login1.TabIndex = 2;
             this.login1.Text = "Rinktis varda";
             this.login1.UseVisualStyleBackColor = true;
-            this.login1.Click += new System.EventHandler(this.login1_Click);
-            // 
-            // database1DataSet1
-            // 
-            this.database1DataSet1.DataSetName = "Database1DataSet";
-            this.database1DataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // userTableAdapter1
-            // 
-            this.userTableAdapter1.ClearBeforeFill = true;
+            this.login1.Click += new System.EventHandler(this.Login1_Click);
             // 
             // label
             // 
@@ -92,7 +80,6 @@
             this.Controls.Add(this.name1);
             this.Name = "LoginForm";
             this.Text = "LoginForm";
-            ((System.ComponentModel.ISupportInitialize)(this.database1DataSet1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -103,8 +90,6 @@
         private System.Windows.Forms.TextBox name1;
         private System.Windows.Forms.TextBox name2;
         private System.Windows.Forms.Button login1;
-        private Database1DataSet database1DataSet1;
-        private Database1DataSetTableAdapters.UserTableAdapter userTableAdapter1;
         private System.Windows.Forms.Label label;
     }
 }
