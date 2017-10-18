@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Logic;
 
@@ -13,22 +6,20 @@ namespace Foosball2text
 {
     public partial class LoginForm : Form
     {
-        private Login _login;
+        private UsersDataProvider _dataProvider;
 
-        public LoginForm()
+        public LoginForm(UsersDataProvider dataProvider)
         {
             InitializeComponent();
-            _login = new Login(database1DataSet1, userTableAdapter1);
+            _dataProvider = dataProvider;
         }
 
-        private void login1_Click(object sender, EventArgs e)
+        private void Login1_Click(object sender, EventArgs e)
         {
             if(name1.Text != name2.Text)
             {
-                _login.IsNameFree(name1.Text);
-                _login._teamA = name1.Text;
-                _login.IsNameFree(name2.Text);
-                _login._teamB = name2.Text;
+                _dataProvider.LeftUser = _dataProvider.AddUser(name1.Text);
+                _dataProvider.RightUser = _dataProvider.AddUser(name2.Text);
                 this.Close();
             }
             else

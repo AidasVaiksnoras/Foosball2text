@@ -11,15 +11,15 @@ namespace Foosball2text
     public partial class VideoProcessForm : Form
     {
         private Timer _timer;
-        private const int _fps = 30; //Would this be a problem on a 60fps video?
+        private const int _fps = 30;
         private VideoCapture _capture;
         private FrameHandler _frameHandler;
         private string _filePath;
 
-        public VideoProcessForm(string filePath, int hue)
+        public VideoProcessForm(string filePath, int hue, User leftUser, User rightUser)
         {
             InitializeComponent();
-            _frameHandler = new FrameHandler(pictureBox1.Width, pictureBox1.Height);
+            _frameHandler = new FrameHandler(pictureBox1.Width, pictureBox1.Height, leftUser, rightUser);
             _frameHandler.UpdateHue(hue);
             _filePath = filePath;
             Init();

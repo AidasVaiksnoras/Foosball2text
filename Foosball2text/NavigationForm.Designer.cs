@@ -52,7 +52,7 @@
             this.button2.TabIndex = 1;
             this.button2.Text = "LeaderBoard";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // button3
             // 
@@ -78,6 +78,7 @@
             this.Controls.Add(this._proccessVideoButton);
             this.Name = "NavigationForm";
             this.Text = "Navigation";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.NavigationForm_FormClosing);
             this.ResumeLayout(false);
 
         }
