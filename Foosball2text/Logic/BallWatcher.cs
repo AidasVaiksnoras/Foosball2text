@@ -143,24 +143,18 @@ namespace Logic
 
         public Teams CheckWhichTeamScored()
         {
-          /* Before conflict resolve?
-            if (_watcherInformation.BallSide == FieldSide.Left)
+            // !!! Following code is a compromise of merge conflicts !!! 
+            if (watcherInformation.BallSide == FieldSide.Left)
             {
                 _rightUser.TotalScore++;
                 return Teams.TeamOnRight;
             }
 
-            else if (_watcherInformation.BallSide == FieldSide.Right)
+            else if (watcherInformation.BallSide == FieldSide.Right)
             {
                 _leftUser.TotalScore++;
-                return Teams.TeamOnLeft
-            }
-          */
-          
-            if (watcherInformation.BallSide == FieldSide.Left)
-                return Teams.TeamOnRight;
-            else if (watcherInformation.BallSide == FieldSide.Right)
                 return Teams.TeamOnLeft;
+            }
 
             return Teams.None;
         }
