@@ -28,7 +28,7 @@ namespace Logic
         {
             Image<Bgr, byte> resizedImage = frame.ToImage<Bgr, byte>().Resize(width, height, Inter.Linear);
             Image<Gray, byte> filteredImage = FilterImage(resizedImage);
-            _gameWatcher.UpdateBallWatcher(filteredImage);
+            _gameWatcher.UpdateGameWatcher(filteredImage);
             if (null != _gameWatcher.Ball)
                 resizedImage.Draw(_gameWatcher.Ball.Circle, new Bgr(Color.Red), 2);
             return resizedImage.ToBitmap();
@@ -39,12 +39,12 @@ namespace Logic
             return _gameWatcher.WatcherInformation;
         }
 
-        public void ResetGameWatcher() //so far it just resets maxSpeed
+        public void ResetGameWatcher()
         {
-            _gameWatcher.ResetMaxSpeed();
+            _gameWatcher.ResetGame();
         }
 
-        public Image<Gray, byte> FilterImage(Image<Bgr, byte> frame)
+        public Image<Gray, byte> FilterImage(Image<Bgr, byte> frame) //TODO: trace the ball find
         {
             Image<Gray, byte> filteredImage = GetFilteredImage(frame.Convert<Hsv, byte>(),
                                                              _hueMin, _saturationMin, _brightnessMin, _hueMax, _saturationMax, _brightnessMax);
