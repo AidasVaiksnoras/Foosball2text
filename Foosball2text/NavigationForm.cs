@@ -1,28 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
+using System.ComponentModel;
+
+using System.Windows.Forms;
+using Logic;
 namespace Foosball2text
 {
     public partial class NavigationForm : Form
     {
         public String _teamA { get; set; }
         public String _teamB { get; set; }
+        public UsersDataProvider DataProvider {get; set;}
 
         public NavigationForm()
         {
             InitializeComponent();
+            DataProvider = new UsersDataProvider();
+            DataProvider.LoadData();
         }
 
         private void ProcessButtonClick(object sender, EventArgs e)
         {
-            var form = new LoginForm();
+            var form = new LoginForm(DataProvider);
             form.ShowDialog();
 
             DialogResult result = openFileDialog1.ShowDialog();
@@ -31,13 +30,19 @@ namespace Foosball2text
         private void OnOpenFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
             this.Hide();
-            new BallColorDetectionForm(openFileDialog1.FileName).Show();
+            new BallColorDetectionForm(openFileDialog1.FileName, 
+                DataProvider.LeftUser, DataProvider.RightUser).Show();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void Button2_Click(object sender, EventArgs e)
         {
-            var seconadary = new LeaderboardForm();
+            var seconadary = new LeaderboardForm(DataProvider);
             seconadary.Show();
+        }
+
+        private void NavigationForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DataProvider.SaveData();
         }
     }
 }
