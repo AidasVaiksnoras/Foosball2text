@@ -84,20 +84,23 @@ namespace Foosball2text
 
         private void EndGameButton_Click(object sender, EventArgs e)
         {
-            _frameHandler.ResetGameWatcher();
             logData.Add(messageGetter.gameEnd);
-            ResetScore();
-        }
 
-        public void ResetScore()
-        {
-            TeamA.Text = "0";
-            TeamB.Text = "0";
+            WatcherInformation newInformation = _frameHandler.GetWatcherInformation();
+            SaveGameResultsForm gameEndForm = new SaveGameResultsForm(
+                int.Parse(newInformation.TeamOnLeftGoals),
+                int.Parse(newInformation.TeamOnRightGoals),
+                double.Parse(newInformation.MaxSpeedTeamOnLeft),
+                double.Parse(newInformation.MaxSpeedTeamOnRight));
+            gameEndForm.Show();
+
         }
 
         public void NewGame()
         {
-            ResetScore();
+            _frameHandler.ResetGameWatcher();
+            TeamA.Text = "0";
+            TeamB.Text = "0";
             logData.Add(messageGetter.gameStart);
         }
 
@@ -105,6 +108,7 @@ namespace Foosball2text
         {
             _timer.Tick -= TimerTick;
             Init();
+            //NewGame(); Commented out because it doesn't show a goal if video ended too soon
         }
 
         private void OnClose(object sender, FormClosingEventArgs e)

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Logic
 {
-    class GameWatcher : BallWatcher
+    class GameWatcher : BallWatcher //TODO extract an interface later
     {
         int _teamOnLeftGoals = 0, _teamOnRightGoals = 0;
         double _teamOnLeftMaxSpeed = 0, _teamOnRightMaxSpeed = 0;
@@ -53,7 +53,7 @@ namespace Logic
             UpdateMaxSpeed();
         }
 
-        private void UpdateMaxSpeed() //FIXME it should check maxSpeed with Teams' maxSpeed
+        private void UpdateMaxSpeed()
         {
             if (movingTowardsGoal != Teams.None)
             {

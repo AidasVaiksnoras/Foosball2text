@@ -253,9 +253,9 @@
             this.LabelUpdates.AutoSize = true;
             this.LabelUpdates.Location = new System.Drawing.Point(381, 286);
             this.LabelUpdates.Name = "LabelUpdates";
-            this.LabelUpdates.Size = new System.Drawing.Size(131, 13);
+            this.LabelUpdates.Size = new System.Drawing.Size(134, 13);
             this.LabelUpdates.TabIndex = 43;
-            this.LabelUpdates.Text = "SecondsBetweenUpdates";
+            this.LabelUpdates.Text = "SecondsBetweenUpdates:";
             // 
             // ValueUpdates
             // 
