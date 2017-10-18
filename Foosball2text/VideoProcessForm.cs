@@ -37,7 +37,6 @@ namespace Foosball2text
             _timer.Tick += new EventHandler(TimerTick);
             _timer.Start();
 
-
             _capture = new VideoCapture(_filePath);
         }
         private void TimerTick(object sender, EventArgs e)
@@ -60,7 +59,6 @@ namespace Foosball2text
             SpeedValue.Text = newInformation.XYSpeed;
             OmniSpeedPerMs_value.Text = newInformation.OmniSpeed;
             ValueUpdates.Text = newInformation.SecondsBetweenBallCapture;
-            label_MaxSpeedValue.Text = newInformation.MaxSpeed;
             label_TeamOnLeftMaxValue.Text = newInformation.MaxSpeedTeamOnLeft;
             label_TeamOnRightMaxValue.Text = newInformation.MaxSpeedTeamOnRight;
             TeamA.Text = newInformation.TeamOnLeftGoals;

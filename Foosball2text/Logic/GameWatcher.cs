@@ -12,9 +12,6 @@ namespace Logic
     {
         int _teamOnLeftGoals = 0, _teamOnRightGoals = 0;
         double _teamOnLeftMaxSpeed = 0, _teamOnRightMaxSpeed = 0;
-        double _maxSpeedPerMs = 0;
-
-        public double MaxSpeedPerMs { get; }
 
         public GameWatcher(float fieldWidth, float fieldHeight) : base(fieldWidth, fieldHeight)
         {
@@ -25,21 +22,21 @@ namespace Logic
             base.UpdateBallWatcher(image);
             List<String> newLogs = new List<string>();
             LoggerMessageDelivery messageTemplates = new LoggerMessageDelivery();
-            if (_teamScored == Teams.TeamOnLeft)
+            if (teamScored == Teams.TeamOnLeft)
             {
                 _teamOnLeftGoals++;
                 newLogs.Add(messageTemplates.goalLeft);
             }
-            else if (_teamScored == Teams.TeamOnRight)
+            else if (teamScored == Teams.TeamOnRight)
             {
                 _teamOnRightGoals++;
                 newLogs.Add(messageTemplates.goalRight);
             }
 
-            _watcherInformation.TeamOnLeftGoals = _teamOnLeftGoals.ToString();
-            _watcherInformation.TeamOnRightGoals = _teamOnRightGoals.ToString();
+            watcherInformation.TeamOnLeftGoals = _teamOnLeftGoals.ToString();
+            watcherInformation.TeamOnRightGoals = _teamOnRightGoals.ToString();
 
-            _watcherInformation.NewLogs = newLogs;
+            watcherInformation.NewLogs = newLogs;
         }
 
         public void ResetGame()
@@ -48,7 +45,6 @@ namespace Logic
             _teamOnRightGoals = 0;
             _teamOnLeftMaxSpeed = 0;
             _teamOnRightMaxSpeed = 0;
-            _maxSpeedPerMs = 0;
         }
 
         protected override void CalculateSpeed()
@@ -59,23 +55,22 @@ namespace Logic
 
         private void UpdateMaxSpeed() //FIXME it should check maxSpeed with Teams' maxSpeed
         {
-            if (_speed.OmniSpeed_ms > _maxSpeedPerMs)
+            if (movingTowardsGoal != Teams.None)
             {
-                _maxSpeedPerMs = _speed.OmniSpeed_ms;
-                _watcherInformation.MaxSpeed = _maxSpeedPerMs.ToString("F5");
-
-                //Assign to the correct team
-                if (_movingTowardsGoal != Teams.None)
+                if (movingTowardsGoal == Teams.TeamOnLeft)
                 {
-                    if (_movingTowardsGoal == Teams.TeamOnLeft)
+                    if (speed.OmniSpeed_ms > _teamOnRightMaxSpeed)
                     {
-                        _teamOnRightMaxSpeed = _maxSpeedPerMs;
-                        _watcherInformation.MaxSpeedTeamOnRight = _teamOnRightMaxSpeed.ToString("F5");
+                        _teamOnRightMaxSpeed = speed.OmniSpeed_ms;
+                        watcherInformation.MaxSpeedTeamOnRight = _teamOnRightMaxSpeed.ToString("F5");
                     }
-                    else
+                }
+                else //(_movingTowardsGoal == Teams.TeamOnRight)
+                {
+                    if (speed.OmniSpeed_ms > _teamOnLeftMaxSpeed)
                     {
-                        _teamOnLeftMaxSpeed = _maxSpeedPerMs;
-                        _watcherInformation.MaxSpeedTeamOnLeft = _teamOnLeftMaxSpeed.ToString("F5");
+                        _teamOnLeftMaxSpeed = speed.OmniSpeed_ms;
+                        watcherInformation.MaxSpeedTeamOnLeft = _teamOnLeftMaxSpeed.ToString("F5");
                     }
                 }
             }

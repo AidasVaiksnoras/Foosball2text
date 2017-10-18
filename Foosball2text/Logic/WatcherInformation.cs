@@ -17,7 +17,6 @@ namespace Logic
         public string SecondsBetweenBallCapture { get; set; }
 
         //In GameWatcher
-        public string MaxSpeed { get; set; }
         public string MaxSpeedTeamOnLeft { get; set; }
         public string MaxSpeedTeamOnRight { get; set; }
         public string TeamOnLeftGoals { get; set; }
