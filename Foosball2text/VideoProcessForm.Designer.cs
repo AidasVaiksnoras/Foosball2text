@@ -53,6 +53,10 @@
             this.ValueUpdates = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label_MaxSpeedValue = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label_TeamOnLeftMaxValue = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label_TeamOnRightMaxValue = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -107,7 +111,7 @@
             // ballOnSideOfFieldValue
             // 
             this.ballOnSideOfFieldValue.AutoSize = true;
-            this.ballOnSideOfFieldValue.Location = new System.Drawing.Point(485, 260);
+            this.ballOnSideOfFieldValue.Location = new System.Drawing.Point(485, 247);
             this.ballOnSideOfFieldValue.Name = "ballOnSideOfFieldValue";
             this.ballOnSideOfFieldValue.Size = new System.Drawing.Size(25, 13);
             this.ballOnSideOfFieldValue.TabIndex = 30;
@@ -116,7 +120,7 @@
             // sideOfFieldLabel
             // 
             this.sideOfFieldLabel.AutoSize = true;
-            this.sideOfFieldLabel.Location = new System.Drawing.Point(381, 260);
+            this.sideOfFieldLabel.Location = new System.Drawing.Point(381, 247);
             this.sideOfFieldLabel.Name = "sideOfFieldLabel";
             this.sideOfFieldLabel.Size = new System.Drawing.Size(98, 13);
             this.sideOfFieldLabel.TabIndex = 29;
@@ -125,7 +129,7 @@
             // SpeedValue
             // 
             this.SpeedValue.AutoSize = true;
-            this.SpeedValue.Location = new System.Drawing.Point(446, 247);
+            this.SpeedValue.Location = new System.Drawing.Point(446, 260);
             this.SpeedValue.Name = "SpeedValue";
             this.SpeedValue.Size = new System.Drawing.Size(25, 13);
             this.SpeedValue.TabIndex = 28;
@@ -134,7 +138,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(381, 247);
+            this.label3.Location = new System.Drawing.Point(381, 260);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(59, 13);
             this.label3.TabIndex = 26;
@@ -281,11 +285,51 @@
             this.label_MaxSpeedValue.TabIndex = 46;
             this.label_MaxSpeedValue.Text = "Null";
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(381, 312);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(92, 13);
+            this.label9.TabIndex = 47;
+            this.label9.Text = "TeamOnLeft Max:";
+            // 
+            // label_TeamOnLeftMaxValue
+            // 
+            this.label_TeamOnLeftMaxValue.AutoSize = true;
+            this.label_TeamOnLeftMaxValue.Location = new System.Drawing.Point(480, 312);
+            this.label_TeamOnLeftMaxValue.Name = "label_TeamOnLeftMaxValue";
+            this.label_TeamOnLeftMaxValue.Size = new System.Drawing.Size(46, 13);
+            this.label_TeamOnLeftMaxValue.TabIndex = 48;
+            this.label_TeamOnLeftMaxValue.Text = "0.00000";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(532, 312);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(99, 13);
+            this.label10.TabIndex = 49;
+            this.label10.Text = "TeamOnRight Max:";
+            // 
+            // label_TeamOnRightMaxValue
+            // 
+            this.label_TeamOnRightMaxValue.AutoSize = true;
+            this.label_TeamOnRightMaxValue.Location = new System.Drawing.Point(637, 312);
+            this.label_TeamOnRightMaxValue.Name = "label_TeamOnRightMaxValue";
+            this.label_TeamOnRightMaxValue.Size = new System.Drawing.Size(46, 13);
+            this.label_TeamOnRightMaxValue.TabIndex = 50;
+            this.label_TeamOnRightMaxValue.Text = "0.00000";
+            // 
             // VideoProcessForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(769, 320);
+            this.ClientSize = new System.Drawing.Size(769, 350);
+            this.Controls.Add(this.label_TeamOnRightMaxValue);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label_TeamOnLeftMaxValue);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.label_MaxSpeedValue);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.ValueUpdates);
@@ -346,6 +390,10 @@
         private System.Windows.Forms.Label ValueUpdates;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label_MaxSpeedValue;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label_TeamOnLeftMaxValue;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label_TeamOnRightMaxValue;
     }
 }
 

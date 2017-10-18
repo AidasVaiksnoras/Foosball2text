@@ -55,10 +55,12 @@ namespace Foosball2text
             _ylabel.Text = _frameHandler.GetWatcherInformation().Y;
 
             ballOnSideOfFieldValue.Text = Enum.GetName(typeof(FieldSide), _frameHandler.GetWatcherInformation().BallSide);
-            SpeedValue.Text = _frameHandler.GetWatcherInformation().Speed; //XY Speed
-            OmniSpeedPerMs_value.Text = _frameHandler.GetWatcherInformation().OmniSpeed; //OmniDirectional speed
+            SpeedValue.Text = _frameHandler.GetWatcherInformation().XYSpeed;
+            OmniSpeedPerMs_value.Text = _frameHandler.GetWatcherInformation().OmniSpeed;
             ValueUpdates.Text = _frameHandler.GetWatcherInformation().SecondsBetweenBallCapture;
             label_MaxSpeedValue.Text = _frameHandler.GetWatcherInformation().MaxSpeed;
+            label_TeamOnLeftMaxValue.Text = _frameHandler.GetWatcherInformation().MaxSpeedTeamOnLeft;
+            label_TeamOnRightMaxValue.Text = _frameHandler.GetWatcherInformation().MaxSpeedTeamOnRight;
 
             if (_frameHandler.GetWatcherInformation().TeamScored == Teams.TeamOnLeft)
                 AddGoalA();

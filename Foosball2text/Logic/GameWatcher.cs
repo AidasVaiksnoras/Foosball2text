@@ -34,15 +34,21 @@ namespace Logic
             {
                 _maxSpeedPerMs = _speed.OmniSpeed_ms;
                 _watcherInformation.MaxSpeed = _maxSpeedPerMs.ToString("F5");
-            }
 
-            //Assign to the correct team
-            if (_movingTowardsGoal != Teams.None)
-            {
-                if (_movingTowardsGoal == Teams.TeamOnLeft)
-                    _teamOnRightMaxSpeed = _maxSpeedPerMs;
-                else
-                    _teamOnLeftMaxSpeed = _maxSpeedPerMs;
+                //Assign to the correct team
+                if (_movingTowardsGoal != Teams.None)
+                {
+                    if (_movingTowardsGoal == Teams.TeamOnLeft)
+                    {
+                        _teamOnRightMaxSpeed = _maxSpeedPerMs;
+                        _watcherInformation.MaxSpeedTeamOnRight = _teamOnRightMaxSpeed.ToString("F5");
+                    }
+                    else
+                    {
+                        _teamOnLeftMaxSpeed = _maxSpeedPerMs;
+                        _watcherInformation.MaxSpeedTeamOnLeft = _teamOnLeftMaxSpeed.ToString("F5");
+                    }
+                }
             }
         }
     }

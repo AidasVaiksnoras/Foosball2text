@@ -109,7 +109,7 @@ namespace Logic
             _watcherInformation.Y = _ball.Y.ToString();
 
             CalculateSpeed();
-            _watcherInformation.Speed = "per ms: X:" + _speed.XPerMs.ToString("F5") + "   Y:" + _speed.YPerMs.ToString("F5");
+            _watcherInformation.XYSpeed = "per ms: X:" + _speed.XPerMs.ToString("F5") + "   Y:" + _speed.YPerMs.ToString("F5");
             _watcherInformation.OmniSpeed = _speed.OmniSpeed_ms.ToString("F5");
 
             if (_speed.xMoved > 0.0)
