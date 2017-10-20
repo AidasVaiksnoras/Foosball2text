@@ -82,7 +82,8 @@
   <ItemGroup>
     <Compile Include="BallWatcherTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="ExtensionMethodsTests.cs" />
+    <Compile Include="DataProviderTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

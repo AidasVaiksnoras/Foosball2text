@@ -143,6 +143,7 @@ namespace Logic
 
         public Teams CheckWhichTeamScored()
         {
+
             // !!! Following code is a compromise of merge conflicts !!! 
             if (watcherInformation.BallSide == FieldSide.Left)
             {
@@ -155,7 +156,6 @@ namespace Logic
                 _leftUser.TotalScore++;
                 return Teams.TeamOnLeft;
             }
-
             return Teams.None;
         }
     }
