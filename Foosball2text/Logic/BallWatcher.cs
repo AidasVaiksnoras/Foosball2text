@@ -109,12 +109,13 @@ namespace Logic
             else
                 watcherInformation.BallSide = FieldSide.Right;
 
-            watcherInformation.X = _ball.X.ToString();
-            watcherInformation.Y = _ball.Y.ToString();
+            watcherInformation.X = _ball.X;
+            watcherInformation.Y = _ball.Y;
 
             CalculateSpeed();
-            watcherInformation.XYSpeed = "X: " + speed.XPerMs.ToString("F5") + "    Y:" + speed.YPerMs.ToString("F5");
-            watcherInformation.OmniSpeed = speed.OmniSpeed_ms.ToString("F5");
+            watcherInformation.XSpeed = speed.XPerMs;
+            watcherInformation.YSpeed = speed.YPerMs;
+            watcherInformation.OmniSpeed = speed.OmniSpeed_ms;
 
             if (speed.xMoved > 0.0)
                 movingTowardsGoal = Teams.TeamOnRight;
@@ -135,7 +136,7 @@ namespace Logic
             //if (_lastFrameBall.Y != 0)
                 speed.yMoved = _ball.Y - _lastFrameBall.Y;
 
-            watcherInformation.SecondsBetweenBallCapture = speed.SecondsBetweenCalculations.ToString();
+            watcherInformation.SecondsBetweenBallCapture = speed.SecondsBetweenCalculations;
 
             speed.timeBetweenCalculations.Reset();
             speed.timeBetweenCalculations.Start();

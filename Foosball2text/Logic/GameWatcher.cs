@@ -34,8 +34,8 @@ namespace Logic
                 newLogs.Add(messageTemplates.goalRight);
             }
 
-            watcherInformation.TeamOnLeftGoals = _teamOnLeftGoals.ToString();
-            watcherInformation.TeamOnRightGoals = _teamOnRightGoals.ToString();
+            watcherInformation.TeamOnLeftGoals = _teamOnLeftGoals;
+            watcherInformation.TeamOnRightGoals = _teamOnRightGoals;
 
             watcherInformation.NewLogs = newLogs;
         }
@@ -63,7 +63,7 @@ namespace Logic
                     if (speed.OmniSpeed_ms > _teamOnRightMaxSpeed)
                     {
                         _teamOnRightMaxSpeed = speed.OmniSpeed_ms;
-                        watcherInformation.MaxSpeedTeamOnRight = _teamOnRightMaxSpeed.ToString("F5");
+                        watcherInformation.MaxSpeedTeamOnRight = _teamOnRightMaxSpeed;
                     }
                 }
                 else //(_movingTowardsGoal == Teams.TeamOnRight)
@@ -71,7 +71,7 @@ namespace Logic
                     if (speed.OmniSpeed_ms > _teamOnLeftMaxSpeed)
                     {
                         _teamOnLeftMaxSpeed = speed.OmniSpeed_ms;
-                        watcherInformation.MaxSpeedTeamOnLeft = _teamOnLeftMaxSpeed.ToString("F5");
+                        watcherInformation.MaxSpeedTeamOnLeft = _teamOnLeftMaxSpeed;
                     }
                 }
             }

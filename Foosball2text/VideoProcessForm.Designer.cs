@@ -79,7 +79,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(513, 234);
+            this.label2.Location = new System.Drawing.Point(534, 234);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(17, 13);
             this.label2.TabIndex = 4;
@@ -88,20 +88,20 @@
             // _ylabel
             // 
             this._ylabel.AutoSize = true;
-            this._ylabel.Location = new System.Drawing.Point(527, 234);
+            this._ylabel.Location = new System.Drawing.Point(550, 234);
             this._ylabel.Name = "_ylabel";
-            this._ylabel.Size = new System.Drawing.Size(13, 13);
+            this._ylabel.Size = new System.Drawing.Size(46, 13);
             this._ylabel.TabIndex = 5;
-            this._ylabel.Text = "0";
+            this._ylabel.Text = "000.000";
             // 
             // _xlabel
             // 
             this._xlabel.AutoSize = true;
             this._xlabel.Location = new System.Drawing.Point(482, 234);
             this._xlabel.Name = "_xlabel";
-            this._xlabel.Size = new System.Drawing.Size(13, 13);
+            this._xlabel.Size = new System.Drawing.Size(46, 13);
             this._xlabel.TabIndex = 6;
-            this._xlabel.Text = "0";
+            this._xlabel.Text = "000.000";
             // 
             // openFileDialog1
             // 
