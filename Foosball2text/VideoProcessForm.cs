@@ -15,9 +15,11 @@ namespace Foosball2text
         private VideoCapture _capture;
         private FrameHandler _frameHandler;
         private string _filePath;
+        private NavigationForm _navForm;
 
-        public VideoProcessForm(string filePath, int hue)
+        public VideoProcessForm(string filePath, int hue, NavigationForm navForm)
         {
+            _navForm = navForm;
             InitializeComponent();
             _frameHandler = new FrameHandler(pictureBox1.Width, pictureBox1.Height);
             _frameHandler.UpdateHue(hue);
@@ -27,6 +29,8 @@ namespace Foosball2text
             logData.Add(messageGetter.gameStart);
             listBox1.DataSource = logData;
             logData.ListChanged += new ListChangedEventHandler(OnListChange);
+            label7.Text = "Team " + _navForm._teamA + ":";
+            label6.Text = "Team " + _navForm._teamB + ":";
         }
         private void Init()
         {
@@ -122,9 +126,10 @@ namespace Foosball2text
             Init();
         }
 
-        private void OnClose(object sender, FormClosingEventArgs e)
+        private void backButton_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            _navForm.Show();
+            this.Close();
         }
     }
 }

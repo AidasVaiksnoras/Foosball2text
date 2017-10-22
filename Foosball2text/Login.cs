@@ -10,9 +10,6 @@ namespace Foosball2text
 {
     public class Login
     {
-        public String _teamA { get; set; }
-        public String _teamB { get; set; }
-
         private Database1DataSet _dataset;
         private Database1DataSetTableAdapters.UserTableAdapter _tableAdapter;
 

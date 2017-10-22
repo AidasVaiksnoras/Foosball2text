@@ -12,12 +12,14 @@ namespace Foosball2text
         private FrameHandler _frameHandler;
         private string _filePath;
         private VideoCapture _capture;
+        private NavigationForm _navForm;
 
-        public BallColorDetectionForm(string filePath)
+        public BallColorDetectionForm(string filePath, NavigationForm navForm)
         {
             InitializeComponent();
             _filePath = filePath;
             InitTimer();
+            _navForm = navForm;
         }
 
         private void InitTimer()
@@ -60,7 +62,7 @@ namespace Foosball2text
         private void OpenProcessForm(int hue)
         {
             this.Hide();
-            new VideoProcessForm(_filePath, hue).Show();
+            new VideoProcessForm(_filePath, hue, _navForm).Show();
         }
 
         private void OnPictureBoxClick(object sender, EventArgs e)

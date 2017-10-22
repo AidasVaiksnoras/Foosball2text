@@ -12,9 +12,12 @@ namespace Foosball2text
 {
     public partial class LeaderboardForm : Form
     {
-        public LeaderboardForm()
+        private NavigationForm _navForm;
+
+        public LeaderboardForm(NavigationForm navForm)
         {
             InitializeComponent();
+            _navForm = navForm;
         }
 
         private void userBindingNavigatorSaveItem_Click(object sender, EventArgs e)
@@ -41,6 +44,12 @@ namespace Foosball2text
         private void button2_Click(object sender, EventArgs e)
         {
             this.userDataGridView.Sort(this.userDataGridView.Columns[2], ListSortDirection.Descending);
+        }
+
+        private void backButton_Click(object sender, EventArgs e)
+        {
+            _navForm.Show();
+            this.Close();
         }
     }
 }

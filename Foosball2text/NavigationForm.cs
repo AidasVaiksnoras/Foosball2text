@@ -22,7 +22,7 @@ namespace Foosball2text
 
         private void ProcessButtonClick(object sender, EventArgs e)
         {
-            var form = new LoginForm();
+            var form = new LoginForm(this);
             form.ShowDialog();
 
             DialogResult result = openFileDialog1.ShowDialog();
@@ -31,13 +31,19 @@ namespace Foosball2text
         private void OnOpenFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
             this.Hide();
-            new BallColorDetectionForm(openFileDialog1.FileName).Show();
+            new BallColorDetectionForm(openFileDialog1.FileName, this).Show();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var seconadary = new LeaderboardForm();
+            var seconadary = new LeaderboardForm(this);
             seconadary.Show();
+            this.Hide();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -53,6 +53,7 @@
             this.ValueUpdates = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label_MaxSpeedValue = new System.Windows.Forms.Label();
+            this.backButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -152,7 +153,7 @@
             // TeamB
             // 
             this.TeamB.AutoSize = true;
-            this.TeamB.Location = new System.Drawing.Point(545, 27);
+            this.TeamB.Location = new System.Drawing.Point(578, 27);
             this.TeamB.Name = "TeamB";
             this.TeamB.Size = new System.Drawing.Size(13, 13);
             this.TeamB.TabIndex = 35;
@@ -162,7 +163,7 @@
             // TeamA
             // 
             this.TeamA.AutoSize = true;
-            this.TeamA.Location = new System.Drawing.Point(431, 27);
+            this.TeamA.Location = new System.Drawing.Point(457, 27);
             this.TeamA.Name = "TeamA";
             this.TeamA.Size = new System.Drawing.Size(13, 13);
             this.TeamA.TabIndex = 34;
@@ -281,11 +282,22 @@
             this.label_MaxSpeedValue.TabIndex = 46;
             this.label_MaxSpeedValue.Text = "Null";
             // 
+            // backButton
+            // 
+            this.backButton.Location = new System.Drawing.Point(679, 276);
+            this.backButton.Name = "backButton";
+            this.backButton.Size = new System.Drawing.Size(75, 23);
+            this.backButton.TabIndex = 47;
+            this.backButton.Text = "Back";
+            this.backButton.UseVisualStyleBackColor = true;
+            this.backButton.Click += new System.EventHandler(this.backButton_Click);
+            // 
             // VideoProcessForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(769, 320);
+            this.Controls.Add(this.backButton);
             this.Controls.Add(this.label_MaxSpeedValue);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.ValueUpdates);
@@ -312,7 +324,6 @@
             this.Controls.Add(this.pictureBox1);
             this.Name = "VideoProcessForm";
             this.Text = "Form1";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnClose);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -346,6 +357,7 @@
         private System.Windows.Forms.Label ValueUpdates;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label_MaxSpeedValue;
+        private System.Windows.Forms.Button backButton;
     }
 }
 
