@@ -56,6 +56,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label_TeamOnRightMaxValue = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.backButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -312,11 +313,22 @@
             this.label8.TabIndex = 51;
             this.label8.Text = "Max Ball Speeds:";
             // 
+            // backButton
+            // 
+            this.backButton.Location = new System.Drawing.Point(687, 312);
+            this.backButton.Name = "backButton";
+            this.backButton.Size = new System.Drawing.Size(75, 23);
+            this.backButton.TabIndex = 52;
+            this.backButton.Text = "Back";
+            this.backButton.UseVisualStyleBackColor = true;
+            this.backButton.Click += new System.EventHandler(this.backButton_Click);
+            // 
             // VideoProcessForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(769, 350);
+            this.Controls.Add(this.backButton);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label_TeamOnRightMaxValue);
             this.Controls.Add(this.label10);
@@ -346,7 +358,6 @@
             this.Controls.Add(this.pictureBox1);
             this.Name = "VideoProcessForm";
             this.Text = "Form1";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnClose);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -383,6 +394,7 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label_TeamOnRightMaxValue;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button backButton;
     }
 }
 

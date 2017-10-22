@@ -14,14 +14,16 @@ namespace Foosball2text
         private VideoCapture _capture;
         private User _leftUser;
         private User _rightUser;
+        private NavigationForm _navForm;
 
-        public BallColorDetectionForm(string filePath, User leftUser, User rightUser)
+        public BallColorDetectionForm(string filePath, User leftUser, User rightUser, NavigationForm navForm)
         {
             InitializeComponent();
             _filePath = filePath;
             _leftUser = leftUser;
             _rightUser = rightUser;
             InitTimer();
+            _navForm = navForm;
         }
 
         private void InitTimer()
@@ -64,7 +66,7 @@ namespace Foosball2text
         private void OpenProcessForm(int hue)
         {
             this.Hide();
-            new VideoProcessForm(_filePath, hue, _leftUser, _rightUser).Show();
+            new VideoProcessForm(_filePath, hue, _leftUser, _rightUser, _navForm).Show();
         }
 
         private void OnPictureBoxClick(object sender, EventArgs e)
@@ -78,9 +80,10 @@ namespace Foosball2text
             OpenProcessForm(Convert.ToInt32(colorAtPoint.GetHue()));
         }
 
-        private void OnClose(object sender, FormClosingEventArgs e)
+        private void backButton_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            _navForm.Show();
+            this.Close();
         }
     }
 }

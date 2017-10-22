@@ -7,7 +7,8 @@ namespace Foosball2text
     public partial class LeaderboardForm : Form
     {
         private UsersDataProvider _dataProvider;
-        public LeaderboardForm(UsersDataProvider dataProvider)
+        private NavigationForm _navForm;
+        public LeaderboardForm(UsersDataProvider dataProvider, NavigationForm navForm)
         {
             InitializeComponent();
             _dataProvider = dataProvider;
@@ -15,6 +16,7 @@ namespace Foosball2text
             totalScoreList.DataSource = _dataProvider.Data.OrderByTotalScore();
             maxSpeedList.DataSource = _dataProvider.Data.OrderByMaxSpeed();
             gamesPlayedList.DataSource = _dataProvider.Data.OrderByGamesPlayed();
+            _navForm = navForm;
         }
 
         private void GamesWonList_Format(object sender, ListControlConvertEventArgs e)
@@ -50,6 +52,12 @@ namespace Foosball2text
         private void button1_Click(object sender, EventArgs e)
         {
             UserInfoForm userInfo = new UserInfoForm(_dataProvider, textBox1.Text);
+        }
+
+        private void backButton_Click(object sender, EventArgs e)
+        {
+            _navForm.Show();
+            this.Close();
         }
     }
 }
