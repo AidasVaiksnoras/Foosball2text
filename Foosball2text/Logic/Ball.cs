@@ -7,18 +7,17 @@ using System.Drawing;
 
 namespace Logic
 {
-    public class Ball : ICloneable, IEquatable<Ball>
+    public class Ball : TrackedObject, ICloneable, IEquatable<Ball>
     {
-        private float _x;
-        private float _y;
-        public CircleF Circle { get; set; }
-        public float X { get => _x ; set => _x = value; }
-        public float Y { get => _y; set => _y = value; }
+        //Inherited
+        //public float x;
+        //public float y;
+        public CircleF Circle;
 
         public Ball(float x = 0, float y = 0) //Optional parameters don't force to assign new values
         {
-            _x = x;
-            _y = y;
+            base.x = x;
+            base.y = y;
         }
 
         public Ball(Image<Gray, byte> frame)
@@ -45,8 +44,8 @@ namespace Logic
             if (circleArray.Length != 0)
             {
                 Circle = circleArray[circleArray.Length-1];
-                X = Circle.Center.X;
-                Y = Circle.Center.Y;
+                x = Circle.Center.X;
+                y = Circle.Center.Y;
             }
 
         }
@@ -60,13 +59,13 @@ namespace Logic
         {
             CircleF newCircle = new CircleF(new PointF(toX, toY), Circle.Radius);
             Circle = newCircle;
-            X = toX;
-            Y = toY;
+            x = toX;
+            y = toY;
         }
 
         public bool Equals(Ball other) //if it's on the same coordinates it's the same ball
         {
-            if (other.X == _x && other.Y == _y)
+            if (other.x == x && other.y == y)
                 return true;
             return false;
         }

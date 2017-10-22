@@ -83,7 +83,7 @@ namespace Logic
             _ball = new Ball(image);
 
             //I removed this and it changed nothing so until further notice it's commented
-            if (/*null != _ball &&*/ 0 != _ball.X && (_lastFrameBall.X != _ball.X || _lastFrameBall.Y != _ball.Y))  //If detected moving
+            if (/*null != _ball &&*/ 0 != _ball.x && (_lastFrameBall.x != _ball.x || _lastFrameBall.y != _ball.y))  //If detected moving
             {
                 _scoredOnLostPositionTime = false; //bool reset allows to score again
                 _positionHasntChangedTime.Reset();
@@ -104,13 +104,13 @@ namespace Logic
 
         protected void UpdateBallInformation()
         {
-            if (_ball.X < _playField.middleLine)
+            if (_ball.x < _playField.middleLine)
                 watcherInformation.BallSide = FieldSide.Left;
             else
                 watcherInformation.BallSide = FieldSide.Right;
 
-            watcherInformation.X = _ball.X;
-            watcherInformation.Y = _ball.Y;
+            watcherInformation.X = _ball.x;
+            watcherInformation.Y = _ball.y;
 
             CalculateSpeed();
             watcherInformation.XSpeed = speed.XPerMs;
@@ -132,9 +132,9 @@ namespace Logic
 
             //ifs removed as I did not find that they do anything
             //if (_lastFrameBall.X != 0)
-                speed.xMoved = _ball.X - _lastFrameBall.X;
+                speed.xMoved = _ball.x - _lastFrameBall.x;
             //if (_lastFrameBall.Y != 0)
-                speed.yMoved = _ball.Y - _lastFrameBall.Y;
+                speed.yMoved = _ball.y - _lastFrameBall.y;
 
             watcherInformation.SecondsBetweenBallCapture = speed.SecondsBetweenCalculations;
 
