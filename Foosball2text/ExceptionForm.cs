@@ -20,7 +20,7 @@ namespace Foosball2text
         public ExceptionForm(string message)
         {
             InitializeComponent();
-            label1.Text = message;
+            label1.Text=message;
         }
         private void button1_Click(object sender, EventArgs e)
         {

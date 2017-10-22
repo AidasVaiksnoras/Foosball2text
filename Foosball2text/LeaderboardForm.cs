@@ -52,7 +52,8 @@ namespace Foosball2text
             try
             {
                 User user = _dataProvider.GetUserData(textBox1.Text);
-
+                UserInfoForm userForm = new UserInfoForm(user);
+                userForm.Show();
             }
             catch(UserNotFoundException ex)
             {

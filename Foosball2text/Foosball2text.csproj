@@ -108,6 +108,12 @@
     <Compile Include="SaveGameResultsForm.Designer.cs">
       <DependentUpon>SaveGameResultsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserInfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserInfoForm.Designer.cs">
+      <DependentUpon>UserInfoForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="VideoProcessForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -136,6 +142,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SaveGameResultsForm.resx">
       <DependentUpon>SaveGameResultsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserInfoForm.resx">
+      <DependentUpon>UserInfoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VideoProcessForm.resx">
       <DependentUpon>VideoProcessForm.cs</DependentUpon>
