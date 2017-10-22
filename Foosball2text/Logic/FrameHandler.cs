@@ -44,7 +44,7 @@ namespace Logic
             _gameWatcher.ResetGame();
         }
 
-        public Image<Gray, byte> FilterImage(Image<Bgr, byte> frame) //TODO: trace the ball find
+        public Image<Gray, byte> FilterImage(Image<Bgr, byte> frame)
         {
             Image<Gray, byte> filteredImage = GetFilteredImage(frame.Convert<Hsv, byte>(),
                                                              _hueMin, _saturationMin, _brightnessMin, _hueMax, _saturationMax, _brightnessMax);

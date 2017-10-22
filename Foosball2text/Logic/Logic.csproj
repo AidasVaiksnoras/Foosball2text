@@ -57,8 +57,10 @@
     <Compile Include="Ball.cs" />
     <Compile Include="BallWatcher.cs" />
     <Compile Include="DataProvider.cs" />
+    <Compile Include="IGameWatcher.cs" />
     <Compile Include="ListExtensions.cs" />
     <Compile Include="SerializationHandler.cs" />
+    <Compile Include="TrackedObject.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserNotFoundException.cs" />
     <Compile Include="WatcherInformation.cs" />
@@ -91,7 +93,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
