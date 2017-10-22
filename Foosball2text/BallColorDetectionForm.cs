@@ -76,9 +76,10 @@ namespace Foosball2text
             OpenProcessForm(Convert.ToInt32(colorAtPoint.GetHue()));
         }
 
-        private void OnClose(object sender, FormClosingEventArgs e)
+        private void backButton_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            _navForm.Show();
+            this.Close();
         }
     }
 }

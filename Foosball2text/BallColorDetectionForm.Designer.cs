@@ -33,6 +33,7 @@
             this._pauseButton = new System.Windows.Forms.Button();
             this._continueButton = new System.Windows.Forms.Button();
             this._restartButton = new System.Windows.Forms.Button();
+            this.backButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this._pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -84,11 +85,22 @@
             this._restartButton.UseVisualStyleBackColor = true;
             this._restartButton.Click += new System.EventHandler(this.OnRestartButtonClick);
             // 
+            // backButton
+            // 
+            this.backButton.Location = new System.Drawing.Point(154, 293);
+            this.backButton.Name = "backButton";
+            this.backButton.Size = new System.Drawing.Size(121, 37);
+            this.backButton.TabIndex = 5;
+            this.backButton.Text = "Back";
+            this.backButton.UseVisualStyleBackColor = true;
+            this.backButton.Click += new System.EventHandler(this.backButton_Click);
+            // 
             // BallColorDetectionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(417, 292);
+            this.ClientSize = new System.Drawing.Size(417, 342);
+            this.Controls.Add(this.backButton);
             this.Controls.Add(this._restartButton);
             this.Controls.Add(this._continueButton);
             this.Controls.Add(this._pauseButton);
@@ -96,7 +108,6 @@
             this.Controls.Add(this.label1);
             this.Name = "BallColorDetectionForm";
             this.Text = "BallColorDetectionForm";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnClose);
             ((System.ComponentModel.ISupportInitialize)(this._pictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -110,5 +121,6 @@
         private System.Windows.Forms.Button _pauseButton;
         private System.Windows.Forms.Button _continueButton;
         private System.Windows.Forms.Button _restartButton;
+        private System.Windows.Forms.Button backButton;
     }
 }
