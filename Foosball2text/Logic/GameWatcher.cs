@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 
 namespace Logic
 {
-    class GameWatcher : BallWatcher //TODO extract an interface later
-, IGameWatcher
+    class GameWatcher : BallWatcher, IGameWatcher
     {
         int _teamOnLeftGoals = 0, _teamOnRightGoals = 0;
         double _teamOnLeftMaxSpeed = 0, _teamOnRightMaxSpeed = 0;
