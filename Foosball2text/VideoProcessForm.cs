@@ -52,17 +52,17 @@ namespace Foosball2text
         {
             WatcherInformation newInformation = _frameHandler.GetWatcherInformation();
 
-            _xlabel.Text = newInformation.X;
-            _ylabel.Text = newInformation.Y;
+            _xlabel.Text = newInformation.X.ToString("F3");
+            _ylabel.Text = newInformation.Y.ToString("F3");
 
             ballOnSideOfFieldValue.Text = Enum.GetName(typeof(FieldSide), newInformation.BallSide);
-            SpeedValue.Text = newInformation.XYSpeed;
-            OmniSpeedPerMs_value.Text = newInformation.OmniSpeed;
-            ValueUpdates.Text = newInformation.SecondsBetweenBallCapture;
-            label_TeamOnLeftMaxValue.Text = newInformation.MaxSpeedTeamOnLeft;
-            label_TeamOnRightMaxValue.Text = newInformation.MaxSpeedTeamOnRight;
-            TeamA.Text = newInformation.TeamOnLeftGoals;
-            TeamB.Text = newInformation.TeamOnRightGoals;
+            SpeedValue.Text = string.Format("X: {0}; Y: {1}", newInformation.XSpeed.ToString("F5"), newInformation.YSpeed.ToString("F5"));
+            OmniSpeedPerMs_value.Text = newInformation.OmniSpeed.ToString("F5");
+            ValueUpdates.Text = newInformation.SecondsBetweenBallCapture.ToString("F5");
+            label_TeamOnLeftMaxValue.Text = newInformation.MaxSpeedTeamOnLeft.ToString("F5");
+            label_TeamOnRightMaxValue.Text = newInformation.MaxSpeedTeamOnRight.ToString("F5");
+            TeamA.Text = newInformation.TeamOnLeftGoals.ToString();
+            TeamB.Text = newInformation.TeamOnRightGoals.ToString();
 
             if (newInformation.NewLogs != null)
             {
@@ -88,10 +88,10 @@ namespace Foosball2text
 
             WatcherInformation newInformation = _frameHandler.GetWatcherInformation();
             SaveGameResultsForm gameEndForm = new SaveGameResultsForm(
-                int.Parse(newInformation.TeamOnLeftGoals),
-                int.Parse(newInformation.TeamOnRightGoals),
-                double.Parse(newInformation.MaxSpeedTeamOnLeft),
-                double.Parse(newInformation.MaxSpeedTeamOnRight));
+                newInformation.TeamOnLeftGoals,
+                newInformation.TeamOnRightGoals,
+                newInformation.MaxSpeedTeamOnLeft,
+                newInformation.MaxSpeedTeamOnRight);
             gameEndForm.Show();
 
         }
