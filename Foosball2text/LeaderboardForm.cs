@@ -49,17 +49,7 @@ namespace Foosball2text
 
         private void button1_Click(object sender, EventArgs e)
         {
-            try
-            {
-                User user = _dataProvider.GetUserData(textBox1.Text);
-                UserInfoForm userForm = new UserInfoForm(user);
-                userForm.Show();
-            }
-            catch(UserNotFoundException ex)
-            {
-                ExceptionForm exceptionForm = new ExceptionForm("Žaidėjas: " + ex.Message + " nerastas");
-                exceptionForm.Show();
-            }
+            UserInfoForm userInfo = new UserInfoForm(_dataProvider, textBox1.Text);
         }
     }
 }
