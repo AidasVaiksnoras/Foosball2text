@@ -44,5 +44,21 @@ namespace Foosball2text
             string gamesPlayed = ((User)e.ListItem).MaxSpeed.ToString();
             e.Value = String.Format("{0, -10} {1, -30}", gamesPlayed, username);
         }
+
+
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                User user = _dataProvider.GetUserData(textBox1.Text);
+
+            }
+            catch(UserNotFoundException ex)
+            {
+                ExceptionForm exceptionForm = new ExceptionForm("Žaidėjas: " + ex.Message + " nerastas");
+                exceptionForm.Show();
+            }
+        }
     }
 }

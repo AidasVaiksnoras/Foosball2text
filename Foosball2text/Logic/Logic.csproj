@@ -60,6 +60,7 @@
     <Compile Include="ListExtensions.cs" />
     <Compile Include="SerializationHandler.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="UserNotFoundException.cs" />
     <Compile Include="WatcherInformation.cs" />
     <Compile Include="FrameHandler.cs" />
     <Compile Include="GameWatcher.cs" />
