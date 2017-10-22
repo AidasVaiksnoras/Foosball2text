@@ -15,12 +15,6 @@ namespace Foosball2text
     {
         private UsersDataProvider _dataProvider;
 
-        public UserInfoForm()
-        {
-            InitializeComponent();
-
-        }
-
         public UserInfoForm(UsersDataProvider dataProvider)
         {
             InitializeComponent();
@@ -36,7 +30,6 @@ namespace Foosball2text
             textBox1.Text = name;
             search(name);
         }
-
 
         private void UpdateForm(User user)
         {
