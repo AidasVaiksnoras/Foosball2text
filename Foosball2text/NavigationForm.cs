@@ -44,5 +44,11 @@ namespace Foosball2text
         {
             DataProvider.SaveData();
         }
+
+        private void Button3_Click(object sender, EventArgs e)
+        {
+            UserInfoForm userInfo = new UserInfoForm(DataProvider);
+            userInfo.Show();
+        }
     }
 }
