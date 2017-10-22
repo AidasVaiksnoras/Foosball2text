@@ -142,7 +142,7 @@ namespace Logic
             speed.timeBetweenCalculations.Start();
         }
 
-        public Teams CheckWhichTeamScored()
+        private Teams CheckWhichTeamScored()
         {
 
             // !!! Following code is a compromise of merge conflicts !!! 
