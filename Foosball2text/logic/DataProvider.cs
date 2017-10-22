@@ -47,7 +47,7 @@ namespace Logic
             if (users.Count() == 1)
                 return users.Last();
             else
-                return new User();
+                throw new UserNotFoundException(name);
         }
 
 
