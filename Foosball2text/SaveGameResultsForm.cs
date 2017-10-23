@@ -7,12 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Logic;
 
 namespace Foosball2text
 {
     public partial class SaveGameResultsForm : Form
     {
-        string _teamNameA, _teamNameB;
+        User _userA, _userB;
+        //Game's data
         int _goalsA, _goalsB;
         //int _oldRankingA, _oldRankingB;
         //int _rankScorechangeA, _rankScorechangeB;
@@ -20,26 +22,23 @@ namespace Foosball2text
         double _maxSpeedA, _maxSpeedB;
         //TimeSpan _gameTime;
 
-        public SaveGameResultsForm(string leftTeamName, string rightTeamName)
+        public SaveGameResultsForm(User userA, User userB, int goalsA, int goalsB, double maxSpeedA, double maxSpeedB)
         {
             InitializeComponent();
 
-            _teamNameA = leftTeamName;
-            _teamNameB = rightTeamName;
+            _userA = userA;
+            _userB = userB;
 
-            label_leftTeamName.Text = _teamNameA;
-            label_rightTeamName.Text = _teamNameB;
-        }
+            label_leftTeamName.Text = _userA.UserName;
+            label_rightTeamName.Text = _userB.UserName;
 
-        public SaveGameResultsForm(int goalsA, int goalsB, double maxSpeedA, double maxSpeedB) : this("Team A", "TeamB")
-        {
             _goalsA = goalsA;
             _goalsB = goalsB;
 
             if (_goalsA > _goalsB)
-                HeaderLabel.Text = "Game ended. " + _teamNameA + " team won!";
+                HeaderLabel.Text = "Game ended. " + _userA.UserName + " team won!";
             else if (_goalsA < _goalsB)
-                HeaderLabel.Text = "Game ended. " + _teamNameA + " team won!";
+                HeaderLabel.Text = "Game ended. " + _userB.UserName + " team won!";
             else
                 HeaderLabel.Text = "Game ended. It's a tie!";
 
@@ -52,10 +51,13 @@ namespace Foosball2text
             label_maxSpeedB.Text = _maxSpeedB.ToString("F5");
         }
 
-        private void button_saveData_Click(object sender, EventArgs e)
+        private void button_saveData_Click(object sender, EventArgs e) //UNDONE button press
         {
-            button_saveData.Text = "Functionality not yet implemented";
-            button_saveData.ForeColor = Color.Tan;
+            _userA.UpdateData(true, (_goalsA > _goalsB), _maxSpeedA, _goalsA);
+            _userB.UpdateData(true, (_goalsB > _goalsA), _maxSpeedB, _goalsB);
+
+            button_saveData.Text = "User datas updated";
+            button_saveData.ForeColor = Color.Green;
         }
 
     }

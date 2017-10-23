@@ -16,11 +16,15 @@ namespace Foosball2text
         private FrameHandler _frameHandler;
         private string _filePath;
         private NavigationForm _navForm;
+        private User _leftUser, _rightUser;
 
         public VideoProcessForm(string filePath, int hue, User leftUser, User rightUser, NavigationForm navForm)
         {
             InitializeComponent();
+
             _navForm = navForm;
+            _leftUser = leftUser;
+            _rightUser = rightUser;
             _frameHandler = new FrameHandler(pictureBox1.Width, pictureBox1.Height, leftUser, rightUser);
             _frameHandler.UpdateHue(hue);
             _filePath = filePath;
@@ -90,6 +94,8 @@ namespace Foosball2text
 
             WatcherInformation newInformation = _frameHandler.GetWatcherInformation();
             SaveGameResultsForm gameEndForm = new SaveGameResultsForm(
+                _leftUser,
+                _rightUser,
                 newInformation.TeamOnLeftGoals,
                 newInformation.TeamOnRightGoals,
                 newInformation.MaxSpeedTeamOnLeft,
