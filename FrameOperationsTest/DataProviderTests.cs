@@ -37,6 +37,7 @@ namespace FrameOperationsTest
         }
 
         [TestMethod]
+        [ExpectedException(typeof(UserNotFoundException))]
         public void GetNotExistingUserInfo()
         {
             UsersDataProvider testDataProvider = new UsersDataProvider();
