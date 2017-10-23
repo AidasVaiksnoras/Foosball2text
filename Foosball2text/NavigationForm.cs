@@ -21,6 +21,7 @@ namespace Foosball2text
 
         private void ProcessButtonClick(object sender, EventArgs e)
         {
+            this.Hide();
             var form = new LoginForm(DataProvider);
             form.ShowDialog();
 
@@ -31,13 +32,14 @@ namespace Foosball2text
         {
             this.Hide();
             new BallColorDetectionForm(openFileDialog1.FileName, 
-                DataProvider.LeftUser, DataProvider.RightUser).Show();
+                DataProvider.LeftUser, DataProvider.RightUser, this).Show();
         }
 
         private void Button2_Click(object sender, EventArgs e)
         {
-            var leaderboard = new LeaderboardForm(DataProvider);
+            var leaderboard = new LeaderboardForm(DataProvider, this);
             leaderboard.Show();
+            this.Hide();
         }
 
         private void NavigationForm_FormClosing(object sender, FormClosingEventArgs e)

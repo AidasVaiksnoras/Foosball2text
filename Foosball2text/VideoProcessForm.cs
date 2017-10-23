@@ -15,10 +15,12 @@ namespace Foosball2text
         private VideoCapture _capture;
         private FrameHandler _frameHandler;
         private string _filePath;
+        private NavigationForm _navForm;
 
-        public VideoProcessForm(string filePath, int hue, User leftUser, User rightUser)
+        public VideoProcessForm(string filePath, int hue, User leftUser, User rightUser, NavigationForm navForm)
         {
             InitializeComponent();
+            _navForm = navForm;
             _frameHandler = new FrameHandler(pictureBox1.Width, pictureBox1.Height, leftUser, rightUser);
             _frameHandler.UpdateHue(hue);
             _filePath = filePath;
@@ -111,9 +113,10 @@ namespace Foosball2text
             //NewGame(); Commented out because it doesn't show a goal if video ended too soon
         }
 
-        private void OnClose(object sender, FormClosingEventArgs e)
+        private void backButton_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            _navForm.Show();
+            this.Close();
         }
     }
 }
