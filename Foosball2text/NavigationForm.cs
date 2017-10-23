@@ -45,6 +45,7 @@ namespace Foosball2text
         private void NavigationForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             DataProvider.SaveData();
+            Application.Exit();
         }
 
         private void Button3_Click(object sender, EventArgs e)

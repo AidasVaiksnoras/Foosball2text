@@ -36,18 +36,16 @@ namespace Foosball2text
         private void MaxSpeedList_Format(object sender, ListControlConvertEventArgs e)
         {
             string username = ((User)e.ListItem).UserName;
-            string maxSpeed = ((User)e.ListItem).MaxSpeed.ToString();
+            string maxSpeed = Math.Round(((User)e.ListItem).MaxSpeed, 2).ToString();
             e.Value = String.Format("{0, -10} {1, -30}", maxSpeed, username);
         }
 
         private void GamesPlayedList_Format(object sender, ListControlConvertEventArgs e)
         {
             string username = ((User)e.ListItem).UserName;
-            string gamesPlayed = ((User)e.ListItem).MaxSpeed.ToString();
+            string gamesPlayed = ((User)e.ListItem).GamesPlayed.ToString();
             e.Value = String.Format("{0, -10} {1, -30}", gamesPlayed, username);
         }
-
-
 
         private void button1_Click(object sender, EventArgs e)
         {

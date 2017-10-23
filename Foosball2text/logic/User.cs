@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Logic
 {
-    [Serializable()]
     public class User
     {
         public string UserName { get; set; }
