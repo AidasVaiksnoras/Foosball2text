@@ -26,6 +26,10 @@ namespace Logic
 
         public void SaveData()
         {
+            //Adds these user to be save
+            Data.Add(LeftUser);
+            Data.Add(RightUser);
+            
             SerializationHandler.WriteToXML<User>(Data);
         }
 

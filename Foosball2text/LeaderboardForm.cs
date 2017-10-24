@@ -12,6 +12,7 @@ namespace Foosball2text
         {
             InitializeComponent();
             _dataProvider = dataProvider;
+            _dataProvider.LoadData();
             gamesWonList.DataSource = _dataProvider.Data.OrderByGamesWon();
             totalScoreList.DataSource = _dataProvider.Data.OrderByTotalScore();
             maxSpeedList.DataSource = _dataProvider.Data.OrderByMaxSpeed();
