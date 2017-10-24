@@ -26,6 +26,10 @@ namespace Foosball2text
             form.ShowDialog();
 
             DialogResult result = openFileDialog1.ShowDialog();
+            if (result != DialogResult.OK)
+            {
+                this.Show();
+            }
         }
 
         private void OnOpenFileDialog1_FileOk(object sender, CancelEventArgs e)
