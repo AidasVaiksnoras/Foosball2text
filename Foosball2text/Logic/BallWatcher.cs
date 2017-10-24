@@ -57,8 +57,6 @@ namespace Logic
         protected Teams teamScored = Teams.None;
         Stopwatch _positionHasntChangedTime = new Stopwatch();
         bool _scoredOnLostPositionTime;
-        private User _leftUser;
-        private User _rightUser;
         //Getters
         public Ball Ball { get => _ball; }
         public WatcherInformation WatcherInformation { get => watcherInformation; }
@@ -68,10 +66,8 @@ namespace Logic
             watcherInformation.BallSide = FieldSide.Middle; //Prevents goals until ball is found
         }
 
-        public BallWatcher(float fieldWidth, float fieldHeight, User leftUser, User rightUser) : this()
+        public BallWatcher(float fieldWidth, float fieldHeight) : this()
         {
-            _leftUser = leftUser;
-            _rightUser = rightUser;
             _playField = new PlayField(fieldWidth, fieldHeight);
         }
 
@@ -144,17 +140,13 @@ namespace Logic
 
         private Teams CheckWhichTeamScored()
         {
-
-            // !!! Following code is a compromise of merge conflicts !!! 
             if (watcherInformation.BallSide == FieldSide.Left)
             {
-                _rightUser.TotalScore++;
                 return Teams.TeamOnRight;
             }
 
             else if (watcherInformation.BallSide == FieldSide.Right)
             {
-                _leftUser.TotalScore++;
                 return Teams.TeamOnLeft;
             }
             return Teams.None;

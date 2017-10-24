@@ -17,6 +17,9 @@ namespace Foosball2text
         private string _filePath;
         private NavigationForm _navForm;
         private User _leftUser, _rightUser;
+        //Logger list asociated
+        BindingList<String> logData = new BindingList<string>();
+        LoggerMessageDelivery messageGetter = new LoggerMessageDelivery();
 
         public VideoProcessForm(string filePath, int hue, User leftUser, User rightUser, NavigationForm navForm)
         {
@@ -25,7 +28,7 @@ namespace Foosball2text
             _navForm = navForm;
             _leftUser = leftUser;
             _rightUser = rightUser;
-            _frameHandler = new FrameHandler(pictureBox1.Width, pictureBox1.Height, leftUser, rightUser);
+            _frameHandler = new FrameHandler(pictureBox1.Width, pictureBox1.Height);
             _frameHandler.UpdateHue(hue);
             _filePath = filePath;
             Init();
@@ -77,10 +80,6 @@ namespace Foosball2text
             }
         }
 
-        // ************ Logger methods ************
-        BindingList<String> logData = new BindingList<string>();
-        LoggerMessageDelivery messageGetter = new LoggerMessageDelivery();
-
         private void OnListChange(object sender, ListChangedEventArgs e)
         {
             //Auto-scrolling
@@ -118,7 +117,7 @@ namespace Foosball2text
             Init();
             //NewGame(); Commented out because it doesn't show a goal if video ended too soon
         }
-
+        
         private void backButton_Click(object sender, EventArgs e)
         {
             _navForm.Show();
