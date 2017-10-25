@@ -123,6 +123,11 @@ namespace Foosball2text
             _navForm.Show();
             this.Close();
         }
-    }
+
+        private void VideoProcessForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _navForm.Show();
+        }
+}
 }
 
