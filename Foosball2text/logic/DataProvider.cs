@@ -27,6 +27,7 @@ namespace Logic
         public void SaveData()
         {
             //Adds these user to be save
+            //TODO add code to prevent duplicates
             Data.Add(LeftUser);
             Data.Add(RightUser);
             

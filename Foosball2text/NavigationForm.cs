@@ -16,7 +16,6 @@ namespace Foosball2text
         {
             InitializeComponent();
             DataProvider = new UsersDataProvider();
-            DataProvider.LoadData();
         }
 
         private void ProcessButtonClick(object sender, EventArgs e)
@@ -48,7 +47,6 @@ namespace Foosball2text
 
         private void NavigationForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DataProvider.SaveData();
             Application.Exit();
         }
 

@@ -12,6 +12,7 @@ namespace Foosball2text
         {
             InitializeComponent();
             _dataProvider = dataProvider;
+            _dataProvider.LoadData();
         }
 
         private void Login1_Click(object sender, EventArgs e)
