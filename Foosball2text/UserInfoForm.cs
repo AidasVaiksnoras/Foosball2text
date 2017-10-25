@@ -19,6 +19,7 @@ namespace Foosball2text
         {
             InitializeComponent();
             _dataProvider = dataProvider;
+            _dataProvider.LoadData();
             foreach (var lbl in Controls.OfType<Label>())
                 lbl.Hide();
         }
