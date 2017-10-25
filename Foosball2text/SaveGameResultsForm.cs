@@ -62,8 +62,8 @@ namespace Foosball2text
                 //Loads the new user data into the file
                 UsersDataProvider dp = new UsersDataProvider();
                 dp.LoadData();
-                dp.LeftUser = _userA;
-                dp.RightUser = _userB;
+                dp.UpdateOldUser(_userA);
+                dp.UpdateOldUser(_userB);
                 dp.SaveData();
 
                 button_saveData.Text = "User datas updated";
