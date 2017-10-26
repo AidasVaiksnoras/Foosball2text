@@ -16,7 +16,6 @@ namespace Foosball2text
         {
             InitializeComponent();
             DataProvider = new UsersDataProvider();
-            DataProvider.LoadData();
         }
 
         private void ProcessButtonClick(object sender, EventArgs e)
@@ -26,6 +25,10 @@ namespace Foosball2text
             form.ShowDialog();
 
             DialogResult result = openFileDialog1.ShowDialog();
+            if (result != DialogResult.OK)
+            {
+                this.Show();
+            }
         }
 
         private void OnOpenFileDialog1_FileOk(object sender, CancelEventArgs e)
@@ -44,7 +47,6 @@ namespace Foosball2text
 
         private void NavigationForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DataProvider.SaveData();
             Application.Exit();
         }
 

@@ -12,6 +12,7 @@ namespace Foosball2text
         {
             InitializeComponent();
             _dataProvider = dataProvider;
+            _dataProvider.LoadData();
         }
 
         private void Login1_Click(object sender, EventArgs e)
@@ -20,6 +21,7 @@ namespace Foosball2text
             {
                 _dataProvider.LeftUser = _dataProvider.AddUser(name1.Text);
                 _dataProvider.RightUser = _dataProvider.AddUser(name2.Text);
+                _dataProvider.SaveData(); //Save possible new users
                 this.Close();
             }
             else

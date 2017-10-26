@@ -46,11 +46,23 @@ namespace Logic
             var users = Data.Where(x => x.UserName == name);
             if (users.Count() == 1)
                 return users.Last();
-            else
+            else if (users.Count() < 1)
                 throw new UserNotFoundException(name);
+            else //Multiple users found - return one
+                return users.Last();
         }
 
+        public void UpdateOldUser(User replacingUser)
+        {
+            var users = Data.Where(x => x.UserName == replacingUser.UserName);
+            if (users.Count() < 1)
+                throw new UserNotFoundException(replacingUser.UserName);
+            //TODO add multiple users found exception
+            var oldUser = users.Last();
+            int oldUserIndex = Data.IndexOf(oldUser);
 
+            Data[oldUserIndex] = replacingUser;
+        }
 
     }
 }

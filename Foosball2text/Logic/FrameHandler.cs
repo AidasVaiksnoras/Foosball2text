@@ -19,9 +19,9 @@ namespace Logic
         {
         }
 
-        public FrameHandler(int pictureBoxWidth, int pictureBoxHeight, User leftUser = null, User rightUser = null)
+        public FrameHandler(int pictureBoxWidth, int pictureBoxHeight)
         {
-            _gameWatcher = new GameWatcher(pictureBoxWidth, pictureBoxHeight, leftUser, rightUser);
+            _gameWatcher = new GameWatcher(pictureBoxWidth, pictureBoxHeight);
         }
         
         public Image GetResizedImage(Mat frame, int width, int height)

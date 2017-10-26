@@ -21,6 +21,7 @@ namespace Foosball2text
         //int _newRankA, _newRankB;
         double _maxSpeedA, _maxSpeedB;
         //TimeSpan _gameTime;
+        bool _userDataSaved;
 
         public SaveGameResultsForm(User userA, User userB, int goalsA, int goalsB, double maxSpeedA, double maxSpeedB)
         {
@@ -51,13 +52,24 @@ namespace Foosball2text
             label_maxSpeedB.Text = _maxSpeedB.ToString("F5");
         }
 
-        private void button_saveData_Click(object sender, EventArgs e) //UNDONE button press
+        private void button_saveData_Click(object sender, EventArgs e)
         {
-            _userA.UpdateData(true, (_goalsA > _goalsB), _maxSpeedA, _goalsA);
-            _userB.UpdateData(true, (_goalsB > _goalsA), _maxSpeedB, _goalsB);
+            if (!_userDataSaved) //Single save allowed
+            {
+                _userA.UpdateData(true, (_goalsA > _goalsB), _maxSpeedA, _goalsA);
+                _userB.UpdateData(true, (_goalsB > _goalsA), _maxSpeedB, _goalsB);
 
-            button_saveData.Text = "User datas updated";
-            button_saveData.ForeColor = Color.Green;
+                //Loads the new user data into the file
+                UsersDataProvider dp = new UsersDataProvider();
+                dp.LoadData();
+                dp.UpdateOldUser(_userA);
+                dp.UpdateOldUser(_userB);
+                dp.SaveData();
+
+                button_saveData.Text = "User datas updated";
+                button_saveData.ForeColor = Color.Green;
+                _userDataSaved = true;
+            }
         }
 
     }

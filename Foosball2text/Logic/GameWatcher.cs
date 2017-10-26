@@ -13,8 +13,8 @@ namespace Logic
         int _teamOnLeftGoals = 0, _teamOnRightGoals = 0;
         double _teamOnLeftMaxSpeed = 0, _teamOnRightMaxSpeed = 0;
 
-        public GameWatcher(float fieldWidth, float fieldHeight, User leftUser, User rightUser) 
-            : base(fieldWidth, fieldHeight, leftUser, rightUser)
+        public GameWatcher(float fieldWidth, float fieldHeight) 
+            : base(fieldWidth, fieldHeight)
         {
         }
 
@@ -66,7 +66,7 @@ namespace Logic
                         watcherInformation.MaxSpeedTeamOnRight = _teamOnRightMaxSpeed;
                     }
                 }
-                else //(_movingTowardsGoal == Teams.TeamOnRight)
+                else //assumed (_movingTowardsGoal == Teams.TeamOnRight)
                 {
                     if (speed.OmniSpeed_ms > _teamOnLeftMaxSpeed)
                     {
