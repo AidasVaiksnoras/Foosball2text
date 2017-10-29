@@ -1,6 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Logic;
 using System.Collections.Generic;
+using SQL_operations;
+
 namespace FrameOperationsTest
 {
     [TestClass]

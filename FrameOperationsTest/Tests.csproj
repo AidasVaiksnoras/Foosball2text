@@ -97,6 +97,10 @@
       <Project>{C80358F0-3547-4DAB-8C46-2E782C850AEC}</Project>
       <Name>Logic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SQL operations\SQL operations.csproj">
+      <Project>{CF0A27E9-4EDC-4750-AAFA-D3CDC401C6DA}</Project>
+      <Name>SQL operations</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

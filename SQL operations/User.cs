@@ -23,7 +23,7 @@ namespace SQL_operations
             UserName = name;
         }
 
-        public void UpdateData(bool addGamePlayed, bool addGameWon, double gamesMaxSpeed, int addScore)
+        public void UpdateData(bool addGamePlayed, bool addGameWon, double gamesMaxSpeed, int addScore) //TODO update or remove this
         {
             if (addGamePlayed)
                 GamesPlayed++;
