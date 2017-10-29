@@ -4,6 +4,8 @@ using System.ComponentModel;
 
 using System.Windows.Forms;
 using Logic;
+using SQL_operations;
+
 namespace Foosball2text
 {
     public partial class NavigationForm : Form
@@ -40,6 +42,10 @@ namespace Foosball2text
 
         private void Button2_Click(object sender, EventArgs e)
         {
+            //UNDONE testing SQL read
+            System.Collections.Generic.List<User> allUserData = new System.Collections.Generic.List<User>();
+            allUserData = ReadOperations.getAllUserData();
+
             var leaderboard = new LeaderboardForm(DataProvider, this);
             leaderboard.Show();
             this.Hide();

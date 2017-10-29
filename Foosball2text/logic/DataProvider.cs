@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQL_operations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -57,7 +58,7 @@ namespace Logic
             var users = Data.Where(x => x.UserName == replacingUser.UserName);
             if (users.Count() < 1)
                 throw new UserNotFoundException(replacingUser.UserName);
-            //TODO add multiple users found exception
+            //TODO add MultipleUsersFound exception
             var oldUser = users.Last();
             int oldUserIndex = Data.IndexOf(oldUser);
 

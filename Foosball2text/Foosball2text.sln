@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.12
+VisualStudioVersion = 15.0.26730.15
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foosball2text", "Foosball2text.csproj", "{B92AF0AF-700F-48CA-9C62-1542B82F7540}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "..\FrameOperationsTest\Tests.csproj", "{DDAF5926-FD8C-44FF-BC93-9C6A791E4C4D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic", "Logic\Logic.csproj", "{C80358F0-3547-4DAB-8C46-2E782C850AEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQL operations", "..\SQL operations\SQL operations.csproj", "{CF0A27E9-4EDC-4750-AAFA-D3CDC401C6DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,14 @@ Global
 		{C80358F0-3547-4DAB-8C46-2E782C850AEC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C80358F0-3547-4DAB-8C46-2E782C850AEC}.Release|x64.ActiveCfg = Release|Any CPU
 		{C80358F0-3547-4DAB-8C46-2E782C850AEC}.Release|x64.Build.0 = Release|Any CPU
+		{CF0A27E9-4EDC-4750-AAFA-D3CDC401C6DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF0A27E9-4EDC-4750-AAFA-D3CDC401C6DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF0A27E9-4EDC-4750-AAFA-D3CDC401C6DA}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CF0A27E9-4EDC-4750-AAFA-D3CDC401C6DA}.Debug|x64.Build.0 = Debug|Any CPU
+		{CF0A27E9-4EDC-4750-AAFA-D3CDC401C6DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF0A27E9-4EDC-4750-AAFA-D3CDC401C6DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF0A27E9-4EDC-4750-AAFA-D3CDC401C6DA}.Release|x64.ActiveCfg = Release|Any CPU
+		{CF0A27E9-4EDC-4750-AAFA-D3CDC401C6DA}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
