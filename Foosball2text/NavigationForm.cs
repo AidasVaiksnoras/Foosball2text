@@ -43,8 +43,9 @@ namespace Foosball2text
         private void Button2_Click(object sender, EventArgs e)
         {
             //UNDONE testing SQL read
-            System.Collections.Generic.List<User> allUserData = new System.Collections.Generic.List<User>();
-            allUserData = ReadOperations.getAllUserData();
+            //System.Collections.Generic.List<User> allUserData = new System.Collections.Generic.List<User>();
+            //allUserData = ReadOperations.GetAllUserData();
+            User customUser = ReadOperations.GetUsersData("Pirmasius");
 
             var leaderboard = new LeaderboardForm(DataProvider, this);
             leaderboard.Show();
