@@ -84,7 +84,6 @@
     <Compile Include="ExtensionMethodsTests.cs" />
     <Compile Include="DataProviderTests.cs" />
     <Compile Include="LoggerMessageDeliveryTests.cs" />
-    <Compile Include="WriteOperations.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

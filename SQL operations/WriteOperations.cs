@@ -26,14 +26,14 @@ namespace SQL_operations
                     sb.Append(", " + userToInsert.GamesWon);
                     sb.Append(", " + userToInsert.TotalGoals);
                     sb.Append(", " + userToInsert.MaxSpeed);
-                    string dateTimeStr = userToInsert.AllTimePlayedISO8601; //temp cange in seconds
+                    string dateTimeStr = userToInsert.AllTimePlayedISO8601;
                     if (!CorrectDateTimeFormat(dateTimeStr))
                         throw new FormatException(dateTimeStr);
                     sb.Append(", '" + dateTimeStr + "'");
                     sb.Append(", " + userToInsert.RankPoints);
 
-                    sb.Append(")");
-                    string sql = sb.ToString();
+                    sb.Append(");");
+                    string sql = sb.ToString(); //TODO test semi colon not being there
 
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
@@ -51,7 +51,44 @@ namespace SQL_operations
             }
         }
 
+        public static void UpdateUserPlayData(User userToUpdate)
+        {
+            try
+            {
+                using (SqlConnection connection = ConnectionProvider.GetConnection())
+                {
+                    connection.Open();
+                    
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("UPDATE Users SET");
+                    sb.Append(" GamesPlayed = " + userToUpdate.GamesPlayed);
+                    sb.Append(", GamesWon = " + userToUpdate.GamesWon);
+                    sb.Append(", TotalGoals = " + userToUpdate.TotalGoals);
+                    sb.Append(", MaxSpeed = " + userToUpdate.MaxSpeed);
+                    string dateTimeStr = userToUpdate.AllTimePlayedISO8601;
+                    if (!CorrectDateTimeFormat(dateTimeStr))
+                        throw new FormatException(dateTimeStr);
+                    sb.Append(", TimePlayed = '" + dateTimeStr + "'");
+                    sb.Append(", RankPoints = " + userToUpdate.RankPoints);
 
+                    sb.Append(" WHERE Username = '" + userToUpdate.UserName + "';");
+                    string sql = sb.ToString();
+
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (FormatException e)
+            {
+                new ExceptionForm(e.ToString()).Show();
+            }
+            catch (SqlException e)
+            {
+                new ExceptionForm(e.ToString()).Show();
+            }
+        }
 
         public static bool CorrectDateTimeFormat(string dateTimeString)
         {
