@@ -34,7 +34,7 @@ namespace SQL_operations
                                 emptyUser.UserName = reader.GetString(1);
                                 emptyUser.GamesPlayed = reader.GetInt32(2);
                                 emptyUser.GamesWon = reader.GetInt32(3);
-                                emptyUser.TotalScore = reader.GetInt32(4);
+                                emptyUser.TotalGoals = reader.GetInt32(4);
                                 emptyUser.MaxSpeed = reader.GetDouble(5);
                                 //emptyUser.TimePlayed = reader[6].***
                                 //emptyUser.RankPoints = reader[7].***
@@ -77,7 +77,7 @@ namespace SQL_operations
                                 foundUser.UserName = reader.GetString(1);
                                 foundUser.GamesPlayed = reader.GetInt32(2);
                                 foundUser.GamesWon = reader.GetInt32(3);
-                                foundUser.TotalScore = reader.GetInt32(4);
+                                foundUser.TotalGoals = reader.GetInt32(4);
                                 foundUser.MaxSpeed = reader.GetDouble(5);
                                 //emptyUser.TimePlayed = reader[6].***
                                 //emptyUser.RankPoints = reader[7].***

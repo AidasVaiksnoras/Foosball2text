@@ -45,7 +45,8 @@ namespace Foosball2text
             //UNDONE testing SQL read
             //System.Collections.Generic.List<User> allUserData = new System.Collections.Generic.List<User>();
             //allUserData = ReadOperations.GetAllUserData();
-            User customUser = ReadOperations.GetUsersData("Pirmasius");
+            //User customUser = ReadOperations.GetUsersData("Pirmasius");
+            WriteOperations.InsertNewUser(new User("DateTime format test", 2, 2, 3.5674444, 0, "0000-01-02T03:04:05Z", 66));
 
             var leaderboard = new LeaderboardForm(DataProvider, this);
             leaderboard.Show();

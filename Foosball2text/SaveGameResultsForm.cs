@@ -21,7 +21,7 @@ namespace Foosball2text
         //int _rankScorechangeA, _rankScorechangeB;
         //int _newRankA, _newRankB;
         double _maxSpeedA, _maxSpeedB;
-        //TimeSpan _gameTime;
+        TimeSpan _gameTime;
         bool _userDataSaved;
 
         public SaveGameResultsForm(User userA, User userB, int goalsA, int goalsB, double maxSpeedA, double maxSpeedB)
@@ -57,8 +57,8 @@ namespace Foosball2text
         {
             if (!_userDataSaved) //Single save allowed
             {
-                _userA.UpdateData(true, (_goalsA > _goalsB), _maxSpeedA, _goalsA);
-                _userB.UpdateData(true, (_goalsB > _goalsA), _maxSpeedB, _goalsB);
+                _userA.UpdateData(true, (_goalsA > _goalsB), _maxSpeedA, _goalsA, _gameTime, 0);
+                _userB.UpdateData(true, (_goalsB > _goalsA), _maxSpeedB, _goalsB, _gameTime, 0);
 
                 //Loads the new user data into the file
                 UsersDataProvider dp = new UsersDataProvider();

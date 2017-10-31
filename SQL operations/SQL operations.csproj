@@ -53,6 +53,7 @@
     <Compile Include="ReadOperations.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserNotFoundException.cs" />
+    <Compile Include="WriteOperations.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ExceptionForm.resx">

@@ -31,7 +31,7 @@ namespace Foosball2text
         private void TotalScoreList_Format(object sender, ListControlConvertEventArgs e)
         {
             string username = ((User)e.ListItem).UserName;
-            string totalScore = ((User)e.ListItem).TotalScore.ToString();
+            string totalScore = ((User)e.ListItem).TotalGoals.ToString();
             e.Value = String.Format("{0, -5} {1, -30}", totalScore, username);
         }
 

@@ -38,7 +38,7 @@ namespace Foosball2text
             nameResultLabel.Text = user.UserName;
             gamesPlayedResultLabel.Text = user.GamesPlayed.ToString();
             gamesWonResultLabel.Text = user.GamesWon.ToString();
-            totalScoreResultLabel.Text = user.TotalScore.ToString();
+            totalScoreResultLabel.Text = user.TotalGoals.ToString();
             maxSpeedResultLabel.Text = user.MaxSpeed.ToString();
             foreach (var lbl in Controls.OfType<Label>())
                 lbl.Show();
