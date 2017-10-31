@@ -42,11 +42,13 @@ namespace Foosball2text
 
         private void Button2_Click(object sender, EventArgs e)
         {
-            //UNDONE testing SQL read
+            //UNDONE testing SQL ops
+            WriteOperations wp = new WriteOperations();
             //System.Collections.Generic.List<User> allUserData = new System.Collections.Generic.List<User>();
             //allUserData = ReadOperations.GetAllUserData();
             //User customUser = ReadOperations.GetUsersData("Pirmasius");
-            WriteOperations.UpdateUserPlayData(new User("Editable test", 4, 3, 9.444, 16, "0000-00-06T03:04:05Z", 10));
+            //WriteOperations.UpdateUserPlayData(new User("Editable test", 4, 3, 9.444, 16, "0000-00-06T03:04:05Z", 10));
+            wp.InsertNewUser(new User("Insert testzzz", 4, 3, 9.444, 16, "0000-00-06T03:04:05Z", 10));
 
             var leaderboard = new LeaderboardForm(DataProvider, this);
             leaderboard.Show();
