@@ -12,8 +12,8 @@ namespace FrameOperationsTest
         {
             UsersDataProvider testDataProvider = new UsersDataProvider();
             testDataProvider.AddUser("User1");
-            Assert.AreEqual(1, testDataProvider.Data.Count);
-            Assert.AreEqual("User1", testDataProvider.Data[0].UserName);
+            Assert.AreEqual(1, testDataProvider.UserList.Count);
+            Assert.AreEqual("User1", testDataProvider.UserList[0].UserName);
         }
 
         [TestMethod]
@@ -21,12 +21,12 @@ namespace FrameOperationsTest
         {
             UsersDataProvider testDataProvider = new UsersDataProvider();
             testDataProvider.AddUser("User1");
-            Assert.AreEqual(1, testDataProvider.Data.Count);
-            Assert.AreEqual("User1", testDataProvider.Data[0].UserName);
+            Assert.AreEqual(1, testDataProvider.UserList.Count);
+            Assert.AreEqual("User1", testDataProvider.UserList[0].UserName);
             User returnedUser = testDataProvider.AddUser("User1");
             Assert.AreEqual("User1", returnedUser.UserName);
-            Assert.AreEqual(1, testDataProvider.Data.Count);
-            Assert.AreEqual("User1", testDataProvider.Data[0].UserName);
+            Assert.AreEqual(1, testDataProvider.UserList.Count);
+            Assert.AreEqual("User1", testDataProvider.UserList[0].UserName);
         }
 
         [TestMethod]
