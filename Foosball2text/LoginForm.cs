@@ -21,7 +21,7 @@ namespace Foosball2text
             {
                 _dataProvider.LeftUser = _dataProvider.AddUser(name1.Text);
                 _dataProvider.RightUser = _dataProvider.AddUser(name2.Text);
-                _dataProvider.SaveData(); //Save possible new users
+                _dataProvider.CommitData(); //Save possible new users
                 this.Close();
             }
             else

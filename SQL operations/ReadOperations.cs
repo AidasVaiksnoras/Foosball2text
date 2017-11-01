@@ -9,7 +9,7 @@ namespace SQL_operations
 {
     public class ReadOperations
     {
-        public static List<User> GetAllUserData()
+        public List<User> GetAllUserData()
         {
             List<User> data = new List<User>(); //data to be returned
 
@@ -31,13 +31,14 @@ namespace SQL_operations
                             while (reader.Read())
                             {
                                 User emptyUser = new User();
-                                emptyUser.UserName = reader.GetString(1);
-                                emptyUser.GamesPlayed = reader.GetInt32(2);
-                                emptyUser.GamesWon = reader.GetInt32(3);
-                                emptyUser.TotalGoals = reader.GetInt32(4);
-                                emptyUser.MaxSpeed = reader.GetDouble(5);
-                                //emptyUser.TimePlayed = reader[6].***
-                                //emptyUser.RankPoints = reader[7].***
+                                emptyUser.UserName = reader.GetString(0);
+                                emptyUser.GamesPlayed = reader.GetInt32(1);
+                                emptyUser.GamesWon = reader.GetInt32(2);
+                                emptyUser.TotalGoals = reader.GetInt32(3);
+                                emptyUser.MaxSpeed = reader.GetDouble(4);
+                                string timePassedString = reader.GetString(5);
+                                emptyUser.AllTimePlayed = new TimePassed(timePassedString);
+                                emptyUser.RankPoints = reader.GetInt32(6);
                                 data.Add(emptyUser);
                             }
                         }
@@ -52,7 +53,7 @@ namespace SQL_operations
             return data;
         }
 
-        public static User GetUsersData(string username)
+        public User GetUsersData(string username)
         {
             try
             {
@@ -74,13 +75,14 @@ namespace SQL_operations
                             while (reader.Read())
                             {
                                 User foundUser = new User();
-                                foundUser.UserName = reader.GetString(1);
-                                foundUser.GamesPlayed = reader.GetInt32(2);
-                                foundUser.GamesWon = reader.GetInt32(3);
-                                foundUser.TotalGoals = reader.GetInt32(4);
-                                foundUser.MaxSpeed = reader.GetDouble(5);
-                                //emptyUser.TimePlayed = reader[6].***
-                                //emptyUser.RankPoints = reader[7].***
+                                foundUser.UserName = reader.GetString(0);
+                                foundUser.GamesPlayed = reader.GetInt32(1);
+                                foundUser.GamesWon = reader.GetInt32(2);
+                                foundUser.TotalGoals = reader.GetInt32(3);
+                                foundUser.MaxSpeed = reader.GetDouble(4);
+                                string timePassedString = reader.GetString(5);
+                                foundUser.AllTimePlayed = new TimePassed(timePassedString);
+                                foundUser.RankPoints = reader.GetInt32(6);
                                 return foundUser;
                             }
                         }
@@ -92,7 +94,7 @@ namespace SQL_operations
                 new ExceptionForm(e.ToString()).Show();
             }
 
-            return new User("Unsuccessful attempt to get user");
+            return null;
         }
 
     }

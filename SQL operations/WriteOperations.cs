@@ -10,31 +10,20 @@ namespace SQL_operations
 {
     public class WriteOperations
     {
-        public void InsertNewUser(User userToInsert)
+        public void InsertNewUser(string newUsersName)
         {
-            if (!UserExists(userToInsert.UserName))
+            if (!UserExists(newUsersName))
                 try
                 {
                     using (SqlConnection connection = ConnectionProvider.GetConnection())
                     {
                         connection.Open();
-                        //TODO check if not creating duplicate
                         StringBuilder sb = new StringBuilder();
-                        sb.Append("INSERT Users (Username, GamesPlayed, GamesWon, TotalGoals, MaxSpeed, TimePlayed, RankPoints) ");
+                        sb.Append("INSERT Users (Username) ");
                         sb.Append("VALUES (");
-                        sb.Append("'" + userToInsert.UserName + "'");
-                        sb.Append(", " + userToInsert.GamesPlayed);
-                        sb.Append(", " + userToInsert.GamesWon);
-                        sb.Append(", " + userToInsert.TotalGoals);
-                        sb.Append(", " + userToInsert.MaxSpeed);
-                        string dateTimeStr = userToInsert.AllTimePlayedISO8601;
-                        if (!CorrectDateTimeFormat(dateTimeStr))
-                            throw new FormatException(dateTimeStr);
-                        sb.Append(", '" + dateTimeStr + "'");
-                        sb.Append(", " + userToInsert.RankPoints);
-
+                        sb.Append("'" + newUsersName + "'");
                         sb.Append(");");
-                        string sql = sb.ToString(); //TODO test semi colon not being there
+                        string sql = sb.ToString();
 
                         using (SqlCommand command = new SqlCommand(sql, connection))
                         {
@@ -97,7 +86,7 @@ namespace SQL_operations
                 @"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$");
         }
 
-        private bool UserExists(string username)
+        public bool UserExists(string username)
         {
             try
             {

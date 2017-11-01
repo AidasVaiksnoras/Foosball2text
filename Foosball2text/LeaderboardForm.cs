@@ -14,10 +14,10 @@ namespace Foosball2text
             InitializeComponent();
             _dataProvider = dataProvider;
             _dataProvider.LoadData();
-            gamesWonList.DataSource = _dataProvider.Data.OrderByGamesWon();
-            totalScoreList.DataSource = _dataProvider.Data.OrderByTotalScore();
-            maxSpeedList.DataSource = _dataProvider.Data.OrderByMaxSpeed();
-            gamesPlayedList.DataSource = _dataProvider.Data.OrderByGamesPlayed();
+            gamesWonList.DataSource = _dataProvider.UserList.OrderByGamesWon();
+            totalScoreList.DataSource = _dataProvider.UserList.OrderByTotalScore();
+            maxSpeedList.DataSource = _dataProvider.UserList.OrderByMaxSpeed();
+            gamesPlayedList.DataSource = _dataProvider.UserList.OrderByGamesPlayed();
             _navForm = navForm;
         }
 

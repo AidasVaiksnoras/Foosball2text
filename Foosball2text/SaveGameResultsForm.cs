@@ -65,7 +65,7 @@ namespace Foosball2text
                 dp.LoadData();
                 dp.UpdateOldUser(_userA);
                 dp.UpdateOldUser(_userB);
-                dp.SaveData();
+                dp.CommitData();
 
                 button_saveData.Text = "User datas updated";
                 button_saveData.ForeColor = Color.Green;

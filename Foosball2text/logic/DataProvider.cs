@@ -9,42 +9,43 @@ namespace Logic
 {
     public class UsersDataProvider
     {
-        public List<User> Data { get; set; }
+        public List<User> UserList { get; set; }
         public User LeftUser { get; set; }
         public User RightUser { get; set; }
 
+        private ReadOperations _ro = new ReadOperations();
+        private WriteOperations _wo = new WriteOperations();
+
         public UsersDataProvider()
         {
-            Data = new List<User>();
+            UserList = new List<User>();
             LeftUser = new User();
             RightUser = new User();
         }
 
         public void LoadData()
         {
-            Data = SerializationHandler.ReadFromXML<User>();
+            UserList = _ro.GetAllUserData();
         }
 
-        public void SaveData()
+        public void CommitData()
         {
-            SerializationHandler.WriteToXML<User>(Data);
+            _wo.UpdateUserPlayData(LeftUser);
+            _wo.UpdateUserPlayData(RightUser);
         }
 
         public User AddUser(string name)
         {
-            if (!Data.Any(x => x.UserName == name))
-            {
-                User user = new User(name);
-                Data.Add(new User(name));
-                return user;
-            }
-            else
-                return GetUserData(name);
+            if (!_wo.UserExists(name))
+                _wo.InsertNewUser(name);
+
+            return _ro.GetUsersData(name);
         }
 
+        //TODO remove the following
         public User GetUserData(string name)
         {
-            var users = Data.Where(x => x.UserName == name);
+            var users = UserList.Where(x => x.UserName == name);
             if (users.Count() == 1)
                 return users.Last();
             else if (users.Count() < 1)
@@ -55,14 +56,13 @@ namespace Logic
 
         public void UpdateOldUser(User replacingUser)
         {
-            var users = Data.Where(x => x.UserName == replacingUser.UserName);
+            var users = UserList.Where(x => x.UserName == replacingUser.UserName);
             if (users.Count() < 1)
                 throw new UserNotFoundException(replacingUser.UserName);
-            //TODO add MultipleUsersFound exception
             var oldUser = users.Last();
-            int oldUserIndex = Data.IndexOf(oldUser);
+            int oldUserIndex = UserList.IndexOf(oldUser);
 
-            Data[oldUserIndex] = replacingUser;
+            UserList[oldUserIndex] = replacingUser;
         }
 
     }
