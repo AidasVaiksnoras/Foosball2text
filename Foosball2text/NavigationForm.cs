@@ -4,6 +4,8 @@ using System.ComponentModel;
 
 using System.Windows.Forms;
 using Logic;
+using SQL_operations;
+
 namespace Foosball2text
 {
     public partial class NavigationForm : Form
@@ -42,7 +44,6 @@ namespace Foosball2text
         {
             var leaderboard = new LeaderboardForm(DataProvider, this);
             leaderboard.Show();
-            this.Hide();
         }
 
         private void NavigationForm_FormClosing(object sender, FormClosingEventArgs e)

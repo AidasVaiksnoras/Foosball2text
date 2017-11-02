@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using Emgu.CV;
 using Logic;
+using SQL_operations;
 
 namespace Foosball2text
 {

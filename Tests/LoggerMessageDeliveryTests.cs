@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Logic;
 
-namespace FrameOperationsTest
+namespace Test
 {
     [TestClass]
     public class LoggerMessageDeliveryTests

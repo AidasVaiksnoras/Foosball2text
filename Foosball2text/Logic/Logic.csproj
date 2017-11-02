@@ -20,7 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -61,8 +61,6 @@
     <Compile Include="ListExtensions.cs" />
     <Compile Include="SerializationHandler.cs" />
     <Compile Include="TrackedObject.cs" />
-    <Compile Include="User.cs" />
-    <Compile Include="UserNotFoundException.cs" />
     <Compile Include="WatcherInformation.cs" />
     <Compile Include="FrameHandler.cs" />
     <Compile Include="GameWatcher.cs" />
@@ -89,6 +87,12 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\SQL operations\SQL operations.csproj">
+      <Project>{cf0a27e9-4edc-4750-aafa-d3cdc401c6da}</Project>
+      <Name>SQL operations</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

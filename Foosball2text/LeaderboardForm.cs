@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using Logic;
+using SQL_operations;
 
 namespace Foosball2text
 {
@@ -13,10 +14,10 @@ namespace Foosball2text
             InitializeComponent();
             _dataProvider = dataProvider;
             _dataProvider.LoadData();
-            gamesWonList.DataSource = _dataProvider.Data.OrderByGamesWon();
-            totalScoreList.DataSource = _dataProvider.Data.OrderByTotalScore();
-            maxSpeedList.DataSource = _dataProvider.Data.OrderByMaxSpeed();
-            gamesPlayedList.DataSource = _dataProvider.Data.OrderByGamesPlayed();
+            gamesWonList.DataSource = _dataProvider.UserList.OrderByGamesWon();
+            totalScoreList.DataSource = _dataProvider.UserList.OrderByTotalScore();
+            maxSpeedList.DataSource = _dataProvider.UserList.OrderByMaxSpeed();
+            gamesPlayedList.DataSource = _dataProvider.UserList.OrderByGamesPlayed();
             _navForm = navForm;
         }
 
@@ -30,7 +31,7 @@ namespace Foosball2text
         private void TotalScoreList_Format(object sender, ListControlConvertEventArgs e)
         {
             string username = ((User)e.ListItem).UserName;
-            string totalScore = ((User)e.ListItem).TotalScore.ToString();
+            string totalScore = ((User)e.ListItem).TotalGoals.ToString();
             e.Value = String.Format("{0, -5} {1, -30}", totalScore, username);
         }
 
