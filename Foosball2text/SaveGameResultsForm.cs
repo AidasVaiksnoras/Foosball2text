@@ -60,12 +60,8 @@ namespace Foosball2text
                 _userA.UpdateData(true, (_goalsA > _goalsB), _maxSpeedA, _goalsA, _gameTime, 0);
                 _userB.UpdateData(true, (_goalsB > _goalsA), _maxSpeedB, _goalsB, _gameTime, 0);
 
-                //Loads the new user data into the file
-                UsersDataProvider dp = new UsersDataProvider();
-                dp.LoadData();
-                dp.UpdateOldUser(_userA);
-                dp.UpdateOldUser(_userB);
-                dp.CommitData();
+                UsersDataProvider dp = new UsersDataProvider(_userA, _userB);
+                dp.CommitBothTeamsData();
 
                 button_saveData.Text = "User datas updated";
                 button_saveData.ForeColor = Color.Green;

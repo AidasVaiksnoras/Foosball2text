@@ -18,9 +18,14 @@ namespace Logic
 
         public UsersDataProvider()
         {
-            UserList = new List<User>();
             LeftUser = new User();
             RightUser = new User();
+        }
+
+        public UsersDataProvider(User leftUser, User rightUser)
+        {
+            LeftUser = leftUser;
+            RightUser = rightUser;
         }
 
         public void LoadData()
@@ -28,7 +33,7 @@ namespace Logic
             UserList = _ro.GetAllUserData();
         }
 
-        public void CommitData()
+        public void CommitBothTeamsData()
         {
             _wo.UpdateUserPlayData(LeftUser);
             _wo.UpdateUserPlayData(RightUser);
@@ -36,34 +41,9 @@ namespace Logic
 
         public User AddUser(string name)
         {
-            if (!_wo.UserExists(name))
-                _wo.InsertNewUser(name);
+            _wo.InsertNewUser(name);
 
             return _ro.GetUsersData(name);
         }
-
-        //TODO remove the following
-        public User GetUserData(string name)
-        {
-            var users = UserList.Where(x => x.UserName == name);
-            if (users.Count() == 1)
-                return users.Last();
-            else if (users.Count() < 1)
-                throw new UserNotFoundException(name);
-            else //Multiple users found - return one
-                return users.Last();
-        }
-
-        public void UpdateOldUser(User replacingUser)
-        {
-            var users = UserList.Where(x => x.UserName == replacingUser.UserName);
-            if (users.Count() < 1)
-                throw new UserNotFoundException(replacingUser.UserName);
-            var oldUser = users.Last();
-            int oldUserIndex = UserList.IndexOf(oldUser);
-
-            UserList[oldUserIndex] = replacingUser;
-        }
-
     }
 }

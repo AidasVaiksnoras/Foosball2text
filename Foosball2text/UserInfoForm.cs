@@ -48,8 +48,8 @@ namespace Foosball2text
         {
             try
             {
-                User user = _dataProvider.GetUserData(textBox1.Text);
-                UpdateForm(user);
+                ReadOperations ro = new ReadOperations();
+                UpdateForm(ro.GetUsersData(name));
                 Show();
             }
             catch (UserNotFoundException ex)

@@ -37,7 +37,7 @@ namespace SQL_operations.Tests
             User oldDataUser = ro.GetUsersData(userName);
 
             Random rng = new Random(); //Used to generate new/unused user data
-            User newDataUser = new User(userName, rng.Next(0,Int32.MaxValue), rng.Next(0, Int32.MaxValue), 5.55, rng.Next(0, Int32.MaxValue), "0000-00-00T00:22:34Z", rng.Next(0, Int32.MaxValue));
+            User newDataUser = new User(userName, rng.Next(0,999), rng.Next(0, 999), 5.55, rng.Next(0, 5000), "0000-00-00T00:22:34Z", rng.Next(0, 5000));
             wo.UpdateUserPlayData(newDataUser);
 
             User updatedDataUser = ro.GetUsersData(userName);
