@@ -44,7 +44,6 @@ namespace Foosball2text
         {
             var leaderboard = new LeaderboardForm(DataProvider, this);
             leaderboard.Show();
-            this.Hide();
         }
 
         private void NavigationForm_FormClosing(object sender, FormClosingEventArgs e)
