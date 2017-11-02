@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MultipleUsersFoundException.cs" />
     <Compile Include="ConnectionProvider.cs" />
     <Compile Include="ExceptionForm.cs">
       <SubType>Form</SubType>

@@ -67,7 +67,7 @@ namespace SQL_operations
                     sb.Append(";");
                     String sql = sb.ToString();
 
-                    //TODO add multiple found exception
+                    //TODO implement multiple found exception
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         using (SqlDataReader reader = command.ExecuteReader())

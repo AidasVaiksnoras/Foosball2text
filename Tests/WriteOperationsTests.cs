@@ -29,19 +29,36 @@ namespace SQL_operations.Tests
         [TestMethod()]
         public void UpdateUserPlayDataTest()
         {
-            Assert.Fail();
+            string userName = "UnitTest Inserted to be updated";
+
+            wo.InsertNewUser(userName);
+
+            ReadOperations ro = new ReadOperations();
+            User oldDataUser = ro.GetUsersData(userName);
+
+            Random rng = new Random(); //Used to generate new/unused user data
+            User newDataUser = new User(userName, rng.Next(0,Int32.MaxValue), rng.Next(0, Int32.MaxValue), 5.55, rng.Next(0, Int32.MaxValue), "0000-00-00T00:22:34Z", rng.Next(0, Int32.MaxValue));
+            wo.UpdateUserPlayData(newDataUser);
+
+            User updatedDataUser = ro.GetUsersData(userName);
+
+            Assert.AreNotEqual(oldDataUser, updatedDataUser);
         }
 
         [TestMethod()]
-        public void CorrectDateTimeFormatTest()
+        public void CorrectDateTimeFormatTest_FalseTimeFormats()
         {
-            Assert.Fail();
-        }
-
-        [TestMethod()]
-        public void UserExistsTest()
-        {
-            Assert.Fail();
+            if (WriteOperations.CorrectDateTimeFormat("T10:10:10Z"))
+                Assert.Fail();
+            if (WriteOperations.CorrectDateTimeFormat("'2016-10-21T10:10:10Z"))
+                Assert.Fail();
+            if (WriteOperations.CorrectDateTimeFormat(@"'2016-10-21T10:10:10Z'"))
+                Assert.Fail();
+            if (WriteOperations.CorrectDateTimeFormat(@"2016-10-21T10:10:10Z'"))
+                Assert.Fail();
+            if (WriteOperations.CorrectDateTimeFormat("2016-10-21T10:10:10Z;"))
+                Assert.Fail();
+            Assert.IsTrue(WriteOperations.CorrectDateTimeFormat("2016-10-21T10:10:10Z"));
         }
     }
 }

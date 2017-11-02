@@ -75,7 +75,7 @@ namespace SQL_operations
         }
     }
 
-    public class User
+    public class User : IEquatable<User>
     {
         public string UserName { get; set; }
         public int GamesPlayed { get; set; }
@@ -124,6 +124,17 @@ namespace SQL_operations
             TimePassed timePassed = new TimePassed(gameTime.Days, gameTime.Hours, gameTime.Minutes, gameTime.Seconds);
             AllTimePlayed += timePassed;
             RankPoints += rankChange;
+        }
+
+        public bool Equals(User other)
+        {
+            return (UserName == other.UserName &&
+                GamesPlayed == other.GamesPlayed &&
+                GamesWon == other.GamesWon &&
+                MaxSpeed == other.MaxSpeed &&
+                TotalGoals == other.TotalGoals &&
+                AllTimePlayedISO8601 == other.AllTimePlayedISO8601 &&
+                RankPoints == other.RankPoints);
         }
     }
 }
