@@ -2,7 +2,13 @@
 using System.Drawing;
 using System.Windows.Forms;
 using Emgu.CV;
+using Emgu.CV.CvEnum;
+using Emgu.CV.Structure;
 using Logic;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
 
 namespace Foosball2text
 {
@@ -32,7 +38,7 @@ namespace Foosball2text
             _timer = new Timer();
 
             //Frame Rate
-            _timer.Interval = 1000 / 30;
+            _timer.Interval = 1000 / 10;
             _timer.Tick += new EventHandler(TimerTick);
             _timer.Start();
             _capture = new VideoCapture(_filePath);
@@ -43,8 +49,9 @@ namespace Foosball2text
             Mat frame = _capture.QueryFrame();
             if (frame == null)
                 return;
-
-            _pictureBox.Image = _frameHandler.GetResizedImage(frame, _pictureBox.Width, _pictureBox.Height);
+            Task.Run(() => ServiceClient.PutFrameToService(frame.ToImage<Bgr, byte>().
+                Resize(_pictureBox.Width, _pictureBox.Height, Inter.Linear)).Wait());
+           // _pictureBox.Image = _frameHandler.GetResizedImage(frame, _pictureBox.Width, _pictureBox.Height);
         }
 
         private void OnPauseButtonClick(object sender, EventArgs e)
