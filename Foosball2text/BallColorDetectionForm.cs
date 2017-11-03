@@ -46,9 +46,7 @@ namespace Foosball2text
             Mat frame = _capture.QueryFrame();
             if (frame == null)
                 return;
-            Task.Run(() => ServiceClient.PutFrameToService(frame.ToImage<Bgr, byte>().
-                Resize(_pictureBox.Width, _pictureBox.Height, Inter.Linear)).Wait());
-           // _pictureBox.Image = _frameHandler.GetResizedImage(frame, _pictureBox.Width, _pictureBox.Height);
+            _pictureBox.Image = _frameHandler.GetResizedImage(frame, _pictureBox.Width, _pictureBox.Height);
         }
 
         private void OnPauseButtonClick(object sender, EventArgs e)
