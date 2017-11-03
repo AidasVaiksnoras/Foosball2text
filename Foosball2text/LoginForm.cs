@@ -17,16 +17,20 @@ namespace Foosball2text
 
         private void Login1_Click(object sender, EventArgs e)
         {
-            if(name1.Text != name2.Text)
+            if (name1.Text == "" || name2.Text == "")
             {
-                _dataProvider.LeftUser = _dataProvider.AddUser(name1.Text);
-                _dataProvider.RightUser = _dataProvider.AddUser(name2.Text);
-                _dataProvider.SaveData(); //Save possible new users
-                this.Close();
+                label.Text = "Komandos pavadinimas neįvestas";
+            }
+            else if (name1.Text == name2.Text)
+            {
+                label.Text = "Vardai negali buti tokie patys";
             }
             else
             {
-                label.Text = "Vardai negali buti tokie patys";
+                _dataProvider.LeftUser = _dataProvider.AddUser(name1.Text);
+                _dataProvider.RightUser = _dataProvider.AddUser(name2.Text);
+                _dataProvider.CommitBothTeamsData(); //Save possible new users
+                this.Close();
             }
         }
 

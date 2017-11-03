@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQL_operations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,61 +9,41 @@ namespace Logic
 {
     public class UsersDataProvider
     {
-        public List<User> Data { get; set; }
+        public List<User> UserList { get; set; }
         public User LeftUser { get; set; }
         public User RightUser { get; set; }
 
+        private ReadOperations _ro = new ReadOperations();
+        private WriteOperations _wo = new WriteOperations();
+
         public UsersDataProvider()
         {
-            Data = new List<User>();
             LeftUser = new User();
             RightUser = new User();
         }
 
-        public void LoadData()
+        public UsersDataProvider(User leftUser, User rightUser)
         {
-            Data = SerializationHandler.ReadFromXML<User>();
+            LeftUser = leftUser;
+            RightUser = rightUser;
         }
 
-        public void SaveData()
+        public void LoadData()
         {
-            SerializationHandler.WriteToXML<User>(Data);
+            UserList = _ro.GetAllUserData();
+        }
+
+        public void CommitBothTeamsData()
+        {
+            _wo.UpdateUserPlayData(LeftUser);
+            _wo.UpdateUserPlayData(RightUser);
         }
 
         public User AddUser(string name)
         {
-            if (!Data.Any(x => x.UserName == name))
-            {
-                User user = new User(name);
-                Data.Add(new User(name));
-                return user;
-            }
-            else
-                return GetUserData(name);
+            _wo.InsertNewUser(name);
+
+            return _ro.GetUsersData(name);
         }
-
-        public User GetUserData(string name)
-        {
-            var users = Data.Where(x => x.UserName == name);
-            if (users.Count() == 1)
-                return users.Last();
-            else if (users.Count() < 1)
-                throw new UserNotFoundException(name);
-            else //Multiple users found - return one
-                return users.Last();
-        }
-
-        public void UpdateOldUser(User replacingUser)
-        {
-            var users = Data.Where(x => x.UserName == replacingUser.UserName);
-            if (users.Count() < 1)
-                throw new UserNotFoundException(replacingUser.UserName);
-            //TODO add multiple users found exception
-            var oldUser = users.Last();
-            int oldUserIndex = Data.IndexOf(oldUser);
-
-            Data[oldUserIndex] = replacingUser;
-        }
-
     }
 }

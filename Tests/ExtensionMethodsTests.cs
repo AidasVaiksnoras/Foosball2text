@@ -1,7 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Logic;
 using System.Collections.Generic;
-namespace FrameOperationsTest
+using SQL_operations;
+
+namespace Test
 {
     [TestClass]
     public class TestListExtension
@@ -11,9 +13,9 @@ namespace FrameOperationsTest
         {
             List<User> testList = new List<User>
             {
-                new User { UserName = "user1", TotalScore = 1 },
-                new User { UserName = "user2", TotalScore = 3 },
-                new User { UserName = "user3", TotalScore = 2 }
+                new User { UserName = "user1", TotalGoals = 1 },
+                new User { UserName = "user2", TotalGoals = 3 },
+                new User { UserName = "user3", TotalGoals = 2 }
             };
             List<User> actual = testList.OrderByTotalScore();
             Assert.AreEqual(actual[0].UserName, "user2");

@@ -5,6 +5,7 @@ using Emgu.CV;
 using System.ComponentModel;
 using System.Linq;
 using Logic;
+using SQL_operations;
 
 namespace Foosball2text
 {
