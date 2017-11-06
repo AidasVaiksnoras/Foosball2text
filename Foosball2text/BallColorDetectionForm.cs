@@ -2,6 +2,8 @@
 using System.Drawing;
 using System.Windows.Forms;
 using Emgu.CV;
+using Emgu.CV.CvEnum;
+using Emgu.CV.Structure;
 using Logic;
 using SQL_operations;
 
@@ -33,7 +35,7 @@ namespace Foosball2text
             _timer = new Timer();
 
             //Frame Rate
-            _timer.Interval = 1000 / 30;
+            _timer.Interval = 1000 / 10;
             _timer.Tick += new EventHandler(TimerTick);
             _timer.Start();
             _capture = new VideoCapture(_filePath);
@@ -44,7 +46,6 @@ namespace Foosball2text
             Mat frame = _capture.QueryFrame();
             if (frame == null)
                 return;
-
             _pictureBox.Image = _frameHandler.GetResizedImage(frame, _pictureBox.Width, _pictureBox.Height);
         }
 
