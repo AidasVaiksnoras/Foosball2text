@@ -26,6 +26,8 @@ namespace Foosball2text
         private ServiceClient _client = new ServiceClient();
         private Game _game = new Game();
 
+        public event EventHandler<OnScoredEventArgs> OnScored;
+
         //Logger list asociated
         BindingList<String> logData = new BindingList<string>();
         LoggerMessageDelivery messageGetter = new LoggerMessageDelivery();
@@ -43,6 +45,9 @@ namespace Foosball2text
             _frameHandler.UpdateHue(hue);
             _filePath = filePath;
             Init();
+            //register delegates for event
+            OnScored += OnScoreChanged;
+            OnScored += _client.OnScoreChanged;
 
             logData.Add(messageGetter.gameStart);
             listBox1.DataSource = logData;
@@ -86,18 +91,24 @@ namespace Foosball2text
             ValueUpdates.Text = newInformation.SecondsBetweenBallCapture.ToString("F5");
             label_TeamOnLeftMaxValue.Text = newInformation.MaxSpeedTeamOnLeft.ToString("F5");
             label_TeamOnRightMaxValue.Text = newInformation.MaxSpeedTeamOnRight.ToString("F5");
-            TeamA.Text = newInformation.TeamOnLeftGoals.ToString();
-            TeamB.Text = newInformation.TeamOnRightGoals.ToString();
-
+            if (TeamA.Text != newInformation.TeamOnLeftGoals.ToString() || TeamB.Text != newInformation.TeamOnRightGoals.ToString())
+            {
             _game.LeftScore = newInformation.TeamOnLeftGoals;
             _game.RightScore = newInformation.TeamOnRightGoals;
-            _client.UpdateGame(_game);
+            OnScored(this, new OnScoredEventArgs(_game));
+            }
 
             if (newInformation.NewLogs != null)
             {
                 foreach (string log in newInformation.NewLogs)
                     logData.Add(log);
             }
+        }
+
+        private void OnScoreChanged(object sender, OnScoredEventArgs e)
+        {
+            TeamA.Text = e.Game.LeftScore.ToString();
+            TeamB.Text = e.Game.RightScore.ToString();
         }
 
         private void OnListChange(object sender, ListChangedEventArgs e)

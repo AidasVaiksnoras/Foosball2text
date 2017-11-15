@@ -20,9 +20,14 @@ namespace Logic
             client.PutAsJsonAsync($"api/CurrentGame/1", game);
         }
 
-        public void UpdateGame(Game game)
+        private void UpdateGame(Game game)
         {
             client.PutAsJsonAsync($"api/CurrentGame/2", game);
+        }
+
+        public void OnScoreChanged(object sender, OnScoredEventArgs e)
+        {
+            UpdateGame(e.Game);
         }
     }
 }

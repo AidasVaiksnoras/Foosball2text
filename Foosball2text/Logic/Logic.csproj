@@ -67,6 +67,7 @@
     <Compile Include="Game.cs" />
     <Compile Include="IGameWatcher.cs" />
     <Compile Include="ListExtensions.cs" />
+    <Compile Include="OnScoredEventArgs.cs" />
     <Compile Include="SerializationHandler.cs" />
     <Compile Include="ServiceClient.cs" />
     <Compile Include="TrackedObject.cs" />
