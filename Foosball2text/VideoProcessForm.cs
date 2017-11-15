@@ -4,6 +4,10 @@ using System.Windows.Forms;
 using Emgu.CV;
 using System.ComponentModel;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using Logic;
 using SQL_operations;
 
@@ -18,6 +22,10 @@ namespace Foosball2text
         private string _filePath;
         private NavigationForm _navForm;
         private User _leftUser, _rightUser;
+        //static HttpClient client = new HttpClient();
+        private ServiceClient _client = new ServiceClient();
+        private Game _game = new Game();
+
         //Logger list asociated
         BindingList<String> logData = new BindingList<string>();
         LoggerMessageDelivery messageGetter = new LoggerMessageDelivery();
@@ -29,6 +37,8 @@ namespace Foosball2text
             _navForm = navForm;
             _leftUser = leftUser;
             _rightUser = rightUser;
+            _game.LeftUserName = leftUser.UserName;
+            _game.RightUserName = rightUser.UserName;
             _frameHandler = new FrameHandler(pictureBox1.Width, pictureBox1.Height);
             _frameHandler.UpdateHue(hue);
             _filePath = filePath;
@@ -47,8 +57,13 @@ namespace Foosball2text
             _timer.Tick += new EventHandler(TimerTick);
             _timer.Start();
 
+            _game.LeftScore = 0;
+            _game.RightScore = 0;
+            _client.AddGame(_game);
+
             _capture = new VideoCapture(_filePath);
         }
+
         private void TimerTick(object sender, EventArgs e)
         {
             Mat frame = _capture.QueryFrame();
@@ -73,6 +88,10 @@ namespace Foosball2text
             label_TeamOnRightMaxValue.Text = newInformation.MaxSpeedTeamOnRight.ToString("F5");
             TeamA.Text = newInformation.TeamOnLeftGoals.ToString();
             TeamB.Text = newInformation.TeamOnRightGoals.ToString();
+
+            _game.LeftScore = newInformation.TeamOnLeftGoals;
+            _game.RightScore = newInformation.TeamOnRightGoals;
+            _client.UpdateGame(_game);
 
             if (newInformation.NewLogs != null)
             {

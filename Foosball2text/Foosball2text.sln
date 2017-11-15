@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foosball2text", "Foosball2t
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic", "Logic\Logic.csproj", "{C80358F0-3547-4DAB-8C46-2E782C850AEC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebService", "..\WebService\WebService.csproj", "{AC19AAC6-77F2-4014-B29D-5D3BA977B812}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "WebApplication\Service.csproj", "{01ECED22-78E6-4DCF-B02D-224B489D9B59}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQL operations", "..\SQL operations\SQL operations.csproj", "{CF0A27E9-4EDC-4750-AAFA-D3CDC401C6DA}"
