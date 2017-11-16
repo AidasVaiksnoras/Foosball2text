@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using Logic;
 using SQL_operations;
+using System.Collections.Generic;
 
 namespace Foosball2text
 {
@@ -9,15 +10,27 @@ namespace Foosball2text
     {
         private UsersDataProvider _dataProvider;
         private NavigationForm _navForm;
+
+        Lazy<List<User>> gamesWonOrdered;
+        Lazy<List<User>> totalScoreOrdered;
+        Lazy<List<User>> maxSpeedOrdered;
+        Lazy<List<User>> gamesPlayedOrdered;
+
         public LeaderboardForm(UsersDataProvider dataProvider, NavigationForm navForm)
         {
             InitializeComponent();
             _dataProvider = dataProvider;
             _dataProvider.LoadData();
-            gamesWonList.DataSource = _dataProvider.UserList.OrderByGamesWon();
-            totalScoreList.DataSource = _dataProvider.UserList.OrderByTotalScore();
-            maxSpeedList.DataSource = _dataProvider.UserList.OrderByMaxSpeed();
-            gamesPlayedList.DataSource = _dataProvider.UserList.OrderByGamesPlayed();
+
+            //Data is loaded when tab is selected
+            gamesWonOrdered = new Lazy<List<User>> (() => _dataProvider.UserList.OrderByGamesWon());
+            totalScoreOrdered = new Lazy<List<User>>(() => _dataProvider.UserList.OrderByTotalScore());
+            maxSpeedOrdered = new Lazy<List<User>>(() => _dataProvider.UserList.OrderByMaxSpeed());
+            gamesPlayedOrdered = new Lazy<List<User>>(() => _dataProvider.UserList.OrderByGamesPlayed());
+            tabControl1.SelectedIndexChanged += tabControl1_SelectedIndexChanged;
+            //Load the first tab
+            gamesWonList.DataSource = gamesWonOrdered.Value;
+
             _navForm = navForm;
         }
 
@@ -58,6 +71,26 @@ namespace Foosball2text
         {
             _navForm.Show();
             this.Close();
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedTab == gamesWonTab)
+            {
+                gamesWonList.DataSource = gamesWonOrdered.Value;
+            }
+            if (tabControl1.SelectedTab == totalScoreTab)
+            {
+                totalScoreList.DataSource = totalScoreOrdered.Value;
+            }
+            if (tabControl1.SelectedTab == maxSpeedTab)
+            {
+                maxSpeedList.DataSource = maxSpeedOrdered.Value;
+            }
+            if (tabControl1.SelectedTab == gamesPlayed)
+            {
+                gamesPlayedList.DataSource = gamesPlayedOrdered.Value;
+            }
         }
     }
 }

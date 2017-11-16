@@ -157,7 +157,7 @@ namespace Foosball2text
             this.Close();
         }
 
-        private void Expand_button_Click(object sender, EventArgs e) //UNDONE
+        private void Expand_button_Click(object sender, EventArgs e)
         {
             if (_container.Panel2Collapsed)
             { ///Show additional data
