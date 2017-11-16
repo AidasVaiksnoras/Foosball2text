@@ -10,6 +10,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Logic;
 using SQL_operations;
+using System.Drawing;
 
 namespace Foosball2text
 {
@@ -30,6 +31,10 @@ namespace Foosball2text
         BindingList<String> logData = new BindingList<string>();
         LoggerMessageDelivery messageGetter = new LoggerMessageDelivery();
 
+        //Expandable data
+        SplitContainer _container;
+        int _extraDataPanelHeight;
+
         public VideoProcessForm(string filePath, int hue, User leftUser, User rightUser, NavigationForm navForm)
         {
             InitializeComponent();
@@ -43,6 +48,10 @@ namespace Foosball2text
             _frameHandler.UpdateHue(hue);
             _filePath = filePath;
             Init();
+
+            _container = splitContainer1;
+            _extraDataPanelHeight = _container.Panel2.Height;
+            _container.Panel2Collapsed = true;
 
             logData.Add(messageGetter.gameStart);
             listBox1.DataSource = logData;
@@ -91,6 +100,7 @@ namespace Foosball2text
 
             _game.LeftScore = newInformation.TeamOnLeftGoals;
             _game.RightScore = newInformation.TeamOnRightGoals;
+
             _client.UpdateGame(_game);
 
             if (newInformation.NewLogs != null)
@@ -142,6 +152,24 @@ namespace Foosball2text
         {
             _navForm.Show();
             this.Close();
+        }
+
+        private void Expand_button_Click(object sender, EventArgs e) //UNDONE
+        {
+            if (_container.Panel2Collapsed)
+            { ///Show additional data
+                _container.Panel2Collapsed = false;
+                this.Height = this.Height + _extraDataPanelHeight;
+                this.MinimumSize = new Size(this.Width, this.Height);
+                Expand_button.Text = "Hide additional data";
+            }
+            else
+            { ///Hide additional data
+                _container.Panel2Collapsed = true;
+                this.MinimumSize = new Size(this.Width, this.Height - _extraDataPanelHeight);
+                this.Height = this.Height - _extraDataPanelHeight;
+                Expand_button.Text = "Show additional data";
+            }
         }
 
         private void VideoProcessForm_FormClosing(object sender, FormClosingEventArgs e)
