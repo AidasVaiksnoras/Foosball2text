@@ -1,50 +1,61 @@
-﻿var result;
+﻿
+//var React = require('react-native');
+
 var obj;
 
-$(function () {
-    var storiesInterval = 10 * 1000;
-    var fetchNews = function () {
-        console.log('Sending AJAX request...');
-        $.ajax({
-            type: "GET",
-            url: "api/CurrentGame",
-            data: {
-                user: 'success',
-                some: ['other', 'data']
-            }
-        }).done(function (msg) {
-            $(msg).appendTo("#edix");
-            console.log('success');
-            console.log(msg);
-            obj = JSON.parse(msg);
-            console.log(obj.LeftUserName);
-        }).fail(function () {
-            console.log('error');
-        }).always(function () {
-            // Schedule the next request after this one completes,
-            // even after error
-            console.log('Waiting ' + (storiesInterval / 1000) + ' seconds');
-            setTimeout(fetchNews, storiesInterval);
-        });
-    }
 
-    // Fetch news immediately, then every 10 seconds AFTER previous request finishes
-    fetchNews();
-});
+var SampleApp = React.createClass({
 
 
-var CommentBox = React.createClass({
+    getInitialState: function () {
+        return {
+            leftUser: '',
+            rightUser: '',
+            leftScore: '0',
+            rightScore: '0'
+        }
+    },
+
+    componentDidMount: function () {
+        this.timer = setInterval(() => {
+            console.log('Sending AJAX request...');
+            $.ajax({
+                type: "GET",
+                url: "api/CurrentGame",
+                data: {
+                    user: 'success',
+                    some: ['other', 'data']
+                }
+            }).done(function (msg) {
+                $(msg).appendTo("#edix");
+                console.log('success');
+                console.log(msg);
+                obj = JSON.parse(msg);
+                console.log(obj.LeftUserName);
+            }).fail(function () {
+                console.log('error');
+            });
+            this.setState({
+                leftUser: obj.LeftUserName,
+                rightUser: obj.RightUserName,
+                leftScore: obj.LeftScore,
+                rightScore: obj.RightScore
+            })
+        }, 1000);
+    },
+
+
     render: function () {
+
         return (
-            <div className="commentBox">
-                <h1>Comments</h1>
-                <h2> See console </h2>
-            </div>
+            <h1>Rezultatas   {this.state.leftUser} {this.state.leftScore} : {this.state.rightScore} {this.state.rightUser} </h1>
         );
     }
 });
 
+
+
 ReactDOM.render(
-    <CommentBox data={obj} />,
+    <SampleApp />,
     document.getElementById('content')
 );
