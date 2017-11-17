@@ -10,6 +10,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Logic;
 using SQL_operations;
+using System.Drawing;
 
 namespace Foosball2text
 {
@@ -30,6 +31,11 @@ namespace Foosball2text
         BindingList<String> logData = new BindingList<string>();
         LoggerMessageDelivery messageGetter = new LoggerMessageDelivery();
 
+        //Expandable data
+        bool _showAdditionalData;
+        SplitContainer _container;
+        int _extraDataPanelHeight;
+
         public VideoProcessForm(string filePath, int hue, User leftUser, User rightUser, NavigationForm navForm)
         {
             InitializeComponent();
@@ -43,6 +49,10 @@ namespace Foosball2text
             _frameHandler.UpdateHue(hue);
             _filePath = filePath;
             Init();
+
+            _container = splitContainer1;
+            _extraDataPanelHeight = _container.Panel2.Height;
+            _container.Panel2Collapsed = true;
 
             logData.Add(messageGetter.gameStart);
             listBox1.DataSource = logData;
@@ -77,20 +87,23 @@ namespace Foosball2text
         {
             WatcherInformation newInformation = _frameHandler.GetWatcherInformation();
 
-            _xlabel.Text = newInformation.X.ToString("F3");
-            _ylabel.Text = newInformation.Y.ToString("F3");
-
-            ballOnSideOfFieldValue.Text = Enum.GetName(typeof(FieldSide), newInformation.BallSide);
-            SpeedValue.Text = string.Format("X: {0}; Y: {1}", newInformation.XSpeed.ToString("F5"), newInformation.YSpeed.ToString("F5"));
-            OmniSpeedPerMs_value.Text = newInformation.OmniSpeed.ToString("F5");
-            ValueUpdates.Text = newInformation.SecondsBetweenBallCapture.ToString("F5");
-            label_TeamOnLeftMaxValue.Text = newInformation.MaxSpeedTeamOnLeft.ToString("F5");
-            label_TeamOnRightMaxValue.Text = newInformation.MaxSpeedTeamOnRight.ToString("F5");
-            TeamA.Text = newInformation.TeamOnLeftGoals.ToString();
-            TeamB.Text = newInformation.TeamOnRightGoals.ToString();
+            if (_showAdditionalData)
+            {
+                _xlabel.Text = newInformation.X.ToString("F3");
+                _ylabel.Text = newInformation.Y.ToString("F3");
+                ballOnSideOfFieldValue.Text = Enum.GetName(typeof(FieldSide), newInformation.BallSide);
+                SpeedValue.Text = string.Format("X: {0}; Y: {1}", newInformation.XSpeed.ToString("F5"), newInformation.YSpeed.ToString("F5"));
+                OmniSpeedPerMs_value.Text = newInformation.OmniSpeed.ToString("F5");
+                ValueUpdates.Text = newInformation.SecondsBetweenBallCapture.ToString("F5");
+                label_TeamOnLeftMaxValue.Text = newInformation.MaxSpeedTeamOnLeft.ToString("F5");
+                label_TeamOnRightMaxValue.Text = newInformation.MaxSpeedTeamOnRight.ToString("F5");
+                TeamA.Text = newInformation.TeamOnLeftGoals.ToString();
+                TeamB.Text = newInformation.TeamOnRightGoals.ToString();
+            }
 
             _game.LeftScore = newInformation.TeamOnLeftGoals;
             _game.RightScore = newInformation.TeamOnRightGoals;
+
             _client.UpdateGame(_game);
 
             if (newInformation.NewLogs != null)
@@ -142,6 +155,26 @@ namespace Foosball2text
         {
             _navForm.Show();
             this.Close();
+        }
+
+        private void Expand_button_Click(object sender, EventArgs e)
+        {
+            if (_container.Panel2Collapsed)
+            { ///Show additional data
+                _showAdditionalData = true;
+                _container.Panel2Collapsed = false;
+                this.Height = this.Height + _extraDataPanelHeight;
+                this.MinimumSize = new Size(this.Width, this.Height);
+                Expand_button.Text = "Hide additional data";
+            }
+            else
+            { ///Hide additional data
+                _showAdditionalData = false;
+                _container.Panel2Collapsed = true;
+                this.MinimumSize = new Size(this.Width, this.Height - _extraDataPanelHeight);
+                this.Height = this.Height - _extraDataPanelHeight;
+                Expand_button.Text = "Show additional data";
+            }
         }
 
         private void VideoProcessForm_FormClosing(object sender, FormClosingEventArgs e)

@@ -35,7 +35,7 @@
             this.totalScoreList = new System.Windows.Forms.ListBox();
             this.maxSpeedTab = new System.Windows.Forms.TabPage();
             this.maxSpeedList = new System.Windows.Forms.ListBox();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.gamesPlayed = new System.Windows.Forms.TabPage();
             this.gamesPlayedList = new System.Windows.Forms.ListBox();
             this.directorySearcher1 = new System.DirectoryServices.DirectorySearcher();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -45,7 +45,7 @@
             this.gamesWonTab.SuspendLayout();
             this.totalScoreTab.SuspendLayout();
             this.maxSpeedTab.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.gamesPlayed.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -53,7 +53,7 @@
             this.tabControl1.Controls.Add(this.gamesWonTab);
             this.tabControl1.Controls.Add(this.totalScoreTab);
             this.tabControl1.Controls.Add(this.maxSpeedTab);
-            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.gamesPlayed);
             this.tabControl1.Location = new System.Drawing.Point(12, 47);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -119,15 +119,15 @@
             this.maxSpeedList.TabIndex = 0;
             this.maxSpeedList.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.MaxSpeedList_Format);
             // 
-            // tabPage1
+            // gamesPlayed
             // 
-            this.tabPage1.Controls.Add(this.gamesPlayedList);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(282, 247);
-            this.tabPage1.TabIndex = 3;
-            this.tabPage1.Text = "sužaista žaidimų";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.gamesPlayed.Controls.Add(this.gamesPlayedList);
+            this.gamesPlayed.Location = new System.Drawing.Point(4, 22);
+            this.gamesPlayed.Name = "gamesPlayed";
+            this.gamesPlayed.Size = new System.Drawing.Size(282, 247);
+            this.gamesPlayed.TabIndex = 3;
+            this.gamesPlayed.Text = "sužaista žaidimų";
+            this.gamesPlayed.UseVisualStyleBackColor = true;
             // 
             // gamesPlayedList
             // 
@@ -187,7 +187,7 @@
             this.gamesWonTab.ResumeLayout(false);
             this.totalScoreTab.ResumeLayout(false);
             this.maxSpeedTab.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
+            this.gamesPlayed.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -202,7 +202,7 @@
         private System.Windows.Forms.TabPage maxSpeedTab;
         private System.Windows.Forms.ListBox totalScoreList;
         private System.Windows.Forms.ListBox maxSpeedList;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage gamesPlayed;
         private System.Windows.Forms.ListBox gamesPlayedList;
         private System.DirectoryServices.DirectorySearcher directorySearcher1;
         private System.Windows.Forms.TextBox textBox1;
