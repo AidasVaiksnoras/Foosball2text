@@ -13,6 +13,9 @@ namespace Foosball2text
             InitializeComponent();
             _dataProvider = dataProvider;
             _dataProvider.LoadData();
+
+            if (Properties.Settings.Default.DefaultTeamName != "")
+                name1.Text = Properties.Settings.Default.DefaultTeamName;
         }
 
         private void Login1_Click(object sender, EventArgs e)
