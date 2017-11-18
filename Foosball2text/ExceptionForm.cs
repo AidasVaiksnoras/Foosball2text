@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+//TODO remove this
+
 namespace Foosball2text
 {
     public partial class ExceptionForm : Form

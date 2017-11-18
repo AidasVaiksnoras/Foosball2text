@@ -12,9 +12,10 @@ namespace Foosball2text
 {
     public partial class NotificationForm : Form
     {
-        public NotificationForm()
+        public NotificationForm(string message)
         {
             InitializeComponent();
+            textBox1.Text = message;
         }
     }
 }
