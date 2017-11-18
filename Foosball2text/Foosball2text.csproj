@@ -149,13 +149,6 @@
     <Compile Include="BallColorDetectionForm.Designer.cs">
       <DependentUpon>BallColorDetectionForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ConfigManager.cs" />
-    <Compile Include="ExceptionForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ExceptionForm.Designer.cs">
-      <DependentUpon>ExceptionForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="LeaderboardForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -208,9 +201,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="BallColorDetectionForm.resx">
       <DependentUpon>BallColorDetectionForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ExceptionForm.resx">
-      <DependentUpon>ExceptionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LeaderboardForm.resx">
       <DependentUpon>LeaderboardForm.cs</DependentUpon>
