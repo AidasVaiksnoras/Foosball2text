@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Foosball2text.Properties {
+namespace SQL_operations.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -23,15 +23,14 @@ namespace Foosball2text.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string DefaultTeamName {
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=universityprojects.database.windows.net;Initial Catalog=foosball2text" +
+            ";Persist Security Info=True;User ID=warhatch;Password=Awalgato0")]
+        public string DatabaseConnectionString {
             get {
-                return ((string)(this["DefaultTeamName"]));
-            }
-            set {
-                this["DefaultTeamName"] = value;
+                return ((string)(this["DatabaseConnectionString"]));
             }
         }
     }

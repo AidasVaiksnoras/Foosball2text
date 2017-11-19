@@ -46,8 +46,8 @@ namespace Foosball2text
             }
             catch (UserNotFoundException ex)
             {
-                ExceptionForm exceptionForm = new ExceptionForm("Žaidėjas: " + ex.UserName + " nerastas");
-                exceptionForm.Show();
+                NotificationForm notificationForm = new NotificationForm("Žaidėjas: " + ex.UserName + " nerastas");
+                notificationForm.Show();
             }
         }
         private void Button1_Click(object sender, EventArgs e) => search(textBox1.Text);

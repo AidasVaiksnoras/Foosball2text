@@ -56,5 +56,10 @@ namespace Foosball2text
             UserInfoForm userInfo = new UserInfoForm(DataProvider);
             userInfo.Show();
         }
+
+        private void Settings_button_Click(object sender, EventArgs e)
+        {
+            new SettingsForm(this).Show();
+        }
     }
 }

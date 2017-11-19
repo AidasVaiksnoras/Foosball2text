@@ -57,7 +57,13 @@
             this.label_TeamOnRightMaxValue = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.backButton = new System.Windows.Forms.Button();
+            this.Expand_button = new System.Windows.Forms.Button();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -71,7 +77,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(468, 234);
+            this.label1.Location = new System.Drawing.Point(90, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(17, 13);
             this.label1.TabIndex = 3;
@@ -80,7 +86,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(534, 234);
+            this.label2.Location = new System.Drawing.Point(156, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(17, 13);
             this.label2.TabIndex = 4;
@@ -89,7 +95,7 @@
             // _ylabel
             // 
             this._ylabel.AutoSize = true;
-            this._ylabel.Location = new System.Drawing.Point(550, 234);
+            this._ylabel.Location = new System.Drawing.Point(172, 9);
             this._ylabel.Name = "_ylabel";
             this._ylabel.Size = new System.Drawing.Size(46, 13);
             this._ylabel.TabIndex = 5;
@@ -98,7 +104,7 @@
             // _xlabel
             // 
             this._xlabel.AutoSize = true;
-            this._xlabel.Location = new System.Drawing.Point(482, 234);
+            this._xlabel.Location = new System.Drawing.Point(104, 9);
             this._xlabel.Name = "_xlabel";
             this._xlabel.Size = new System.Drawing.Size(46, 13);
             this._xlabel.TabIndex = 6;
@@ -111,7 +117,7 @@
             // ballOnSideOfFieldValue
             // 
             this.ballOnSideOfFieldValue.AutoSize = true;
-            this.ballOnSideOfFieldValue.Location = new System.Drawing.Point(485, 247);
+            this.ballOnSideOfFieldValue.Location = new System.Drawing.Point(107, 22);
             this.ballOnSideOfFieldValue.Name = "ballOnSideOfFieldValue";
             this.ballOnSideOfFieldValue.Size = new System.Drawing.Size(25, 13);
             this.ballOnSideOfFieldValue.TabIndex = 30;
@@ -120,7 +126,7 @@
             // sideOfFieldLabel
             // 
             this.sideOfFieldLabel.AutoSize = true;
-            this.sideOfFieldLabel.Location = new System.Drawing.Point(381, 247);
+            this.sideOfFieldLabel.Location = new System.Drawing.Point(3, 22);
             this.sideOfFieldLabel.Name = "sideOfFieldLabel";
             this.sideOfFieldLabel.Size = new System.Drawing.Size(98, 13);
             this.sideOfFieldLabel.TabIndex = 29;
@@ -129,7 +135,7 @@
             // SpeedValue
             // 
             this.SpeedValue.AutoSize = true;
-            this.SpeedValue.Location = new System.Drawing.Point(464, 260);
+            this.SpeedValue.Location = new System.Drawing.Point(86, 35);
             this.SpeedValue.Name = "SpeedValue";
             this.SpeedValue.Size = new System.Drawing.Size(25, 13);
             this.SpeedValue.TabIndex = 28;
@@ -138,7 +144,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(381, 260);
+            this.label3.Location = new System.Drawing.Point(3, 35);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(77, 13);
             this.label3.TabIndex = 26;
@@ -147,7 +153,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(381, 234);
+            this.label4.Location = new System.Drawing.Point(3, 9);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(85, 13);
             this.label4.TabIndex = 25;
@@ -234,7 +240,7 @@
             // OmniSpeedPerMs_label
             // 
             this.OmniSpeedPerMs_label.AutoSize = true;
-            this.OmniSpeedPerMs_label.Location = new System.Drawing.Point(381, 273);
+            this.OmniSpeedPerMs_label.Location = new System.Drawing.Point(3, 48);
             this.OmniSpeedPerMs_label.Name = "OmniSpeedPerMs_label";
             this.OmniSpeedPerMs_label.Size = new System.Drawing.Size(83, 13);
             this.OmniSpeedPerMs_label.TabIndex = 41;
@@ -243,7 +249,7 @@
             // OmniSpeedPerMs_value
             // 
             this.OmniSpeedPerMs_value.AutoSize = true;
-            this.OmniSpeedPerMs_value.Location = new System.Drawing.Point(470, 273);
+            this.OmniSpeedPerMs_value.Location = new System.Drawing.Point(92, 48);
             this.OmniSpeedPerMs_value.Name = "OmniSpeedPerMs_value";
             this.OmniSpeedPerMs_value.Size = new System.Drawing.Size(25, 13);
             this.OmniSpeedPerMs_value.TabIndex = 42;
@@ -252,7 +258,7 @@
             // LabelUpdates
             // 
             this.LabelUpdates.AutoSize = true;
-            this.LabelUpdates.Location = new System.Drawing.Point(381, 286);
+            this.LabelUpdates.Location = new System.Drawing.Point(3, 61);
             this.LabelUpdates.Name = "LabelUpdates";
             this.LabelUpdates.Size = new System.Drawing.Size(134, 13);
             this.LabelUpdates.TabIndex = 43;
@@ -261,7 +267,7 @@
             // ValueUpdates
             // 
             this.ValueUpdates.AutoSize = true;
-            this.ValueUpdates.Location = new System.Drawing.Point(518, 286);
+            this.ValueUpdates.Location = new System.Drawing.Point(140, 61);
             this.ValueUpdates.Name = "ValueUpdates";
             this.ValueUpdates.Size = new System.Drawing.Size(25, 13);
             this.ValueUpdates.TabIndex = 44;
@@ -270,7 +276,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(381, 312);
+            this.label9.Location = new System.Drawing.Point(3, 87);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(69, 13);
             this.label9.TabIndex = 47;
@@ -279,7 +285,7 @@
             // label_TeamOnLeftMaxValue
             // 
             this.label_TeamOnLeftMaxValue.AutoSize = true;
-            this.label_TeamOnLeftMaxValue.Location = new System.Drawing.Point(456, 312);
+            this.label_TeamOnLeftMaxValue.Location = new System.Drawing.Point(78, 87);
             this.label_TeamOnLeftMaxValue.Name = "label_TeamOnLeftMaxValue";
             this.label_TeamOnLeftMaxValue.Size = new System.Drawing.Size(46, 13);
             this.label_TeamOnLeftMaxValue.TabIndex = 48;
@@ -288,7 +294,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(508, 312);
+            this.label10.Location = new System.Drawing.Point(130, 87);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(76, 13);
             this.label10.TabIndex = 49;
@@ -297,7 +303,7 @@
             // label_TeamOnRightMaxValue
             // 
             this.label_TeamOnRightMaxValue.AutoSize = true;
-            this.label_TeamOnRightMaxValue.Location = new System.Drawing.Point(590, 312);
+            this.label_TeamOnRightMaxValue.Location = new System.Drawing.Point(212, 87);
             this.label_TeamOnRightMaxValue.Name = "label_TeamOnRightMaxValue";
             this.label_TeamOnRightMaxValue.Size = new System.Drawing.Size(46, 13);
             this.label_TeamOnRightMaxValue.TabIndex = 50;
@@ -307,7 +313,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.label8.Location = new System.Drawing.Point(381, 299);
+            this.label8.Location = new System.Drawing.Point(3, 74);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(89, 13);
             this.label8.TabIndex = 51;
@@ -315,7 +321,7 @@
             // 
             // backButton
             // 
-            this.backButton.Location = new System.Drawing.Point(687, 312);
+            this.backButton.Location = new System.Drawing.Point(687, 205);
             this.backButton.Name = "backButton";
             this.backButton.Size = new System.Drawing.Size(75, 23);
             this.backButton.TabIndex = 52;
@@ -323,21 +329,57 @@
             this.backButton.UseVisualStyleBackColor = true;
             this.backButton.Click += new System.EventHandler(this.backButton_Click);
             // 
+            // Expand_button
+            // 
+            this.Expand_button.Location = new System.Drawing.Point(4, 6);
+            this.Expand_button.Name = "Expand_button";
+            this.Expand_button.Size = new System.Drawing.Size(146, 27);
+            this.Expand_button.TabIndex = 0;
+            this.Expand_button.Text = "Show additional data\r\n";
+            this.Expand_button.UseVisualStyleBackColor = true;
+            this.Expand_button.Click += new System.EventHandler(this.Expand_button_Click);
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Location = new System.Drawing.Point(381, 234);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.Expand_button);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.label4);
+            this.splitContainer1.Panel2.Controls.Add(this.label1);
+            this.splitContainer1.Panel2.Controls.Add(this.label8);
+            this.splitContainer1.Panel2.Controls.Add(this.label2);
+            this.splitContainer1.Panel2.Controls.Add(this.label_TeamOnRightMaxValue);
+            this.splitContainer1.Panel2.Controls.Add(this._ylabel);
+            this.splitContainer1.Panel2.Controls.Add(this.label10);
+            this.splitContainer1.Panel2.Controls.Add(this._xlabel);
+            this.splitContainer1.Panel2.Controls.Add(this.label_TeamOnLeftMaxValue);
+            this.splitContainer1.Panel2.Controls.Add(this.label3);
+            this.splitContainer1.Panel2.Controls.Add(this.label9);
+            this.splitContainer1.Panel2.Controls.Add(this.SpeedValue);
+            this.splitContainer1.Panel2.Controls.Add(this.ValueUpdates);
+            this.splitContainer1.Panel2.Controls.Add(this.sideOfFieldLabel);
+            this.splitContainer1.Panel2.Controls.Add(this.LabelUpdates);
+            this.splitContainer1.Panel2.Controls.Add(this.ballOnSideOfFieldValue);
+            this.splitContainer1.Panel2.Controls.Add(this.OmniSpeedPerMs_value);
+            this.splitContainer1.Panel2.Controls.Add(this.OmniSpeedPerMs_label);
+            this.splitContainer1.Size = new System.Drawing.Size(300, 150);
+            this.splitContainer1.SplitterDistance = 37;
+            this.splitContainer1.TabIndex = 53;
+            // 
             // VideoProcessForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(769, 350);
+            this.ClientSize = new System.Drawing.Size(769, 274);
+            this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.backButton);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label_TeamOnRightMaxValue);
-            this.Controls.Add(this.label10);
-            this.Controls.Add(this.label_TeamOnLeftMaxValue);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.ValueUpdates);
-            this.Controls.Add(this.LabelUpdates);
-            this.Controls.Add(this.OmniSpeedPerMs_value);
-            this.Controls.Add(this.OmniSpeedPerMs_label);
             this.Controls.Add(this.restartButton);
             this.Controls.Add(this.EndGameButton);
             this.Controls.Add(this.listBox1);
@@ -346,20 +388,16 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.ballOnSideOfFieldValue);
-            this.Controls.Add(this.sideOfFieldLabel);
-            this.Controls.Add(this.SpeedValue);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this._xlabel);
-            this.Controls.Add(this._ylabel);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.Name = "VideoProcessForm";
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.VideoProcessForm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -396,6 +434,8 @@
         private System.Windows.Forms.Label label_TeamOnRightMaxValue;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button backButton;
+        private System.Windows.Forms.Button Expand_button;
+        private System.Windows.Forms.SplitContainer splitContainer1;
     }
 }
 

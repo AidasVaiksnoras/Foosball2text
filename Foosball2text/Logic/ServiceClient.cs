@@ -2,7 +2,6 @@
 using System.Text;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Threading.Tasks;
 using System.Collections.Generic;
 
 namespace Logic
@@ -11,7 +10,7 @@ namespace Logic
     {
         static HttpClient client = new HttpClient();
         static private StringBuilder stringBuilder = new StringBuilder();
-        static ServiceClient()
+        public ServiceClient()
         {
             client.BaseAddress = new Uri("http://localhost:63526/");
             client.DefaultRequestHeaders.Accept.Clear();
