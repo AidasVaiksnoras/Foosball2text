@@ -97,9 +97,9 @@ namespace Foosball2text
                 ValueUpdates.Text = newInformation.SecondsBetweenBallCapture.ToString("F5");
                 label_TeamOnLeftMaxValue.Text = newInformation.MaxSpeedTeamOnLeft.ToString("F5");
                 label_TeamOnRightMaxValue.Text = newInformation.MaxSpeedTeamOnRight.ToString("F5");
-                TeamA.Text = newInformation.TeamOnLeftGoals.ToString();
-                TeamB.Text = newInformation.TeamOnRightGoals.ToString();
             }
+            TeamA.Text = newInformation.TeamOnLeftGoals.ToString();
+            TeamB.Text = newInformation.TeamOnRightGoals.ToString();
 
             _game.LeftScore = newInformation.TeamOnLeftGoals;
             _game.RightScore = newInformation.TeamOnRightGoals;
