@@ -4,8 +4,10 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+
 namespace Logic
 {
+    public enum Method { Insert, Update};
     public static class ServiceClient
     {
         static HttpClient client = new HttpClient();
@@ -17,29 +19,28 @@ namespace Logic
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        static public void AddGame(Game game)
-        {
-            client.PutAsJsonAsync($"api/CurrentGame/1", game);
-        }
-
-        static private void UpdateGame(Game game)
-        {
-            client.PutAsJsonAsync($"api/CurrentGame/2", game);
-        }
+        static public void PutToDb<T>(T instance, Method method)
+            {
+            string apiString = instance.GetType().Name;
+            switch (method)
+            {
+                case Method.Insert:
+                {
+                    apiString += "/1";
+                    break;
+                }
+                case Method.Update:
+                    {
+                        apiString += "/2";
+                        break;
+                    }
+            }
+            client.PutAsJsonAsync($"api/" + apiString, instance);
+            }
 
         static public void OnScoreChanged(object sender, OnScoredEventArgs e)
         {
-            UpdateGame(e.Game);
-        }
-
-        static public void InsertUser(User user)
-        {
-            client.PutAsJsonAsync($"api/User/1", user);
-        }
-
-        static public void UpdateUser(User user)
-        {
-            client.PutAsJsonAsync($"api/User/2", user);
+            PutToDb<Game>(e.Game, Method.Update);
         }
 
         static public async Task<List<User>> GetAllUsers()

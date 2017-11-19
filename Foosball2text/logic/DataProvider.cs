@@ -27,18 +27,19 @@ namespace Logic
 
         public void CommitBothTeamsData()
         {
-            ServiceClient.UpdateUser(LeftUser);
-            ServiceClient.UpdateUser(RightUser);
+            ServiceClient.PutToDb<User>(LeftUser, Method.Update);
+            ServiceClient.PutToDb<User>(RightUser, Method.Update);
         }
 
         public User AddUser(string name)
         {
             User user = new User();
             user.UserName = name;
-            ServiceClient.InsertUser(user);
+            ServiceClient.PutToDb<User>(user, Method.Insert);
 
             return user;
         }
+
         public User GetUserData(string username)
         {
             List<User> user = UserList.Where((x) => x.UserName == username).ToList();
