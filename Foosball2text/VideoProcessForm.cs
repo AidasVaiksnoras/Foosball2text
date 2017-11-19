@@ -1,11 +1,8 @@
 using System;
 using System.Windows.Forms;
-
 using Emgu.CV;
 using System.ComponentModel;
-using System.Linq;
 using Logic;
-using SQL_operations;
 
 namespace Foosball2text
 {
@@ -18,6 +15,12 @@ namespace Foosball2text
         private string _filePath;
         private NavigationForm _navForm;
         private User _leftUser, _rightUser;
+
+        private Game _game = new Game();
+
+        public event EventHandler<OnScoredEventArgs> OnScored;
+        public event Action OnRestart;
+
         //Logger list asociated
         BindingList<String> logData = new BindingList<string>();
         LoggerMessageDelivery messageGetter = new LoggerMessageDelivery();
@@ -29,26 +32,47 @@ namespace Foosball2text
             _navForm = navForm;
             _leftUser = leftUser;
             _rightUser = rightUser;
+            _game.LeftUserName = leftUser.UserName;
+            _game.RightUserName = rightUser.UserName;
             _frameHandler = new FrameHandler(pictureBox1.Width, pictureBox1.Height);
             _frameHandler.UpdateHue(hue);
             _filePath = filePath;
-            Init();
 
+            RegisterEventsHandlers();
+            OnRestart();
+
+            ServiceClient.AddGame(_game);
             logData.Add(messageGetter.gameStart);
             listBox1.DataSource = logData;
             logData.ListChanged += new ListChangedEventHandler(OnListChange);
         }
-        private void Init()
+
+        private void RegisterEventsHandlers()
+        {
+            OnRestart += InitTimer;
+            OnRestart += () => {
+                _capture = new VideoCapture(_filePath);
+            };
+            OnRestart += () => {
+                _game.LeftScore = 0;
+                _game.RightScore = 0;
+            };
+
+            OnScored += ServiceClient.OnScoreChanged;
+            OnScored += (o, e) => {
+                TeamA.Text = e.Game.LeftScore.ToString();
+                TeamB.Text = e.Game.RightScore.ToString();
+            };
+        }
+
+        private void InitTimer()
         {
             _timer = new Timer();
-
-            //Frame Rate
             _timer.Interval = 1000 / _fps;
             _timer.Tick += new EventHandler(TimerTick);
             _timer.Start();
-
-            _capture = new VideoCapture(_filePath);
         }
+
         private void TimerTick(object sender, EventArgs e)
         {
             Mat frame = _capture.QueryFrame();
@@ -58,6 +82,7 @@ namespace Foosball2text
             pictureBox1.Image = _frameHandler.GetResizedImage(frame, pictureBox1.Width, pictureBox1.Height);
             UpdateInformation();
         }
+
         private void UpdateInformation()
         {
             WatcherInformation newInformation = _frameHandler.GetWatcherInformation();
@@ -71,14 +96,24 @@ namespace Foosball2text
             ValueUpdates.Text = newInformation.SecondsBetweenBallCapture.ToString("F5");
             label_TeamOnLeftMaxValue.Text = newInformation.MaxSpeedTeamOnLeft.ToString("F5");
             label_TeamOnRightMaxValue.Text = newInformation.MaxSpeedTeamOnRight.ToString("F5");
-            TeamA.Text = newInformation.TeamOnLeftGoals.ToString();
-            TeamB.Text = newInformation.TeamOnRightGoals.ToString();
+            if (TeamA.Text != newInformation.TeamOnLeftGoals.ToString() || TeamB.Text != newInformation.TeamOnRightGoals.ToString())
+            {
+            _game.LeftScore = newInformation.TeamOnLeftGoals;
+            _game.RightScore = newInformation.TeamOnRightGoals;
+            OnScored(this, new OnScoredEventArgs(_game));
+            }
 
             if (newInformation.NewLogs != null)
             {
                 foreach (string log in newInformation.NewLogs)
                     logData.Add(log);
             }
+        }
+
+        private void OnScoreChanged(object sender, OnScoredEventArgs e)
+        {
+            TeamA.Text = e.Game.LeftScore.ToString();
+            TeamB.Text = e.Game.RightScore.ToString();
         }
 
         private void OnListChange(object sender, ListChangedEventArgs e)
@@ -90,6 +125,7 @@ namespace Foosball2text
 
         private void EndGameButton_Click(object sender, EventArgs e)
         {
+            _timer.Stop();
             logData.Add(messageGetter.gameEnd);
 
             WatcherInformation newInformation = _frameHandler.GetWatcherInformation();
@@ -115,7 +151,7 @@ namespace Foosball2text
         private void RestartButton_Click(object sender, EventArgs e)
         {
             _timer.Tick -= TimerTick;
-            Init();
+            OnRestart();
             //NewGame(); Commented out because it doesn't show a goal if video ended too soon
         }
         

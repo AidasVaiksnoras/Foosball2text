@@ -2,8 +2,9 @@
 using System.Drawing;
 using System.Windows.Forms;
 using Emgu.CV;
+using Emgu.CV.CvEnum;
+using Emgu.CV.Structure;
 using Logic;
-using SQL_operations;
 
 namespace Foosball2text
 {
@@ -44,7 +45,6 @@ namespace Foosball2text
             Mat frame = _capture.QueryFrame();
             if (frame == null)
                 return;
-
             _pictureBox.Image = _frameHandler.GetResizedImage(frame, _pictureBox.Width, _pictureBox.Height);
         }
 

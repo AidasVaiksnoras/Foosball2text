@@ -1,10 +1,5 @@
-﻿using SQL_operations;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Logic
 {
     public class UsersDataProvider
@@ -12,9 +7,6 @@ namespace Logic
         public List<User> UserList { get; set; }
         public User LeftUser { get; set; }
         public User RightUser { get; set; }
-
-        private ReadOperations _ro = new ReadOperations();
-        private WriteOperations _wo = new WriteOperations();
 
         public UsersDataProvider()
         {
@@ -30,20 +22,30 @@ namespace Logic
 
         public void LoadData()
         {
-            UserList = _ro.GetAllUserData();
+            UserList = ServiceClient.GetAllUsers().Result;
         }
 
         public void CommitBothTeamsData()
         {
-            _wo.UpdateUserPlayData(LeftUser);
-            _wo.UpdateUserPlayData(RightUser);
+            ServiceClient.UpdateUser(LeftUser);
+            ServiceClient.UpdateUser(RightUser);
         }
 
         public User AddUser(string name)
         {
-            _wo.InsertNewUser(name);
+            User user = new User();
+            user.UserName = name;
+            ServiceClient.InsertUser(user);
 
-            return _ro.GetUsersData(name);
+            return user;
+        }
+        public User GetUserData(string username)
+        {
+            List<User> user = UserList.Where((x) => x.UserName == username).ToList();
+            if (user.Count == 0)
+                throw new UserNotFoundException("No user was found with Name: " + username, username);
+            else
+                return user[0]; 
         }
     }
 }

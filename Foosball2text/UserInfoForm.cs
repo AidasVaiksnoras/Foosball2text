@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Logic;
-using SQL_operations;
 
 namespace Foosball2text
 {
@@ -48,13 +41,12 @@ namespace Foosball2text
         {
             try
             {
-                ReadOperations ro = new ReadOperations();
-                UpdateForm(ro.GetUsersData(name));
+                UpdateForm(_dataProvider.GetUserData(name));
                 Show();
             }
             catch (UserNotFoundException ex)
             {
-                ExceptionForm exceptionForm = new ExceptionForm("Žaidėjas: " + ex.Message + " nerastas");
+                ExceptionForm exceptionForm = new ExceptionForm("Žaidėjas: " + ex.UserName + " nerastas");
                 exceptionForm.Show();
             }
         }
