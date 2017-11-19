@@ -2,32 +2,56 @@
 using System.Text;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+
 namespace Logic
 {
-    public class ServiceClient
+    public static class ServiceClient
     {
         static HttpClient client = new HttpClient();
-        private StringBuilder stringBuilder = new StringBuilder();
-        public ServiceClient()
+        static private StringBuilder stringBuilder = new StringBuilder();
+        static ServiceClient()
         {
             client.BaseAddress = new Uri("http://localhost:63526/");
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public void AddGame(Game game)
+        static public void AddGame(Game game)
         {
             client.PutAsJsonAsync($"api/CurrentGame/1", game);
         }
 
-        private void UpdateGame(Game game)
+        static private void UpdateGame(Game game)
         {
             client.PutAsJsonAsync($"api/CurrentGame/2", game);
         }
 
-        public void OnScoreChanged(object sender, OnScoredEventArgs e)
+        static public void OnScoreChanged(object sender, OnScoredEventArgs e)
         {
             UpdateGame(e.Game);
+        }
+
+        static public void InsertUser(User user)
+        {
+            client.PutAsJsonAsync($"api/User/1", user);
+        }
+
+        static public void UpdateUser(User user)
+        {
+            client.PutAsJsonAsync($"api/User/2", user);
+        }
+
+        static public async Task<List<User>> GetAllUsers()
+        {
+            HttpResponseMessage msg = await client.GetAsync($"api/User").ConfigureAwait(false); ;
+            List<User> list = null;
+            if (msg.IsSuccessStatusCode)
+            {
+                list = await msg.Content.ReadAsAsync<List<User>>();
+            }
+            return list;
         }
     }
 }

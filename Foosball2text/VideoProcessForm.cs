@@ -3,7 +3,6 @@ using System.Windows.Forms;
 using Emgu.CV;
 using System.ComponentModel;
 using Logic;
-using SQL_operations;
 
 namespace Foosball2text
 {
@@ -17,7 +16,6 @@ namespace Foosball2text
         private NavigationForm _navForm;
         private User _leftUser, _rightUser;
 
-        private ServiceClient _client = new ServiceClient();
         private Game _game = new Game();
 
         public event EventHandler<OnScoredEventArgs> OnScored;
@@ -43,7 +41,7 @@ namespace Foosball2text
             RegisterEventsHandlers();
             OnRestart();
 
-            _client.AddGame(_game);
+            ServiceClient.AddGame(_game);
             logData.Add(messageGetter.gameStart);
             listBox1.DataSource = logData;
             logData.ListChanged += new ListChangedEventHandler(OnListChange);
@@ -60,7 +58,7 @@ namespace Foosball2text
                 _game.RightScore = 0;
             };
 
-            OnScored += _client.OnScoreChanged;
+            OnScored += ServiceClient.OnScoreChanged;
             OnScored += (o, e) => {
                 TeamA.Text = e.Game.LeftScore.ToString();
                 TeamB.Text = e.Game.RightScore.ToString();
@@ -127,6 +125,7 @@ namespace Foosball2text
 
         private void EndGameButton_Click(object sender, EventArgs e)
         {
+            _timer.Stop();
             logData.Add(messageGetter.gameEnd);
 
             WatcherInformation newInformation = _frameHandler.GetWatcherInformation();

@@ -8,18 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Logic;
-using SQL_operations;
 
 namespace Foosball2text
 {
     public partial class SaveGameResultsForm : Form
     {
         User _userA, _userB;
-        //Game's data
         int _goalsA, _goalsB;
-        //int _oldRankingA, _oldRankingB;
-        //int _rankScorechangeA, _rankScorechangeB;
-        //int _newRankA, _newRankB;
         double _maxSpeedA, _maxSpeedB;
         TimeSpan _gameTime;
         bool _userDataSaved;

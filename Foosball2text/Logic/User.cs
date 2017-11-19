@@ -11,6 +11,8 @@ namespace Logic
         public int TotalGoals { get; set; }
         public int RankPoints { get; set; }
 
+        public User() {}
+
         public User(string name)
         {
             UserName = name;
