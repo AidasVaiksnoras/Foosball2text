@@ -166,7 +166,6 @@
     </Compile>
     <Compile Include="Helpers\ConnectionProvider.cs" />
     <Compile Include="Helpers\DataProvider.cs" />
-    <Compile Include="Models\CommentModel.cs" />
     <Compile Include="Models\Game.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

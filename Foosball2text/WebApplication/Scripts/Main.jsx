@@ -1,10 +1,7 @@
-﻿
-//var React = require('react-native');
+﻿var obj;
+var interval = 1000;
 
-var obj;
-
-
-var SampleApp = React.createClass({
+var CurrentResult = React.createClass({
 
 
     getInitialState: function () {
@@ -18,7 +15,6 @@ var SampleApp = React.createClass({
 
     componentDidMount: function () {
         this.timer = setInterval(() => {
-            console.log('Sending AJAX request...');
             $.ajax({
                 type: "GET",
                 url: "api/CurrentGame",
@@ -27,13 +23,7 @@ var SampleApp = React.createClass({
                     some: ['other', 'data']
                 }
             }).done(function (msg) {
-                $(msg).appendTo("#edix");
-                console.log('success');
-                console.log(msg);
                 obj = JSON.parse(msg);
-                console.log(obj.LeftUserName);
-            }).fail(function () {
-                console.log('error');
             });
             this.setState({
                 leftUser: obj.LeftUserName,
@@ -41,7 +31,7 @@ var SampleApp = React.createClass({
                 leftScore: obj.LeftScore,
                 rightScore: obj.RightScore
             })
-        }, 1000);
+        }, interval);
     },
 
 
@@ -56,6 +46,6 @@ var SampleApp = React.createClass({
 
 
 ReactDOM.render(
-    <SampleApp />,
+    <CurrentResult />,
     document.getElementById('content')
 );
