@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
 using Logic;
-using SQL_operations;
 using System.Collections.Generic;
 
 namespace Foosball2text

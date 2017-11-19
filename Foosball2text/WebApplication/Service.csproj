@@ -161,12 +161,15 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CurrentGameController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\ConnectionProvider.cs" />
     <Compile Include="Helpers\DataProvider.cs" />
+    <Compile Include="Helpers\EmptyGameListExeption.cs" />
     <Compile Include="Models\Game.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -188,6 +191,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\" />  
     <Folder Include="Views\Demo\" />
   </ItemGroup>
   <PropertyGroup>

@@ -16,7 +16,16 @@ namespace WebApplication.Controllers
         // GET: api/CurrentGame
         public IEnumerable<string> Get()
         {
-            return new string[] { new JavaScriptSerializer().Serialize(provider.GetCurrentGameData()) };
+            string[] gameList = new string[] { };
+            try
+            {
+                 gameList = new string[] { new JavaScriptSerializer().Serialize(provider.GetCurrentGameData()) };
+            }
+            catch (EmptyGameListExeption e)
+            {
+                gameList = null;
+            }
+            return gameList;
         }
 
         // GET: api/CurrentGame/5
