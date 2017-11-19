@@ -65,7 +65,7 @@ namespace WebApplication.Helpers
                             game.LeftUserName = reader.GetString(1);
                             game.RightUserName = reader.GetString(2);
                             game.LeftScore = reader.GetInt32(3);
-                            game.LeftScore = reader.GetInt32(4);
+                            game.RightScore = reader.GetInt32(4);
                             return game;
                         }
                     }
