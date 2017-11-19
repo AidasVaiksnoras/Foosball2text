@@ -3,14 +3,14 @@ using System.Text;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Collections.Generic;
-
+using System.Threading.Tasks;
 namespace Logic
 {
     public static class ServiceClient
     {
         static HttpClient client = new HttpClient();
         static private StringBuilder stringBuilder = new StringBuilder();
-        public ServiceClient()
+        static ServiceClient()
         {
             client.BaseAddress = new Uri("http://localhost:63526/");
             client.DefaultRequestHeaders.Accept.Clear();

@@ -86,7 +86,7 @@ namespace Foosball2text
             _timer.Start();
             _game.LeftScore = 0;
             _game.RightScore = 0;
-            _client.AddGame(_game);
+            ServiceClient.AddGame(_game);
 
         }
 
@@ -122,7 +122,6 @@ namespace Foosball2text
             OnScored(this, new OnScoredEventArgs(_game));
 
             }
-            _client.UpdateGame(_game);
 
             if (newInformation.NewLogs != null)
             {
