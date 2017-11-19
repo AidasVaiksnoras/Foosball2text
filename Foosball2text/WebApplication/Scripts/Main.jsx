@@ -17,7 +17,7 @@ var CurrentResult = React.createClass({
         this.timer = setInterval(() => {
             $.ajax({
                 type: "GET",
-                url: "api/CurrentGame",
+                url: "api/Game",
                 data: {
                     user: 'success',
                     some: ['other', 'data']
