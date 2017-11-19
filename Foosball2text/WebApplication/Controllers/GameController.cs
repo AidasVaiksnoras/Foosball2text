@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Collections.Generic;
 using System.Web.Http;
 using WebApplication.Helpers;
 using WebApplication.Models;
@@ -10,7 +6,7 @@ using System.Web.Script.Serialization;
 
 namespace WebApplication.Controllers
 {
-    public class CurrentGameController : ApiController
+    public class GameController : ApiController
     {
         DataProvider provider = new DataProvider();
         // GET: api/CurrentGame

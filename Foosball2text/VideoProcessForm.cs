@@ -2,10 +2,6 @@ using System;
 using System.Windows.Forms;
 using Emgu.CV;
 using System.ComponentModel;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
 using Logic;
 using System.Drawing;
 
@@ -54,7 +50,7 @@ namespace Foosball2text
             RegisterEventsHandlers();
             OnRestart();
 
-            ServiceClient.AddGame(_game);
+            ServiceClient.PutToDb<Game>(_game, Method.Insert);
             logData.Add(messageGetter.gameStart);
             listBox1.DataSource = logData;
             logData.ListChanged += new ListChangedEventHandler(OnListChange);
@@ -86,7 +82,7 @@ namespace Foosball2text
             _timer.Start();
             _game.LeftScore = 0;
             _game.RightScore = 0;
-            ServiceClient.AddGame(_game);
+            ServiceClient.PutToDb<Game>(_game, Method.Insert);
 
         }
 
