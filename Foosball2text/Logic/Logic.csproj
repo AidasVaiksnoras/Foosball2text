@@ -108,12 +108,6 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\SQL operations\SQL operations.csproj">
-      <Project>{cf0a27e9-4edc-4750-aafa-d3cdc401c6da}</Project>
-      <Name>SQL operations</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
