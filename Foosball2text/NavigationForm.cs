@@ -4,7 +4,9 @@ using System.ComponentModel;
 
 using System.Windows.Forms;
 using Logic;
-using SQL_operations;
+
+using Microsoft.Practices.Unity;
+
 
 namespace Foosball2text
 {
@@ -13,17 +15,19 @@ namespace Foosball2text
         public String _teamA { get; set; }
         public String _teamB { get; set; }
         public UsersDataProvider DataProvider {get; set;}
+        public UnityContainer container = new UnityContainer();
 
         public NavigationForm()
         {
             InitializeComponent();
             DataProvider = new UsersDataProvider();
+            container.RegisterType<UsersDataProvider>(new InjectionConstructor());
         }
 
         private void ProcessButtonClick(object sender, EventArgs e)
         {
             this.Hide();
-            var form = new LoginForm(DataProvider);
+            var form = container.Resolve<LoginForm>();
             form.ShowDialog();
 
             DialogResult result = openFileDialog1.ShowDialog();
@@ -42,7 +46,8 @@ namespace Foosball2text
 
         private void Button2_Click(object sender, EventArgs e)
         {
-            var leaderboard = new LeaderboardForm(DataProvider, this);
+            container.RegisterInstance(this);
+            var leaderboard = container.Resolve<LeaderboardForm>();
             leaderboard.Show();
         }
 
@@ -53,7 +58,8 @@ namespace Foosball2text
 
         private void Button3_Click(object sender, EventArgs e)
         {
-            UserInfoForm userInfo = new UserInfoForm(DataProvider);
+            container.RegisterType<UserInfoForm>(new InjectionConstructor(DataProvider));
+            UserInfoForm userInfo = container.Resolve<UserInfoForm>(); ;
             userInfo.Show();
         }
 
