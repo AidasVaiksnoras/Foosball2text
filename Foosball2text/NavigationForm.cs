@@ -21,7 +21,7 @@ namespace Foosball2text
         {
             InitializeComponent();
             DataProvider = new UsersDataProvider();
-            container.RegisterType<UsersDataProvider>(new InjectionConstructor());
+            container.RegisterInstance(DataProvider);
         }
 
         private void ProcessButtonClick(object sender, EventArgs e)
