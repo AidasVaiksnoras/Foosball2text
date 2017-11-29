@@ -4,9 +4,9 @@ namespace Logic
 {
     public class OnScoredEventArgs : EventArgs
     {
-        public GameEntity Game { get; set; }
+        public Game Game { get; set; }
 
-        public OnScoredEventArgs(GameEntity game)
+        public OnScoredEventArgs(Game game)
         {
             Game = game;
         }
