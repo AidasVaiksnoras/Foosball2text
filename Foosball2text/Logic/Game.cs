@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Logic
 {
-    public class GameEntity
+    public class Game
     {
         public string LeftUserName { get; set;}
         public string RightUserName { get; set; }
