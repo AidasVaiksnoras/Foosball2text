@@ -9,7 +9,7 @@ namespace WebApplication.Controllers
     public class GameController : ApiController
     {
         DataProvider provider = new DataProvider();
-        // GET: api/CurrentGame
+        // GET: api/Game
         public IEnumerable<string> Get()
         {
             string[] gameList = new string[] { };
@@ -24,18 +24,18 @@ namespace WebApplication.Controllers
             return gameList;
         }
 
-        // GET: api/CurrentGame/5
+        // GET: api/Game/5
         public string Get(int id)
         {
             return "";
         }
 
-        // POST: api/CurrentGame
+        // POST: api/Game
         public void Post([FromBody]string value)
         {
         }
 
-        // PUT: api/CurrentGame/5
+        // PUT: api/Game/5
         public void Put(int id, [FromBody]Game value)
         {
             if (id == 1) 
@@ -44,7 +44,7 @@ namespace WebApplication.Controllers
                 provider.UpdateGame(value);
         }
 
-        // DELETE: api/CurrentGame/5
+        // DELETE: api/Game/5
         public void Delete(int id)
         {
         }
