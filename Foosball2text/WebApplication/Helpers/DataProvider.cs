@@ -15,7 +15,7 @@ namespace WebApplication.Helpers
             {
                 connection.Open();
                 StringBuilder sb = new StringBuilder();
-                sb.Append("INSERT dbo.CurrentGame (LeftUserName, RightUserName, LeftScore, RightScore)");
+                sb.Append("INSERT dbo.Games (LeftUserName, RightUserName, LeftScore, RightScore)");
                 sb.Append("VALUES (");
                 sb.Append("'" + game.LeftUserName + "', '" + game.RightUserName + "', " + game.LeftScore + ", " + game.RightScore + "");
                 sb.Append(");");
@@ -36,9 +36,9 @@ namespace WebApplication.Helpers
                     connection.Open();
 
                 StringBuilder sb = new StringBuilder();
-                sb.Append("Update CurrentGame ");
+                sb.Append("Update Games ");
                 sb.Append("SET LeftScore = " + game.LeftScore + ", RightScore = " + game.RightScore );
-                sb.Append(" Where (Id = (SELECT TOP 1 Id FROM CurrentGame ORDER BY Id DESC))");
+                sb.Append(" Where (Id = (SELECT TOP 1 Id FROM Games ORDER BY Id DESC))");
                 string sql = sb.ToString();
 
                 using (SqlCommand command = new SqlCommand(sql, connection))
@@ -53,7 +53,7 @@ namespace WebApplication.Helpers
             using (SqlConnection connection = ConnectionProvider.GetConnection())
             {
                 connection.Open();
-                string sql = "SELECT TOP 1 * FROM CurrentGame ORDER BY Id DESC";
+                string sql = "SELECT TOP 1 * FROM Games ORDER BY Id DESC";
 
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {

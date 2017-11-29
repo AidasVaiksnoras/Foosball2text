@@ -17,7 +17,7 @@ namespace Foosball2text
         private NavigationForm _navForm;
         private User _leftUser, _rightUser;
 
-        private Game _game = new Game();
+        private GameEntity _game = new GameEntity();
 
         public event EventHandler<OnScoredEventArgs> OnScored;
         public event Action OnRestart;
@@ -50,7 +50,7 @@ namespace Foosball2text
             RegisterEventsHandlers();
             OnRestart();
 
-            ServiceClient.PutToDb<Game>(_game, Method.Insert);
+            ServiceClient.PutToDb<GameEntity>(_game, Method.Insert);
             logData.Add(messageGetter.gameStart);
             listBox1.DataSource = logData;
             logData.ListChanged += new ListChangedEventHandler(OnListChange);
@@ -82,7 +82,7 @@ namespace Foosball2text
             _timer.Start();
             _game.LeftScore = 0;
             _game.RightScore = 0;
-            ServiceClient.PutToDb<Game>(_game, Method.Insert);
+            ServiceClient.PutToDb<GameEntity>(_game, Method.Insert);
 
         }
 

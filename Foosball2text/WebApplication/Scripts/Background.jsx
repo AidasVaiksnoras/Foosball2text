@@ -8,7 +8,7 @@ class Background extends Component {
         };
     }
 }
-componentDidMount() {
+componentDidMount() { //TODO inspect this
     return fetch('http://localhost:63526/api/CurrentGame')
         .then((response) => response.json())
         .then((responseJson) => {

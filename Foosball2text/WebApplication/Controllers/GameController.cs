@@ -9,7 +9,7 @@ namespace WebApplication.Controllers
     public class GameController : ApiController
     {
         DataProvider provider = new DataProvider();
-        // GET: api/CurrentGame
+        // GET: api/???
         public IEnumerable<string> Get()
         {
             string[] gameList = new string[] { };

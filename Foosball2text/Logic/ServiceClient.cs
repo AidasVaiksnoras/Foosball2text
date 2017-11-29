@@ -40,7 +40,7 @@ namespace Logic
 
         static public void OnScoreChanged(object sender, OnScoredEventArgs e)
         {
-            PutToDb<Game>(e.Game, Method.Update);
+            PutToDb<GameEntity>(e.Game, Method.Update);
         }
 
         static public async Task<List<User>> GetAllUsers()
