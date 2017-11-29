@@ -68,7 +68,7 @@
     <Compile Include="Ball.cs" />
     <Compile Include="BallWatcher.cs" />
     <Compile Include="DataProvider.cs" />
-    <Compile Include="Game.cs" />
+    <Compile Include="GameEntity.cs" />
     <Compile Include="IGameWatcher.cs" />
     <Compile Include="ListExtensions.cs" />
     <Compile Include="OnScoredEventArgs.cs" />
