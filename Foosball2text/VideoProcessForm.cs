@@ -35,6 +35,9 @@ namespace Foosball2text
         {
             InitializeComponent();
 
+            TeamA_label.Text = leftUser.UserName;
+            TeamB_label.Text = rightUser.UserName;
+
             _navForm = navForm;
             _leftUser = leftUser;
             _rightUser = rightUser;
@@ -50,7 +53,7 @@ namespace Foosball2text
             RegisterEventsHandlers();
             OnRestart();
 
-            ServiceClient.PutToDb<GameEntity>(_game, Method.Insert);
+            ServiceClient.PutToDb<GameEntity>(_game, Method.Insert); //FIXME inspect new game insertion
             logData.Add(messageGetter.gameStart);
             listBox1.DataSource = logData;
             logData.ListChanged += new ListChangedEventHandler(OnListChange);
@@ -69,8 +72,8 @@ namespace Foosball2text
 
             OnScored += ServiceClient.OnScoreChanged;
             OnScored += (o, e) => {
-                TeamA.Text = e.Game.LeftScore.ToString();
-                TeamB.Text = e.Game.RightScore.ToString();
+                TeamA_score.Text = e.Game.LeftScore.ToString();
+                TeamB_score.Text = e.Game.RightScore.ToString();
             };
         }
 
@@ -111,7 +114,7 @@ namespace Foosball2text
                 label_TeamOnLeftMaxValue.Text = newInformation.MaxSpeedTeamOnLeft.ToString("F5");
                 label_TeamOnRightMaxValue.Text = newInformation.MaxSpeedTeamOnRight.ToString("F5");
             }
-            if (TeamA.Text != newInformation.TeamOnLeftGoals.ToString() || TeamB.Text != newInformation.TeamOnRightGoals.ToString())
+            if (TeamA_score.Text != newInformation.TeamOnLeftGoals.ToString() || TeamB_score.Text != newInformation.TeamOnRightGoals.ToString())
             {
             _game.LeftScore = newInformation.TeamOnLeftGoals;
             _game.RightScore = newInformation.TeamOnRightGoals;
@@ -128,8 +131,8 @@ namespace Foosball2text
 
         private void OnScoreChanged(object sender, OnScoredEventArgs e)
         {
-            TeamA.Text = e.Game.LeftScore.ToString();
-            TeamB.Text = e.Game.RightScore.ToString();
+            TeamA_score.Text = e.Game.LeftScore.ToString();
+            TeamB_score.Text = e.Game.RightScore.ToString();
         }
 
         private void OnListChange(object sender, ListChangedEventArgs e)
@@ -159,8 +162,8 @@ namespace Foosball2text
         public void NewGame()
         {
             _frameHandler.ResetGameWatcher();
-            TeamA.Text = "0";
-            TeamB.Text = "0";
+            TeamA_score.Text = "0";
+            TeamB_score.Text = "0";
             logData.Add(messageGetter.gameStart);
         }
 

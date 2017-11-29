@@ -39,11 +39,11 @@
             this.SpeedValue = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.TeamB = new System.Windows.Forms.Label();
-            this.TeamA = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.TeamB_score = new System.Windows.Forms.Label();
+            this.TeamA_score = new System.Windows.Forms.Label();
+            this.TeamB_label = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.TeamA_label = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.EndGameButton = new System.Windows.Forms.Button();
             this.restartButton = new System.Windows.Forms.Button();
@@ -159,34 +159,34 @@
             this.label4.TabIndex = 25;
             this.label4.Text = "Ball coordinates:";
             // 
-            // TeamB
+            // TeamB_score
             // 
-            this.TeamB.AutoSize = true;
-            this.TeamB.Location = new System.Drawing.Point(545, 27);
-            this.TeamB.Name = "TeamB";
-            this.TeamB.Size = new System.Drawing.Size(13, 13);
-            this.TeamB.TabIndex = 35;
-            this.TeamB.Tag = "score";
-            this.TeamB.Text = "0";
+            this.TeamB_score.AutoSize = true;
+            this.TeamB_score.Location = new System.Drawing.Point(553, 27);
+            this.TeamB_score.Name = "TeamB_score";
+            this.TeamB_score.Size = new System.Drawing.Size(13, 13);
+            this.TeamB_score.TabIndex = 35;
+            this.TeamB_score.Tag = "score";
+            this.TeamB_score.Text = "0";
             // 
-            // TeamA
+            // TeamA_score
             // 
-            this.TeamA.AutoSize = true;
-            this.TeamA.Location = new System.Drawing.Point(431, 27);
-            this.TeamA.Name = "TeamA";
-            this.TeamA.Size = new System.Drawing.Size(13, 13);
-            this.TeamA.TabIndex = 34;
-            this.TeamA.Tag = "score";
-            this.TeamA.Text = "0";
+            this.TeamA_score.AutoSize = true;
+            this.TeamA_score.Location = new System.Drawing.Point(435, 27);
+            this.TeamA_score.Name = "TeamA_score";
+            this.TeamA_score.Size = new System.Drawing.Size(13, 13);
+            this.TeamA_score.TabIndex = 34;
+            this.TeamA_score.Tag = "score";
+            this.TeamA_score.Text = "0";
             // 
-            // label6
+            // TeamB_label
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(495, 27);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(44, 13);
-            this.label6.TabIndex = 33;
-            this.label6.Text = "Team B";
+            this.TeamB_label.AutoSize = true;
+            this.TeamB_label.Location = new System.Drawing.Point(553, 14);
+            this.TeamB_label.Name = "TeamB_label";
+            this.TeamB_label.Size = new System.Drawing.Size(44, 13);
+            this.TeamB_label.TabIndex = 33;
+            this.TeamB_label.Text = "Team B";
             // 
             // label5
             // 
@@ -198,14 +198,14 @@
             this.label5.TabIndex = 32;
             this.label5.Text = "Score:";
             // 
-            // label7
+            // TeamA_label
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(381, 27);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(44, 13);
-            this.label7.TabIndex = 31;
-            this.label7.Text = "Team A";
+            this.TeamA_label.AutoSize = true;
+            this.TeamA_label.Location = new System.Drawing.Point(435, 14);
+            this.TeamA_label.Name = "TeamA_label";
+            this.TeamA_label.Size = new System.Drawing.Size(44, 13);
+            this.TeamA_label.TabIndex = 31;
+            this.TeamA_label.Text = "Team A";
             // 
             // listBox1
             // 
@@ -383,11 +383,11 @@
             this.Controls.Add(this.restartButton);
             this.Controls.Add(this.EndGameButton);
             this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.TeamB);
-            this.Controls.Add(this.TeamA);
-            this.Controls.Add(this.label6);
+            this.Controls.Add(this.TeamB_score);
+            this.Controls.Add(this.TeamA_score);
+            this.Controls.Add(this.TeamB_label);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.label7);
+            this.Controls.Add(this.TeamA_label);
             this.Controls.Add(this.pictureBox1);
             this.Name = "VideoProcessForm";
             this.Text = "Form1";
@@ -416,11 +416,11 @@
         private System.Windows.Forms.Label SpeedValue;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label TeamB;
-        private System.Windows.Forms.Label TeamA;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label TeamB_score;
+        private System.Windows.Forms.Label TeamA_score;
+        private System.Windows.Forms.Label TeamB_label;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label TeamA_label;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button EndGameButton;
         private System.Windows.Forms.Button restartButton;
