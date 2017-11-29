@@ -15,9 +15,9 @@ namespace WebApplication.Helpers
             {
                 connection.Open();
                 StringBuilder sb = new StringBuilder();
-                sb.Append("INSERT dbo.Games (LeftUserName, RightUserName, LeftScore, RightScore)");
+                sb.Append("INSERT dbo.Games (LeftUserName, RightUserName, LeftScore, RightScore, InProgress)");
                 sb.Append("VALUES (");
-                sb.Append("'" + game.LeftUserName + "', '" + game.RightUserName + "', " + game.LeftScore + ", " + game.RightScore + "");
+                sb.Append("'" + game.LeftUserName + "', '" + game.RightUserName + "', " + game.LeftScore + ", " + game.RightScore + ", " + Convert.ToInt32(game.InProgress));
                 sb.Append(");");
                 string sql = sb.ToString();
 
@@ -37,7 +37,7 @@ namespace WebApplication.Helpers
 
                 StringBuilder sb = new StringBuilder();
                 sb.Append("Update Games ");
-                sb.Append("SET LeftScore = " + game.LeftScore + ", RightScore = " + game.RightScore );
+                sb.Append("SET LeftScore = " + game.LeftScore + ", RightScore = " + game.RightScore + ", InProgress = " + Convert.ToInt32(game.InProgress));
                 sb.Append(" Where (Id = (SELECT TOP 1 Id FROM Games ORDER BY Id DESC))");
                 string sql = sb.ToString();
 
@@ -66,6 +66,7 @@ namespace WebApplication.Helpers
                             game.RightUserName = reader.GetString(2);
                             game.LeftScore = reader.GetInt32(3);
                             game.RightScore = reader.GetInt32(4);
+                            game.InProgress = reader.GetBoolean(5);
                             return game;
                         }
                     }

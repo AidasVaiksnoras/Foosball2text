@@ -43,6 +43,7 @@ namespace Foosball2text
             _rightUser = rightUser;
             _game.LeftUserName = leftUser.UserName;
             _game.RightUserName = rightUser.UserName;
+            _game.InProgress = true;
             _frameHandler = new FrameHandler(pictureBox1.Width, pictureBox1.Height);
             _frameHandler.UpdateHue(hue);
             _filePath = filePath;
@@ -51,9 +52,8 @@ namespace Foosball2text
             _container.Panel2Collapsed = true;
 
             RegisterEventsHandlers();
-            OnRestart();
+            OnRestart(); //Works as Start
 
-            ServiceClient.PutToDb<Game>(_game, Method.Insert);
             logData.Add(messageGetter.gameStart);
             listBox1.DataSource = logData;
             logData.ListChanged += new ListChangedEventHandler(OnListChange);
@@ -66,8 +66,11 @@ namespace Foosball2text
                 _capture = new VideoCapture(_filePath);
             };
             OnRestart += () => {
+                SetGameEndedState();
                 _game.LeftScore = 0;
                 _game.RightScore = 0;
+                _game.InProgress = true;
+                ServiceClient.PutToDb<Game>(_game, Method.Insert);
             };
 
             OnScored += ServiceClient.OnScoreChanged;
@@ -83,10 +86,6 @@ namespace Foosball2text
             _timer.Interval = 1000 / _fps;
             _timer.Tick += new EventHandler(TimerTick);
             _timer.Start();
-            _game.LeftScore = 0;
-            _game.RightScore = 0;
-            ServiceClient.PutToDb<Game>(_game, Method.Insert);
-
         }
 
         private void TimerTick(object sender, EventArgs e)
@@ -145,6 +144,7 @@ namespace Foosball2text
         private void EndGameButton_Click(object sender, EventArgs e)
         {
             _timer.Stop();
+            SetGameEndedState();
             logData.Add(messageGetter.gameEnd);
 
             WatcherInformation newInformation = _frameHandler.GetWatcherInformation();
@@ -171,7 +171,7 @@ namespace Foosball2text
         {
             _timer.Tick -= TimerTick;
             OnRestart();
-            //NewGame(); Commented out because it doesn't show a goal if video ended too soon
+            logData.Add(messageGetter.gameStart);
         }
         
         private void backButton_Click(object sender, EventArgs e)
@@ -203,7 +203,14 @@ namespace Foosball2text
         private void VideoProcessForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             _navForm.Show();
+            SetGameEndedState();
         }
-}
+
+        private void SetGameEndedState() //FIXME always ends in true
+        {
+            _game.InProgress = false; 
+            ServiceClient.PutToDb<Game>(_game, Method.Update);
+        }
+    }
 }
 
