@@ -54,7 +54,7 @@ namespace Foosball2text
 
             RegisterEventsHandlers();
 
-            //UNDONE Start the video redo
+            ///Start the video
             InitTimer();
             _capture = new VideoCapture(_filePath);
             NewGame();
@@ -69,9 +69,9 @@ namespace Foosball2text
             OnRestart += () => {
                 _capture = new VideoCapture(_filePath);
             };
-            OnRestart += () => { //FIXME breaking point
-                SetGameEndedState();
-                //UNDONE creating a new game object in hopes of fixing DB updating instead of inserting
+            OnRestart += () => {
+                SetGameEnded();
+                logData.Add(messageGetter.gameEnd);
                 NewGame();
             };
 
@@ -145,7 +145,7 @@ namespace Foosball2text
         private void EndGameButton_Click(object sender, EventArgs e)
         {
             _timer.Stop();
-            SetGameEndedState();
+            SetGameEnded();
             logData.Add(messageGetter.gameEnd);
 
             WatcherInformation newInformation = _frameHandler.GetWatcherInformation();
@@ -195,12 +195,10 @@ namespace Foosball2text
         private void VideoProcessForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             _navForm.Show();
-            SetGameEndedState();
+            SetGameEnded();
         }
 
-        //TODO consider moving game info passing methods elsewhere
-
-        private void SetGameEndedState()
+        private void SetGameEnded()
         {
             _game.InProgress = false; 
             ServiceClient.PutToDb<Game>(_game, Method.Update);
