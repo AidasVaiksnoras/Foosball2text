@@ -20,7 +20,7 @@ namespace Logic
         }
 
         static public void PutToDb<T>(T instance, Method method)
-            {
+        {
             string apiString = instance.GetType().Name;      
 
             switch (method)
@@ -31,13 +31,13 @@ namespace Logic
                     break;
                 }
                 case Method.Update:
-                    {
-                        apiString += "/2";
-                        break;
-                    }
+                {
+                    apiString += "/2";
+                    break;
+                }
             }
             client.PutAsJsonAsync($"api/" + apiString, instance); //NOTE: make sure the Type of the instance and controller match
-            }
+        }
 
         static public void OnScoreChanged(object sender, OnScoredEventArgs e)
         {

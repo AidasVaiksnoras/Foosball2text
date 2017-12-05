@@ -43,18 +43,22 @@ namespace Foosball2text
             _rightUser = rightUser;
             _game.LeftUserName = leftUser.UserName;
             _game.RightUserName = rightUser.UserName;
+            _game.InProgress = true;
             _frameHandler = new FrameHandler(pictureBox1.Width, pictureBox1.Height);
             _frameHandler.UpdateHue(hue);
             _filePath = filePath;
+            ///Additional info
             _container = splitContainer1;
             _extraDataPanelHeight = _container.Panel2.Height;
             _container.Panel2Collapsed = true;
 
             RegisterEventsHandlers();
-            OnRestart();
 
-            ServiceClient.PutToDb<Game>(_game, Method.Insert);
-            logData.Add(messageGetter.gameStart);
+            ///Start the video
+            InitTimer();
+            _capture = new VideoCapture(_filePath);
+            NewGame();
+
             listBox1.DataSource = logData;
             logData.ListChanged += new ListChangedEventHandler(OnListChange);
         }
@@ -66,8 +70,9 @@ namespace Foosball2text
                 _capture = new VideoCapture(_filePath);
             };
             OnRestart += () => {
-                _game.LeftScore = 0;
-                _game.RightScore = 0;
+                SetGameEnded();
+                logData.Add(messageGetter.gameEnd);
+                NewGame();
             };
 
             OnScored += ServiceClient.OnScoreChanged;
@@ -83,10 +88,6 @@ namespace Foosball2text
             _timer.Interval = 1000 / _fps;
             _timer.Tick += new EventHandler(TimerTick);
             _timer.Start();
-            _game.LeftScore = 0;
-            _game.RightScore = 0;
-            ServiceClient.PutToDb<Game>(_game, Method.Insert);
-
         }
 
         private void TimerTick(object sender, EventArgs e)
@@ -116,10 +117,9 @@ namespace Foosball2text
             }
             if (TeamA_score.Text != newInformation.TeamOnLeftGoals.ToString() || TeamB_score.Text != newInformation.TeamOnRightGoals.ToString())
             {
-            _game.LeftScore = newInformation.TeamOnLeftGoals;
-            _game.RightScore = newInformation.TeamOnRightGoals;
-            OnScored(this, new OnScoredEventArgs(_game));
-
+                _game.LeftScore = newInformation.TeamOnLeftGoals;
+                _game.RightScore = newInformation.TeamOnRightGoals;
+                OnScored(this, new OnScoredEventArgs(_game));
             }
 
             if (newInformation.NewLogs != null)
@@ -145,6 +145,7 @@ namespace Foosball2text
         private void EndGameButton_Click(object sender, EventArgs e)
         {
             _timer.Stop();
+            SetGameEnded();
             logData.Add(messageGetter.gameEnd);
 
             WatcherInformation newInformation = _frameHandler.GetWatcherInformation();
@@ -159,19 +160,10 @@ namespace Foosball2text
 
         }
 
-        public void NewGame()
-        {
-            _frameHandler.ResetGameWatcher();
-            TeamA_score.Text = "0";
-            TeamB_score.Text = "0";
-            logData.Add(messageGetter.gameStart);
-        }
-
         private void RestartButton_Click(object sender, EventArgs e)
         {
             _timer.Tick -= TimerTick;
             OnRestart();
-            //NewGame(); Commented out because it doesn't show a goal if video ended too soon
         }
         
         private void backButton_Click(object sender, EventArgs e)
@@ -203,7 +195,31 @@ namespace Foosball2text
         private void VideoProcessForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             _navForm.Show();
+            SetGameEnded();
         }
-}
+
+        private void SetGameEnded()
+        {
+            _game.InProgress = false; 
+            ServiceClient.PutToDb<Game>(_game, Method.Update);
+        }
+
+        private void NewGame()
+        {
+            _frameHandler.ResetGameWatcher();
+            TeamA_score.Text = "0";
+            TeamB_score.Text = "0";
+            logData.Add(messageGetter.gameStart);
+
+            //DB related
+            _game = new Game();
+            _game.LeftScore = 0;
+            _game.RightScore = 0;
+            _game.LeftUserName = _leftUser.UserName;
+            _game.RightUserName = _rightUser.UserName;
+            _game.InProgress = true;
+            ServiceClient.PutToDb<Game>(_game, Method.Insert);
+        }
+    }
 }
 
