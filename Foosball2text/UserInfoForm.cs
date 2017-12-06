@@ -26,7 +26,7 @@ namespace Foosball2text
             search(name);
         }
 
-        private void UpdateForm(User user)
+        private void UpdateForm(UserNONMODEL user)
         {
             nameResultLabel.Text = user.UserName;
             gamesPlayedResultLabel.Text = user.GamesPlayed.ToString();

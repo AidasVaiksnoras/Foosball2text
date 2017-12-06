@@ -4,17 +4,17 @@ namespace Logic
 {
     public class UsersDataProvider
     {
-        public List<User> UserList { get; set; }
-        public User LeftUser { get; set; }
-        public User RightUser { get; set; }
+        public List<UserNONMODEL> UserList { get; set; }
+        public UserNONMODEL LeftUser { get; set; }
+        public UserNONMODEL RightUser { get; set; }
 
         public UsersDataProvider()
         {
-            LeftUser = new User();
-            RightUser = new User();
+            LeftUser = new UserNONMODEL();
+            RightUser = new UserNONMODEL();
         }
 
-        public UsersDataProvider(User leftUser, User rightUser)
+        public UsersDataProvider(UserNONMODEL leftUser, UserNONMODEL rightUser)
         {
             LeftUser = leftUser;
             RightUser = rightUser;
@@ -27,22 +27,22 @@ namespace Logic
 
         public void CommitBothTeamsData()
         {
-            ServiceClient.PutToDb<User>(LeftUser, Method.Update);
-            ServiceClient.PutToDb<User>(RightUser, Method.Update);
+            ServiceClient.PutToDb<UserNONMODEL>(LeftUser, Method.Update);
+            ServiceClient.PutToDb<UserNONMODEL>(RightUser, Method.Update);
         }
 
-        public User AddUser(string name)
+        public UserNONMODEL AddUser(string name)
         {
-            User user = new User();
+            UserNONMODEL user = new UserNONMODEL();
             user.UserName = name;
-            ServiceClient.PutToDb<User>(user, Method.Insert);
+            ServiceClient.PutToDb<UserNONMODEL>(user, Method.Insert);
 
             return user;
         }
 
-        public User GetUserData(string username)
+        public UserNONMODEL GetUserData(string username)
         {
-            List<User> user = UserList.Where((x) => x.UserName == username).ToList();
+            List<UserNONMODEL> user = UserList.Where((x) => x.UserName == username).ToList();
             if (user.Count == 0)
                 throw new UserNotFoundException("No user was found with Name: " + username, username);
             else

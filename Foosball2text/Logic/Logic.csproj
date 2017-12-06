@@ -64,14 +64,13 @@
     <Compile Include="Ball.cs" />
     <Compile Include="BallWatcher.cs" />
     <Compile Include="DataProvider.cs" />
-    <Compile Include="Game.cs" />
     <Compile Include="IGameWatcher.cs" />
     <Compile Include="ListExtensions.cs" />
     <Compile Include="OnScoredEventArgs.cs" />
     <Compile Include="SerializationHandler.cs" />
     <Compile Include="ServiceClient.cs" />
     <Compile Include="TrackedObject.cs" />
-    <Compile Include="User.cs" />
+    <Compile Include="UserNONMODEL.cs" />
     <Compile Include="UserNotFoundException.cs" />
     <Compile Include="WatcherInformation.cs" />
     <Compile Include="FrameHandler.cs" />
@@ -105,6 +104,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WebApplication\Service.csproj">
+      <Project>{01eced22-78e6-4dcf-b02d-224b489d9b59}</Project>
+      <Name>Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

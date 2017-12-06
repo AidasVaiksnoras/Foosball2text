@@ -277,6 +277,10 @@
       <Project>{c80358f0-3547-4dab-8c46-2e782c850aec}</Project>
       <Name>Logic</Name>
     </ProjectReference>
+    <ProjectReference Include="WebApplication\Service.csproj">
+      <Project>{01ECED22-78E6-4DCF-B02D-224B489D9B59}</Project>
+      <Name>Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">

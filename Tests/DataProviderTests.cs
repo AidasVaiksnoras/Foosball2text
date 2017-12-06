@@ -11,14 +11,14 @@ namespace Test
         public void GetNotExistingUserInfo()
         {
             UsersDataProvider testDataProvider = new UsersDataProvider();
-            User testUser = new User();
+            UserNONMODEL testUser = new UserNONMODEL();
             testUser.UserName = "User1";
-            testDataProvider.UserList = new List<User>();
+            testDataProvider.UserList = new List<UserNONMODEL>();
             testDataProvider.UserList.Add(testUser);
             bool exceptionThrown = false;
             try
             {
-                User returnedUser = testDataProvider.GetUserData("User");
+                UserNONMODEL returnedUser = testDataProvider.GetUserData("User");
             }
             catch (UserNotFoundException e)
             {
@@ -31,11 +31,11 @@ namespace Test
         public void GetExistingUserInfo()
         {
             UsersDataProvider testDataProvider = new UsersDataProvider();
-            User testUser = new User();
+            UserNONMODEL testUser = new UserNONMODEL();
             testUser.UserName = "User1"; ;
-            testDataProvider.UserList = new List<User>();
+            testDataProvider.UserList = new List<UserNONMODEL>();
             testDataProvider.UserList.Add(testUser);
-            User returnedUser = testDataProvider.GetUserData("User1");
+            UserNONMODEL returnedUser = testDataProvider.GetUserData("User1");
             Assert.AreEqual(testUser.UserName, returnedUser.UserName);
         }
     }

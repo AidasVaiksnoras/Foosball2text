@@ -15,13 +15,19 @@ namespace WebApplication.Controllers
             string[] gameList = new string[] { };
             try
             {
-                 gameList = new string[] { new JavaScriptSerializer().Serialize(provider.GetCurrentGameData()) };
+                 gameList = new string[] { new JavaScriptSerializer().Serialize(provider.FindGame()) };
             }
             catch (EmptyGameListExeption e)
             {
                 gameList = null;
             }
             return gameList;
+        }
+
+        // GET: api/Game/leftName=name1&rightName=test2
+        public Game Get(string leftName, string rightName)
+        {
+            return provider.GetCurrentGame(leftName, rightName);
         }
 
         // GET: api/Game/5
@@ -35,7 +41,7 @@ namespace WebApplication.Controllers
         {
         }
 
-        // PUT: api/Game/5
+        // PUT: api/Game/???
         public void Put(int id, [FromBody]Game value)
         {
             if (id == 1) 

@@ -10,10 +10,10 @@ namespace Foosball2text
         private UsersDataProvider _dataProvider;
         private NavigationForm _navForm;
 
-        Lazy<List<User>> gamesWonOrdered;
-        Lazy<List<User>> totalScoreOrdered;
-        Lazy<List<User>> maxSpeedOrdered;
-        Lazy<List<User>> gamesPlayedOrdered;
+        Lazy<List<UserNONMODEL>> gamesWonOrdered;
+        Lazy<List<UserNONMODEL>> totalScoreOrdered;
+        Lazy<List<UserNONMODEL>> maxSpeedOrdered;
+        Lazy<List<UserNONMODEL>> gamesPlayedOrdered;
 
         public LeaderboardForm(UsersDataProvider dataProvider, NavigationForm navForm)
         {
@@ -22,10 +22,10 @@ namespace Foosball2text
             _dataProvider.LoadData();
 
             //Data is loaded when tab is selected
-            gamesWonOrdered = new Lazy<List<User>> (() => _dataProvider.UserList.OrderByGamesWon());
-            totalScoreOrdered = new Lazy<List<User>>(() => _dataProvider.UserList.OrderByTotalScore());
-            maxSpeedOrdered = new Lazy<List<User>>(() => _dataProvider.UserList.OrderByMaxSpeed());
-            gamesPlayedOrdered = new Lazy<List<User>>(() => _dataProvider.UserList.OrderByGamesPlayed());
+            gamesWonOrdered = new Lazy<List<UserNONMODEL>> (() => _dataProvider.UserList.OrderByGamesWon());
+            totalScoreOrdered = new Lazy<List<UserNONMODEL>>(() => _dataProvider.UserList.OrderByTotalScore());
+            maxSpeedOrdered = new Lazy<List<UserNONMODEL>>(() => _dataProvider.UserList.OrderByMaxSpeed());
+            gamesPlayedOrdered = new Lazy<List<UserNONMODEL>>(() => _dataProvider.UserList.OrderByGamesPlayed());
             tabControl1.SelectedIndexChanged += tabControl1_SelectedIndexChanged;
             //Load the first tab
             gamesWonList.DataSource = gamesWonOrdered.Value;
@@ -35,29 +35,29 @@ namespace Foosball2text
 
         private void GamesWonList_Format(object sender, ListControlConvertEventArgs e)
         {
-            string username = ((User)e.ListItem).UserName;
-            string gamesWon = ((User)e.ListItem).GamesWon.ToString();
+            string username = ((UserNONMODEL)e.ListItem).UserName;
+            string gamesWon = ((UserNONMODEL)e.ListItem).GamesWon.ToString();
             e.Value = String.Format("{0, -5} {1, -30}", gamesWon, username);
         }
 
         private void TotalScoreList_Format(object sender, ListControlConvertEventArgs e)
         {
-            string username = ((User)e.ListItem).UserName;
-            string totalScore = ((User)e.ListItem).TotalGoals.ToString();
+            string username = ((UserNONMODEL)e.ListItem).UserName;
+            string totalScore = ((UserNONMODEL)e.ListItem).TotalGoals.ToString();
             e.Value = String.Format("{0, -5} {1, -30}", totalScore, username);
         }
 
         private void MaxSpeedList_Format(object sender, ListControlConvertEventArgs e)
         {
-            string username = ((User)e.ListItem).UserName;
-            string maxSpeed = Math.Round(((User)e.ListItem).MaxSpeed, 2).ToString();
+            string username = ((UserNONMODEL)e.ListItem).UserName;
+            string maxSpeed = Math.Round(((UserNONMODEL)e.ListItem).MaxSpeed, 2).ToString();
             e.Value = String.Format("{0, -10} {1, -30}", maxSpeed, username);
         }
 
         private void GamesPlayedList_Format(object sender, ListControlConvertEventArgs e)
         {
-            string username = ((User)e.ListItem).UserName;
-            string gamesPlayed = ((User)e.ListItem).GamesPlayed.ToString();
+            string username = ((UserNONMODEL)e.ListItem).UserName;
+            string gamesPlayed = ((UserNONMODEL)e.ListItem).GamesPlayed.ToString();
             e.Value = String.Format("{0, -10} {1, -30}", gamesPlayed, username);
         }
 

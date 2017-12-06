@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using WebApplication.Models;
 
 namespace Logic
 {
@@ -39,18 +40,30 @@ namespace Logic
             client.PutAsJsonAsync($"api/" + apiString, instance); //NOTE: make sure the Type of the instance and controller match
         }
 
+        static public void GetFromDb<T>(T instance, string string1, string string2) //where T: IModel
+        {
+            string apiString = "api/";
+            Type type = instance.GetType();
+            apiString += type.Name;
+            if (type == typeof(Game))
+            {
+                apiString += "?leftName=" + string1 + "&&";
+            }
+            client.GetAsync()
+        }
+
         static public void OnScoreChanged(object sender, OnScoredEventArgs e)
         {
             PutToDb<Game>(e.Game, Method.Update);
         }
 
-        static public async Task<List<User>> GetAllUsers()
+        static public async Task<List<UserNONMODEL>> GetAllUsers()
         {
             HttpResponseMessage msg = await client.GetAsync($"api/User").ConfigureAwait(false); ;
-            List<User> list = null;
+            List<UserNONMODEL> list = null;
             if (msg.IsSuccessStatusCode)
             {
-                list = await msg.Content.ReadAsAsync<List<User>>();
+                list = await msg.Content.ReadAsAsync<List<UserNONMODEL>>();
             }
             return list;
         }

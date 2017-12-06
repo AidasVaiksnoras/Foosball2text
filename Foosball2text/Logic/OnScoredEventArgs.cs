@@ -1,4 +1,5 @@
 ﻿using System;
+using WebApplication.Models;
 
 namespace Logic
 {

@@ -12,7 +12,7 @@ namespace WebApplication.Models
         {
         }
 
-        public virtual DbSet<Game> Games { get; set; }
+        public DbSet<Game> Games { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

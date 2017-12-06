@@ -4,6 +4,7 @@ using Emgu.CV;
 using System.ComponentModel;
 using Logic;
 using System.Drawing;
+using WebApplication.Models;
 
 namespace Foosball2text
 {
@@ -15,7 +16,7 @@ namespace Foosball2text
         private FrameHandler _frameHandler;
         private string _filePath;
         private NavigationForm _navForm;
-        private User _leftUser, _rightUser;
+        private UserNONMODEL _leftUser, _rightUser;
 
         private Game _game = new Game();
 
@@ -31,7 +32,7 @@ namespace Foosball2text
         SplitContainer _container;
         int _extraDataPanelHeight;
 
-        public VideoProcessForm(string filePath, int hue, User leftUser, User rightUser, NavigationForm navForm)
+        public VideoProcessForm(string filePath, int hue, UserNONMODEL leftUser, UserNONMODEL rightUser, NavigationForm navForm)
         {
             InitializeComponent();
 
@@ -219,6 +220,8 @@ namespace Foosball2text
             _game.RightUserName = _rightUser.UserName;
             _game.InProgress = true;
             ServiceClient.PutToDb<Game>(_game, Method.Insert);
+            /// Following code is required to get such information (like Id) that the local machine can't generate
+            _game = WebApplication.Helpers.DataProvider.GetCurrentGame(_game.LeftUserName, _game.RightUserName);
         }
     }
 }

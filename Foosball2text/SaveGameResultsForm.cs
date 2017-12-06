@@ -13,13 +13,13 @@ namespace Foosball2text
 {
     public partial class SaveGameResultsForm : Form
     {
-        User _userA, _userB;
+        UserNONMODEL _userA, _userB;
         int _goalsA, _goalsB;
         double _maxSpeedA, _maxSpeedB;
         TimeSpan _gameTime;
         bool _userDataSaved;
 
-        public SaveGameResultsForm(User userA, User userB, int goalsA, int goalsB, double maxSpeedA, double maxSpeedB)
+        public SaveGameResultsForm(UserNONMODEL userA, UserNONMODEL userB, int goalsA, int goalsB, double maxSpeedA, double maxSpeedB)
         {
             InitializeComponent();
 
