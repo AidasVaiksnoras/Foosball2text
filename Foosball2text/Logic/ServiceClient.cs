@@ -47,9 +47,9 @@ namespace Logic
             apiString += type.Name;
             if (type == typeof(Game))
             {
-                apiString += "?leftName=" + string1 + "&&";
+                apiString += "?leftName=" + string1 + "&rightName=" + string2;
             }
-            client.GetAsync() //UNDONE In progress
+            client.GetAsync(apiString); //UNDONE Not tested
         }
 
         static public void OnScoreChanged(object sender, OnScoredEventArgs e)

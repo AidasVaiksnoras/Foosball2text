@@ -24,7 +24,7 @@ namespace WebApplication.Controllers
             return gameList;
         }
 
-        // GET: api/Game/leftName=name1&rightName=test2
+        // GET: api/Game?leftName=name1&rightName=test2 (NOT SURE ABOUT URL)
         public Game Get(string leftName, string rightName)
         {
             return provider.GetCurrentGame(leftName, rightName);
