@@ -49,7 +49,7 @@ namespace Logic
             {
                 apiString += "?leftName=" + string1 + "&&";
             }
-            client.GetAsync()
+            client.GetAsync() //UNDONE In progress
         }
 
         static public void OnScoreChanged(object sender, OnScoredEventArgs e)
