@@ -8,7 +8,7 @@ namespace WebApplication.Models
     public partial class EFModel : DbContext
     {
         public EFModel()
-            : base("name=EFModel")
+            : base("data source=universityprojects.database.windows.net;initial catalog=foosball2text;persist security info=True;user id=warhatch;password=Awalgato0;MultipleActiveResultSets=True;App=EntityFramework")
         {
         }
 
