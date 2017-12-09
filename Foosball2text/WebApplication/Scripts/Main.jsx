@@ -1,4 +1,5 @@
 ﻿var obj;
+var user;
 var interval = 1000;
 
 var CurrentResult = React.createClass({
@@ -31,6 +32,19 @@ var CurrentResult = React.createClass({
                 leftScore: obj.LeftScore,
                 rightScore: obj.RightScore
             })
+
+            $.ajax({
+                type: "GET",
+                url: "api/User?id=" + obj.LeftUserName,
+                data: {
+                    user: 'success',
+                    some: ['other', 'data']
+                }
+            }).done(function (usr) {
+                console.log(usr);
+                
+            });
+
         }, interval);
     },
 

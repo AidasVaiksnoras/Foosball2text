@@ -182,5 +182,43 @@ namespace WebApplication.Helpers
             }
             return data;
         }
+
+        public User GetUser(string username)
+        {
+            using (SqlConnection connection = ConnectionProvider.GetConnection())
+            {
+                connection.Open();
+                StringBuilder sb = new StringBuilder();
+                sb.Append("SELECT * ");
+                sb.Append("FROM Users ");
+                sb.Append("WHERE UserName = '" + username + "'");
+                sb.Append(";");
+                String sql = sb.ToString();
+
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.CommandTimeout = 0;
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string foundUserName = reader[0].ToString();
+                            if (foundUserName != null)
+                            {
+                                User emptyUser = new User();
+                                emptyUser.UserName = reader.GetString(0);
+                                emptyUser.GamesPlayed = reader.GetInt32(1);
+                                emptyUser.GamesWon = reader.GetInt32(2);
+                                emptyUser.TotalGoals = reader.GetInt32(3);
+                                emptyUser.MaxSpeed = reader.GetDouble(4);
+                                emptyUser.RankPoints = reader.GetInt32(6);
+                                return emptyUser;
+                            }
+                        }
+                    }
+                }
+            }
+            return null;
+        }
     }
 }
