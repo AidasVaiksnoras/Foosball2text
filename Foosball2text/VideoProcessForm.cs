@@ -17,7 +17,6 @@ namespace Foosball2text
         private string _filePath;
         private NavigationForm _navForm;
         private UserNONMODEL _leftUser, _rightUser;
-
         private Game _game = new Game();
 
         public event EventHandler<OnScoredEventArgs> OnScored;
@@ -205,7 +204,7 @@ namespace Foosball2text
             ServiceClient.PutToDb<Game>(_game, Method.Update);
         }
 
-        private void NewGame()
+        private void NewGame() //UNDONE untested added `async`
         {
             _frameHandler.ResetGameWatcher();
             TeamA_score.Text = "0";
@@ -221,7 +220,7 @@ namespace Foosball2text
             _game.InProgress = true;
             ServiceClient.PutToDb<Game>(_game, Method.Insert);
             /// Following code is required to get such information (like Id) that the local machine can't generate
-            _game = WebApplication.Helpers.DataProvider.GetCurrentGame(_game.LeftUserName, _game.RightUserName);
+            _game = ServiceClient.GetCurrentGameFromDbAsync(_game.LeftUserName, _game.RightUserName);
         }
     }
 }

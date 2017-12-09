@@ -278,7 +278,7 @@
       <Name>Logic</Name>
     </ProjectReference>
     <ProjectReference Include="WebApplication\Service.csproj">
-      <Project>{01ECED22-78E6-4DCF-B02D-224B489D9B59}</Project>
+      <Project>{01eced22-78e6-4dcf-b02d-224b489d9b59}</Project>
       <Name>Service</Name>
     </ProjectReference>
   </ItemGroup>

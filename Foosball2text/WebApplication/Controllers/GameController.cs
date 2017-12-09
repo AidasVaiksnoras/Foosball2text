@@ -9,13 +9,15 @@ namespace WebApplication.Controllers
     public class GameController : ApiController
     {
         DataProvider provider = new DataProvider();
+        JavaScriptSerializer serializer = new JavaScriptSerializer();
+
         // GET: api/Game
         public IEnumerable<string> Get()
         {
             string[] gameList = new string[] { };
             try
             {
-                 gameList = new string[] { new JavaScriptSerializer().Serialize(provider.FindGame()) };
+                 gameList = new string[] { serializer.Serialize(provider.FindGame()) };
             }
             catch (EmptyGameListExeption e)
             {
@@ -25,9 +27,23 @@ namespace WebApplication.Controllers
         }
 
         // GET: api/Game?leftName=name1&rightName=test2 (NOT SURE ABOUT URL)
-        public Game Get(string leftName, string rightName)
+        public string Get(string leftName, string rightName)
         {
-            return provider.GetCurrentGame(leftName, rightName);
+            //TODO: clean up 
+            var debugtext = System.Web.HttpContext.Current.Request.Url.PathAndQuery;
+            Game gameEntity;
+            try
+            {
+                gameEntity = provider.GetCurrentGame(leftName, rightName);
+            }
+            catch (EmptyGameListExeption e)
+            {
+                gameEntity = null;
+            }
+
+            var json = serializer.Serialize(gameEntity);
+
+            return json;
         }
 
         // GET: api/Game/5

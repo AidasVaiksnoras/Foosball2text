@@ -5,6 +5,7 @@ using System.Net.Http.Headers;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebApplication.Models;
+using Newtonsoft.Json;
 
 namespace Logic
 {
@@ -13,6 +14,7 @@ namespace Logic
     {
         static HttpClient client = new HttpClient();
         static private StringBuilder stringBuilder = new StringBuilder();
+
         static ServiceClient()
         {
             client.BaseAddress = new Uri("http://localhost:63526/");
@@ -40,16 +42,42 @@ namespace Logic
             client.PutAsJsonAsync($"api/" + apiString, instance); //NOTE: make sure the Type of the instance and controller match
         }
 
-        static public void GetFromDb<T>(T instance, string string1, string string2) //where T: IModel
+
+        static public Game GetCurrentGameFromDbAsync(string string1, string string2)
         {
-            string apiString = "api/";
-            Type type = instance.GetType();
-            apiString += type.Name;
-            if (type == typeof(Game))
+            string apiString = "api/Game";
+            apiString += "?leftName=" + string1 + "&rightName=" + string2;
+
+            Game gameFromDb = null;
+
+            //TODO remove test
+            WebApplication.Controllers.GameController gc = new WebApplication.Controllers.GameController();
+            gc.Get(string1, string2);
+
+            var response = client.GetAsync(apiString).Result; //FIXME
+            if (response.IsSuccessStatusCode)
             {
-                apiString += "?leftName=" + string1 + "&rightName=" + string2;
+                // by calling .Result you are performing a synchronous call
+                var responseContent = response.Content;
+
+                // by calling .Result you are synchronously reading the result
+                string responseString = responseContent.ReadAsStringAsync().Result;
+
+                gameFromDb = JsonConvert.DeserializeObject<Game>(responseString);
             }
-            client.GetAsync(apiString); //UNDONE Not tested
+            else
+                throw new HttpRequestException("Uri \"" + apiString + "\" did not return a result");
+
+
+                /*
+                using (client)
+                {
+                    string json = client.GetStringAsync(apiString);
+                    gameFromDb = JsonConvert.DeserializeObject<Game>(json);
+                }
+                */
+
+                return gameFromDb;
         }
 
         static public void OnScoreChanged(object sender, OnScoredEventArgs e)
