@@ -26,11 +26,9 @@ namespace WebApplication.Controllers
             return gameList;
         }
 
-        // GET: api/Game?leftName=name1&rightName=test2 (NOT SURE ABOUT URL)
+        [Route("api/Game/{leftname}/{rightname}")]
         public string Get(string leftName, string rightName)
         {
-            //TODO: clean up 
-            var debugtext = System.Web.HttpContext.Current.Request.Url.PathAndQuery;
             Game gameEntity;
             try
             {

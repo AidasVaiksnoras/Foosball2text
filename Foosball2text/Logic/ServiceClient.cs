@@ -42,11 +42,10 @@ namespace Logic
             client.PutAsJsonAsync($"api/" + apiString, instance); //NOTE: make sure the Type of the instance and controller match
         }
 
-
         static public Game GetCurrentGameFromDbAsync(string string1, string string2)
         {
             string apiString = "api/Game";
-            apiString += "?leftName=" + string1 + "&rightName=" + string2;
+            apiString += "/" + string1 + "/" + string2;
 
             Game gameFromDb = null;
 
@@ -57,10 +56,7 @@ namespace Logic
             var response = client.GetAsync(apiString).Result; //FIXME
             if (response.IsSuccessStatusCode)
             {
-                // by calling .Result you are performing a synchronous call
                 var responseContent = response.Content;
-
-                // by calling .Result you are synchronously reading the result
                 string responseString = responseContent.ReadAsStringAsync().Result;
 
                 gameFromDb = JsonConvert.DeserializeObject<Game>(responseString);
@@ -68,14 +64,6 @@ namespace Logic
             else
                 throw new HttpRequestException("Uri \"" + apiString + "\" did not return a result");
 
-
-                /*
-                using (client)
-                {
-                    string json = client.GetStringAsync(apiString);
-                    gameFromDb = JsonConvert.DeserializeObject<Game>(json);
-                }
-                */
 
                 return gameFromDb;
         }
