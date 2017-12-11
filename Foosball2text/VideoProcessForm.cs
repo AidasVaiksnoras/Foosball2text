@@ -204,7 +204,7 @@ namespace Foosball2text
             ServiceClient.PutToDb<Game>(_game, Method.Update);
         }
 
-        private void NewGame() //UNDONE untested added `async`
+        private void NewGame()
         {
             _frameHandler.ResetGameWatcher();
             TeamA_score.Text = "0";
@@ -217,8 +217,8 @@ namespace Foosball2text
             _game.RightScore = 0;
             _game.LeftUserName = _leftUser.UserName;
             _game.RightUserName = _rightUser.UserName;
-            _game.InProgress = true;
-            ServiceClient.PutToDb<Game>(_game, Method.Insert);
+            _game.InProgress = true; 
+            ServiceClient.PutToDb<Game>(_game, Method.Insert); //FIXME when endgame and then restarted unable to find game in db
             /// Following code is required to get such information (like Id) that the local machine can't generate
             _game = ServiceClient.GetCurrentGameFromDbAsync(_game.LeftUserName, _game.RightUserName);
         }

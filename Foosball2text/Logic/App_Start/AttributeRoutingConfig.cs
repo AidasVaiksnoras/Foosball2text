@@ -7,8 +7,8 @@ namespace Logic
 {
     public static class AttributeRoutingConfig
 	{
-		public static void RegisterRoutes(RouteCollection routes) //TODO delete this?
-		{    
+		public static void RegisterRoutes(RouteCollection routes) //TODO This file MIGHT be useless
+        {    
 			// See http://github.com/mccalltd/AttributeRouting/wiki for more options.
 			// To debug routes locally using the built in ASP.NET development server, go to /routes.axd
             

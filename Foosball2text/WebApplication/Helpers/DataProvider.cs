@@ -75,7 +75,7 @@ namespace WebApplication.Helpers
             }
         }
 
-        //TODO: Change the other methods to EF and TAdapter too
+        //TODO: Change the other methods to use EF
         public void InsertUser(User user)
         {
             if (!UserExists(user.Username))

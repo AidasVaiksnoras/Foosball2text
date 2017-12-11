@@ -49,23 +49,25 @@ namespace Logic
 
             Game gameFromDb = null;
 
-            //TODO remove test
+            //FIXME wont work without creating a GameController (SOMETIMES throws 'internal server error')
             WebApplication.Controllers.GameController gc = new WebApplication.Controllers.GameController();
-            gc.Get(string1, string2);
-
-            var response = client.GetAsync(apiString).Result; //FIXME
-            if (response.IsSuccessStatusCode)
+            var testReturn = gc.Get(string1, string2);
+            gameFromDb = JsonConvert.DeserializeObject<Game>(testReturn);
+            /*using (client)
             {
-                var responseContent = response.Content;
-                string responseString = responseContent.ReadAsStringAsync().Result;
+                var response = client.GetAsync(apiString).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseContent = response.Content;
+                    string responseString = responseContent.ReadAsStringAsync().Result;
 
-                gameFromDb = JsonConvert.DeserializeObject<Game>(responseString);
-            }
-            else
-                throw new HttpRequestException("Uri \"" + apiString + "\" did not return a result");
+                    gameFromDb = (Game)serializer.DeserializeObject(responseString);
+                }
+                else
+                    throw new HttpRequestException("Uri \"" + apiString + "\" has returned an error: " + response.StatusCode);
+            }*/
 
-
-                return gameFromDb;
+            return gameFromDb;
         }
 
         static public void OnScoreChanged(object sender, OnScoredEventArgs e)
