@@ -101,7 +101,7 @@
     <Compile Include="SerializationHandler.cs" />
     <Compile Include="ServiceClient.cs" />
     <Compile Include="TrackedObject.cs" />
-    <Compile Include="UserNONMODEL.cs" />
+    <Compile Include="User.cs" />
     <Compile Include="UserNotFoundException.cs" />
     <Compile Include="WatcherInformation.cs" />
     <Compile Include="FrameHandler.cs" />

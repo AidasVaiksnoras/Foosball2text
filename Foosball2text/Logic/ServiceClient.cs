@@ -75,13 +75,13 @@ namespace Logic
             PutToDb<Game>(e.Game, Method.Update);
         }
 
-        static public async Task<List<UserNONMODEL>> GetAllUsers()
+        static public async Task<List<User>> GetAllUsers()
         {
             HttpResponseMessage msg = await client.GetAsync($"api/User").ConfigureAwait(false); ;
-            List<UserNONMODEL> list = null;
+            List<User> list = null;
             if (msg.IsSuccessStatusCode)
             {
-                list = await msg.Content.ReadAsAsync<List<UserNONMODEL>>();
+                list = await msg.Content.ReadAsAsync<List<User>>();
             }
             return list;
         }

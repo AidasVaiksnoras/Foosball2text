@@ -162,6 +162,13 @@
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\Main.jsx" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Web.config" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\ReactConfig.cs" />
@@ -170,13 +177,15 @@
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Helpers\DataProvider.cs" />
+    <Compile Include="Helpers\IDataProvider.cs" />
     <Compile Include="Models\EFModel.cs" />
     <Compile Include="Models\Game.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\ConnectionProvider.cs" />
-    <Compile Include="Helpers\DataProvider.cs" />
+    <Compile Include="Helpers\DataProviderEF.cs" />
     <Compile Include="Helpers\EmptyGameListExeption.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\User.cs" />

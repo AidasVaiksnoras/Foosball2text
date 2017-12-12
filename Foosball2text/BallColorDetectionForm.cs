@@ -14,11 +14,11 @@ namespace Foosball2text
         private FrameHandler _frameHandler;
         private string _filePath;
         private VideoCapture _capture;
-        private UserNONMODEL _leftUser;
-        private UserNONMODEL _rightUser;
+        private User _leftUser;
+        private User _rightUser;
         private NavigationForm _navForm;
 
-        public BallColorDetectionForm(string filePath, UserNONMODEL leftUser, UserNONMODEL rightUser, NavigationForm navForm)
+        public BallColorDetectionForm(string filePath, User leftUser, User rightUser, NavigationForm navForm)
         {
             InitializeComponent();
             _filePath = filePath;

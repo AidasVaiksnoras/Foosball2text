@@ -8,7 +8,7 @@ namespace WebApplication.Controllers
 {
     public class GameController : ApiController
     {
-        DataProvider provider = new DataProvider();
+        IDataProvider provider = new DataProviderEF();
         JavaScriptSerializer serializer = new JavaScriptSerializer();
 
         // GET: api/Game
@@ -17,7 +17,7 @@ namespace WebApplication.Controllers
             string[] gameList = new string[] { };
             try
             {
-                 gameList = new string[] { serializer.Serialize(provider.FindGame()) };
+                 gameList = new string[] { serializer.Serialize(provider.GetActiveGame()) };
             }
             catch (EmptyGameListExeption e)
             {

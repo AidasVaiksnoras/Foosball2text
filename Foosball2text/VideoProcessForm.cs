@@ -16,7 +16,7 @@ namespace Foosball2text
         private FrameHandler _frameHandler;
         private string _filePath;
         private NavigationForm _navForm;
-        private UserNONMODEL _leftUser, _rightUser;
+        private Logic.User _leftUser, _rightUser;
         private Game _game = new Game();
 
         public event EventHandler<OnScoredEventArgs> OnScored;
@@ -31,7 +31,7 @@ namespace Foosball2text
         SplitContainer _container;
         int _extraDataPanelHeight;
 
-        public VideoProcessForm(string filePath, int hue, UserNONMODEL leftUser, UserNONMODEL rightUser, NavigationForm navForm)
+        public VideoProcessForm(string filePath, int hue, Logic.User leftUser, Logic.User rightUser, NavigationForm navForm)
         {
             InitializeComponent();
 

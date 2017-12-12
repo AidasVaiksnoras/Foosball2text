@@ -4,78 +4,77 @@ using System.Data.SqlClient;
 using System.Text;
 using System.Globalization;
 using WebApplication.Models;
-using System.Linq;
 
 namespace WebApplication.Helpers
 {
-    public class DataProvider
+    public class DataProvider : IDataProvider
     {
-        //string connectionStr = System.Configuration.ConfigurationManager.ConnectionStrings["EFModel"].ConnectionString;
-
         public void InsertNewGame(Game game)
         {
-            using (var db = new EFModel())
+            using (SqlConnection connection = ConnectionProvider.GetConnection())
             {
-                db.Games.Add(game);
-                db.SaveChanges();
+                connection.Open();
+                StringBuilder sb = new StringBuilder();
+                sb.Append("INSERT dbo.Games (LeftUserName, RightUserName, LeftScore, RightScore, InProgress)");
+                sb.Append("VALUES (");
+                sb.Append("'" + game.LeftUserName + "', '" + game.RightUserName + "', " + game.LeftScore + ", " + game.RightScore + ", " + Convert.ToInt32(game.InProgress));
+                sb.Append(");");
+                string sql = sb.ToString();
+
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.ExecuteNonQuery();
+                }
             }
-        }
-
-        public Game FindGame(int Id) //TODO make sure Id and User'sName's is read only in logic
-        {
-            Game game;
-            using (var db = new EFModel())
-            {
-                game = db.Games.Where(g => g.Id == Id).First();
-            }
-
-            return game;
-        }
-
-        public Game GetCurrentGame(string leftTeam, string rightTeam)
-        {
-            Game activeGame;
-            using (var db = new EFModel())
-            {
-                activeGame = db.Games.Where(g => g.LeftUserName == leftTeam && g.RightUserName == rightTeam && g.InProgress == true).First();
-            }
-
-            return activeGame;
-        }
-
-        public Game FindGame() //TODO switch this to Table Adapter for efficiency?
-        {
-            Game game;
-            using (var db = new EFModel())
-            {
-                var result = db.Games.ToList().Last();
-                game = result;
-            }
-
-            return game;
         }
 
         public void UpdateGame(Game game)
-        /// Updates InProgress and Scores
         {
-            Game GameToUpdate = FindGame(game.Id);
-            
-            if (GameToUpdate != null)
+            using (SqlConnection connection = ConnectionProvider.GetConnection())
             {
-                GameToUpdate.InProgress = game.InProgress;
-                GameToUpdate.LeftScore = game.LeftScore;
-                GameToUpdate.RightScore = game.RightScore;
-            }
+                if (connection.State == System.Data.ConnectionState.Closed)
+                    connection.Open();
 
-            using (var db = new EFModel())
-            {
-                db.Entry(GameToUpdate).State = System.Data.Entity.EntityState.Modified;
+                StringBuilder sb = new StringBuilder();
+                sb.Append("Update Games ");
+                sb.Append("SET LeftScore = " + game.LeftScore + ", RightScore = " + game.RightScore + ", InProgress = " + Convert.ToInt32(game.InProgress));
+                sb.Append(" Where (Id = (SELECT TOP 1 Id FROM Games ORDER BY Id DESC))");
+                string sql = sb.ToString();
 
-                db.SaveChanges();
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.ExecuteNonQuery();
+                }
             }
         }
 
-        //TODO: Change the other methods to use EF
+        public Game GetCurrentGameData()
+        {
+            using (SqlConnection connection = ConnectionProvider.GetConnection())
+            {
+                connection.Open();
+                string sql = "SELECT TOP 1 * FROM Games ORDER BY Id DESC";
+
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Game game = new Game();
+                            game.LeftUserName = reader.GetString(1);
+                            game.RightUserName = reader.GetString(2);
+                            game.LeftScore = reader.GetInt32(3);
+                            game.RightScore = reader.GetInt32(4);
+                            game.InProgress = reader.GetBoolean(5);
+                            return game;
+                        }
+                    }
+                }
+                throw new EmptyGameListExeption();
+            }
+        }
+
         public void InsertUser(User user)
         {
             if (!UserExists(user.Username))
@@ -183,6 +182,7 @@ namespace WebApplication.Helpers
             }
             return data;
         }
-       
+        public Game GetActiveGame() { return new Game(); }
+        public Game GetCurrentGame(string leftTeam, string rightTeam) { return new Game(); }
     }
 }
