@@ -7,7 +7,7 @@ namespace WebApplication.Controllers
 {
     public class UserController : ApiController
     {
-        DataProviderEF _dataProvider = new DataProviderEF();
+        IDataProvider _dataProvider = new DataProviderEF();
         // GET: api/User
         public IEnumerable<User> Get()
         {
