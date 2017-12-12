@@ -16,9 +16,9 @@ namespace WebApplication.Controllers
         }
 
         // GET: api/User/5
-        public string Get(int id)
+        public User Get(string id)
         {
-            return "value";
+            return _dataProvider.GetUser(id);
         }
 
         // POST: api/User

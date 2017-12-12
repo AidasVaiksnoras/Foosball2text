@@ -12,5 +12,6 @@ namespace WebApplication.Helpers
         void InsertUser(User user);
         void UpdateUser(User userToUpdate);
         List<User> GetUsers();
+        User GetUser(string username);
     }
 }

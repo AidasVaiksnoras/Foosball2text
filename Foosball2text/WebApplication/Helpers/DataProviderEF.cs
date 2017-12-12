@@ -80,6 +80,17 @@ namespace WebApplication.Helpers
             }
             return data;
         }
-       
+
+        public User GetUser(string username)
+        {
+            User user;
+            using (var db = new EFModel())
+            {
+                user = db.Users.Where(x => x.Username == username).First();
+            }
+            return user;
+        }
+
+
     }
 }
