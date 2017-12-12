@@ -28,7 +28,7 @@ namespace Logic
             RankPoints = rankPoints;
         }
 
-        public void UpdateData(bool addGamePlayed, bool addGameWon, double gamesMaxSpeed, int addScore, TimeSpan gameTime , int rankChange)
+        public void UpdateData(bool addGamePlayed, bool addGameWon, double gamesMaxSpeed, int addScore, TimeSpan gameTime)
         {
             GamesPlayed++;
             if (addGameWon)
@@ -36,7 +36,6 @@ namespace Logic
             if (gamesMaxSpeed > MaxSpeed)
                 MaxSpeed = gamesMaxSpeed;
             TotalGoals += addScore;
-            RankPoints += rankChange;
         }
 
         public bool Equals(User other)
