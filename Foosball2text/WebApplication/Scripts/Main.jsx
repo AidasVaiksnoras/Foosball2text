@@ -50,7 +50,7 @@ var CurrentResult = React.createClass({
                 }
             }).done(function (usr) {
                 this.setState({
-                    UserName: usr.UserName,
+                    UserName: usr.Username,
                     GamesPlayed: usr.GamesPlayed,
                     GamesWon: usr.GamesWon,
                     MaxSpeed: usr.MaxSpeed,
@@ -64,31 +64,7 @@ var CurrentResult = React.createClass({
         }, interval);
     },
 
-    getStats: function () {
-        this.timer = setInterval(() => {
-            $.ajax({
-                type: "GET",
-                url: "api/User?id=" + this.state.UserName,
-                data: {
-                    user: 'success',
-                    some: ['other', 'data']
-                }
-            }).done(function (usr) {
-                console.log(usr.UserName);
-                console.log(usr.GamesPlayed);
-                this.setState({
-                    UserName: usr.UserName,
-                    GamesPlayed: usr.GamesPlayed,
-                    GamesWon: usr.GamesWon,
-                    MaxSpeed: usr.MaxSpeed,
-                    TotalGoals: usr.TotalGoals,
-                    RankPoints: usr.RankPoints
-                });
-
-            }.bind(this));
-        }, interval);
-
-    },
+   
     handleClickLeft: function () {
         if (this.state.isLeftVisible) {
             this.setState({ isLeftVisible: false });
