@@ -40,7 +40,7 @@ namespace Logic
             return user;
         }
 
-        public User GetUserData(string username)
+        public User GetUserDataFromLocalList(string username)
         {
             List<User> user = UserList.Where((x) => x.UserName == username).ToList();
             if (user.Count == 0)

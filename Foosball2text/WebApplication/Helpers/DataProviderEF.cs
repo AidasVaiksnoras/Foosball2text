@@ -56,7 +56,7 @@ namespace WebApplication.Helpers
                 }
             }
         }
-        //Does not update user somehow
+
         public void UpdateUser(User userToUpdate)
         {
             using (var db = new EFModel())

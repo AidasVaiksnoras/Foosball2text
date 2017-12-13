@@ -41,7 +41,7 @@ namespace Foosball2text
         {
             try
             {
-                UpdateForm(_dataProvider.GetUserData(name));
+                UpdateForm(_dataProvider.GetUserDataFromLocalList(name));
                 Show();
             }
             catch (UserNotFoundException ex)
