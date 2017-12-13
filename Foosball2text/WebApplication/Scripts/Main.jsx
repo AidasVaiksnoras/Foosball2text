@@ -1,6 +1,5 @@
 ﻿var obj;
 var usr;
-var passedUserName = '';
 var interval = 1000;
 
 var CurrentResult = React.createClass({
@@ -92,20 +91,12 @@ var CurrentResult = React.createClass({
 
     },
     handleClickLeft: function () {
-
-
         if (this.state.isLeftVisible) {
             this.setState({ isLeftVisible: false });
-
         }
         else {
             this.setState({ isLeftVisible: true, UserName: this.state.leftUser });
-
         }
-
-
-
-
     },
     handleClickRight: function () {
 
@@ -119,7 +110,6 @@ var CurrentResult = React.createClass({
 
 
     render: function () {
-
         return (
             <div>
                 <div className="score" style={{ textAlign: "center" }}>
@@ -149,16 +139,11 @@ var CurrentResult = React.createClass({
                             <h3>Bendrai įmušta: {this.state.TotalGoals}</h3>
                             <h3>Surinkę taškų: {this.state.RankPoints}</h3>
                         </div> : null}
-
                 </div>
             </div>
         );
     }
 });
-
-
-
-
 
 
 ReactDOM.render(
