@@ -17,8 +17,7 @@ var CurrentResult = React.createClass({
             GamesPlayed: 'Loading',
             GamesWon: 'Loading',
             MaxSpeed: 'Loading',
-            TotalGoals: 'Loading',
-            RankPoints: 'Loading'
+            TotalGoals: 'Loading'
         }
     },
 
@@ -137,7 +136,6 @@ var CurrentResult = React.createClass({
                             <h3> Laimėjo: {this.state.GamesWon}</h3>
                             <h3>Max greitis: {this.state.MaxSpeed}</h3>
                             <h3>Bendrai įmušta: {this.state.TotalGoals}</h3>
-                            <h3>Surinkę taškų: {this.state.RankPoints}</h3>
                         </div> : null}
                 </div>
             </div>
