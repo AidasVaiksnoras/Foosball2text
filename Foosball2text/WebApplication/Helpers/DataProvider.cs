@@ -7,7 +7,7 @@ using WebApplication.Models;
 
 namespace WebApplication.Helpers
 {
-    public class DataProvider
+    public class DataProvider : IDataProvider
     {
         public void InsertNewGame(Game game)
         {
@@ -77,14 +77,14 @@ namespace WebApplication.Helpers
 
         public void InsertUser(User user)
         {
-            if (!UserExists(user.UserName))
+            if (!UserExists(user.Username))
                 using (SqlConnection connection = ConnectionProvider.GetConnection())
                 {
                     connection.Open();
                     StringBuilder sb = new StringBuilder();
                     sb.Append("INSERT Users (Username) ");
                     sb.Append("VALUES (");
-                    sb.Append("'" + user.UserName + "'");
+                    sb.Append("'" + user.Username + "'");
                     sb.Append(");");
                     string sql = sb.ToString();
 
@@ -110,7 +110,7 @@ namespace WebApplication.Helpers
                 nfi.NumberDecimalSeparator = ".";
                 sb.Append(", MaxSpeed = " + Math.Round(userToUpdate.MaxSpeed, 6).ToString(nfi));
                 sb.Append(", RankPoints = " + userToUpdate.RankPoints);
-                sb.Append(" WHERE Username = '" + userToUpdate.UserName + "';");
+                sb.Append(" WHERE Username = '" + userToUpdate.Username + "';");
                 string sql = sb.ToString();
 
                 using (SqlCommand command = new SqlCommand(sql, connection))
@@ -169,7 +169,7 @@ namespace WebApplication.Helpers
                         while (reader.Read())
                         {
                             User emptyUser = new User();
-                            emptyUser.UserName = reader.GetString(0);
+                            emptyUser.Username = reader.GetString(0);
                             emptyUser.GamesPlayed = reader.GetInt32(1);
                             emptyUser.GamesWon = reader.GetInt32(2);
                             emptyUser.TotalGoals = reader.GetInt32(3);
@@ -183,6 +183,9 @@ namespace WebApplication.Helpers
             return data;
         }
 
+        public Game GetActiveGame() { return new Game(); }
+        public Game GetCurrentGame(string leftTeam, string rightTeam) { return new Game(); }
+      
         public User GetUser(string username)
         {
             using (SqlConnection connection = ConnectionProvider.GetConnection())
