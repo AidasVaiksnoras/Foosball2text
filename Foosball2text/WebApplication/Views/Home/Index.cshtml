@@ -1,21 +1,33 @@
 ﻿
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
     <title>Foosball</title>
+    <style>
+        table {
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 200%
+        }
+
+        h1 {
+            font-size: 200%;
+        }
+
+        h3 {
+            font-size: 120%;
+            margin-left: 20px;
+        }
+    </style>
 </head>
+
 <body>
     <div id="content"></div>
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react-dom.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/remarkable/1.7.1/remarkable.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <div id="root"></div>
     <script src="@Url.Content("~/Scripts/Main.jsx")"></script>
 </body>
 </html>

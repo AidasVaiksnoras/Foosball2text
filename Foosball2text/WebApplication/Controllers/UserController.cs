@@ -7,7 +7,7 @@ namespace WebApplication.Controllers
 {
     public class UserController : ApiController
     {
-        DataProvider _dataProvider = new DataProvider();
+        IDataProvider _dataProvider = new DataProviderEF();
         // GET: api/User
         public IEnumerable<User> Get()
         {
@@ -16,9 +16,9 @@ namespace WebApplication.Controllers
         }
 
         // GET: api/User/5
-        public string Get(int id)
+        public User Get(string id)
         {
-            return "value";
+            return _dataProvider.GetUser(id);
         }
 
         // POST: api/User
@@ -29,6 +29,7 @@ namespace WebApplication.Controllers
         // PUT: api/User/5
         public void Put(int id, [FromBody]User value)
         {
+            value.TimePlayed = "0000-00-00T00:00:00Z";
             if (id == 1)
                 _dataProvider.InsertUser(value);
             else if (id == 2)

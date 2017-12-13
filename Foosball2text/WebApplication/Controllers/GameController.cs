@@ -8,20 +8,40 @@ namespace WebApplication.Controllers
 {
     public class GameController : ApiController
     {
-        DataProvider provider = new DataProvider();
+        IDataProvider provider = new DataProviderEF();
+        JavaScriptSerializer serializer = new JavaScriptSerializer();
+
         // GET: api/Game
         public IEnumerable<string> Get()
         {
             string[] gameList = new string[] { };
             try
             {
-                 gameList = new string[] { new JavaScriptSerializer().Serialize(provider.GetCurrentGameData()) };
+                 gameList = new string[] { serializer.Serialize(provider.GetActiveGame()) };
             }
             catch (EmptyGameListExeption e)
             {
                 gameList = null;
             }
             return gameList;
+        }
+
+        [Route("api/Game/{leftname}/{rightname}")]
+        public string Get(string leftName, string rightName)
+        {
+            Game gameEntity;
+            try
+            {
+                gameEntity = provider.GetCurrentGame(leftName, rightName);
+            }
+            catch (EmptyGameListExeption e)
+            {
+                gameEntity = null;
+            }
+
+            var json = serializer.Serialize(gameEntity);
+
+            return json;
         }
 
         // GET: api/Game/5
@@ -35,7 +55,7 @@ namespace WebApplication.Controllers
         {
         }
 
-        // PUT: api/Game/5
+        // PUT: api/Game/???
         public void Put(int id, [FromBody]Game value)
         {
             if (id == 1) 
