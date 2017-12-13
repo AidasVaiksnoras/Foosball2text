@@ -176,6 +176,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserAditionalInfoController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Helpers\IDataProvider.cs" />
     <Compile Include="Models\EFModel.cs" />
