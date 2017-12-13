@@ -4,6 +4,8 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using WebApplication.Models;
+using Newtonsoft.Json;
 
 namespace Logic
 {
@@ -12,6 +14,7 @@ namespace Logic
     {
         static HttpClient client = new HttpClient();
         static private StringBuilder stringBuilder = new StringBuilder();
+
         static ServiceClient()
         {
             client.BaseAddress = new Uri("http://localhost:63526/");
@@ -37,6 +40,34 @@ namespace Logic
                 }
             }
             client.PutAsJsonAsync($"api/" + apiString, instance); //NOTE: make sure the Type of the instance and controller match
+        }
+
+        static public Game GetCurrentGameFromDbAsync(string string1, string string2)
+        {
+            string apiString = "api/Game";
+            apiString += "/" + string1 + "/" + string2;
+
+            Game gameFromDb = null;
+
+            //FIXME wont work without creating a GameController (SOMETIMES throws 'internal server error')
+            WebApplication.Controllers.GameController gc = new WebApplication.Controllers.GameController();
+            var testReturn = gc.Get(string1, string2);
+            gameFromDb = JsonConvert.DeserializeObject<Game>(testReturn);
+            /*using (client)
+            {
+                var response = client.GetAsync(apiString).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseContent = response.Content;
+                    string responseString = responseContent.ReadAsStringAsync().Result;
+
+                    gameFromDb = (Game)serializer.DeserializeObject(responseString);
+                }
+                else
+                    throw new HttpRequestException("Uri \"" + apiString + "\" has returned an error: " + response.StatusCode);
+            }*/
+
+            return gameFromDb;
         }
 
         static public void OnScoreChanged(object sender, OnScoredEventArgs e)
