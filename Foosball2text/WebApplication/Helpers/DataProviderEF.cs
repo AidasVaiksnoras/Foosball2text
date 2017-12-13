@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using WebApplication.Models;
 using System.Linq;
-
+using System.Data.Entity.Migrations;
 namespace WebApplication.Helpers
 {
     public class DataProviderEF : IDataProvider
@@ -63,13 +63,8 @@ namespace WebApplication.Helpers
         {
             using (var db = new EFModel())
             {
-                List<User> users = db.Users.Where(x => x.Username == userToUpdate.Username).ToList();
-                if (users.Count() == 1)
-                {
-                    users[0] = userToUpdate;
-                    db.Entry(users[0]).State = System.Data.Entity.EntityState.Modified;
-                    db.SaveChanges();
-                }
+                db.Users.AddOrUpdate(userToUpdate);
+                db.SaveChanges();
             }
         }
 

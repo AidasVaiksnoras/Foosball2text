@@ -45,11 +45,10 @@ namespace WebApplication.Controllers
         }
         // number is number of records
         // GET: api/Game/
-        public List<Game> Get(int number)
+        public List<Game> Get(int id)
         {
-            return provider.GetLastGames(number);
+            return provider.GetLastGames(id);
         }
-
         // POST: api/Game
         public void Post([FromBody]string value)
         {
