@@ -182,9 +182,10 @@ namespace WebApplication.Helpers
             }
             return data;
         }
+
         public Game GetActiveGame() { return new Game(); }
         public Game GetCurrentGame(string leftTeam, string rightTeam) { return new Game(); }
-
+      
         public User GetUser(string username)
         {
             using (SqlConnection connection = ConnectionProvider.GetConnection())
@@ -208,7 +209,7 @@ namespace WebApplication.Helpers
                             if (foundUserName != null)
                             {
                                 User emptyUser = new User();
-                                emptyUser.Username = reader.GetString(0);
+                                emptyUser.UserName = reader.GetString(0);
                                 emptyUser.GamesPlayed = reader.GetInt32(1);
                                 emptyUser.GamesWon = reader.GetInt32(2);
                                 emptyUser.TotalGoals = reader.GetInt32(3);
