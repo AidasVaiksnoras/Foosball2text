@@ -22,7 +22,7 @@ namespace WebApplication.Helpers
             {
                 List < Game > list = db.Games.Where(g => g.LeftUserName == leftTeam && g.RightUserName == rightTeam && g.InProgress == true).ToList();
                 if (list.Count()>0)
-                    activeGame = list.First();
+                    activeGame = list.Last();
             }
             return activeGame;
         }
