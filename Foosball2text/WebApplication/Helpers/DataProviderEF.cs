@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using WebApplication.Models;
 using System.Linq;
-using System.Data.Entity.Migrations;
+
 namespace WebApplication.Helpers
 {
     public class DataProviderEF : IDataProvider
@@ -58,13 +58,21 @@ namespace WebApplication.Helpers
                 }
             }
         }
-        //Does not update user somehow
+
         public void UpdateUser(User userToUpdate)
         {
             using (var db = new EFModel())
             {
-                db.Users.AddOrUpdate(userToUpdate);
-                db.SaveChanges();
+                List<User> users = db.Users.Where(x => x.Username == userToUpdate.Username).ToList();
+                if (users.Count() == 1)
+                {
+                    users[0].TotalGoals += userToUpdate.TotalGoals;
+                    users[0].GamesPlayed += userToUpdate.GamesPlayed;
+                    users[0].GamesWon += userToUpdate.GamesWon;
+                    users[0].MaxSpeed = users[0].MaxSpeed > userToUpdate.MaxSpeed ? users[0].MaxSpeed : userToUpdate.MaxSpeed;
+                    db.Entry(users[0]).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+                }
             }
         }
 
