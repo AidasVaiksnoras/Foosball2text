@@ -19,9 +19,11 @@ namespace Foosball2text
         TimeSpan _gameTime;
         bool _userDataSaved;
 
-        public SaveGameResultsForm(User userA, User userB, int goalsA, int goalsB, double maxSpeedA, double maxSpeedB)
+        public SaveGameResultsForm(User userA, User userB, int goalsA, int goalsB, double maxSpeedA, double maxSpeedB, GameTime time)
         {
             InitializeComponent();
+
+            label_gameTimeValue.Text = time.TimeString;
 
             _userA = userA;
             _userB = userB;

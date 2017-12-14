@@ -21,7 +21,12 @@ namespace WebApplication.Helpers
             using (var db = new EFModel())
             {
                 activeGame = db.Games.Where(g => g.LeftUserName == leftTeam && g.RightUserName == rightTeam && g.InProgress == true).First();
+                /*TODO handle this ERROR (sometimes gets thrown on restart)
+                 * System.InvalidOperationException occurred
+                 * Message=Sequence contains no elements
+                 */
             }
+
             return activeGame;
         }
 

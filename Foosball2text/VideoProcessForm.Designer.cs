@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -59,6 +60,8 @@
             this.backButton = new System.Windows.Forms.Button();
             this.Expand_button = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.GameTime_label = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -373,11 +376,21 @@
             this.splitContainer1.SplitterDistance = 37;
             this.splitContainer1.TabIndex = 53;
             // 
+            // GameTime_label
+            // 
+            this.GameTime_label.AutoSize = true;
+            this.GameTime_label.Location = new System.Drawing.Point(688, 72);
+            this.GameTime_label.Name = "GameTime_label";
+            this.GameTime_label.Size = new System.Drawing.Size(34, 13);
+            this.GameTime_label.TabIndex = 54;
+            this.GameTime_label.Text = "00:00";
+            // 
             // VideoProcessForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(769, 274);
+            this.Controls.Add(this.GameTime_label);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.backButton);
             this.Controls.Add(this.restartButton);
@@ -436,6 +449,8 @@
         private System.Windows.Forms.Button backButton;
         private System.Windows.Forms.Button Expand_button;
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label GameTime_label;
     }
 }
 
