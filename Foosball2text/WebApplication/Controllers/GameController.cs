@@ -43,13 +43,12 @@ namespace WebApplication.Controllers
 
             return json;
         }
-
-        // GET: api/Game/5
-        public string Get(int id)
+        // number is number of records
+        // GET: api/Game/
+        public List<Game> Get(int id)
         {
-            return "";
+            return provider.GetLastGames(id);
         }
-
         // POST: api/Game
         public void Post([FromBody]string value)
         {

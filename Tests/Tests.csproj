@@ -57,6 +57,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Helpers\DataProviderEFTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DataProviderTests.cs" />
     <Compile Include="ExtensionMethodsTests.cs" />
@@ -64,13 +65,16 @@
     <Compile Include="WriteOperationsTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Foosball2text\Logic\Logic.csproj">
       <Project>{c80358f0-3547-4dab-8c46-2e782c850aec}</Project>
       <Name>Logic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Foosball2text\WebApplication\Service.csproj">
+      <Project>{01ECED22-78E6-4DCF-B02D-224B489D9B59}</Project>
+      <Name>Service</Name>
     </ProjectReference>
     <ProjectReference Include="..\SQL operations\SQL operations.csproj">
       <Project>{CF0A27E9-4EDC-4750-AAFA-D3CDC401C6DA}</Project>

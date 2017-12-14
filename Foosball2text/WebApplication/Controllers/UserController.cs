@@ -21,6 +21,7 @@ namespace WebApplication.Controllers
             return _dataProvider.GetUser(id);
         }
 
+
         // POST: api/User
         public void Post([FromBody]string value)
         {
