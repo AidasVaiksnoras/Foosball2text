@@ -13,5 +13,8 @@ namespace WebApplication.Helpers
         void UpdateUser(User userToUpdate);
         List<User> GetUsers();
         User GetUser(string username);
+        List<Game> GetLastGames(int number);
+        List<User> GetUserCompetitors(string UserName);
+        double GetUserAverageScore(string UserName);
     }
 }
