@@ -27,6 +27,7 @@ namespace WebApplication.Helpers
             return activeGame;
         }
 
+        //TODO this probably needs to be renamed since it just gets the most RECENT game
         public Game GetActiveGame()
         {
             Game game;

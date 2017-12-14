@@ -16,6 +16,7 @@ namespace WebApplication.Helpers.Tests
         [TestMethod()]
         public void GetCurrentGameTest_ExceptionThrown()
         {
+            //UNDONE wrong exceptions thrown
             try
             {
                 DataProviderEF.GetCurrentGame("", "");
