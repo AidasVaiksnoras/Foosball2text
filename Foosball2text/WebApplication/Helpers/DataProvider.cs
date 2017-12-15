@@ -209,7 +209,7 @@ namespace WebApplication.Helpers
                             if (foundUserName != null)
                             {
                                 User emptyUser = new User();
-                                emptyUser.UserName = reader.GetString(0);
+                                emptyUser.Username = reader.GetString(0);
                                 emptyUser.GamesPlayed = reader.GetInt32(1);
                                 emptyUser.GamesWon = reader.GetInt32(2);
                                 emptyUser.TotalGoals = reader.GetInt32(3);
@@ -223,5 +223,8 @@ namespace WebApplication.Helpers
             }
             return null;
         }
+        public List<Game> GetLastGames(int number) { return new List<Game>(); }
+        public List<User> GetUserCompetitors(string UserName) { return new List<User>(); }
+        public double GetUserAverageScore(string UserName) { return 0.0; } 
     }
 }

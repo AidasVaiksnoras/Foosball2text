@@ -178,6 +178,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserAditionalInfoController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Helpers\DataProvider.cs" />
     <Compile Include="Helpers\IDataProvider.cs" />
     <Compile Include="Models\EFModel.cs" />
     <Compile Include="Models\Game.cs" />
