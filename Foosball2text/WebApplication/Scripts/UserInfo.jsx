@@ -67,9 +67,80 @@ var CurrentResult = React.createClass({
     }
 });
 
+var CompetitorList = React.createClass({
+
+
+    getInitialState: function () {
+        return {
+            competitors: []
+        }
+    },
+
+    componentDidMount: function () {
+        this.timer = setInterval(() => {
+            $.ajax({
+                type: "GET",
+                url: "api/Competitor?id=" + Username,
+                data: {
+                    user: 'success',
+                    some: ['other', 'data']
+                }
+            }).done(function (data) {
+                this.setState({ competitors: data });
+                interval = 1000;
+            }.bind(this));
+
+
+        }, interval);
+    },
+
+    render: function () {
+        return (
+            <div>
+
+                <table className="table table-hover ">
+                    <tbody>
+                        <th>Varžovas</th>
+                        <th>Žaidės žaidimų</th>
+                        <th>Laimėta</th>
+                        <th>Įmušęs įvarčių</th>
+                        <th> Max kamuoliuko greitis</th>
+                        {this.state.competitors.map(competitors => {
+                            const parentcompetitors = (
+                                <tr key={`competitors-${competitors.Username}`}>
+                                    <td>
+                                        <div >{competitors.Username}</div>
+                                    </td>
+                                    <td>
+                                        {competitors.GamesPlayed}
+                                    </td>
+                                    <td>
+                                        {competitors.GamesWon}
+                                    </td>
+                                    <td>
+                                        {competitors.TotalGoals}
+                                    </td>
+                                    <td>
+                                        {competitors.MaxSpeed}
+                                    </td>
+
+                                </tr>
+                            );
+
+
+                            return [parentcompetitors];
+                        })}
+                    </tbody>
+                </table>
+            </div>
+        );
+    }
+});
+
 
 ReactDOM.render(
     <div> <CurrentResult />
+        <CompetitorList/>
     </div>,
     document.getElementById('content')
 );
