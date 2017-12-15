@@ -11,6 +11,7 @@ namespace SQL_operations.Tests
     [TestClass()]
     public class WriteOperationsTests
     {
+        /* Deprectaed: is using old code
         WriteOperations wo = new WriteOperations();
 
         [TestMethod]
@@ -44,6 +45,7 @@ namespace SQL_operations.Tests
 
             Assert.AreNotEqual(oldDataUser, updatedDataUser);
         }
+        */
 
         [TestMethod()]
         public void CorrectDateTimeFormatTest_FalseTimeFormats()
