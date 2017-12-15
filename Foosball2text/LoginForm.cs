@@ -51,7 +51,7 @@ namespace Foosball2text
                 ///Weird code (it worked)
                 _dataProvider.LeftUser = _dataProvider.AddUser(name1.Text);
                 _dataProvider.RightUser = _dataProvider.AddUser(name2.Text);
-                _dataProvider.CommitBothTeamsData(); //Save possible new users???
+                _dataProvider.CommitBothTeamsData(); //Save possible new users
                 //*/
 
                 label.Text = "Komandos sėkmingai prisijungė";
