@@ -75,6 +75,17 @@ namespace WebApplication.Helpers
             }
         }
 
+        public bool UserExists(string username)
+        {
+            using (var db = new EFModel())
+            {
+                List<User> data = db.Users.Where(x => x.Username == username).ToList();
+                if (data.Count() > 0)
+                    return true;
+            }
+            return false;
+        }
+
         public List<User> GetUsers()
         {
             List<User> data = new List<User>();

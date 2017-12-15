@@ -19,19 +19,41 @@ namespace Foosball2text
 
         private void Login1_Click(object sender, EventArgs e)
         {
-            if (name1.Text == "" || name2.Text == "")
+            string team1 = name1.Text;
+            string team2 = name2.Text;
+            if (team1 == "" || team2 == "")
             {
                 label.Text = "Komandos pavadinimas neįvestas";
             }
-            else if (name1.Text == name2.Text)
+            else if (team1 == team2)
             {
                 label.Text = "Vardai negali buti tokie patys";
             }
             else
             {
+                /*// Karolio kodas
+                if (_dataProvider.UserExistsInDb(team1))
+                {
+                    _dataProvider.LeftUser = _dataProvider.GetUserFromDb(team1);
+                }
+                else
+                    _dataProvider.LeftUser = _dataProvider.AddUser(team1);
+
+                if (_dataProvider.UserExistsInDb(team2))
+                {
+                    _dataProvider.RightUser = _dataProvider.GetUserFromDb(team2);
+                }
+                else
+                    _dataProvider.RightUser = _dataProvider.AddUser(team2);
+                //*/
+
+                ///Weird code (it worked)
                 _dataProvider.LeftUser = _dataProvider.AddUser(name1.Text);
                 _dataProvider.RightUser = _dataProvider.AddUser(name2.Text);
-                _dataProvider.CommitBothTeamsData(); //Save possible new users
+                _dataProvider.CommitBothTeamsData(); //Save possible new users???
+                //*/
+
+                label.Text = "Komandos sėkmingai prisijungė";
                 this.Close();
             }
         }

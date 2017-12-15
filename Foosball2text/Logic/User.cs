@@ -24,8 +24,9 @@ namespace Logic
             UserName = userName;
             GamesPlayed = gamesPlayed;
             GamesWon = gamesWon;
-            MaxSpeed = maxSpeed;
             TotalGoals = totalGoals;
+            MaxSpeed = maxSpeed;
+            //UNDONE TimePlayed saving not implemented
             RankPoints = rankPoints;
         }
 
