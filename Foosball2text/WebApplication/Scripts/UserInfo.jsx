@@ -1,7 +1,6 @@
 ﻿var obj;
 var usr;
-var interval = 1000;
-console.log(Username);
+var interval = 500;
 var CurrentResult = React.createClass({
 
 
@@ -17,7 +16,8 @@ var CurrentResult = React.createClass({
             GamesPlayed: 'Loading',
             GamesWon: 'Loading',
             MaxSpeed: 'Loading',
-            TotalGoals: 'Loading'
+            TotalGoals: 'Loading',
+            AverageScore:'0'
         }
     },
 
@@ -43,6 +43,19 @@ var CurrentResult = React.createClass({
                     
                 });
 
+                }.bind(this));
+
+            $.ajax({
+                type: "GET",
+                url: "/api/UserAditionalInfo/" + Username
+
+            }).done(function (avrage) {
+                this.setState({
+                    AverageScore: avrage
+                });
+               
+                console.log(avrage);
+
             }.bind(this));
 
 
@@ -61,6 +74,7 @@ var CurrentResult = React.createClass({
                             <h4> Laimėjo: {this.state.GamesWon}</h4>
                             <h4>Max greitis: {this.state.MaxSpeed}</h4>
                             <h4>Bendrai įmušta: {this.state.TotalGoals}</h4>
+                            <h4>Vidutiniškai įmuša: {this.state.AverageScore}</h4>
                         
                 </div>
             </div>
