@@ -160,9 +160,14 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\LastGame.jsx" />
     <Content Include="Scripts\Main.jsx" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\UserInfo.jsx" />
     <Content Include="Web.config" />
+    <Content Include="Views\LastGame\Index.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\About\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -174,8 +179,12 @@
     <Compile Include="App_Start\ReactConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AboutController.cs" />
+    <Compile Include="Controllers\CompetitorController.cs" />
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LastGameController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\UserAditionalInfoController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Helpers\IDataProvider.cs" />

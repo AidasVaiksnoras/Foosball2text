@@ -1,6 +1,6 @@
 ﻿var obj;
 var usr;
-var interval = 1000;
+var interval = 500;
 
 var CurrentResult = React.createClass({
 
@@ -17,7 +17,8 @@ var CurrentResult = React.createClass({
             GamesPlayed: 'Loading',
             GamesWon: 'Loading',
             MaxSpeed: 'Loading',
-            TotalGoals: 'Loading'
+            TotalGoals: 'Loading',
+            isLive: false
         }
     },
 
@@ -38,7 +39,8 @@ var CurrentResult = React.createClass({
                 leftUser: obj.LeftUserName,
                 rightUser: obj.RightUserName,
                 leftScore: obj.LeftScore,
-                rightScore: obj.RightScore
+                rightScore: obj.RightScore,
+                isLive: obj.InProgress
             })
 
             $.ajax({
@@ -89,6 +91,7 @@ var CurrentResult = React.createClass({
             <div>
                 <div className="score" style={{ textAlign: "center" }}>
                     <h1>Rezultatas</h1>
+                    <h4><span className={"badge " + (this.state.isLive ? 'badge-success' : 'badge-danger')}>{(this.state.isLive ? 'Live' : 'Finished')}</span></h4>
 
                     <h1>{this.state.leftScore} : {this.state.rightScore} </h1>
 
@@ -96,9 +99,9 @@ var CurrentResult = React.createClass({
                         <tbody>
                             <tr>
 
-                                <th onClick={this.handleClickLeft}>{this.state.leftUser}</th>
-                                <th>&ensp;vs</th>
-                                <th onClick={this.handleClickRight}>&ensp;{this.state.rightUser}</th>
+                                <td className='alnright' onClick={this.handleClickLeft}>{this.state.leftUser}</td>
+                                <td>&ensp;vs</td>
+                                <td onClick={this.handleClickRight}>&ensp;{this.state.rightUser}</td>
                             </tr>
                         </tbody>
                     </table>
