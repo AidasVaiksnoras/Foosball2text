@@ -50,7 +50,7 @@ render: function () {
                         <td className="score">
                             {game.RightScore}
                         </td>
-                        <td>
+                        <td className="text-capitalize">
                             {game.RightUserName}
                         </td>
 
