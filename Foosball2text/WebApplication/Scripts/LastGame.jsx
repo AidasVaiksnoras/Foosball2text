@@ -21,6 +21,7 @@ var GamesList = React.createClass({
                     some: ['other', 'data']
                 }
             }).done(function (data) {
+                data.reverse();
                 this.setState({ games: data });
                 interval = 1000;
             }.bind(this));
