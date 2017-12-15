@@ -7,8 +7,9 @@ namespace Logic
         public string UserName { get; set; }
         public int GamesPlayed { get; set; }
         public int GamesWon { get; set; }
-        public double MaxSpeed { get; set; }
         public int TotalGoals { get; set; }
+        public double MaxSpeed { get; set; }
+        public string TimePlayed { get; set; }
         public int RankPoints { get; set; }
 
         public User() {}
@@ -18,17 +19,17 @@ namespace Logic
             UserName = name;
         }
 
-        public User(string userName, int gamesPlayed, int gamesWon, double maxSpeed, int totalGoals, string allTimePlayed, int rankPoints) //Got data from SQL constructor
+        public User(string userName, int gamesPlayed, int gamesWon, double maxSpeed, int totalGoals, string allTimePlayed, int rankPoints) : this(userName)
         {
-            UserName = userName;
             GamesPlayed = gamesPlayed;
             GamesWon = gamesWon;
             MaxSpeed = maxSpeed;
             TotalGoals = totalGoals;
             RankPoints = rankPoints;
+            TimePlayed = allTimePlayed;
         }
 
-        public void UpdateData(bool addGamePlayed, bool addGameWon, double gamesMaxSpeed, int addScore, TimeSpan gameTime , int rankChange)
+        public void UpdateData(bool addGameWon, double gamesMaxSpeed, int addScore, TimeSpan gameTime)
         {
             GamesPlayed++;
             if (addGameWon)
@@ -36,7 +37,7 @@ namespace Logic
             if (gamesMaxSpeed > MaxSpeed)
                 MaxSpeed = gamesMaxSpeed;
             TotalGoals += addScore;
-            RankPoints += rankChange;
+            //TODO add game time
         }
 
         public bool Equals(User other)

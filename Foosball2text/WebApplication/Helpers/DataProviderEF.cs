@@ -67,12 +67,13 @@ namespace WebApplication.Helpers
                 List<User> users = db.Users.Where(x => x.Username == userToUpdate.Username).ToList();
                 if (users.Count() == 1)
                 {
-                    users[0].TotalGoals += userToUpdate.TotalGoals;
-                    users[0].GamesPlayed += userToUpdate.GamesPlayed;
-                    users[0].GamesWon += userToUpdate.GamesWon;
-                    users[0].MaxSpeed = users[0].MaxSpeed > userToUpdate.MaxSpeed ? users[0].MaxSpeed : userToUpdate.MaxSpeed;
-                    db.Entry(users[0]).State = System.Data.Entity.EntityState.Modified;
-                    db.SaveChanges();
+                    if (users[0].GamesPlayed <= userToUpdate.GamesPlayed)
+                    {
+                        users[0] = userToUpdate;
+                        //FIXME doesn't update correctly
+                        db.Entry(users[0]).State = System.Data.Entity.EntityState.Modified;
+                        db.SaveChanges();
+                    }
                 }
             }
         }
@@ -97,6 +98,17 @@ namespace WebApplication.Helpers
                     user = data[0];
             }
             return user;
+        }
+
+        public bool UserExists(string username)
+        {
+            using (var db = new EFModel())
+            {
+                List<User> data = db.Users.Where(x => x.Username == username).ToList();
+                if (data.Count() > 0)
+                    return true;
+            }
+            return false;
         }
 
         public List<Game> GetLastGames(int number)

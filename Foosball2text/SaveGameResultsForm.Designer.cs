@@ -38,6 +38,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label_goalsA = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label_gameTimeValue = new System.Windows.Forms.Label();
             this.button_saveData = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -82,24 +84,24 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 53.11005F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 105F));
             this.tableLayoutPanel1.Controls.Add(this.label_goalsB, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label_goalsA, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label5, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label_maxSpeedA, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.label_maxSpeedB, 2, 1);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 57);
+            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 70);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(314, 99);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(314, 69);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
             // label_maxSpeedB
             // 
             this.label_maxSpeedB.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label_maxSpeedB.AutoSize = true;
-            this.label_maxSpeedB.Location = new System.Drawing.Point(249, 67);
+            this.label_maxSpeedB.Location = new System.Drawing.Point(249, 45);
             this.label_maxSpeedB.Name = "label_maxSpeedB";
             this.label_maxSpeedB.Size = new System.Drawing.Size(23, 13);
             this.label_maxSpeedB.TabIndex = 14;
@@ -109,7 +111,7 @@
             // 
             this.label_maxSpeedA.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label_maxSpeedA.AutoSize = true;
-            this.label_maxSpeedA.Location = new System.Drawing.Point(141, 67);
+            this.label_maxSpeedA.Location = new System.Drawing.Point(141, 45);
             this.label_maxSpeedA.Name = "label_maxSpeedA";
             this.label_maxSpeedA.Size = new System.Drawing.Size(23, 13);
             this.label_maxSpeedA.TabIndex = 13;
@@ -119,7 +121,7 @@
             // 
             this.label_goalsB.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label_goalsB.AutoSize = true;
-            this.label_goalsB.Location = new System.Drawing.Point(249, 18);
+            this.label_goalsB.Location = new System.Drawing.Point(249, 10);
             this.label_goalsB.Name = "label_goalsB";
             this.label_goalsB.Size = new System.Drawing.Size(23, 13);
             this.label_goalsB.TabIndex = 6;
@@ -129,7 +131,7 @@
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 18);
+            this.label1.Location = new System.Drawing.Point(3, 10);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(34, 13);
             this.label1.TabIndex = 0;
@@ -140,7 +142,7 @@
             // 
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 67);
+            this.label5.Location = new System.Drawing.Point(3, 45);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(59, 13);
             this.label5.TabIndex = 4;
@@ -151,17 +153,37 @@
             // 
             this.label_goalsA.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label_goalsA.AutoSize = true;
-            this.label_goalsA.Location = new System.Drawing.Point(141, 18);
+            this.label_goalsA.Location = new System.Drawing.Point(141, 10);
             this.label_goalsA.Name = "label_goalsA";
             this.label_goalsA.Size = new System.Drawing.Size(23, 13);
             this.label_goalsA.TabIndex = 5;
             this.label_goalsA.Text = "null";
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(15, 153);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(60, 13);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "Game time:";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label_gameTimeValue
+            // 
+            this.label_gameTimeValue.AutoSize = true;
+            this.label_gameTimeValue.Location = new System.Drawing.Point(81, 153);
+            this.label_gameTimeValue.Name = "label_gameTimeValue";
+            this.label_gameTimeValue.Size = new System.Drawing.Size(34, 13);
+            this.label_gameTimeValue.TabIndex = 6;
+            this.label_gameTimeValue.Text = "00:00";
+            this.label_gameTimeValue.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // button_saveData
             // 
-            this.button_saveData.Location = new System.Drawing.Point(12, 162);
+            this.button_saveData.Location = new System.Drawing.Point(121, 179);
             this.button_saveData.Name = "button_saveData";
-            this.button_saveData.Size = new System.Drawing.Size(314, 48);
+            this.button_saveData.Size = new System.Drawing.Size(93, 48);
             this.button_saveData.TabIndex = 7;
             this.button_saveData.Text = "Confirm and Save game data";
             this.button_saveData.UseVisualStyleBackColor = true;
@@ -171,8 +193,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(336, 224);
+            this.ClientSize = new System.Drawing.Size(338, 240);
             this.Controls.Add(this.button_saveData);
+            this.Controls.Add(this.label_gameTimeValue);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.label_rightTeamName);
             this.Controls.Add(this.label_leftTeamName);
@@ -195,6 +219,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label_goalsA;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label_gameTimeValue;
         private System.Windows.Forms.Label label_maxSpeedB;
         private System.Windows.Forms.Label label_maxSpeedA;
         private System.Windows.Forms.Label label_goalsB;

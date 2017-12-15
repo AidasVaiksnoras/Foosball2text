@@ -218,7 +218,7 @@ namespace Foosball2text
             _game.LeftUserName = _leftUser.UserName;
             _game.RightUserName = _rightUser.UserName;
             _game.InProgress = true; 
-            ServiceClient.PutToDb<Game>(_game, Method.Insert); //FIXME when endgame and then restarted unable to find game in db
+            ServiceClient.PutToDb<Game>(_game, Method.Insert);
             /// Following code is required to get such information (like Id) that the local machine can't generate
             _game = ServiceClient.GetCurrentGameFromDbAsync(_game.LeftUserName, _game.RightUserName);
         }

@@ -18,7 +18,7 @@ namespace Test
             bool exceptionThrown = false;
             try
             {
-                User returnedUser = testDataProvider.GetUserData("User");
+                User returnedUser = testDataProvider.GetUserDataFromLocalList("User");
             }
             catch (UserNotFoundException e)
             {
@@ -35,7 +35,7 @@ namespace Test
             testUser.UserName = "User1"; ;
             testDataProvider.UserList = new List<User>();
             testDataProvider.UserList.Add(testUser);
-            User returnedUser = testDataProvider.GetUserData("User1");
+            User returnedUser = testDataProvider.GetUserDataFromLocalList("User1");
             Assert.AreEqual(testUser.UserName, returnedUser.UserName);
         }
     }

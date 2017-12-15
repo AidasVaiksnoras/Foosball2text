@@ -52,8 +52,8 @@ namespace Foosball2text
         {
             if (!_userDataSaved) //Single save allowed
             {
-                _userA.UpdateData(true, (_goalsA > _goalsB), _maxSpeedA, _goalsA, _gameTime, 0);
-                _userB.UpdateData(true, (_goalsB > _goalsA), _maxSpeedB, _goalsB, _gameTime, 0);
+                _userA.UpdateData((_goalsA > _goalsB), _maxSpeedA, _goalsA, _gameTime);
+                _userB.UpdateData((_goalsB > _goalsA), _maxSpeedB, _goalsB, _gameTime);
 
                 UsersDataProvider dp = new UsersDataProvider(_userA, _userB);
                 dp.CommitBothTeamsData();
