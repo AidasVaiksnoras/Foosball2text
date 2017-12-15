@@ -17,7 +17,8 @@ var CurrentResult = React.createClass({
             GamesPlayed: 'Loading',
             GamesWon: 'Loading',
             MaxSpeed: 'Loading',
-            TotalGoals: 'Loading'
+            TotalGoals: 'Loading',
+            isLive: false
         }
     },
 
@@ -38,7 +39,8 @@ var CurrentResult = React.createClass({
                 leftUser: obj.LeftUserName,
                 rightUser: obj.RightUserName,
                 leftScore: obj.LeftScore,
-                rightScore: obj.RightScore
+                rightScore: obj.RightScore,
+                isLive: obj.InProgress
             })
 
             $.ajax({
@@ -89,6 +91,7 @@ var CurrentResult = React.createClass({
             <div>
                 <div className="score" style={{ textAlign: "center" }}>
                     <h1>Rezultatas</h1>
+                    <h4><span className={"badge " + (this.state.isLive ? 'badge-success' : 'badge-danger')}>{(this.state.isLive ? 'Live' : 'Finished')}</span></h4>
 
                     <h1>{this.state.leftScore} : {this.state.rightScore} </h1>
 

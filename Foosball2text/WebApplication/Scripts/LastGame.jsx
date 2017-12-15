@@ -31,7 +31,7 @@ var GamesList = React.createClass({
 
 render: function () {
     return (
-        <div>
+        <div className="container">
             
             <table className="table table-hover ">
             <tbody>
