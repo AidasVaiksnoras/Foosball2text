@@ -12,7 +12,7 @@ namespace Foosball2text
         {
             InitializeComponent();
             _dataProvider = dataProvider;
-            _dataProvider.LoadData();
+            //_dataProvider.LoadData(); no need to load ALL users
 
             if (Properties.Settings.Default.DefaultTeamName != "")
                 name1.Text = Properties.Settings.Default.DefaultTeamName;
