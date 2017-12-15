@@ -7,8 +7,9 @@ namespace Logic
         public string UserName { get; set; }
         public int GamesPlayed { get; set; }
         public int GamesWon { get; set; }
-        public double MaxSpeed { get; set; }
         public int TotalGoals { get; set; }
+        public double MaxSpeed { get; set; }
+        TimeSpan TimePlayed { get; set; }
         public int RankPoints { get; set; }
 
         public User() {}
@@ -23,12 +24,13 @@ namespace Logic
             UserName = userName;
             GamesPlayed = gamesPlayed;
             GamesWon = gamesWon;
-            MaxSpeed = maxSpeed;
             TotalGoals = totalGoals;
+            MaxSpeed = maxSpeed;
+            //UNDONE TimePlayed saving not implemented
             RankPoints = rankPoints;
         }
 
-        public void UpdateData(bool addGamePlayed, bool addGameWon, double gamesMaxSpeed, int addScore, TimeSpan gameTime , int rankChange)
+        public void UpdateData(bool addGameWon, double gamesMaxSpeed, int addScore, GameTime gameTime)
         {
             GamesPlayed++;
             if (addGameWon)
@@ -36,7 +38,8 @@ namespace Logic
             if (gamesMaxSpeed > MaxSpeed)
                 MaxSpeed = gamesMaxSpeed;
             TotalGoals += addScore;
-            RankPoints += rankChange;
+            TimeSpan gameTimeSpan = new TimeSpan(0, gameTime.min, gameTime.sec);
+            TimePlayed += gameTimeSpan;
         }
 
         public bool Equals(User other)

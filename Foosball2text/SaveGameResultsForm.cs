@@ -16,10 +16,10 @@ namespace Foosball2text
         User _userA, _userB;
         int _goalsA, _goalsB;
         double _maxSpeedA, _maxSpeedB;
-        TimeSpan _gameTime;
+        GameTime _gameTime;
         bool _userDataSaved;
 
-        public SaveGameResultsForm(User userA, User userB, int goalsA, int goalsB, double maxSpeedA, double maxSpeedB)
+        public SaveGameResultsForm(User userA, User userB, int goalsA, int goalsB, double maxSpeedA, double maxSpeedB, GameTime time)
         {
             InitializeComponent();
 
@@ -46,14 +46,17 @@ namespace Foosball2text
             label_goalsB.Text = _goalsB.ToString();
             label_maxSpeedA.Text = _maxSpeedA.ToString("F5");
             label_maxSpeedB.Text = _maxSpeedB.ToString("F5");
+
+            _gameTime = time;
+            label_gameTimeValue.Text = "Game length " + time.TimeString;
         }
 
         private void button_saveData_Click(object sender, EventArgs e)
         {
             if (!_userDataSaved) //Single save allowed
             {
-                _userA.UpdateData(true, (_goalsA > _goalsB), _maxSpeedA, _goalsA, _gameTime, 0);
-                _userB.UpdateData(true, (_goalsB > _goalsA), _maxSpeedB, _goalsB, _gameTime, 0);
+                _userA.UpdateData((_goalsA > _goalsB), _maxSpeedA, _goalsA, _gameTime);
+                _userB.UpdateData((_goalsB > _goalsA), _maxSpeedB, _goalsB, _gameTime);
 
                 UsersDataProvider dp = new UsersDataProvider(_userA, _userB);
                 dp.CommitBothTeamsData();

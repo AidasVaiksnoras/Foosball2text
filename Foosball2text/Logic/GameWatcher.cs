@@ -8,6 +8,16 @@ using System.Threading.Tasks;
 
 namespace Logic
 {
+    public struct GameTime
+    {
+        public int min;
+        public int sec;
+
+        public String MinString { get => (min < 10) ? ("0" + min.ToString()) : min.ToString(); }
+        public String SecString { get => (sec < 10) ? ("0" + sec.ToString()) : sec.ToString(); }
+        public String TimeString { get => MinString + ":" + SecString; }
+    }
+
     class GameWatcher : BallWatcher, IGameWatcher
     {
         int _teamOnLeftGoals = 0, _teamOnRightGoals = 0;

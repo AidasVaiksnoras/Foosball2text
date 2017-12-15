@@ -49,7 +49,7 @@ namespace Logic
 
             Game gameFromDb = null;
 
-            //FIXME wont work without creating a GameController (SOMETIMES throws 'internal server error')
+            //wont work without creating a GameController (SOMETIMES throws 'internal server error')
             WebApplication.Controllers.GameController gc = new WebApplication.Controllers.GameController();
             var testReturn = gc.Get(string1, string2);
             gameFromDb = JsonConvert.DeserializeObject<Game>(testReturn);

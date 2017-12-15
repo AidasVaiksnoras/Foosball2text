@@ -24,6 +24,7 @@ namespace WebApplication.Helpers
                 if (list.Count()>0)
                     activeGame = list.Last();
             }
+
             return activeGame;
         }
 
@@ -67,14 +68,22 @@ namespace WebApplication.Helpers
                 List<User> users = db.Users.Where(x => x.Username == userToUpdate.Username).ToList();
                 if (users.Count() == 1)
                 {
-                    users[0].TotalGoals += userToUpdate.TotalGoals;
-                    users[0].GamesPlayed += userToUpdate.GamesPlayed;
-                    users[0].GamesWon += userToUpdate.GamesWon;
-                    users[0].MaxSpeed = users[0].MaxSpeed > userToUpdate.MaxSpeed ? users[0].MaxSpeed : userToUpdate.MaxSpeed;
+                    users[0] = userToUpdate;
                     db.Entry(users[0]).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
                 }
             }
+        }
+
+        public bool UserExists(string username)
+        {
+            using (var db = new EFModel())
+            {
+                List<User> data = db.Users.Where(x => x.Username == username).ToList();
+                if (data.Count() > 0)
+                    return true;
+            }
+            return false;
         }
 
         public List<User> GetUsers()

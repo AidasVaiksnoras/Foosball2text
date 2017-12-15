@@ -31,6 +31,10 @@ namespace Foosball2text
         SplitContainer _container;
         int _extraDataPanelHeight;
 
+        //GameTimer
+        GameTime _gameTime;
+        int _framesPassedFromLastSecond = 0;
+
         public VideoProcessForm(string filePath, int hue, Logic.User leftUser, Logic.User rightUser, NavigationForm navForm)
         {
             InitializeComponent();
@@ -54,7 +58,7 @@ namespace Foosball2text
 
             RegisterEventsHandlers();
 
-            ///Start the video
+            ///Start the video and related processes
             InitTimer();
             _capture = new VideoCapture(_filePath);
             NewGame();
@@ -98,6 +102,20 @@ namespace Foosball2text
             
             pictureBox1.Image = _frameHandler.GetResizedImage(frame, pictureBox1.Width, pictureBox1.Height);
             UpdateInformation();
+
+            _framesPassedFromLastSecond++;
+            if (_framesPassedFromLastSecond >= _fps)
+            {
+                _framesPassedFromLastSecond = 0;
+                _gameTime.sec++;
+                if (_gameTime.sec >= 60)
+                {
+                    _gameTime.sec = 0;
+                    _gameTime.min++;
+                }
+                GameTime_label.Text = _gameTime.TimeString;
+            }
+
         }
 
         private void UpdateInformation()
@@ -155,7 +173,8 @@ namespace Foosball2text
                 newInformation.TeamOnLeftGoals,
                 newInformation.TeamOnRightGoals,
                 newInformation.MaxSpeedTeamOnLeft,
-                newInformation.MaxSpeedTeamOnRight);
+                newInformation.MaxSpeedTeamOnRight,
+                _gameTime);
             gameEndForm.Show();
 
         }
@@ -209,6 +228,7 @@ namespace Foosball2text
             _frameHandler.ResetGameWatcher();
             TeamA_score.Text = "0";
             TeamB_score.Text = "0";
+            _gameTime = new GameTime();
             logData.Add(messageGetter.gameStart);
 
             //DB related
