@@ -1,6 +1,6 @@
 ﻿var obj;
 var usr;
-var interval = 100;
+var interval = 500;
 
 var CurrentResult = React.createClass({
 

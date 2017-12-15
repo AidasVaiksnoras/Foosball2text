@@ -1,0 +1,16 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+</head>
+<body>
+    <div id="content"></div>
+    <script>  var Username = '@ViewBag.Message'</script>
+    <script src="@Url.Content("~/Scripts/UserInfo.jsx")"></script>
+</body>
+</html>

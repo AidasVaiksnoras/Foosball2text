@@ -22,7 +22,7 @@ var GamesList = React.createClass({
                 }
             }).done(function (data) {
                 this.setState({ games: data });
-                console.log(this.state.games[1].RightUserName)
+                interval = 1000;
             }.bind(this));
 
 
@@ -33,7 +33,7 @@ render: function () {
     return (
         <div>
             
-            <table>
+            <table className="table table-hover ">
             <tbody>
             {this.state.games.map(game => {
                 const parentgame = (
@@ -41,14 +41,14 @@ render: function () {
                         <td className='alnright'>
                             <div className="parent">{game.LeftUserName}</div>
                         </td>
-                        <td>
-                            &ensp;{game.LeftScore}
+                        <td className="score">
+                            {game.LeftScore}
                         </td>
                         <td>
-                            &ensp;:&ensp;
+                           :
                         </td>
-                        <td>
-                            {game.RightScore}&ensp;
+                        <td className="score">
+                            {game.RightScore}
                         </td>
                         <td>
                             {game.RightUserName}
