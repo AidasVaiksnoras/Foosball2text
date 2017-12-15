@@ -2,38 +2,27 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-
-    <title>Foosball</title>
     <style>
-        table {
-            margin-left: auto;
-            margin-right: auto;
-            font-size: 200%
-        }
 
         h1 {
             font-size: 200%;
         }
 
-        h3 {
+        h4 {
             font-size: 120%;
             margin-left: 20px;
         }
-        .alnright {
-            text-align: right;
-        }
-        .alncenter {
-            text-align: center;
-        }
+
+
     </style>
 </head>
-
 <body>
     <div id="content"></div>
-    <script src="@Url.Content("~/Scripts/Main.jsx")"></script>
+    <script>  var Username = '@ViewBag.Message'</script>
+    <script src="@Url.Content("~/Scripts/UserInfo.jsx")"></script>
 </body>
 </html>
